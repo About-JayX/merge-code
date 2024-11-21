@@ -1,0 +1,37 @@
+.memes-card {
+  /* From Uiverse.io by yashasvi9199 */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 0.4em;
+    background-color: #171717;
+    border-radius: 25px;
+    transition: 0.4s ease-in-out;
+    @apply px-4 py-7 border border-[#5F5F5F]/30;
+  }
+
+  .card {
+    background-image: linear-gradient(163deg, #a440fd 0%, #0dc8ec 100%);
+    border-radius: 22px;
+    transition: all 0.3s;
+  }
+
+  .card2 {
+    border-radius: 0;
+    transition: all 0.2s;
+  }
+
+  .card2:hover {
+    transform: scale(0.98);
+    border-radius: 20px;
+  }
+
+  .card:hover {
+    @supports not (-webkit-touch-callout: none) {
+      box-shadow: 0px 0px 30px 1px rgba(13, 200, 236, 0.3);
+    }
+  }
+}
