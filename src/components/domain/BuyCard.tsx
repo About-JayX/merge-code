@@ -22,7 +22,7 @@ const BuyCard = ({ ...props }) => {
               <CSSTransition in={show} timeout={1000} classNames="scale">
                 <div
                   className="bg-gradient-to-b from-gry to-blk p-6 rounded-full borde"
-                  style={{ border: `1px solid ${props.text.color}` }}
+                  style={{ border: `1px solid ${props.text?.color}` }}
                 >
                   <div className="bg-gradient-to-tr from-lyllw to-yllw rounded-full p-4">
                     <div className="rounded-full w-40 h-40">
@@ -35,7 +35,7 @@ const BuyCard = ({ ...props }) => {
           </div>
           <div
             className="bg-gradient-to-t from-white/20 to-black/20 flex flex-col gap-y-8 items-center justify-center w-full pt-24 pb-12 rounded-2xl border relative overflow-hidden backdrop-blur-lg"
-            style={{ border: `1px solid ${props.text.color}` }}
+            style={{ border: `1px solid ${props.text?.color}` }}
           >
             <CSSTransition in={show} timeout={1000} classNames="about">
               <div className="flex flex-col justify-center items-center text-6xl lg:text-9xl leading-[3rem] lg:leading-[5rem]">
@@ -80,10 +80,10 @@ const BuyCard = ({ ...props }) => {
                   <Button
                     style={{
                       display: "ruby",
-                      background: props.button.background,
-                      color: props.button.text,
+                      background: props.button?.background,
+                      color: props.button?.text,
                     }}
-                    className={`${props.button.rounded} py-3`}
+                    className={`${props.button?.rounded} py-3`}
                   >
                     Buy Now&nbsp;
                     <svg
@@ -111,10 +111,10 @@ const BuyCard = ({ ...props }) => {
                   <Button
                     style={{
                       display: "ruby",
-                      background: props.button.background,
-                      color: props.button.text,
+                      background: props.button?.background,
+                      color: props.button?.text,
                     }}
-                    className={`${props.button.rounded} py-3`}
+                    className={`${props.button?.rounded} py-3`}
                   >
                     See Charts&nbsp;
                   </Button>

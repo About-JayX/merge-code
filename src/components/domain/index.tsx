@@ -41,25 +41,23 @@ export default function Domain({ ...props }) {
     };
   }, []);
   return (
-    <div className={`w-full relative overflow-x-hidden ${props.text.font}`}>
+    <div className={`w-full relative overflow-x-hidden ${props.text?.font}`}>
       <div
         style={{
-          color: props.text.color,
-          backgroundImage: `url(${props.background.custom})`,
-          backgroundSize: "cover",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "center",
+          color: props.text?.color,
+          backgroundImage: `url(${props.background?.custom})`,
         }}
+        className="bg-cover bg-no-repeat bg-fixed bg-center"
       >
-        {!props.background.custom && (
+        {!props.background?.custom && (
           <div
-            className={`${props.background.pattern} absolute top-0 left-0 w-full h-full`}
+            className={`${props.background?.pattern} absolute top-0 left-0 w-full h-full`}
           />
         )}
         <div
           className="absolute top-0 left-0 w-full h-full z-0 opacity-50"
           style={{
-            background: props.background.color,
+            background: props.background?.color,
           }}
         />
         <Nav show={showNav} {...props}></Nav>

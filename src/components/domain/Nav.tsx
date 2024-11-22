@@ -73,7 +73,7 @@ const Nav = ({ ...props }) => {
           </div>
           <div className="gap-x-4 items-center hidden lg:flex">
             <a>
-              <Button style={{ background: props.button.background,color:props.button.text }} className={`${props.button.rounded}`}>
+              <Button style={{ background: props.button?.background,color:props.button?.text }} className={`${props.button?.rounded}`}>
                 Buy
               </Button>
             </a>

@@ -1,8 +1,6 @@
 import type { Resource } from "i18next";
 
 import enUS from "@/config/locale/en-US";
-import koKR from "@/config/locale/ko-KR";
-import zhCN from "@/config/locale/zh-CN";
 import type { TelegramType } from "@/type";
 
 // 检测是否为开发者
@@ -10,7 +8,7 @@ export const isDev: boolean = import.meta.env.DEV;
 // 路由
 export const router = {
   // 根据路由路经需要传参数
-  param: { "/": ["domain"]},
+  param: { "/": ["domain"] },
 };
 // 电报
 export const telegram = {
@@ -48,6 +46,4 @@ export const URL = {
 // 语言库
 export const locale = {
   "en-US": enUS,
-  "ko-KR": koKR,
-  "zh-CN": zhCN,
 } as Resource;

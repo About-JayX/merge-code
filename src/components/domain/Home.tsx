@@ -45,7 +45,7 @@ const Home = ({ ...props }) => {
         <div className="flex flex-col items-center justify-center gap-y-12">
           <button
             className="px-4 py-3 border rounded-full bg-gradient-to-tr from-yllw/10 to-lyllw/10 flex gap-x-3 items-center font-semibold z-50 hover:scale-[1.05] hover:from-yllw/20 hover:to-lyllw/20 transition-all ease-in-out duration-300 text-sm lg:text-xl"
-            style={{ border: `1px solid ${props.text.color}` }}
+            style={{ border: `1px solid ${props.text?.color}` }}
           >
             <svg
               stroke="currentColor"
@@ -78,12 +78,12 @@ const Home = ({ ...props }) => {
                 <Button
                   style={{
                     display: "ruby",
-                    background: props.button.background,
-                    color: props.button.text,
+                    background: props.button?.background,
+                    color: props.button?.text,
                   }}
-                  className={`${props.button.rounded} py-3`}
+                  className={`${props.button?.rounded} py-3`}
                 >
-                  Buy on Kyberswap&nbsp;{" "}
+                  Buy on Kyberswap&nbsp;
                   <svg
                     stroke="currentColor"
                     fill="none"
@@ -111,12 +111,12 @@ const Home = ({ ...props }) => {
                 <Button
                   style={{
                     display: "ruby",
-                    background: props.button.background,
-                    color: props.button.text,
+                    background: props.button?.background,
+                    color: props.button?.text,
                   }}
-                  className={`${props.button.rounded} py-3`}
+                  className={`${props.button?.rounded} py-3`}
                 >
-                  Buy on OKX&nbsp;{" "}
+                  Buy on OKX&nbsp;
                   <svg
                     stroke="currentColor"
                     fill="none"
@@ -144,10 +144,10 @@ const Home = ({ ...props }) => {
                 <Button
                   style={{
                     display: "ruby",
-                    background: props.button.background,
-                    color: props.button.text,
+                    background: props.button?.background,
+                    color: props.button?.text,
                   }}
-                  className={`${props.button.rounded} py-3`}
+                  className={`${props.button?.rounded} py-3`}
                 >
                   Dextools Chart
                 </Button>

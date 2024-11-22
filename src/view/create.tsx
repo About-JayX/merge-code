@@ -20,6 +20,8 @@ export default function Create() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const [step, setStep] = useState<number>(0);
+  const [avatarImage, setAvatarImageUrl] = useState<string>();
+  const [avatarLoading, setAvatarLoading] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState<string>("#fff");
   const [backgroundPattern, setBackgroundPattern] = useState<string>("");
   const [backgroundImage, setBackgroundImageUrl] = useState<string>();
@@ -29,6 +31,40 @@ export default function Create() {
   const [buttonBackground, setButtonBackground] = useState("#000");
   const [buttonText, setButtonText] = useState("#fff");
   const [buttonRounded, setButtonRounded] = useState("!rounded-none");
+  console.log(state?.domain);
+
+  const avatarHandleLocalRead = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64Url = event.target?.result as string;
+      setAvatarImageUrl(base64Url); // 将 Base64 图片 URL 保存到状态中
+      setAvatarLoading(false); // 读取完成，停止加载状态
+    };
+    reader.readAsDataURL(file); // 将文件读取为 Base64 格式
+  };
+
+  const avatarBeforeUpload = (file: File) => {
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isJpgOrPng) {
+      message.error("You can only upload JPG/PNG file!");
+      return false; // 阻止上传
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error("Image must smaller than 2MB!");
+      return false; // 阻止上传
+    }
+    setAvatarLoading(true); // 开始加载
+    avatarHandleLocalRead(file); // 本地读取文件
+    return false; // 阻止上传到服务器
+  };
+
+  const avatarUploadButton = (
+    <div style={{ textAlign: "center" }}>
+      {avatarLoading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
 
   const backgroundHandleLocalRead = (file: File) => {
     const reader = new FileReader();
@@ -39,7 +75,6 @@ export default function Create() {
     };
     reader.readAsDataURL(file); // 将文件读取为 Base64 格式
   };
-  console.log(state.domain);
 
   const backgroundBeforeUpload = (file: File) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
@@ -57,7 +92,7 @@ export default function Create() {
     return false; // 阻止上传到服务器
   };
 
-  const uploadButton = (
+  const backgroundUploadButton = (
     <div style={{ textAlign: "center" }}>
       {backgroundLoading ? <LoadingOutlined /> : <PlusOutlined />}
       <div style={{ marginTop: 8 }}>Upload</div>
@@ -84,14 +119,14 @@ export default function Create() {
                     listType="picture-card"
                     className="avatar-uploader overflow-hidden"
                     showUploadList={false}
-                    beforeUpload={backgroundBeforeUpload}
+                    beforeUpload={avatarBeforeUpload}
                   >
-                    {backgroundImage ? (
+                    {avatarImage ? (
                       <div style={{ textAlign: "center" }}>
-                        <img src={backgroundImage} style={{ width: "100%" }} />
+                        <img src={avatarImage} style={{ width: "100%" }} />
                       </div>
                     ) : (
-                      uploadButton
+                      avatarUploadButton
                     )}
                   </Upload>
                 </div>
@@ -134,7 +169,13 @@ export default function Create() {
                 <span className="text-base font-bold">Dexscreener</span>
                 <Input size="large" />
               </div>
-              <Mbutton type="primary" onClick={() => setStep(1)}>
+              <Mbutton
+                type="primary"
+                onClick={() => {
+                  // 提交前保存数据
+                  setStep(1);
+                }}
+              >
                 Next step
               </Mbutton>
             </div>
@@ -268,7 +309,7 @@ export default function Create() {
                                   />
                                 </div>
                               ) : (
-                                uploadButton
+                                backgroundUploadButton
                               )}
                             </Upload>
                           </div>
@@ -509,7 +550,7 @@ export default function Create() {
                               />
                             </div>
                           ) : (
-                            uploadButton
+                            backgroundUploadButton
                           )}
                         </Upload>
                       </div>

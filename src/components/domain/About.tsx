@@ -25,7 +25,7 @@ const About = ({ ...props }) => {
         <CSSTransition in={show} timeout={1000} classNames="hideToshow">
           <div
             className="bg-gradient-to-t from-yllw/50 to-lyllw/50  backdrop-blur-lg  flex flex-col lg:flex-row gap-y-8 items-center justify-center w-full p-12 rounded-2xl border"
-            style={{ border: `1px solid ${props.text.color}` }}
+            style={{ border: `1px solid ${props.text?.color}` }}
           >
             <div className="flex flex-col items-center justify-center w-1/2">
               <div>svg demo</div>
@@ -60,10 +60,10 @@ const About = ({ ...props }) => {
               <Button
                 style={{
                   display: "ruby",
-                  background: props.button.background,
-                  color: props.button.text,
+                  background: props.button?.background,
+                  color: props.button?.text,
                 }}
-                className={`${props.button.rounded} py-3`}
+                className={`${props.button?.rounded} py-3`}
               >
                 Telegram&nbsp;
                 <svg
@@ -83,10 +83,10 @@ const About = ({ ...props }) => {
               <Button
                 style={{
                   display: "ruby",
-                  background: props.button.background,
-                  color: props.button.text,
+                  background: props.button?.background,
+                  color: props.button?.text,
                 }}
-                className={`${props.button.rounded} py-3`}
+                className={`${props.button?.rounded} py-3`}
               >
                 Twitter&nbsp;
                 <svg

@@ -400,7 +400,7 @@ const SwapList = ({ ...props }) => {
           </div>
           <div
             className="h-1 w-full max-w-xs mx-auto rounded-full mb-10 mt-5"
-            style={{ background: props.text.color }}
+            style={{ background: props.text?.color }}
           ></div>
           <div className="flex flex-col justify-center items-center text-6xl lg:text-9xl leading-[3rem] lg:leading-[5rem] mb-10">
             <p className="mt-5 text-center">FUTURES TRADING</p>

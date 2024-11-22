@@ -12,7 +12,7 @@ const Tokenomics = ({...props}) => {
         style={{ opacity: show ? 1 : 0 }}
       >
         <CSSTransition in={show} timeout={1000} classNames="hideToshow">
-          <div className="bg-gradient-to-t from-yllw/50 to-lyllw/50  backdrop-blur-lg  gap-y-8 items-center justify-center w-full p-12 rounded-2xl border"  style={{ border: `1px solid ${props.text.color}` }}>
+          <div className="bg-gradient-to-t from-yllw/50 to-lyllw/50  backdrop-blur-lg  gap-y-8 items-center justify-center w-full p-12 rounded-2xl border"  style={{ border: `1px solid ${props.text?.color}` }}>
             <div className="flex flex-col md:flex-row">
               <div className="">
                 <div className="flex flex-col items-center justify-center ">

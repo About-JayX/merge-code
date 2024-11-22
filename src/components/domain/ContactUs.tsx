@@ -14,7 +14,7 @@ const ContactUs = ({...props}) => {
           </p>
           <CSSTransition in={show} timeout={1000} classNames="lines">
             <div className="w-full h-[2px] hidden lg:block"  style={{
-              background:props.text.color
+              background:props.text?.color
             }}/>
           </CSSTransition>
           <CSSTransition in={show} timeout={1000} classNames="about">

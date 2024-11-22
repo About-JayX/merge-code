@@ -31,7 +31,7 @@ const Utilities = ({ ...props }) => {
           <CSSTransition in={show} timeout={1000} classNames="hideToshow">
             <div
               className="bg-gradient-to-t from-yllw/50 to-lyllw/50 flex flex-col lg:flex-row gap-y-8 items-center w-full p-12 rounded-2xl border backdrop-blur-lg"
-              style={{ border: `1px solid ${props.text.color}` }}
+              style={{ border: `1px solid ${props.text?.color}` }}
             >
               <CSSTransition in={show} timeout={1000} classNames="about">
                 <div className="flex flex-col justify-center gap-y-4 w-full text-center lg:text-left">
@@ -50,7 +50,7 @@ const Utilities = ({ ...props }) => {
           </CSSTransition>
           <CSSTransition in={showDiv1} timeout={1000} classNames="hideToshow">
             <div
-              style={{ opacity: showDiv1 ? 1 : 0,border: `1px solid ${props.text.color}` }}
+              style={{ opacity: showDiv1 ? 1 : 0,border: `1px solid ${props.text?.color}` }}
               className="bg-gradient-to-t from-yllw/50 to-lyllw/50 flex flex-col lg:flex-row gap-y-8 items-center w-full p-12 rounded-2xl border backdrop-blur-lg"
             >
               <CSSTransition in={showDiv1} timeout={1000} classNames="about">
@@ -76,7 +76,7 @@ const Utilities = ({ ...props }) => {
             <div
               style={{
                 opacity: showDiv2 ? 1 : 0,
-                border: `1px solid ${props.text.color}`,
+                border: `1px solid ${props.text?.color}`,
               }}
               className="bg-gradient-to-t from-yllw/50 to-lyllw/50 flex flex-col lg:flex-row gap-y-8 items-center w-full p-12 rounded-2xl border backdrop-blur-lg"
             >
