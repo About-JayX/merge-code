@@ -14,11 +14,11 @@ export default function Theme({ children }: { children?: React.ReactNode }) {
           },
         },
         token: {
-          colorPrimary: "#0DC8EC",
-          colorBgContainer: "var(--bg-color) !important",
-          colorText: "var(--title-color) !important",
+          // colorPrimary: "#0DC8EC",
+          // colorBgContainer: "var(--bg-color) !important",
+          // colorText: "var(--title-color) !important",
           colorBorder: "rgba(255,255,255,0.1)",
-          colorLink: "#fff",
+          // colorLink: "#fff",
           fontSize: 16,
         },
       }}

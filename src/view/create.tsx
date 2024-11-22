@@ -15,6 +15,15 @@ import Mbutton from "@/components/memes/button";
 import { useLocation } from "react-router";
 import Icon from "@/components/icon";
 import { useNavigate } from "react-router";
+import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
+import {
+  Connection,
+  LAMPORTS_PER_SOL,
+  PublicKey,
+  SystemProgram,
+  Transaction,
+} from "@solana/web3.js";
 
 export default function Create() {
   const { state } = useLocation();
@@ -31,7 +40,8 @@ export default function Create() {
   const [buttonBackground, setButtonBackground] = useState("#000");
   const [buttonText, setButtonText] = useState("#fff");
   const [buttonRounded, setButtonRounded] = useState("!rounded-none");
-  console.log(state?.domain);
+  const { setVisible } = useWalletModal();
+  const { publicKey, sendTransaction } = useWallet();
 
   const avatarHandleLocalRead = (file: File) => {
     const reader = new FileReader();
@@ -98,6 +108,45 @@ export default function Create() {
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
+
+  const sendSolana = async () => {
+    if (!publicKey) {
+      console.error("Wallet not connected");
+      return;
+    }
+
+    try {
+      // 使用自定义 RPC 提供商
+      const connection = new Connection(
+        "https://api.zan.top/node/v1/solana/mainnet/0fe3a89037da49a49acd410c53bbd1dd"
+      );
+
+      const recipientPubKey = new PublicKey(
+        "9Mv7BPofspMKsSkxGFf9dnfQKM6RzbgCu4vFfYmRG8zh"
+      );
+      const transaction = new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: publicKey,
+          toPubkey: recipientPubKey,
+          lamports: 0.1 * LAMPORTS_PER_SOL,
+        })
+      );
+
+      // 获取最近的 blockhash
+      const latestBlockhash = await connection.getLatestBlockhash();
+      transaction.recentBlockhash = latestBlockhash.blockhash;
+      transaction.feePayer = publicKey;
+
+      // 发送交易
+      const signature = await sendTransaction(transaction, connection);
+      console.log(`Transaction signature: ${signature}`);
+    } catch (error) {
+      console.error("Transaction failed", error);
+    }
+  };
+
+  publicKey && console.log("获取域名名称", state?.domain);
+  publicKey && console.log("获取solana地址", publicKey?.toBase58());
 
   return (
     <div className="flex justify-center px-4 gap-4">
@@ -214,7 +263,7 @@ export default function Create() {
                 },
               }}
             />
-            <div className="fixed bottom-0 left-0 flex xl:hidden bg-[--bg-color] p-4 w-full justify-center items-center z-50">
+            <div className="fixed flex-col gap-4 bottom-0 left-0 flex xl:hidden bg-[--bg-color] p-4 w-full justify-center items-center z-50">
               <div className="max-w-4xl flex items-center justify-center flex-wrap gap-4">
                 <a
                   className="text-current text-base"
@@ -475,6 +524,24 @@ export default function Create() {
                   </a>
                 </Dropdown>
               </div>
+              <Mbutton
+                type="primary"
+                onClick={() => {
+                  if (publicKey) {
+                    sendSolana();
+                    // 完成把所有数据保存数据库
+                  } else {
+                    setVisible(true);
+                  }
+                }}
+              >
+                {publicKey ? "Launch" : "Connect wallet"}
+              </Mbutton>
+              <span className="text-center text-sm font-bold">
+                {publicKey
+                  ? "Cost to create - 0.05 SOL"
+                  : " Connect your wallet to finish creating website."}
+              </span>
             </div>
           </div>
           <div className="h-fit w-56 sticky top-4 flex-col gap-4 hidden xl:flex">
@@ -664,6 +731,24 @@ export default function Create() {
                 },
               ]}
             />
+            <Mbutton
+              type="primary"
+              onClick={() => {
+                if (publicKey) {
+                  sendSolana();
+                  // 完成把所有数据保存数据库
+                } else {
+                  setVisible(true);
+                }
+              }}
+            >
+              {publicKey ? "Launch" : "Connect wallet"}
+            </Mbutton>
+            <span className="text-center text-sm font-bold">
+              {publicKey
+                ? "Cost to create - 0.05 SOL"
+                : " Connect your wallet to finish creating website."}
+            </span>
           </div>
         </Fragment>
       )}

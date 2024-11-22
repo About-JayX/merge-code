@@ -9,9 +9,11 @@ import { createHtmlPlugin } from "vite-plugin-html";
 import viteImagemin from "vite-plugin-imagemin";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 
+
 export default defineConfig(({ mode }) => ({
   define: {
     "process.env": loadEnv(mode, process.cwd()),
+    global: {},
   },
   plugins: [
     createHtmlPlugin({ minify: true }),

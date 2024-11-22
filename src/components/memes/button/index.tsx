@@ -8,6 +8,7 @@ interface ButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 export default function Button({
   loading = false,
   type = "default",
+  className="",
   ...props
 }: ButtonProps) {
   return (
@@ -17,7 +18,7 @@ export default function Button({
         type === "default"
           ? ""
           : "bg-gradient-to-r from-[#A440FD] to-[#0DC8EC] border-none"
-      }`}
+      } ${className}`}
       {...props}
     >
       {type == "default" && (
