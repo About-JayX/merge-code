@@ -32,7 +32,7 @@ export const View = () => {
         <nav className="w-full max-w-6xl flex items-center gap-4">
           <div className="flex gap-2 items-center text-2xl font-bold flex-1">
             <img className="w-12 h-12" />
-            <span className=" hidden sm:block">Memsite</span>
+            <span className=" hidden sm:block">Memes</span>
           </div>
           <div>
             <div className="flex gap-2 items-center text-lg font-normal">
