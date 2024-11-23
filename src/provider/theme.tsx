@@ -17,9 +17,9 @@ export default function Theme({ children }: { children?: React.ReactNode }) {
           // colorPrimary: "#0DC8EC",
           // colorBgContainer: "var(--bg-color) !important",
           // colorText: "var(--title-color) !important",
-          colorBorder: "rgba(255,255,255,0.1)",
+          // colorBorder: "rgba(255,255,255,0.1)",
           // colorLink: "#fff",
-          fontSize: 16,
+          // fontSize: 16,
         },
       }}
     >

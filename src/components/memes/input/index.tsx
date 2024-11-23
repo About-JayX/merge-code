@@ -8,6 +8,7 @@ export default function Input({
   loading = false,
   onSearch,
   onChange,
+  className = "",
 }: {
   addonBefore?: React.ReactNode;
   enterButton?: string;
@@ -15,10 +16,11 @@ export default function Input({
   loading?: boolean;
   onSearch?: (value: string) => void;
   onChange?: (event: ChangeEventHandler & any) => void;
+  className?: string;
 }) {
   const [input, setInput] = useState<string>("");
   return (
-    <div className="memes-input">
+    <div className={`memes-input ${className}`}>
       <div id="poda">
         <div className="glow"></div>
         <div className="darkBorderBg"></div>

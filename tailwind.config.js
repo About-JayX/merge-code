@@ -11,7 +11,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        primary: ["Londrina Solid", "sans-serif"],
+        londrinaSolid: ["Londrina Solid", "sans-serif"],
+        poppinsSemiBold: ["Poppins SemiBold","sans-serif"],
       },
     },
   },

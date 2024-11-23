@@ -4,13 +4,13 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding-left: 2em;
-    padding-right: 2em;
-    padding-bottom: 0.4em;
+    // padding-left: 2em;
+    // padding-right: 2em;
+    // padding-bottom: 0.4em;
     background-color: #171717;
     border-radius: 25px;
     transition: 0.4s ease-in-out;
-    @apply px-4 py-7 border border-[#5F5F5F]/30;
+    @apply px-1 sm:px-4 py-5 sm:py-7 border border-[#5F5F5F]/30;
   }
 
   .card {

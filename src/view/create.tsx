@@ -9,7 +9,12 @@ import {
   Upload,
 } from "antd";
 import { Fragment, useState } from "react";
-import { DownOutlined, LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  CloseOutlined,
+  DownOutlined,
+  LoadingOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import Button from "@/components/domain/button";
 import Mbutton from "@/components/memes/button";
 import { useLocation } from "react-router";
@@ -36,7 +41,7 @@ export default function Create() {
   const [backgroundImage, setBackgroundImageUrl] = useState<string>();
   const [backgroundLoading, setBackgroundLoading] = useState(false);
   const [textColor, setTextColor] = useState<string>("#000");
-  const [textFont, setTextFont] = useState<string>("font-primary");
+  const [textFont, setTextFont] = useState<string>("font-londrinaSolid");
   const [buttonBackground, setButtonBackground] = useState("#000");
   const [buttonText, setButtonText] = useState("#fff");
   const [buttonRounded, setButtonRounded] = useState("!rounded-none");
@@ -149,10 +154,14 @@ export default function Create() {
   publicKey && console.log("获取solana地址", publicKey?.toBase58());
 
   return (
-    <div className="flex justify-center px-4 gap-4">
+    <div
+      className={`flex justify-center px-4 gap-4  min-h-screen ${
+        step === 0 ? "items-center" : "items-start"
+      }`}
+    >
       {step === 0 ? (
-        <div className="mt-12 flex flex-col gap-4">
-          <a className="text-current text-base" onClick={() => navigate("/")}>
+        <div className="flex flex-col gap-4 py-4">
+          <a className="text-current text-sm" onClick={() => navigate("/")}>
             <Icon name="back" className="mt-[-3px]" />
             &nbsp; Back
           </a>
@@ -160,7 +169,7 @@ export default function Create() {
             <div className="grid gap-4">
               <div className="grid gap-4 grid-cols-[auto,1fr]">
                 <div className="grid gap-2">
-                  <span className="text-base font-bold">
+                  <span className="text-sm font-bold">
                     Image <span className="text-red-500">*</span>
                   </span>
                   <Upload
@@ -179,44 +188,44 @@ export default function Create() {
                     )}
                   </Upload>
                 </div>
-                <div className="flex flex-col gap-2 h-fit">
+                <div className="flex flex-col gap-4 h-fit">
                   <div className="grid gap-1">
-                    <span className="text-base font-bold">
+                    <span className="text-sm font-bold">
                       Name <span className="text-red-500">*</span>
                     </span>
-                    <Input size="large" />
+                    <Input size="middle" />
                   </div>
                   <div className="grid gap-1">
-                    <span className="text-base font-bold">
-                      Name <span className="text-red-500">*</span>
+                    <span className="text-sm font-bold">
+                      Ticker <span className="text-red-500">*</span>
                     </span>
-                    <Input size="large" />
+                    <Input size="middle" />
                   </div>
                 </div>
               </div>
               <div className="grid gap-2">
-                <span className="text-base font-bold">Description</span>
-                <Input size="large" />
+                <span className="text-sm font-bold">Description</span>
+                <Input size="middle" />
               </div>
               <div className="grid gap-2">
-                <span className="text-base font-bold">Contract Address</span>
-                <Input size="large" />
+                <span className="text-sm font-bold">Contract Address</span>
+                <Input size="middle" />
               </div>
               <div className="grid gap-2">
-                <span className="text-base font-bold">Twitter</span>
-                <Input size="large" />
+                <span className="text-sm font-bold">Twitter</span>
+                <Input size="middle" />
               </div>
               <div className="grid gap-2">
-                <span className="text-base font-bold">Telegram</span>
-                <Input size="large" />
+                <span className="text-sm font-bold">Telegram</span>
+                <Input size="middle" />
               </div>
               <div className="grid gap-2">
-                <span className="text-base font-bold">Pumpfun</span>
-                <Input size="large" />
+                <span className="text-sm font-bold">Pumpfun</span>
+                <Input size="middle" />
               </div>
               <div className="grid gap-2">
-                <span className="text-base font-bold">Dexscreener</span>
-                <Input size="large" />
+                <span className="text-sm font-bold">Dexscreener</span>
+                <Input size="middle" />
               </div>
               <Mbutton
                 type="primary"
@@ -232,7 +241,7 @@ export default function Create() {
         </div>
       ) : (
         <Fragment>
-          <div className="max-w-4xl overflow-hidden relative">
+          <div className="max-w-4xl overflow-hidden relative pb-48 sm:pb-0">
             <Domain
               {...{
                 domain: "RiffRaff",
@@ -263,14 +272,11 @@ export default function Create() {
                 },
               }}
             />
-            <div className="fixed flex-col gap-4 bottom-0 left-0 flex xl:hidden bg-[--bg-color] p-4 w-full justify-center items-center z-50">
-              <div className="max-w-4xl flex items-center justify-center flex-wrap gap-4">
-                <a
-                  className="text-current text-base"
-                  onClick={() => setStep(0)}
-                >
+            <div className="fixed flex-col gap-4 bottom-0 left-0 flex xl:hidden bg-[--bg-color] p-4 pb-8 w-full justify-center items-center z-50">
+              <div className="max-w-4xl flex items-center justify-between flex-wrap gap-4 gap-x-5">
+                <a className="!text-current text-sm" onClick={() => setStep(0)}>
                   <Icon name="back" className="mt-[-3px]" />
-                  &nbsp; Previous step
+                  &nbsp;Previous step
                 </a>
                 <Dropdown
                   placement="top"
@@ -279,8 +285,8 @@ export default function Create() {
                       {
                         key: "background-color",
                         label: (
-                          <div className="flex gap-2">
-                            <span>Color</span>
+                          <div className="flex gap-3 items-center">
+                            <span className="text-sm">Color</span>
                             <ColorPicker
                               defaultValue={backgroundColor}
                               allowClear
@@ -296,13 +302,13 @@ export default function Create() {
                         key: "background-pattern",
                         label: (
                           <div className="flex flex-col gap-2">
-                            <span>Pattern</span>
+                            <span className="text-sm">Pattern</span>
                             <div className="flex flex-wrap gap-2">
                               <a
                                 className="w-9 h-9 flex items-center justify-center bg-white text-black rounded-lg"
                                 onClick={() => setBackgroundPattern("")}
                               >
-                                x
+                                <CloseOutlined />
                               </a>
                               <a
                                 className="w-9 h-9 pattern-1 rounded-lg"
@@ -342,7 +348,7 @@ export default function Create() {
                         key: "background-custom",
                         label: (
                           <div className="flex flex-col gap-2">
-                            <span>Custom</span>
+                            <span className="text-sm">Custom</span>
                             <Upload
                               name="avatar"
                               listType="picture-card"
@@ -368,22 +374,22 @@ export default function Create() {
                   }}
                 >
                   <a
-                    className="text-current text-base"
+                    className="text-current text-sm flex items-center gap-2"
                     onClick={(e) => e.preventDefault()}
                   >
-                    Background&nbsp;
+                    Background
                     <DownOutlined />
                   </a>
                 </Dropdown>
                 <Dropdown
-                  placement="top"
+                  placement="topRight"
                   menu={{
                     items: [
                       {
                         key: "text-color",
                         label: (
-                          <div className="flex gap-2">
-                            <span>Color</span>
+                          <div className="flex gap-3 items-center">
+                            <span className="text-sm">Color</span>
                             <ColorPicker
                               defaultValue={textColor}
                               allowClear
@@ -399,14 +405,24 @@ export default function Create() {
                         key: "text-font",
                         label: (
                           <div className="flex flex-col gap-2">
-                            <span>Font</span>
-                            <div className="grid grid-cols-2 gap-2 flex-wrap">
-                              <a
-                                className="font-primary"
-                                onClick={() => setTextFont("font-primary")}
+                            <span className="text-sm">Font</span>
+                            <div className="flex gap-1 flex-wrap">
+                              <Button
+                                className="font-londrinaSolid text-sm"
+                                onClick={() =>
+                                  setTextFont("font-londrinaSolid")
+                                }
                               >
-                                primary
-                              </a>
+                                Londrina Solid
+                              </Button>
+                              <Button
+                                className="font-poppinsSemiBold text-sm"
+                                onClick={() =>
+                                  setTextFont("font-poppinsSemiBold")
+                                }
+                              >
+                                Poppins SemiBold
+                              </Button>
                             </div>
                           </div>
                         ),
@@ -415,22 +431,22 @@ export default function Create() {
                   }}
                 >
                   <a
-                    className="text-current text-base"
+                    className="text-current text-sm flex items-center gap-2"
                     onClick={(e) => e.preventDefault()}
                   >
-                    Text&nbsp;
+                    Text
                     <DownOutlined />
                   </a>
                 </Dropdown>
                 <Dropdown
-                  placement="top"
+                  placement="topCenter"
                   menu={{
                     items: [
                       {
                         key: "button-background",
                         label: (
-                          <div className="flex gap-2">
-                            <span>Background</span>
+                          <div className="flex gap-3 items-center">
+                            <span className="text-sm">Background</span>
                             <ColorPicker
                               defaultValue={buttonBackground}
                               allowClear
@@ -445,8 +461,8 @@ export default function Create() {
                       {
                         key: "button-text",
                         label: (
-                          <div className="flex gap-2">
-                            <span>Text</span>
+                          <div className="flex gap-3 items-center">
+                            <span className="text-sm">Text</span>
                             <ColorPicker
                               defaultValue={buttonText}
                               allowClear
@@ -462,8 +478,8 @@ export default function Create() {
                         key: "button-rounded",
                         label: (
                           <div className="flex flex-col gap-2">
-                            <span>Rounded</span>
-                            <div className="grid grid-cols-2 gap-2">
+                            <span className="text-sm">Rounded</span>
+                            <div className="grid grid-cols-2 gap-1">
                               <Button
                                 style={{
                                   background: buttonBackground,
@@ -516,7 +532,7 @@ export default function Create() {
                   }}
                 >
                   <a
-                    className="text-current text-base"
+                    className="text-current text-sm"
                     onClick={(e) => e.preventDefault()}
                   >
                     Button&nbsp;
@@ -525,6 +541,7 @@ export default function Create() {
                 </Dropdown>
               </div>
               <Mbutton
+                className="!min-w-48"
                 type="primary"
                 onClick={() => {
                   if (publicKey) {
@@ -537,15 +554,15 @@ export default function Create() {
               >
                 {publicKey ? "Launch" : "Connect wallet"}
               </Mbutton>
-              <span className="text-center text-sm font-bold">
+              <span className="text-center text-sm font-bold opacity-80">
                 {publicKey
                   ? "Cost to create - 0.05 SOL"
                   : " Connect your wallet to finish creating website."}
               </span>
             </div>
           </div>
-          <div className="h-fit w-56 sticky top-4 flex-col gap-4 hidden xl:flex">
-            <a className="text-current text-base" onClick={() => setStep(0)}>
+          <div className="w-56 sticky top-4 flex-col gap-4 hidden xl:flex">
+            <a className="text-current text-sm" onClick={() => setStep(0)}>
               <Icon name="back" className="mt-[-3px]" />
               &nbsp; Previous step
             </a>
@@ -558,8 +575,8 @@ export default function Create() {
                   label: "Background",
                   children: (
                     <div className="grid gap-4">
-                      <div className="flex gap-2">
-                        <span>Color</span>
+                      <div className="flex gap-3 items-center">
+                        <span className="text-sm">Color</span>
                         <ColorPicker
                           defaultValue={backgroundColor}
                           allowClear
@@ -570,38 +587,38 @@ export default function Create() {
                         />
                       </div>
                       <div className="flex flex-col gap-2">
-                        <span>Pattern</span>
+                        <span className="text-sm">Pattern</span>
                         <div className="flex flex-wrap gap-2">
                           <a
-                            className="w-9 h-9 flex items-center justify-center bg-white text-black rounded-lg"
+                            className="w-10 h-10 flex items-center justify-center bg-white text-black rounded-lg"
                             onClick={() => setBackgroundPattern("")}
                           >
-                            x
+                            <CloseOutlined />
                           </a>
                           <a
-                            className="w-9 h-9 pattern-1 rounded-lg"
+                            className="w-10 h-10 pattern-1 rounded-lg"
                             onClick={() => setBackgroundPattern("pattern-1")}
                           />
                           <a
-                            className="w-9 h-9 pattern-2 rounded-lg"
+                            className="w-10 h-10 pattern-2 rounded-lg"
                             onClick={() => setBackgroundPattern("pattern-2")}
                           />
                           <a
-                            className="w-9 h-9 pattern-3 rounded-lg"
+                            className="w-10 h-10 pattern-3 rounded-lg"
                             onClick={() => setBackgroundPattern("pattern-3")}
                           />
                           <a
-                            className="w-9 h-9 pattern-4 rounded-lg"
+                            className="w-10 h-10 pattern-4 rounded-lg"
                             onClick={() => setBackgroundPattern("pattern-4")}
                           />
                           <a
-                            className="w-9 h-9 pattern-5 rounded-lg"
+                            className="w-10 h-10 pattern-5 rounded-lg"
                             onClick={() => setBackgroundPattern("pattern-5")}
                           />
                         </div>
                       </div>
                       <div className="flex flex-col gap-2">
-                        <span>Custom</span>
+                        <span className="text-sm">Custom</span>
                         <Upload
                           name="avatar"
                           listType="picture-card"
@@ -629,8 +646,8 @@ export default function Create() {
                   label: "Text",
                   children: (
                     <div className="grid gap-4">
-                      <div className="flex gap-2">
-                        <span>Color</span>
+                      <div className="flex gap-3 items-center">
+                        <span className="text-sm">Color</span>
                         <ColorPicker
                           defaultValue={textColor}
                           allowClear
@@ -641,14 +658,20 @@ export default function Create() {
                         />
                       </div>
                       <div className="flex flex-col gap-2">
-                        <span>Font</span>
-                        <div className="grid grid-cols-2 gap-2 flex-wrap">
-                          <a
-                            className="font-primary"
-                            onClick={() => setTextFont("font-primary")}
+                        <span className="text-sm">Font</span>
+                        <div className="flex gap-1 flex-wrap">
+                          <Button
+                            className="font-londrinaSolid text-sm"
+                            onClick={() => setTextFont("font-londrinaSolid")}
                           >
-                            primary
-                          </a>
+                            Londrina Solid
+                          </Button>
+                          <Button
+                            className="font-poppinsSemiBold text-sm"
+                            onClick={() => setTextFont("font-poppinsSemiBold")}
+                          >
+                            Poppins SemiBold
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -659,8 +682,8 @@ export default function Create() {
                   label: "Button",
                   children: (
                     <div className="grid gap-4">
-                      <div className="flex gap-2">
-                        <span>Background</span>
+                      <div className="flex gap-3 items-center">
+                        <span className="text-sm">Background</span>
                         <ColorPicker
                           defaultValue={buttonBackground}
                           allowClear
@@ -670,8 +693,8 @@ export default function Create() {
                           }
                         />
                       </div>
-                      <div className="flex gap-2">
-                        <span>Text</span>
+                      <div className="flex items-center gap-3">
+                        <span className="text-sm">Text</span>
                         <ColorPicker
                           defaultValue={buttonText}
                           allowClear
@@ -682,8 +705,8 @@ export default function Create() {
                         />
                       </div>
                       <div className="flex flex-col gap-2">
-                        <span>Rounded</span>
-                        <div className="grid grid-cols-2 gap-2">
+                        <span className="text-sm">Rounded</span>
+                        <div className="grid grid-cols-2 gap-1">
                           <Button
                             style={{
                               background: buttonBackground,
@@ -744,7 +767,7 @@ export default function Create() {
             >
               {publicKey ? "Launch" : "Connect wallet"}
             </Mbutton>
-            <span className="text-center text-sm font-bold">
+            <span className="text-center text-sm font-bold opacity-80">
               {publicKey
                 ? "Cost to create - 0.05 SOL"
                 : " Connect your wallet to finish creating website."}
