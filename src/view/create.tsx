@@ -1,20 +1,7 @@
 import Domain from "@/components/domain";
-import {
-  Card,
-  Collapse,
-  ColorPicker,
-  Dropdown,
-  Input,
-  message,
-  Upload,
-} from "antd";
+import { Card, Collapse, ColorPicker, Dropdown, Input } from "antd";
 import { Fragment, useState } from "react";
-import {
-  CloseOutlined,
-  DownOutlined,
-  LoadingOutlined,
-  PlusOutlined,
-} from "@ant-design/icons";
+import { CloseOutlined, DownOutlined } from "@ant-design/icons";
 import Button from "@/components/domain/button";
 import Mbutton from "@/components/memes/button";
 import { useLocation } from "react-router";
@@ -29,17 +16,16 @@ import {
   SystemProgram,
   Transaction,
 } from "@solana/web3.js";
+import Upload from "@/components/memes/upload";
 
 export default function Create() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const [step, setStep] = useState<number>(0);
-  const [avatarImage, setAvatarImageUrl] = useState<string>();
-  const [avatarLoading, setAvatarLoading] = useState(false);
+  const [_, setAvatarImageUrl] = useState<string>();
   const [backgroundColor, setBackgroundColor] = useState<string>("#fff");
   const [backgroundPattern, setBackgroundPattern] = useState<string>("");
   const [backgroundImage, setBackgroundImageUrl] = useState<string>();
-  const [backgroundLoading, setBackgroundLoading] = useState(false);
   const [textColor, setTextColor] = useState<string>("#000");
 
   const [buttonBackground, setButtonBackground] = useState("#000");
@@ -53,72 +39,6 @@ export default function Create() {
     { key: "font-poppinsSemiBold", name: "Poppins SemiBold" },
   ];
   const [textFont, setTextFont] = useState<string>(fontFamily?.[0].key);
-
-  const avatarHandleLocalRead = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const base64Url = event.target?.result as string;
-      setAvatarImageUrl(base64Url); // 将 Base64 图片 URL 保存到状态中
-      setAvatarLoading(false); // 读取完成，停止加载状态
-    };
-    reader.readAsDataURL(file); // 将文件读取为 Base64 格式
-  };
-
-  const avatarBeforeUpload = (file: File) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-      return false; // 阻止上传
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-      return false; // 阻止上传
-    }
-    setAvatarLoading(true); // 开始加载
-    avatarHandleLocalRead(file); // 本地读取文件
-    return false; // 阻止上传到服务器
-  };
-
-  const avatarUploadButton = (
-    <div style={{ textAlign: "center" }}>
-      {avatarLoading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
-
-  const backgroundHandleLocalRead = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const base64Url = event.target?.result as string;
-      setBackgroundImageUrl(base64Url); // 将 Base64 图片 URL 保存到状态中
-      setBackgroundLoading(false); // 读取完成，停止加载状态
-    };
-    reader.readAsDataURL(file); // 将文件读取为 Base64 格式
-  };
-
-  const backgroundBeforeUpload = (file: File) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-      return false; // 阻止上传
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-      return false; // 阻止上传
-    }
-    setBackgroundLoading(true); // 开始加载
-    backgroundHandleLocalRead(file); // 本地读取文件
-    return false; // 阻止上传到服务器
-  };
-
-  const backgroundUploadButton = (
-    <div style={{ textAlign: "center" }}>
-      {backgroundLoading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
 
   const sendSolana = async () => {
     if (!publicKey) {
@@ -178,21 +98,7 @@ export default function Create() {
                   <span className="text-sm font-bold">
                     Image <span className="text-red-500">*</span>
                   </span>
-                  <Upload
-                    name="avatar"
-                    listType="picture-card"
-                    className="avatar-uploader overflow-hidden"
-                    showUploadList={false}
-                    beforeUpload={avatarBeforeUpload}
-                  >
-                    {avatarImage ? (
-                      <div style={{ textAlign: "center" }}>
-                        <img src={avatarImage} style={{ width: "100%" }} />
-                      </div>
-                    ) : (
-                      avatarUploadButton
-                    )}
-                  </Upload>
+                  <Upload onChange={setAvatarImageUrl} />
                 </div>
                 <div className="flex flex-col gap-4 h-fit">
                   <div className="grid gap-1">
@@ -356,23 +262,9 @@ export default function Create() {
                           <div className="flex flex-col gap-2">
                             <span className="text-sm">Custom</span>
                             <Upload
-                              name="avatar"
-                              listType="picture-card"
-                              className="avatar-uploader overflow-hidden"
-                              showUploadList={false}
-                              beforeUpload={backgroundBeforeUpload}
-                            >
-                              {backgroundImage ? (
-                                <div style={{ textAlign: "center" }}>
-                                  <img
-                                    src={backgroundImage}
-                                    style={{ width: "100%" }}
-                                  />
-                                </div>
-                              ) : (
-                                backgroundUploadButton
-                              )}
-                            </Upload>
+                              onChange={setBackgroundImageUrl}
+                              image={backgroundImage}
+                            />
                           </div>
                         ),
                       },
@@ -619,23 +511,9 @@ export default function Create() {
                       <div className="flex flex-col gap-2">
                         <span className="text-sm">Custom</span>
                         <Upload
-                          name="avatar"
-                          listType="picture-card"
-                          className="avatar-uploader overflow-hidden"
-                          showUploadList={false}
-                          beforeUpload={backgroundBeforeUpload}
-                        >
-                          {backgroundImage ? (
-                            <div style={{ textAlign: "center" }}>
-                              <img
-                                src={backgroundImage}
-                                style={{ width: "100%" }}
-                              />
-                            </div>
-                          ) : (
-                            backgroundUploadButton
-                          )}
-                        </Upload>
+                          onChange={setBackgroundImageUrl}
+                          image={backgroundImage}
+                        />
                       </div>
                     </div>
                   ),
