@@ -41,12 +41,18 @@ export default function Create() {
   const [backgroundImage, setBackgroundImageUrl] = useState<string>();
   const [backgroundLoading, setBackgroundLoading] = useState(false);
   const [textColor, setTextColor] = useState<string>("#000");
-  const [textFont, setTextFont] = useState<string>("font-londrinaSolid");
+
   const [buttonBackground, setButtonBackground] = useState("#000");
   const [buttonText, setButtonText] = useState("#fff");
   const [buttonRounded, setButtonRounded] = useState("!rounded-none");
   const { setVisible } = useWalletModal();
   const { publicKey, sendTransaction } = useWallet();
+
+  const fontFamily = [
+    { key: "font-londrinaSolid", name: "Londrina Solid" },
+    { key: "font-poppinsSemiBold", name: "Poppins SemiBold" },
+  ];
+  const [textFont, setTextFont] = useState<string>(fontFamily?.[0].key);
 
   const avatarHandleLocalRead = (file: File) => {
     const reader = new FileReader();
@@ -407,22 +413,15 @@ export default function Create() {
                           <div className="flex flex-col gap-2">
                             <span className="text-sm">Font</span>
                             <div className="flex gap-1 flex-wrap">
-                              <Button
-                                className="font-londrinaSolid text-sm"
-                                onClick={() =>
-                                  setTextFont("font-londrinaSolid")
-                                }
-                              >
-                                Londrina Solid
-                              </Button>
-                              <Button
-                                className="font-poppinsSemiBold text-sm"
-                                onClick={() =>
-                                  setTextFont("font-poppinsSemiBold")
-                                }
-                              >
-                                Poppins SemiBold
-                              </Button>
+                              {fontFamily.map((item, index) => (
+                                <Button
+                                  className="font-poppinsSemiBold text-sm"
+                                  key={index}
+                                  onClick={() => setTextFont(item.key)}
+                                >
+                                  {item.name}
+                                </Button>
+                              ))}
                             </div>
                           </div>
                         ),
@@ -660,18 +659,15 @@ export default function Create() {
                       <div className="flex flex-col gap-2">
                         <span className="text-sm">Font</span>
                         <div className="flex gap-1 flex-wrap">
-                          <Button
-                            className="font-londrinaSolid text-sm"
-                            onClick={() => setTextFont("font-londrinaSolid")}
-                          >
-                            Londrina Solid
-                          </Button>
-                          <Button
-                            className="font-poppinsSemiBold text-sm"
-                            onClick={() => setTextFont("font-poppinsSemiBold")}
-                          >
-                            Poppins SemiBold
-                          </Button>
+                          {fontFamily.map((item, index) => (
+                            <Button
+                              className="font-poppinsSemiBold text-sm"
+                              key={index}
+                              onClick={() => setTextFont(item.key)}
+                            >
+                              {item.name}
+                            </Button>
+                          ))}
                         </div>
                       </div>
                     </div>

@@ -12,7 +12,7 @@ export default {
     extend: {
       fontFamily: {
         londrinaSolid: ["Londrina Solid", "sans-serif"],
-        poppinsSemiBold: ["Poppins SemiBold","sans-serif"],
+        poppinsSemiBold: ["Poppins SemiBold", "sans-serif"],
       },
     },
   },
