@@ -6,7 +6,7 @@
   .glow {
     @apply max-h-20 max-w-96 w-full h-full absolute overflow-hidden rounded-xl blur-sm;
     @supports (-webkit-touch-callout: none) {
-      z-index: -1;
+      display: none;
     }
     
   }
@@ -17,7 +17,7 @@
     @apply flex items-center justify-center flex-col;
   }
   .input::placeholder {
-    color: #c0b9c0;
+    @apply text-[#c0b9c0]
   }
 
   .input:focus {
@@ -42,6 +42,9 @@
     filter: blur(20px);
     opacity: 0.8;
     transition: all 2s;
+    @supports (-webkit-touch-callout: none) {
+      display: none;
+    }
   }
   #main:hover > #pink-mask {
     @apply opacity-0;
