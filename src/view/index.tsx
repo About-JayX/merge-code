@@ -43,26 +43,26 @@ export const View = () => {
               <Mbutton
                 href="https://t.me/memes_ac_entry"
                 target="_blank"
-                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:min-h-10"
+                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
               >
                 <Icon name="telegram" />
               </Mbutton>
               <Mbutton
                 href="https://x.com/memes_dot_ac"
                 target="_blank"
-                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:min-h-10"
+                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
               >
                 <Icon name="twitter" />
               </Mbutton>
               <Mbutton
-                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:min-h-10"
+                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
                 href="https://dexscreener.com/solana/fa7wk5hqnszx1dcvbncgaj2rvgsknkwtnu3jydxvrsnw"
                 target="_blank"
               >
                 <Icon name="dexscreener" />
               </Mbutton>
               <Mbutton
-                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:min-h-10"
+                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
                 href="https://pump.fun/coin/BoGovexaH9cMKZg6bFgDgsrqj81MvWu6hKdcNK4Mpump"
                 target="_blank"
               >
