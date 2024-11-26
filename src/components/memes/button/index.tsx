@@ -9,8 +9,11 @@ export default function Button({
   loading = false,
   type = "default",
   className,
+  disabled = false,
   ...props
-}: ButtonProps) {
+}: {
+  disabled?: boolean;
+} & ButtonProps) {
   return (
     <a
       id="memes-button-icon"
@@ -18,7 +21,10 @@ export default function Button({
         type === "default"
           ? ""
           : "bg-gradient-to-r from-[#A440FD] to-[#0DC8EC] border-none"
-      } ${className}`}
+      } ${className} ${
+        disabled ? "cursor-not-allowed opacity-50 hover:opacity-50" : ""
+      }`}
+      rel="noopener noreferrer"
       {...props}
     >
       {type == "default" && (

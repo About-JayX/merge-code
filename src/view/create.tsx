@@ -1,7 +1,19 @@
 import Domain from "@/components/domain";
-import { Card, Collapse, ColorPicker, Dropdown, Input } from "antd";
+import {
+  Card,
+  Collapse,
+  ColorPicker,
+  Dropdown,
+  Input,
+  Button as AntdButton,
+} from "antd";
 import { Fragment, useState } from "react";
-import { CloseOutlined, DownOutlined } from "@ant-design/icons";
+import {
+  CloseOutlined,
+  DeleteOutlined,
+  DownOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import Button from "@/components/domain/button";
 import Mbutton from "@/components/memes/button";
 import { useLocation } from "react-router";
@@ -22,17 +34,42 @@ export default function Create() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const [step, setStep] = useState<number>(0);
-  const [_, setAvatarImageUrl] = useState<string>();
+
+  const [avatarImageUrl, setAvatarImageUrl] = useState<string>();
+  const [name, setName] = useState<string>("");
+  const [ticker, setTicker] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [contractAddress, setContractAddress] = useState<string>("");
+  const [twitter, setTwitter] = useState<string>("");
+  const [telegram, setTelegram] = useState<string>("");
+  const [pumpfun, setPumpfun] = useState<string>("");
+  const [dexscreener, setDexscreener] = useState<string>("");
+
   const [backgroundColor, setBackgroundColor] = useState<string>("#fff");
   const [backgroundPattern, setBackgroundPattern] = useState<string>("");
   const [backgroundImage, setBackgroundImageUrl] = useState<string>();
   const [textColor, setTextColor] = useState<string>("#000");
-
   const [buttonBackground, setButtonBackground] = useState("#000");
   const [buttonText, setButtonText] = useState("#fff");
   const [buttonRounded, setButtonRounded] = useState("!rounded-none");
   const { setVisible } = useWalletModal();
   const { publicKey, sendTransaction } = useWallet();
+  const [about, setAbout] = useState<{
+    image?: string;
+    title?: string;
+    text?: string;
+  }>({});
+
+  const [buy, setBuy] = useState<{
+    advertiseImage1?: string;
+    advertiseImage2?: string;
+    buyLink1?: string;
+    buyLink2?: string;
+  }>({});
+
+  const [roadmap, setRoadmap] = useState<{ title?: string; text?: string }[]>([
+    { title: "", text: "" },
+  ]);
 
   const fontFamily = [
     { key: "font-londrinaSolid", name: "Londrina Solid" },
@@ -40,7 +77,39 @@ export default function Create() {
   ];
   const [textFont, setTextFont] = useState<string>(fontFamily?.[0].key);
 
+  const data = {
+    domain: state?.domain,
+    image: avatarImageUrl,
+    name,
+    ticker,
+    description,
+    contractAddress,
+    twitter,
+    telegram,
+    pumpfun,
+    dexscreener,
+    background: {
+      color: backgroundColor,
+      pattern: backgroundPattern,
+      custom: backgroundImage,
+    },
+    text: {
+      color: textColor,
+      font: textFont,
+    },
+    button: {
+      background: buttonBackground,
+      text: buttonText,
+      rounded: buttonRounded,
+    },
+    about,
+    buy,
+    roadmap,
+  };
+  console.log("获取全部参数", JSON.stringify(data));
+  // 交易前拿到全部参数:如果完成交易将数据转JSON数据上传到服务器或写入到合约等等...
   const sendSolana = async () => {
+    console.log("获取全部参数", JSON.stringify(data));
     if (!publicKey) {
       console.error("Wallet not connected");
       return;
@@ -59,7 +128,7 @@ export default function Create() {
         SystemProgram.transfer({
           fromPubkey: publicKey,
           toPubkey: recipientPubKey,
-          lamports: 0.1 * LAMPORTS_PER_SOL,
+          lamports: 0.05 * LAMPORTS_PER_SOL,
         })
       );
 
@@ -71,6 +140,9 @@ export default function Create() {
       // 发送交易
       const signature = await sendTransaction(transaction, connection);
       console.log(`Transaction signature: ${signature}`);
+
+      // 完成交易区域
+      console.log("交易完成上传参数", JSON.stringify(data));
     } catch (error) {
       console.error("Transaction failed", error);
     }
@@ -98,51 +170,84 @@ export default function Create() {
                   <span className="text-sm font-bold">
                     Image <span className="text-red-500">*</span>
                   </span>
-                  <Upload onChange={setAvatarImageUrl} />
+                  <Upload image={avatarImageUrl} onChange={setAvatarImageUrl} />
                 </div>
                 <div className="flex flex-col gap-4 h-fit">
                   <div className="grid gap-1">
                     <span className="text-sm font-bold">
                       Name <span className="text-red-500">*</span>
                     </span>
-                    <Input size="middle" />
+                    <Input
+                      size="middle"
+                      defaultValue={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
                   </div>
                   <div className="grid gap-1">
                     <span className="text-sm font-bold">
                       Ticker <span className="text-red-500">*</span>
                     </span>
-                    <Input size="middle" />
+                    <Input
+                      size="middle"
+                      defaultValue={ticker}
+                      onChange={(e) => setTicker(e.target.value)}
+                    />
                   </div>
                 </div>
               </div>
               <div className="grid gap-2">
                 <span className="text-sm font-bold">Description</span>
-                <Input size="middle" />
+                <Input.TextArea
+                  size="middle"
+                  defaultValue={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
               </div>
               <div className="grid gap-2">
                 <span className="text-sm font-bold">Contract Address</span>
-                <Input size="middle" />
+                <Input
+                  size="middle"
+                  defaultValue={contractAddress}
+                  onChange={(e) => setContractAddress(e.target.value)}
+                />
               </div>
               <div className="grid gap-2">
                 <span className="text-sm font-bold">Twitter</span>
-                <Input size="middle" />
+                <Input
+                  size="middle"
+                  defaultValue={twitter}
+                  onChange={(e) => setTwitter(e.target.value)}
+                />
               </div>
               <div className="grid gap-2">
                 <span className="text-sm font-bold">Telegram</span>
-                <Input size="middle" />
+                <Input
+                  size="middle"
+                  defaultValue={telegram}
+                  onChange={(e) => setTelegram(e.target.value)}
+                />
               </div>
               <div className="grid gap-2">
                 <span className="text-sm font-bold">Pumpfun</span>
-                <Input size="middle" />
+                <Input
+                  size="middle"
+                  defaultValue={pumpfun}
+                  onChange={(e) => setPumpfun(e.target.value)}
+                />
               </div>
               <div className="grid gap-2">
                 <span className="text-sm font-bold">Dexscreener</span>
-                <Input size="middle" />
+                <Input
+                  size="middle"
+                  defaultValue={dexscreener}
+                  onChange={(e) => setDexscreener(e.target.value)}
+                />
               </div>
               <Mbutton
+                disabled={!avatarImageUrl || !name || !ticker}
                 type="primary"
                 onClick={() => {
-                  // 提交前保存数据
+                  if (!avatarImageUrl || !name || !ticker) return;
                   setStep(1);
                 }}
               >
@@ -154,36 +259,7 @@ export default function Create() {
       ) : (
         <Fragment>
           <div className="max-w-4xl overflow-hidden relative pb-48 sm:pb-0">
-            <Domain
-              {...{
-                domain: "RiffRaff",
-                image:
-                  "https://firebasestorage.googleapis.com/v0/b/test-35761.appspot.com/o/images%2Fjody-high-roller-braces.gif?alt=media&token=6657043b-1aae-41a3-b208-9da8deb3f864",
-                name: "RIFF RAFF",
-                ticker: "d",
-                description: "dsfdsgsdfgsdfsdg",
-                contractAddress: "0x532f27101965dd16442E59d40670FaF5eBB142E4",
-                twitter: "https://x.com/RIFFRAFFMEME",
-                telegram: "https://t.me/basedbrett",
-                pumpfun:
-                  "https://pump.fun/coin/7FTFVeHkkx8R1W2j6W61RAXaPbC3fRpsd5paLNGypump",
-                dexscreener: "",
-                background: {
-                  color: backgroundColor,
-                  pattern: backgroundPattern,
-                  custom: backgroundImage,
-                },
-                text: {
-                  color: textColor,
-                  font: textFont,
-                },
-                button: {
-                  background: buttonBackground,
-                  text: buttonText,
-                  rounded: buttonRounded,
-                },
-              }}
-            />
+            <Domain {...data} />
             <div className="fixed flex-col gap-4 bottom-0 left-0 flex xl:hidden bg-[--bg-color] p-4 pb-8 w-full justify-center items-center z-50">
               <div className="max-w-4xl flex items-center justify-between flex-wrap gap-4 gap-x-5">
                 <a className="!text-current text-sm" onClick={() => setStep(0)}>
@@ -192,7 +268,11 @@ export default function Create() {
                 </a>
                 <Dropdown
                   placement="top"
+                  trigger={["click"]}
                   menu={{
+                    onClick: (e: any) => {
+                      e.preventDefault();
+                    },
                     items: [
                       {
                         key: "background-color",
@@ -280,8 +360,12 @@ export default function Create() {
                   </a>
                 </Dropdown>
                 <Dropdown
-                  placement="topRight"
+                  placement="top"
+                  trigger={["click"]}
                   menu={{
+                    onClick: (e: any) => {
+                      e.preventDefault();
+                    },
                     items: [
                       {
                         key: "text-color",
@@ -330,8 +414,12 @@ export default function Create() {
                   </a>
                 </Dropdown>
                 <Dropdown
-                  placement="topCenter"
+                  placement="top"
+                  trigger={["click"]}
                   menu={{
+                    onClick: (e: any) => {
+                      e.preventDefault();
+                    },
                     items: [
                       {
                         key: "button-background",
@@ -430,6 +518,249 @@ export default function Create() {
                     <DownOutlined />
                   </a>
                 </Dropdown>
+                <Dropdown
+                  placement="top"
+                  trigger={["click"]}
+                  menu={{
+                    onClick: (e: any) => {
+                      e.preventDefault();
+                    },
+                    items: [
+                      {
+                        key: "about-image",
+                        label: (
+                          <div className="flex flex-col gap-2">
+                            <span className="text-sm">Image</span>
+                            <Upload
+                              image={about.image}
+                              onChange={(image) =>
+                                setAbout((item) =>
+                                  Object.assign({}, item, { image })
+                                )
+                              }
+                            />
+                          </div>
+                        ),
+                      },
+                      {
+                        key: "about-title",
+                        label: (
+                          <div className="flex flex-col gap-2">
+                            <span className="text-sm">Title</span>
+                            <Input
+                              defaultValue={about.title}
+                              onChange={(e) =>
+                                setAbout((item) =>
+                                  Object.assign({}, item, {
+                                    title: e.target.value,
+                                  })
+                                )
+                              }
+                            />
+                          </div>
+                        ),
+                      },
+                      {
+                        key: "about-text",
+                        label: (
+                          <div className="flex flex-col gap-2">
+                            <span className="text-sm">Text</span>
+                            <Input
+                              defaultValue={about.text}
+                              onChange={(e) =>
+                                setAbout((item) =>
+                                  Object.assign({}, item, {
+                                    text: e.target.value,
+                                  })
+                                )
+                              }
+                            />
+                          </div>
+                        ),
+                      },
+                    ],
+                  }}
+                >
+                  <a
+                    className="text-current text-sm"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    About Text&nbsp;
+                    <DownOutlined />
+                  </a>
+                </Dropdown>
+                <Dropdown
+                  placement="top"
+                  trigger={["click"]}
+                  menu={{
+                    onClick: (e: any) => {
+                      e.preventDefault();
+                    },
+                    items: [
+                      {
+                        key: "buy-advertise",
+                        label: (
+                          <div className="flex flex-wrap items-center gap-4">
+                            <div className="flex flex-col gap-2">
+                              <span className="text-sm">Advertise1</span>
+                              <Upload
+                                image={buy.advertiseImage1}
+                                onChange={(image) =>
+                                  setBuy((item) =>
+                                    Object.assign({}, item, {
+                                      advertiseImage1: image,
+                                    })
+                                  )
+                                }
+                              />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                              <span className="text-sm">Advertise2</span>
+                              <Upload
+                                image={buy.advertiseImage2}
+                                onChange={(image) =>
+                                  setBuy((item) =>
+                                    Object.assign({}, item, {
+                                      advertiseImage2: image,
+                                    })
+                                  )
+                                }
+                              />
+                            </div>
+                          </div>
+                        ),
+                      },
+                      {
+                        key: "buy-link1",
+                        label: (
+                          <div className="flex flex-col gap-2">
+                            <span className="text-sm">Buy Link1</span>
+                            <Input
+                              defaultValue={buy.buyLink1}
+                              onChange={(e) =>
+                                setBuy((item) =>
+                                  Object.assign({}, item, {
+                                    buyLink1: e.target.value,
+                                  })
+                                )
+                              }
+                            />
+                          </div>
+                        ),
+                      },
+                      {
+                        key: "buy-link2",
+                        label: (
+                          <div className="flex flex-col gap-2">
+                            <span className="text-sm">Buy Link2</span>
+                            <Input
+                              defaultValue={buy.buyLink2}
+                              onChange={(e) =>
+                                setBuy((item) =>
+                                  Object.assign({}, item, {
+                                    buyLink2: e.target.value,
+                                  })
+                                )
+                              }
+                            />
+                          </div>
+                        ),
+                      },
+                    ],
+                  }}
+                >
+                  <a
+                    className="text-current text-sm"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    Buy Text&nbsp;
+                    <DownOutlined />
+                  </a>
+                </Dropdown>
+                <Dropdown
+                  placement="top"
+                  trigger={["click"]}
+                  menu={{
+                    items: [
+                      {
+                        key: "roadmap-text",
+                        onClick: (e: any) => {
+                          e.preventDefault();
+                        },
+                        label: (
+                          <div className="grid gap-4">
+                            {roadmap.map((_, index) => (
+                              <div key={index} className="flex flex-col gap-2">
+                                <div className="flex gap-3 items-center justify-between">
+                                  <span className="text-sm">
+                                    Roadmap {index + 1}
+                                  </span>
+                                  <div className="flex gap-2 items-center">
+                                    {index + 1 >= roadmap.length ? (
+                                      <AntdButton
+                                        onClick={() =>
+                                          setRoadmap([
+                                            ...roadmap,
+                                            { title: "", text: "" },
+                                          ])
+                                        }
+                                        icon={<PlusOutlined />}
+                                        type="primary"
+                                      />
+                                    ) : (
+                                      <AntdButton
+                                        onClick={() =>
+                                          setRoadmap(
+                                            roadmap.filter(
+                                              (_, idx) => idx !== index
+                                            )
+                                          )
+                                        }
+                                        icon={<DeleteOutlined />}
+                                        type="primary"
+                                        danger
+                                      />
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex gap-3 items-center">
+                                  Title&nbsp;
+                                  <Input
+                                    defaultValue={roadmap[index]["title"]}
+                                    onChange={(e) => {
+                                      const array = [...roadmap];
+                                      array[index]["title"] = e.target.value;
+                                      setRoadmap(array);
+                                    }}
+                                  />
+                                </div>
+                                <div className="flex gap-3 items-center">
+                                  Text&nbsp;
+                                  <Input.TextArea
+                                    defaultValue={roadmap[index]["text"]}
+                                    onChange={(e) => {
+                                      const array = [...roadmap];
+                                      array[index]["text"] = e.target.value;
+                                      setRoadmap(array);
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        ),
+                      },
+                    ],
+                  }}
+                >
+                  <a
+                    className="text-current text-sm"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    Roadmap Text&nbsp;
+                    <DownOutlined />
+                  </a>
+                </Dropdown>
               </div>
               <Mbutton
                 className="!min-w-48"
@@ -452,12 +783,13 @@ export default function Create() {
               </span>
             </div>
           </div>
-          <div className="w-56 sticky top-4 flex-col gap-4 hidden xl:flex">
+          <div className="w-72 sticky top-4 flex-col gap-4 hidden xl:flex">
             <a className="text-current text-sm" onClick={() => setStep(0)}>
               <Icon name="back" className="mt-[-3px]" />
               &nbsp; Previous step
             </a>
             <Collapse
+              className="max-h-[calc(100vh-260px)] overflow-hidden overflow-y-auto"
               defaultActiveKey={["background"]}
               accordion
               items={[
@@ -623,6 +955,173 @@ export default function Create() {
                           </Button>
                         </div>
                       </div>
+                    </div>
+                  ),
+                },
+                {
+                  key: "about",
+                  label: "About Text",
+                  children: (
+                    <div className="grid gap-4">
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm">Image</span>
+                        <Upload
+                          image={about.image}
+                          onChange={(image) =>
+                            setAbout((item) =>
+                              Object.assign({}, item, { image })
+                            )
+                          }
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm">Title</span>
+                        <Input
+                          defaultValue={about.title}
+                          onChange={(e) =>
+                            setAbout((item) =>
+                              Object.assign({}, item, { title: e.target.value })
+                            )
+                          }
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm">Text</span>
+                        <Input
+                          defaultValue={about.text}
+                          onChange={(e) =>
+                            setAbout((item) =>
+                              Object.assign({}, item, { text: e.target.value })
+                            )
+                          }
+                        />
+                      </div>
+                    </div>
+                  ),
+                },
+                {
+                  key: "buy",
+                  label: "Buy Text",
+                  children: (
+                    <div className="grid gap-4">
+                      <div className="flex flex-wrap items-center gap-4">
+                        <div className="flex flex-col gap-2">
+                          <span className="text-sm">Advertise1</span>
+                          <Upload
+                            image={buy.advertiseImage1}
+                            onChange={(image) =>
+                              setBuy((item) =>
+                                Object.assign({}, item, {
+                                  advertiseImage1: image,
+                                })
+                              )
+                            }
+                          />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <span className="text-sm">Advertise2</span>
+                          <Upload
+                            image={buy.advertiseImage2}
+                            onChange={(image) =>
+                              setBuy((item) =>
+                                Object.assign({}, item, {
+                                  advertiseImage2: image,
+                                })
+                              )
+                            }
+                          />
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm">Buy Link1</span>
+                        <Input
+                          defaultValue={buy.buyLink1}
+                          onChange={(e) =>
+                            setBuy((item) =>
+                              Object.assign({}, item, {
+                                buyLink1: e.target.value,
+                              })
+                            )
+                          }
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm">Buy Link2</span>
+                        <Input
+                          defaultValue={buy.buyLink2}
+                          onChange={(e) =>
+                            setBuy((item) =>
+                              Object.assign({}, item, {
+                                buyLink2: e.target.value,
+                              })
+                            )
+                          }
+                        />
+                      </div>
+                    </div>
+                  ),
+                },
+                {
+                  key: "roadmap",
+                  label: "Roadmap Text",
+                  children: (
+                    <div className="grid gap-4">
+                      {roadmap.map((_, index) => (
+                        <div key={index} className="flex flex-col gap-2">
+                          <div className="flex gap-3 items-center justify-between">
+                            <span className="text-sm">Roadmap {index + 1}</span>
+                            <div className="flex gap-2 items-center">
+                              {index + 1 >= roadmap.length && (
+                                <AntdButton
+                                  onClick={() =>
+                                    setRoadmap([
+                                      ...roadmap,
+                                      { title: "", text: "" },
+                                    ])
+                                  }
+                                  icon={<PlusOutlined />}
+                                  type="primary"
+                                />
+                              )}
+                              {roadmap.length > 1 && (
+                                <AntdButton
+                                  onClick={() =>
+                                    setRoadmap(
+                                      roadmap.filter((_, idx) => idx !== index)
+                                    )
+                                  }
+                                  icon={<DeleteOutlined />}
+                                  type="primary"
+                                  danger
+                                />
+                              )}
+                            </div>
+                          </div>
+                          <div className="flex gap-3 items-center">
+                            Title&nbsp;
+                            <Input
+                              defaultValue={roadmap[index]["title"]}
+                              onChange={(e) => {
+                                const array = [...roadmap];
+                                array[index]["title"] = e.target.value;
+                                setRoadmap(array);
+                              }}
+                            />
+                          </div>
+                          <div className="flex gap-3 items-center">
+                            Text&nbsp;
+                            <Input.TextArea
+                              defaultValue={roadmap[index]["text"]}
+                              onChange={(e) => {
+                                const array = [...roadmap];
+                                array[index]["text"] = e.target.value;
+                                setRoadmap(array);
+                              }}
+                            />
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   ),
                 },

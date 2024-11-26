@@ -71,7 +71,7 @@ export const View = () => {
             </div>
           </div>
           <Mbutton
-            className="!min-w-9 !min-h-9 sm:!min-w-10 sm:min-h-10"
+            className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
             type="primary"
             href="https://raydium.io/swap/?inputMint=sol&outputMint=BoGovexaH9cMKZg6bFgDgsrqj81MvWu6hKdcNK4Mpump"
             target="_blank"
@@ -228,7 +228,7 @@ export const View = () => {
                 [],
                 t("project.data", { returnObjects: true })
               ).map((item: any, index) => (
-                <Card key={index} href={item.webUrl} target="_blank" >
+                <Card key={index} href={item.webUrl} target="_blank" rel="noopener noreferrer">
                   <div className="flex flex-col gap-2 sm:gap-4 items-center">
                     <Image
                       loading="lazy"
@@ -241,22 +241,22 @@ export const View = () => {
                     </span>
                     <div className="flex gap-1 sm:gap-2 flex-wrap justify-center">
                       {item.telegramUrl && (
-                        <Mbutton href={item.telegramUrl} target="_blank" className="!min-w-8 !min-h-8 sm:!min-w-10 sm:min-h-10">
+                        <Mbutton href={item.telegramUrl} target="_blank" className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10">
                           <Icon name="telegram" />
                         </Mbutton>
                       )}
                       {item.twitterUrl && (
-                        <Mbutton href={item.twitterUrl} target="_blank" className="!min-w-8 !min-h-8 sm:!min-w-10 sm:min-h-10">
+                        <Mbutton href={item.twitterUrl} target="_blank" className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10">
                           <Icon name="twitter" />
                         </Mbutton>
                       )}
                       {item.dexUrl && (
-                        <Mbutton href={item.dexUrl} target="_blank" className="!min-w-8 !min-h-8 sm:!min-w-10 sm:min-h-10">
+                        <Mbutton href={item.dexUrl} target="_blank" className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10">
                           <Icon name="dexscreener" />
                         </Mbutton>
                       )}
                       {item.pumpUrl && (
-                        <Mbutton href={item.pumpUrl} target="_blank" className="!min-w-8 !min-h-8 sm:!min-w-10 sm:min-h-10">
+                        <Mbutton href={item.pumpUrl} target="_blank" className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10">
                           <Icon name="pump" />
                         </Mbutton>
                       )}

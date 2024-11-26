@@ -1,6 +1,10 @@
-import { message, Upload as AntdUpload } from "antd";
+import { message, Upload as AntdUpload, Image, Button } from "antd";
 
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  CloseOutlined,
+  LoadingOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import { useState } from "react";
 
 export default function Upload({
@@ -10,6 +14,7 @@ export default function Upload({
   image?: string;
   onChange?: (image: string) => void;
 }) {
+  const [messageApi, contextHolder] = message.useMessage();
   const [url, setUrl] = useState<string>();
   const [loading, setLoading] = useState(false);
   const handleLocalRead = (file: File) => {
@@ -26,12 +31,12 @@ export default function Upload({
   const beforeUpload = (file: File) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
+      messageApi.error("You can only upload JPG/PNG file!");
       return false; // 阻止上传
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
+      messageApi.error("Image must smaller than 2MB!");
       return false; // 阻止上传
     }
     setLoading(true); // 开始加载
@@ -46,20 +51,46 @@ export default function Upload({
     </div>
   );
   return (
-    <AntdUpload
-      name="avatar"
-      listType="picture-card"
-      className="avatar-uploader overflow-hidden"
-      showUploadList={false}
-      beforeUpload={beforeUpload}
-    >
-      {url ? (
-        <div style={{ textAlign: "center" }}>
-          <img src={image || url} style={{ width: "100%" }} />
-        </div>
-      ) : (
-        uploadButton
-      )}
-    </AntdUpload>
+    <>
+      {contextHolder}
+      <div className="relative w-fit">
+        <AntdUpload
+          name="avatar"
+          listType="picture-card"
+          className={`avatar-uploader overflow-hidden`}
+          showUploadList={false}
+          beforeUpload={beforeUpload}
+        >
+          {url ? (
+            <div className="text-center ">
+              <Image
+                src={image || url}
+                width="100%"
+                height="100%"
+                preview={false}
+                className="!object-cover"
+              />
+            </div>
+          ) : (
+            uploadButton
+          )}
+        </AntdUpload>
+        {url && (
+          <div className="absolute top-2 right-[7px] opacity-80">
+            <Button
+              type="primary"
+              shape="circle"
+              danger
+              icon={<CloseOutlined />}
+              className="!min-w-6 !w-6 !h-6"
+              onClick={() => {
+                setUrl("");
+                onChange && onChange("");
+              }}
+            />
+          </div>
+        )}
+      </div>
+    </>
   );
 }

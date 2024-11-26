@@ -12,9 +12,12 @@ export default function Theme({ children }: { children?: React.ReactNode }) {
             headerBg: "var(--card-color)",
             contentBg: "var(--card-color)",
           },
+          Message:{
+            algorithm: true
+          }
         },
         token: {
-          // colorPrimary: "#0DC8EC",
+          colorPrimary: "#0DC8EC",
           // colorBgContainer: "var(--bg-color) !important",
           // colorText: "var(--title-color) !important",
           // colorBorder: "rgba(255,255,255,0.1)",
