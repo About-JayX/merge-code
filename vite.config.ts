@@ -8,14 +8,17 @@ import { defineConfig, loadEnv } from "vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 import viteImagemin from "vite-plugin-imagemin";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
-
-
+import {nodePolyfills} from "vite-plugin-node-polyfills";
 export default defineConfig(({ mode }) => ({
   define: {
     "process.env": loadEnv(mode, process.cwd()),
     global: {},
   },
   plugins: [
+    nodePolyfills({
+      // 启用以下选项以 Polyfill 特定模块
+      protocolImports: true, // 支持 protocol 模块 (http, https 等)
+    }),
     createHtmlPlugin({ minify: true }),
     createSvgIconsPlugin({
       iconDirs: [path.resolve(process.cwd(), "./src/assets/icon")],
@@ -64,8 +67,9 @@ export default defineConfig(({ mode }) => ({
     }),
   ],
   esbuild: {
-    target: "esnext"
+    target: "esnext",
   },
+  base:"./",
   css: {
     preprocessorOptions: {
       scss: {
@@ -84,48 +88,17 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+     
     },
   },
   build: {
+    outDir: "dist", // 确保输出目录为 dist
     minify: "terser",
-    cssCodeSplit: true,
-    chunkSizeWarningLimit: 1500,
     rollupOptions: {
-      treeshake: true,
       output: {
         entryFileNames: "assets/[name].[hash].js",
         chunkFileNames: "assets/[name].[hash].js",
         assetFileNames: "assets/[name].[hash].[ext]",
-        format: "es",
-        manualChunks(id) {
-          if (id.includes("node_modules")) {
-            const packageName = id
-              .toString()
-              .split("node_modules/")[1]
-              .split("/")[0];
-            if (
-              ["html-parse-stringify", "void-elements"].includes(packageName)
-            ) {
-              return;
-            }
-            return packageName;
-          }
-        },
-      },
-    },
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ["console.log"],
-        passes: 3,
-        toplevel: true,
-        reduce_vars: true,
-        collapse_vars: true,
-      },
-      mangle: true,
-      format: {
-        comments: false,
       },
     },
   },
