@@ -2,9 +2,11 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 
 import telegram from "@/store/telegram";
+import theme from "./theme";
 
 const rootReducer = combineReducers({
   telegram,
+  theme
 });
 
 export const store = configureStore({

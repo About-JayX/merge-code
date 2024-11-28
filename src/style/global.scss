@@ -187,7 +187,7 @@
 .memes-title {
   .btn-shine {
     background-color: currentColor;
-    background: linear-gradient(to right, #9f9f9f 0, #fff 10%, #9f9f9f 20%);
+    background: linear-gradient(to right, #9f9f9f 0, var(--title-color) 10%, #9f9f9f 20%);
     background-position: 0;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -250,4 +250,12 @@
 
 .ant-dropdown-menu {
   max-height: 50vh;
+}
+
+.ant-typography-copy,.ant-typography-expand,.ant-typography-collapse{
+  color:currentColor !important
+}
+
+.ant-collapse{
+  @apply border
 }

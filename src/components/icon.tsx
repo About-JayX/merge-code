@@ -9,7 +9,7 @@ export default memo(function Icon({
 }) {
   return (
     <svg
-      className={`fill-current align-middle w-[1em] h-[1em] inline-block ${className}`}
+      className={`fill-[--title-color] align-middle w-[1em] h-[1em] inline-block ${className}`}
     >
       <use xlinkHref={`#icon-${name}`} />
     </svg>
