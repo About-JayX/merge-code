@@ -107,7 +107,7 @@ export default function Create() {
 
   // 交易前拿到全部参数:如果完成交易将数据转JSON数据上传到服务器或写入到合约等等...
   const sendSolana = async () => {
-    console.log('获取全部参数',(data))
+    console.log('获取全部参数', data)
     if (!publicKey) {
       console.error('Wallet not connected')
       return
