@@ -5,14 +5,6 @@ export interface CoinDetails {
   domain: string
   image: string
   contractAddress: string
-  pumpfun: string
   telegram: string
-  dexscreener: string
   twitter: string
-  background: {}
-  about: {}
-  buy: {}
-  text: {}
-  roadmap: {}
-  botton: {}
 }
