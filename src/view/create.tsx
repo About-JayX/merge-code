@@ -1,20 +1,18 @@
-import Domain from '@/components/domain'
-import { Card, Dropdown, Input, Button as AntdButton } from 'antd'
+import { Card, Input } from 'antd'
 import { Fragment, useState } from 'react'
-import { DeleteOutlined, DownOutlined, PlusOutlined } from '@ant-design/icons'
 import Mbutton from '@/components/memes/button'
 import { useLocation } from 'react-router'
 import Icon from '@/components/icon'
 import { useNavigate } from 'react-router'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
 import { useWallet } from '@solana/wallet-adapter-react'
-import {
-  Connection,
-  LAMPORTS_PER_SOL,
-  PublicKey,
-  SystemProgram,
-  Transaction,
-} from '@solana/web3.js'
+// import {
+//   Connection,
+//   LAMPORTS_PER_SOL,
+//   PublicKey,
+//   SystemProgram,
+//   Transaction,
+// } from '@solana/web3.js'
 import Upload from '@/components/memes/upload'
 import { domain } from '@/api'
 
@@ -30,66 +28,72 @@ export default function Create() {
   const [twitter, setTwitter] = useState<string>('')
   const [telegram, setTelegram] = useState<string>('')
   const { setVisible } = useWalletModal()
-  const { publicKey, sendTransaction } = useWallet()
+  const { publicKey } = useWallet() //sendTransaction
 
-  const data = {
-    domain: state?.domain,
-    image: avatarImageUrl || '',
-    name,
-    ticker,
-    description,
-    contractAddress,
-    twitter,
-    telegram,
-  }
-  // 交易前拿到全部参数:如果完成交易将数据转JSON数据上传到服务器或写入到合约等等...
-  const sendSolana = async () => {
-    console.log('获取全部参数', data)
+  const register = async () => {
+    const data = {
+      domain: state?.domain,
+      image: avatarImageUrl || '',
+      name,
+      ticker,
+      description,
+      contractAddress,
+      twitter,
+      telegram,
+    }
     try {
       const result: any = await domain.registerAPI(data)
-      if (!result.success) return Promise.reject('create error')
-
-      const iv = (result.data && result.data.iv) || ''
-
-      if (!iv) return Promise.reject('get iv error')
-    } catch (error) {
-      console.log(error, 'craete error_')
-    }
-
-    // if (!publicKey) {
-    //   console.error('Wallet not connected')
-    //   return
-    // }
-
-    // try {
-    //   // 使用自定义 RPC 提供商
-    //   const connection = new Connection(
-    //     'https://api.zan.top/node/v1/solana/mainnet/0fe3a89037da49a49acd410c53bbd1dd'
-    //   )
-
-    //   const recipientPubKey = new PublicKey(
-    //     '9Mv7BPofspMKsSkxGFf9dnfQKM6RzbgCu4vFfYmRG8zh'
-    //   )
-    //   const transaction = new Transaction().add(
-    //     SystemProgram.transfer({
-    //       fromPubkey: publicKey,
-    //       toPubkey: recipientPubKey,
-    //       lamports: 0.05 * LAMPORTS_PER_SOL,
-    //     })
-    //   )
-    //   // 获取最近的 blockhash
-    //   const latestBlockhash = await connection.getLatestBlockhash()
-    //   transaction.recentBlockhash = latestBlockhash.blockhash
-    //   transaction.feePayer = publicKey
-    //   // 发送交易
-    //   const signature = await sendTransaction(transaction, connection)
-    //   console.log(`Transaction signature: ${signature}`)
-    //   // 完成交易区域
-    //   console.log('交易完成上传参数', JSON.stringify(data))
-    // } catch (error) {
-    //   console.error('Transaction failed', error)
-    // }
+      if (!result.success) throw Promise.reject('create error')
+    } catch (error) {}
   }
+  // // 交易前拿到全部参数:如果完成交易将数据转JSON数据上传到服务器或写入到合约等等...
+  // const sendSolana = async () => {
+  //   console.log('获取全部参数', data)
+  //   try {
+  //     const result: any = await domain.registerAPI(data)
+  //     if (!result.success) return Promise.reject('create error')
+
+  //     const iv = (result.data && result.data.iv) || ''
+
+  //     if (!iv) return Promise.reject('get iv error')
+  //   } catch (error) {
+  //     console.log(error, 'craete error_')
+  //   }
+
+  //   if (!publicKey) {
+  //     console.error('Wallet not connected')
+  //     return
+  //   }
+
+  //   try {
+  //     // 使用自定义 RPC 提供商
+  //     const connection = new Connection(
+  //       'https://api.zan.top/node/v1/solana/mainnet/0fe3a89037da49a49acd410c53bbd1dd'
+  //     )
+
+  //     const recipientPubKey = new PublicKey(
+  //       '9Mv7BPofspMKsSkxGFf9dnfQKM6RzbgCu4vFfYmRG8zh'
+  //     )
+  //     const transaction = new Transaction().add(
+  //       SystemProgram.transfer({
+  //         fromPubkey: publicKey,
+  //         toPubkey: recipientPubKey,
+  //         lamports: 0.05 * LAMPORTS_PER_SOL,
+  //       })
+  //     )
+  //     // 获取最近的 blockhash
+  //     const latestBlockhash = await connection.getLatestBlockhash()
+  //     transaction.recentBlockhash = latestBlockhash.blockhash
+  //     transaction.feePayer = publicKey
+  //     // 发送交易
+  //     const signature = await sendTransaction(transaction, connection)
+  //     console.log(`Transaction signature: ${signature}`)
+  //     // 完成交易区域
+  //     console.log('交易完成上传参数', JSON.stringify(data))
+  //   } catch (error) {
+  //     console.error('Transaction failed', error)
+  //   }
+  // }
 
   return (
     <div
@@ -172,10 +176,10 @@ export default function Create() {
                 type="primary"
                 onClick={() => {
                   if (!avatarImageUrl || !name || !ticker) return
-                  setStep(1)
+                  register()
                 }}
               >
-                Next step
+                register
               </Mbutton>
             </div>
           </Card>
@@ -183,7 +187,6 @@ export default function Create() {
       ) : (
         <Fragment>
           <div className="max-w-4xl overflow-hidden relative pb-48 sm:pb-0">
-            <Domain {...data} />
             <div className="fixed flex-col gap-4 bottom-0 left-0 flex xl:hidden bg-[--bg-color] p-4 pb-8 w-full justify-center items-center z-50">
               <div className="max-w-4xl flex items-center justify-between flex-wrap gap-4 gap-x-5">
                 <a className="!text-current text-sm" onClick={() => setStep(0)}>
@@ -196,7 +199,7 @@ export default function Create() {
                 type="primary"
                 onClick={() => {
                   if (publicKey) {
-                    sendSolana()
+                    // sendSolana()
                     // 完成把所有数据保存数据库
                   } else {
                     setVisible(true)
@@ -221,7 +224,7 @@ export default function Create() {
               type="primary"
               onClick={() => {
                 if (publicKey) {
-                  sendSolana()
+                  // sendSolana()
                   // 完成把所有数据保存数据库
                 } else {
                   setVisible(true)
