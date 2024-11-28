@@ -9,9 +9,9 @@ import "@/i18n";
 import "@/style/global.scss";
 
 ReactDOM.createRoot(document.getElementById("root")! as HTMLElement).render(
-  <BrowserRouter>
-    <Provider>
+  <Provider>
+    <BrowserRouter>
       <App />
-    </Provider>
-  </BrowserRouter>
+    </BrowserRouter>
+  </Provider>
 );

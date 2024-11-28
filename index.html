@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" data-prefers-color="dark" data-prefers-color-scheme="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
     />
-    <title>$MEMES Memes.ac</title>
-    <link rel="icon" href="/favicon.png" />
+    <!-- <title>$MEMES Memes.ac</title>
+    <link rel="icon" href="/favicon.png" /> -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@50;300;400;900&display=swap"
@@ -22,12 +22,20 @@
     />
     <link rel="stylesheet" href="/fonts/index.css" />
     <style>
-      :root {
+      :root[class="light"] {
+        --bg-color: white;
+        --title-color: #000000;
+        --text-color: rgba(0, 0, 0, 0.5);
+        --card-color: #dcdcdc;
+        --border-color: #5f5f5f24;
+      }
+      :root[class="dark"] {
         --bg-color: #181a20;
         --title-color: white;
         --text-color: rgba(255, 255, 255, 0.5);
         --card-color: #282d37;
         --success-color: #16a34a;
+        --border-color: #5f5f5f71;
       }
       html,
       body,
@@ -35,10 +43,14 @@
         @apply min-h-screen bg-[--bg-color] text-[--title-color];
       }
     </style>
-    <script>
+    <script crossorigin="anonymous">
+      document.documentElement.setAttribute(
+        "class",
+        window.localStorage.getItem("theme") || "light"
+      );
       const originalConsoleError = console.error;
       console.error = function (...args) {
-        if (args[0]?.includes('validateDOMNesting')) {
+        if (args[0]?.includes("validateDOMNesting")) {
           // 忽略嵌套 <a> 的警告
           return;
         }

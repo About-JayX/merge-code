@@ -6,12 +6,16 @@ import { Image, Typography } from "antd";
 import Mbutton from "@/components/memes/button";
 import { Ellipsis } from "antd-mobile";
 import { debounce } from "lodash";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import Card from "@/components/memes/card";
 import partner from "@/config/partner";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { useAppDispatch } from "@/store";
+import { switchTheme } from "@/hook/theme/switchTheme";
+import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
 const { Paragraph } = Typography;
 
 export const View = () => {
@@ -20,6 +24,9 @@ export const View = () => {
   const [search, setSearch] = useState<string>("");
   const [searchStatus, setSearchStatus] = useState<boolean>(false);
   const [availableStatus, setAvailableStatus] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const { setVisible } = useWalletModal();
+  const { publicKey } = useWallet();
 
   const onSearchChange = debounce((value) => {
     setAvailableStatus(false);
@@ -33,7 +40,7 @@ export const View = () => {
   return (
     <div className="flex sm:gap-20 flex-col pb-12">
       <header className="flex justify-center h-20 items-center sticky top-0  backdrop-blur-sm p-4 z-10">
-        <nav className="w-full max-w-6xl flex items-center gap-2 sm:gap-4">
+        <nav className="w-full max-w-6xl flex items-center gap-1 sm:gap-3">
           <div className="flex gap-0 items-center text-2xl font-bold flex-1">
             <img className="w-16 h-16" src="/favicon.png" />
             <span className=" hidden sm:block">MEMES</span>
@@ -72,11 +79,22 @@ export const View = () => {
           </div>
           <Mbutton
             className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
+            onClick={() => dispatch(switchTheme())}
+          >
+            <Icon name="telegram" />
+          </Mbutton>
+          <Mbutton
+            onClick={() => setVisible(true)}
+            className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-28"
             type="primary"
-            href="https://raydium.io/swap/?inputMint=sol&outputMint=BoGovexaH9cMKZg6bFgDgsrqj81MvWu6hKdcNK4Mpump"
+            // href="https://raydium.io/swap/?inputMint=sol&outputMint=BoGovexaH9cMKZg6bFgDgsrqj81MvWu6hKdcNK4Mpump"
             target="_blank"
           >
-            buy $MEMES
+            {publicKey ? (
+              <Ellipsis direction="middle" content={publicKey?.toBase58()} />
+            ) : (
+              "Connect"
+            )}
           </Mbutton>
         </nav>
       </header>
@@ -193,7 +211,7 @@ export const View = () => {
                       </div>
                     </a>
                     <Paragraph
-                      className="text-sm sm:text-base"
+                      className="text-sm sm:text-base !text-[--text-color]"
                       ellipsis={{
                         rows: 4,
                         expandable: "collapsible",
@@ -228,7 +246,12 @@ export const View = () => {
                 [],
                 t("project.data", { returnObjects: true })
               ).map((item: any, index) => (
-                <Card key={index} href={item.webUrl} target="_blank" rel="noopener noreferrer">
+                <Card
+                  key={index}
+                  href={item.webUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <div className="flex flex-col gap-2 sm:gap-4 items-center">
                     <Image
                       loading="lazy"
@@ -241,22 +264,38 @@ export const View = () => {
                     </span>
                     <div className="flex gap-1 sm:gap-2 flex-wrap justify-center">
                       {item.telegramUrl && (
-                        <Mbutton href={item.telegramUrl} target="_blank" className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10">
+                        <Mbutton
+                          href={item.telegramUrl}
+                          target="_blank"
+                          className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
+                        >
                           <Icon name="telegram" />
                         </Mbutton>
                       )}
                       {item.twitterUrl && (
-                        <Mbutton href={item.twitterUrl} target="_blank" className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10">
+                        <Mbutton
+                          href={item.twitterUrl}
+                          target="_blank"
+                          className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
+                        >
                           <Icon name="twitter" />
                         </Mbutton>
                       )}
                       {item.dexUrl && (
-                        <Mbutton href={item.dexUrl} target="_blank" className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10">
+                        <Mbutton
+                          href={item.dexUrl}
+                          target="_blank"
+                          className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
+                        >
                           <Icon name="dexscreener" />
                         </Mbutton>
                       )}
                       {item.pumpUrl && (
-                        <Mbutton href={item.pumpUrl} target="_blank" className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10">
+                        <Mbutton
+                          href={item.pumpUrl}
+                          target="_blank"
+                          className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
+                        >
                           <Icon name="pump" />
                         </Mbutton>
                       )}
@@ -274,10 +313,37 @@ export const View = () => {
 
 export default function Home() {
   const { domain } = useParams();
+  const datas = data.find((item) => item.domain === domain);
 
-  return domain ? (
-    <Domain {...data.find((item) => item.domain === domain)} />
-  ) : (
-    <View />
-  );
+  const SEO = ({
+    title = "",
+    icon = "",
+  }: {
+    title?: string;
+    icon?: string;
+  }) => {
+    document.title = title;
+
+    let favicon: any = document.querySelector('link[rel="icon"]');
+    if (favicon) {
+      // 如果存在 favicon，直接修改 href
+      favicon.setAttribute("href", icon);
+    } else {
+      // 如果不存在，创建新的 favicon
+      favicon = document.createElement("link");
+      favicon.rel = "icon";
+      favicon.href = icon;
+      document.head.appendChild(favicon);
+    }
+  };
+
+  useLayoutEffect(() => {
+    SEO(
+      domain
+        ? { title: datas?.domain, icon: datas?.image }
+        : { title: "$MEMES Memes.ac", icon: "/favicon.png" }
+    );
+  }, [domain]);
+
+  return domain ? <Domain {...datas} /> : <View />;
 }
