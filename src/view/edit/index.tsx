@@ -1,57 +1,67 @@
-import Domain from '@/components/domain'
-import { data } from '@/mock'
-import { Fragment, useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router'
-import FormMobile from './form_mobile'
-import FormPc from './form_pc'
-import { domain as doMainAPI } from '@/api/index'
+import Domain from "@/components/domain";
+import { data } from "@/mock";
+import { Fragment, useEffect, useLayoutEffect, useState } from "react";
+import { useLocation, useParams } from "react-router";
+import FormMobile from "./form_mobile";
+import FormPc from "./form_pc";
+import { domain as doMainAPI } from "@/api/index";
 export default function Edit() {
-  const { domain } = useParams()
+  const { domain } = useParams();
 
-  const getData = data.find(item => item.domain === domain)
+  const [getData, setGetData] = useState<any>({});
+
+  const init = async () => {
+    const result: any = domain && (await doMainAPI.verifyAPI({ domain }));
+    setGetData({ ...result.data, ...JSON.parse(result.data.config) });
+  };
+  useLayoutEffect(() => {
+    init();
+  }, [domain]);
+
   const [backgroundColor, setBackgroundColor] = useState<string>(
-    getData?.background.color || '#fff'
-  )
-  const [backgroundPattern, setBackgroundPattern] = useState<string>('')
+    getData?.background?.color || "#fff"
+  );
+  const [backgroundPattern, setBackgroundPattern] = useState<string>("");
   const [backgroundImage, setBackgroundImageUrl] = useState<string>(
-    getData?.background.custom || ''
-  )
+    getData?.background?.custom || ""
+  );
   const [textColor, setTextColor] = useState<string>(
-    getData?.text.color || '#000'
-  )
+    getData?.text?.color || "#000"
+  );
   const [buttonBackground, setButtonBackground] = useState(
-    getData?.button.background || '#000'
-  )
-  const [buttonText, setButtonText] = useState(getData?.button.text || '#fff')
+    getData?.button?.background || "#000"
+  );
+  const [buttonText, setButtonText] = useState(getData?.button?.text || "#fff");
   const [buttonRounded, setButtonRounded] = useState(
-    getData?.button.rounded || '!rounded-none'
-  )
+    getData?.button?.rounded || "!rounded-none"
+  );
   const [about, setAbout] = useState<{
-    image?: string
-    title?: string
-    text?: string
-  }>(getData?.about || {})
+    image?: string;
+    title?: string;
+    text?: string;
+  }>(getData?.about || {});
 
   const [buy, setBuy] = useState<{
-    advertiseImage1?: string
-    advertiseImage2?: string
-    buyLink1?: string
-    buyLink2?: string
-  }>(getData?.buy || {})
+    advertiseImage1?: string;
+    advertiseImage2?: string;
+    buyLink1?: string;
+    buyLink2?: string;
+  }>(getData?.buy || {});
 
   const [roadmap, setRoadmap] = useState<{ title?: string; text?: string }[]>(
-    getData?.roadmap || [{ title: '', text: '' }]
-  )
+    getData?.roadmap || [{ title: "", text: "" }]
+  );
 
   const fontFamily = [
-    { key: 'font-londrinaSolid', name: 'Londrina Solid' },
-    { key: 'font-poppinsSemiBold', name: 'Poppins SemiBold' },
-  ]
-  const [textFont, setTextFont] = useState<string>(fontFamily?.[0].key)
+    { key: "font-londrinaSolid", name: "Londrina Solid" },
+    { key: "font-poppinsSemiBold", name: "Poppins SemiBold" },
+  ];
+  const [textFont, setTextFont] = useState<string>(fontFamily?.[0].key);
 
   const datas = {
     ...getData,
     ...{
+      image: getData?.logo_url,
       background: {
         color: backgroundColor,
         pattern: backgroundPattern,
@@ -70,14 +80,9 @@ export default function Edit() {
       buy,
       roadmap,
     },
-  }
-  const init = async () => {
-    const result = domain && (await doMainAPI.verifyAPI({ domain }))
-    console.log(result, 'result_')
-  }
-  useEffect(() => {
-    init()
-  }, [domain])
+  };
+  console.log(datas, "result_");
+
   return (
     <div className={`flex justify-center px-4 gap-4  min-h-screen items-start`}>
       <Fragment>
@@ -130,5 +135,5 @@ export default function Edit() {
         />
       </Fragment>
     </div>
-  )
+  );
 }
