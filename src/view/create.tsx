@@ -6,15 +6,18 @@ import Icon from '@/components/icon'
 import { useNavigate } from 'react-router'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
 import { useWallet } from '@solana/wallet-adapter-react'
-// import {
-//   Connection,
-//   LAMPORTS_PER_SOL,
-//   PublicKey,
-//   SystemProgram,
-//   Transaction,
-// } from '@solana/web3.js'
+import {
+  clusterApiUrl,
+  Connection,
+  LAMPORTS_PER_SOL,
+  PublicKey,
+  SystemProgram,
+  Transaction,
+  TransactionInstruction,
+} from '@solana/web3.js'
 import Upload from '@/components/memes/upload'
 import { domain } from '@/api'
+import BigNumber from 'bignumber.js'
 
 export default function Create() {
   const { state } = useLocation()
@@ -28,9 +31,10 @@ export default function Create() {
   const [twitter, setTwitter] = useState<string>('')
   const [telegram, setTelegram] = useState<string>('')
   const { setVisible } = useWalletModal()
-  const { publicKey } = useWallet() //sendTransaction
+  const { publicKey, sendTransaction } = useWallet()
 
   const register = async () => {
+    if (!publicKey) return
     const data = {
       domain: state?.domain,
       image: avatarImageUrl || '',
@@ -43,9 +47,62 @@ export default function Create() {
     }
     try {
       const result: any = await domain.registerAPI(data)
+      console.log(result, '??')
+
       if (!result.success) throw Promise.reject('create error')
-    } catch (error) {}
+      if (!(result.data && result.data.iv))
+        throw Promise.reject('Already registered')
+
+      const connection = new Connection(
+        'https://go.getblock.io/79260d59d6f84a648a0e75909aebc3f2',
+        {
+          wsEndpoint: 'https://go.getblock.io/0f0b2baad7c54856ab656600d50e0c32',
+          commitment: 'confirmed',
+        }
+      )
+
+      const recipientPubKey = new PublicKey(
+        '74A2G5b6oPK3PS3yX5rAtFwnYvxtbAuhckoWG125KMcP'
+      )
+      const fixedAmount = 0.00001
+      const lamports = new BigNumber(fixedAmount)
+        .multipliedBy(LAMPORTS_PER_SOL)
+        .integerValue(BigNumber.ROUND_DOWN)
+        .toNumber()
+
+      const transaction = new Transaction()
+
+      transaction
+        .add(
+          SystemProgram.transfer({
+            fromPubkey: publicKey,
+            toPubkey: recipientPubKey,
+            lamports: lamports,
+          })
+        )
+        .add(
+          new TransactionInstruction({
+            keys: [],
+            programId: new PublicKey(
+              'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr'
+            ),
+            data: Buffer.from(new TextEncoder().encode(result.data.iv)), // Encode memo
+          })
+        )
+      const latestBlockhash = await connection.getLatestBlockhash()
+
+      transaction.recentBlockhash = latestBlockhash.blockhash
+      transaction.feePayer = publicKey
+      const signature = await sendTransaction(transaction, connection)
+
+      console.log(`Transaction signature: ${signature}`)
+      // 完成交易区域
+      navigate('/user')
+    } catch (error) {
+      console.log(error, 'error_')
+    }
   }
+
   // // 交易前拿到全部参数:如果完成交易将数据转JSON数据上传到服务器或写入到合约等等...
   // const sendSolana = async () => {
   //   console.log('获取全部参数', data)
@@ -176,10 +233,10 @@ export default function Create() {
                 type="primary"
                 onClick={() => {
                   if (!avatarImageUrl || !name || !ticker) return
-                  register()
+                  publicKey ? register() : setVisible(true)
                 }}
               >
-                register
+                {publicKey ? 'Register' : 'Connect wallet'}
               </Mbutton>
             </div>
           </Card>
