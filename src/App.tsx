@@ -22,11 +22,13 @@ export default function App() {
         <header className="flex justify-center h-20 items-center sticky top-0  backdrop-blur-sm p-4 z-10">
           <nav className="w-full max-w-6xl flex items-center gap-1 sm:gap-3">
             <a
-              className="flex gap-0 items-center text-2xl font-bold flex-1"
+              className="flex gap-1 items-center text-4xl font-bold flex-1"
               onClick={() => navigate("/")}
             >
               <img className="w-14 h-14 sm:w-16 sm:h-16" src="/favicon.png" />
-              <span className=" hidden sm:block">MEMES</span>
+              <span className="hidden sm:block bg-clip-text text-transparent bg-gradient-to-b from-[#9E45FC] to-[#0DADCE]">
+                MEMES
+              </span>
             </a>
             <div>
               <div className="flex gap-1 sm:gap-2 items-center text-lg">
