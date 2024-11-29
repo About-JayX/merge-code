@@ -8,9 +8,11 @@ import { useAppDispatch, useAppSelector } from "./store";
 import { Ellipsis } from "antd-mobile";
 import { Fragment } from "react";
 import { useNavigate, useLocation } from "react-router";
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { Dropdown } from "antd";
 export default function App() {
   const { setVisible } = useWalletModal();
-  const { publicKey } = useWallet();
+  const { publicKey,disconnect } = useWallet();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -19,7 +21,7 @@ export default function App() {
   return (
     <Fragment>
       {(pathname === "/" || pathname === "/user") && (
-        <header className="flex justify-center h-20 items-center sticky top-0  backdrop-blur-sm p-4 z-10">
+        <header className="flex justify-center h-20 items-center fixed top-0 left-0 w-full backdrop-blur-sm p-4 z-50">
           <nav className="w-full max-w-6xl flex items-center gap-1 sm:gap-3">
             <a
               className="flex gap-1 items-center text-4xl font-bold flex-1"
@@ -31,7 +33,7 @@ export default function App() {
               </span>
             </a>
             <div>
-              <div className="flex gap-1 sm:gap-2 items-center text-lg">
+              <div className="hidden sm:flex gap-1 sm:gap-2 items-center text-lg ">
                 <Mbutton
                   href="https://t.me/memes_ac_entry"
                   target="_blank"
@@ -68,7 +70,7 @@ export default function App() {
             >
               <Icon name={value} />
             </Mbutton>
-            <Mbutton
+            {/* <Mbutton
               onClick={() => (publicKey ? navigate("/user") : setVisible(true))}
               className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-28"
               type="primary"
@@ -79,7 +81,53 @@ export default function App() {
               ) : (
                 "Connect"
               )}
-            </Mbutton>
+            </Mbutton> */}
+            {publicKey ? (
+              <Dropdown
+                placement="bottomRight"
+                menu={{
+                  items: [
+                    {
+                      key: "user",
+                      label: "My Personal",
+                      icon: <UserOutlined />,
+                      onClick: () => navigate("/user"),
+                    },
+                    {
+                      type: 'divider',
+                    },
+                    {
+                      key: "out",
+                      label: "Disconnect",
+                      icon: <LogoutOutlined />,
+                      onClick: () => disconnect(),
+                    },
+                  ],
+                }}
+              >
+                {/* <a onClick={(e) => e.preventDefault()}>测试</a> */}
+                <Mbutton
+                  onClick={(e) => e.preventDefault()}
+                  className="!min-w-36 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-36"
+                  type="primary"
+                  target="_blank"
+                >
+                  <Ellipsis
+                    direction="middle"
+                    content={publicKey?.toBase58()}
+                  />
+                </Mbutton>
+              </Dropdown>
+            ) : (
+              <Mbutton
+                onClick={()=>setVisible(true)}
+                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-28"
+                type="primary"
+                target="_blank"
+              >
+                Connect
+              </Mbutton>
+            )}
           </nav>
         </header>
       )}
