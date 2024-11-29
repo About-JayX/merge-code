@@ -42,7 +42,7 @@ export const View = () => {
   return (
     <div className="flex sm:gap-20 flex-col pb-12">
       <main className="bg-[#181a20] flex justify-center p-4 pt-20 sm:pt-40 pb-8 sm:pb-24 text-white">
-        <div className="w-full max-w-6xl flex justify-center flex-col gap-2 sm:gap-10">
+        <div className="w-full max-w-6xl flex justify-center flex-col gap-6 sm:gap-10">
           <div className="text-center grid gap-4 sm:gap-2 justify-items-center z-10">
             <div className="memes-title flex justify-center">
               <h1 className="text-4xl md:text-5xl font-bold uppercase btn-shine">

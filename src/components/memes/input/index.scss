@@ -11,7 +11,7 @@
     
   }
   .input {
-    @apply bg-[#181a20] border-none w-80 sm:w-96 h-14 rounded-xl flex items-center gap-2 px-4 py-2 justify-between text-base font-medium;
+    @apply bg-[#181a20] border-[1px] border-[--border-color] w-80 sm:w-96 h-14 rounded-xl flex items-center gap-2 px-4 py-2 justify-between text-base font-medium;
   }
   #poda {
     @apply flex items-center justify-center flex-col;
