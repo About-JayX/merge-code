@@ -47,21 +47,51 @@ export const View = () => {
   }, [])
   return (
     <div className="flex sm:gap-20 flex-col pb-12">
-      <main className="flex justify-center p-4">
-        <div className="w-full max-w-6xl flex justify-center flex-col gap-2 sm:gap-10">
-          <div className="text-center grid gap-1 sm:gap-2">
+      <main className="bg-[#181a20] flex justify-center p-4 pt-20 sm:pt-40 pb-8 sm:pb-24 text-white">
+        <div className="w-full max-w-6xl flex justify-center flex-col gap-6 sm:gap-10">
+          <div className="text-center grid gap-4 sm:gap-2 justify-items-center z-10">
             <div className="memes-title flex justify-center">
               <h1 className="text-4xl md:text-5xl font-bold uppercase btn-shine">
-                <span className="">{t('home.title')}</span>
+                {t('home.title')}
               </h1>
             </div>
 
-            <span className="text-[--text-color] text-sm sm:text-base md:text-lg font-normal">
+            <span className="text-white/50 text-sm sm:text-base md:text-lg font-normal">
               {t('home.text')}
             </span>
+            <div className="flex sm:hidden gap-1 sm:gap-2 items-center text-lg ">
+              <Mbutton
+                href="https://t.me/memes_ac_entry"
+                target="_blank"
+                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
+              >
+                <Icon name="telegram" />
+              </Mbutton>
+              <Mbutton
+                href="https://x.com/memes_dot_ac"
+                target="_blank"
+                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
+              >
+                <Icon name="twitter" />
+              </Mbutton>
+              <Mbutton
+                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
+                href="https://dexscreener.com/solana/fa7wk5hqnszx1dcvbncgaj2rvgsknkwtnu3jydxvrsnw"
+                target="_blank"
+              >
+                <Icon name="dexscreener" />
+              </Mbutton>
+              <Mbutton
+                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
+                href="https://pump.fun/coin/BoGovexaH9cMKZg6bFgDgsrqj81MvWu6hKdcNK4Mpump"
+                target="_blank"
+              >
+                <Icon name="pump" />
+              </Mbutton>
+            </div>
             <div className="flex justify-center mt-2">
               <Paragraph
-                className="flex"
+                className="flex !text-white"
                 copyable={{
                   text: t('home.contractAddress'),
                 }}
@@ -106,7 +136,11 @@ export const View = () => {
               </a>
             ))}
           </div>
-          <div className="flex flex-col mt-16 sm:mt-24 gap-4 sm:gap-7">
+        </div>
+      </main>
+      <main className="flex justify-center px-4">
+        <div className="w-full max-w-6xl flex justify-center flex-col gap-2 sm:gap-10">
+          <div className="flex flex-col mt-16 sm:mt-4 gap-4 sm:gap-7">
             <span
               className="uppercase text-xl sm:text-3xl font-bold"
               style={{ display: '-webkit-box' }}
@@ -224,7 +258,7 @@ export const View = () => {
                         <Mbutton
                           href={item.telegram_url}
                           target="_blank"
-                          className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
+                          className="!min-w-7 !min-h-7 sm:!min-w-10 sm:!min-h-10"
                         >
                           <Icon name="telegram" />
                         </Mbutton>
@@ -233,7 +267,7 @@ export const View = () => {
                         <Mbutton
                           href={item.twitter_url}
                           target="_blank"
-                          className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
+                          className="!min-w-7 !min-h-7 sm:!min-w-10 sm:!min-h-10"
                         >
                           <Icon name="twitter" />
                         </Mbutton>
@@ -242,7 +276,7 @@ export const View = () => {
                         <Mbutton
                           href={item.dexscreener_url}
                           target="_blank"
-                          className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
+                          className="!min-w-7 !min-h-7 sm:!min-w-10 sm:!min-h-10"
                         >
                           <Icon name="dexscreener" />
                         </Mbutton>
@@ -251,7 +285,7 @@ export const View = () => {
                         <Mbutton
                           href={item.pump_url}
                           target="_blank"
-                          className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
+                          className="!min-w-7 !min-h-7 sm:!min-w-10 sm:!min-h-10"
                         >
                           <Icon name="pump" />
                         </Mbutton>

@@ -46,7 +46,7 @@ export default function User() {
     loadEditTokens()
   }, [token])
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex flex-col gap-20 mt-20">
       <main className="flex justify-center p-4 mt-12">
         <div className="w-full max-w-6xl flex justify-center flex-col gap-7 sm:gap-10">
           <div className="grid gap-5 justify-items-center">
