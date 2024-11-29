@@ -1,135 +1,69 @@
-import { Icon } from '@/components'
-import Domain from '@/components/domain'
-import Input from '@/components/memes/input'
-import { data } from '@/mock'
-import { Image, Typography } from 'antd'
-import Mbutton from '@/components/memes/button'
-import { Ellipsis } from 'antd-mobile'
-import { debounce } from 'lodash'
-import { useCallback, useLayoutEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router'
-import { useTranslation } from 'react-i18next'
-import Card from '@/components/memes/card'
-import partner from '@/config/partner'
-import { DownOutlined, UpOutlined } from '@ant-design/icons'
-import { domain } from '@/api'
-import { useWalletModal } from '@solana/wallet-adapter-react-ui'
-import { useWallet } from '@solana/wallet-adapter-react'
-import { switchTheme } from '@/hook/theme/switchTheme'
-import { useAppDispatch, useAppSelector } from '@/store'
-const { Paragraph } = Typography
+import { Icon } from "@/components";
+import Domain from "@/components/domain";
+import Input from "@/components/memes/input";
+import { data } from "@/mock";
+import { Image, Typography } from "antd";
+import Mbutton from "@/components/memes/button";
+import { Ellipsis } from "antd-mobile";
+import { debounce } from "lodash";
+import { useCallback, useLayoutEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
+import Card from "@/components/memes/card";
+import partner from "@/config/partner";
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { domain } from "@/api";
+const { Paragraph } = Typography;
 
 export const View = () => {
-  const navigate = useNavigate()
-  const { t } = useTranslation()
-  const [search, setSearch] = useState<string>('')
-  const [searchStatus, setSearchStatus] = useState<boolean>(false)
-  const [availableStatus, setAvailableStatus] = useState<boolean>(false)
-  const { setVisible } = useWalletModal()
-  const { publicKey, sendTransaction } = useWallet()
-  const dispatch = useAppDispatch()
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const [search, setSearch] = useState<string>("");
+  const [searchStatus, setSearchStatus] = useState<boolean>(false);
+  const [availableStatus, setAvailableStatus] = useState<boolean>(false);
 
   const onSearchChange = useCallback(
-    debounce(async value => {
-      if (value === '') {
-        setAvailableStatus(false)
-        setSearchStatus(false)
-        return
+    debounce(async (value) => {
+      if (value === "") {
+        setAvailableStatus(false);
+        setSearchStatus(false);
+        return;
       }
-      setSearch(value)
-      const result: any = await domain.verifyAPI({ domain: value })
+      setSearch(value);
+      const result: any = await domain.verifyAPI({ domain: value });
       if (!result.data) {
-        setAvailableStatus(true)
+        setAvailableStatus(true);
       }
-      setSearchStatus(false)
+      setSearchStatus(false);
     }, 1000),
     []
-  )
+  );
 
   return (
     <div className="flex sm:gap-20 flex-col pb-12">
-      <header className="flex justify-center h-20 items-center sticky top-0  backdrop-blur-sm p-4 z-10">
-        <nav className="w-full max-w-6xl flex items-center gap-1 sm:gap-3">
-          <div className="flex gap-0 items-center text-2xl font-bold flex-1">
-            <img className="w-16 h-16" src="/favicon.png" />
-            <span className=" hidden sm:block">MEMES</span>
-          </div>
-          <div>
-            <div className="flex gap-1 sm:gap-2 items-center text-lg">
-              <Mbutton
-                href="https://t.me/memes_ac_entry"
-                target="_blank"
-                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
-              >
-                <Icon name="telegram" />
-              </Mbutton>
-              <Mbutton
-                href="https://x.com/memes_dot_ac"
-                target="_blank"
-                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
-              >
-                <Icon name="twitter" />
-              </Mbutton>
-              <Mbutton
-                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
-                href="https://dexscreener.com/solana/fa7wk5hqnszx1dcvbncgaj2rvgsknkwtnu3jydxvrsnw"
-                target="_blank"
-              >
-                <Icon name="dexscreener" />
-              </Mbutton>
-              <Mbutton
-                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
-                href="https://pump.fun/coin/BoGovexaH9cMKZg6bFgDgsrqj81MvWu6hKdcNK4Mpump"
-                target="_blank"
-              >
-                <Icon name="pump" />
-              </Mbutton>
-            </div>
-          </div>
-          <Mbutton
-            className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
-            onClick={() => dispatch(switchTheme())}
-          >
-            <Icon name="telegram" />
-          </Mbutton>
-          <Mbutton
-            onClick={() => setVisible(true)}
-            className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-28"
-            type="primary"
-            // href="https://raydium.io/swap/?inputMint=sol&outputMint=BoGovexaH9cMKZg6bFgDgsrqj81MvWu6hKdcNK4Mpump"
-            target="_blank"
-          >
-            {publicKey ? (
-              <Ellipsis direction="middle" content={publicKey?.toBase58()} />
-            ) : (
-              "Connect"
-            )}
-          </Mbutton>
-        </nav>
-      </header>
       <main className="flex justify-center p-4">
         <div className="w-full max-w-6xl flex justify-center flex-col gap-2 sm:gap-10">
           <div className="text-center grid gap-1 sm:gap-2">
             <div className="memes-title flex justify-center">
               <h1 className="text-4xl md:text-5xl font-bold uppercase btn-shine">
-                <span className="">{t('home.title')}</span>
+                <span className="">{t("home.title")}</span>
               </h1>
             </div>
 
             <span className="text-[--text-color] text-sm sm:text-base md:text-lg font-normal">
-              {t('home.text')}
+              {t("home.text")}
             </span>
             <div className="flex justify-center mt-2">
               <Paragraph
                 className="flex"
                 copyable={{
-                  text: t('home.contractAddress'),
+                  text: t("home.contractAddress"),
                 }}
               >
                 <Ellipsis
                   className="text-lg opacity-80"
                   direction="middle"
-                  content={t('home.contractAddress')}
+                  content={t("home.contractAddress")}
                 />
               </Paragraph>
             </div>
@@ -139,20 +73,20 @@ export const View = () => {
             placeholder="domain"
             addonBefore={`memes.ac /`}
             enterButton={
-              searchStatus ? '' : availableStatus ? 'Available' : 'Launch'
+              searchStatus ? "" : availableStatus ? "Available" : "Launch"
             }
-            onSearch={_ => {
-              setAvailableStatus(false)
+            onSearch={(_) => {
+              setAvailableStatus(false);
               if (availableStatus) {
-                navigate('/create', { state: { domain: search } })
+                navigate("/create", { state: { domain: search } });
               } else {
-                setSearchStatus(true)
+                setSearchStatus(true);
               }
             }}
-            onChange={event => {
-              setAvailableStatus(false)
-              setSearchStatus(true)
-              onSearchChange && onSearchChange(event.target.value)
+            onChange={(event) => {
+              setAvailableStatus(false);
+              setSearchStatus(true);
+              onSearchChange && onSearchChange(event.target.value);
             }}
           />
           <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center mt-8 gap-4 sm:gap-8">
@@ -169,15 +103,15 @@ export const View = () => {
           <div className="flex flex-col mt-16 sm:mt-24 gap-4 sm:gap-7">
             <span
               className="uppercase text-xl sm:text-3xl font-bold"
-              style={{ display: '-webkit-box' }}
+              style={{ display: "-webkit-box" }}
             >
               <div className="w-1 h-5 sm:h-6 bg-gradient-to-b from-[#A440FD] to-[#0DC8EC] rounded-lg mt-[6px] mr-2 sm:mr-3" />
-              {t('twitter.title')}
+              {t("twitter.title")}
             </span>
             <div className="grid grid-cols-1  gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {Object.assign(
                 [],
-                t('twitter.data', { returnObjects: true })
+                t("twitter.data", { returnObjects: true })
               ).map((item: any, index) => (
                 <div key={index} className="flex gap-3 sm:gap-4 text-current">
                   <div className="w-1 h-full relative flex justify-center">
@@ -222,8 +156,8 @@ export const View = () => {
                       className="text-sm sm:text-base !text-[--text-color]"
                       ellipsis={{
                         rows: 4,
-                        expandable: 'collapsible',
-                        symbol: expanded =>
+                        expandable: "collapsible",
+                        symbol: (expanded) =>
                           expanded ? <UpOutlined /> : <DownOutlined />,
                       }}
                     >
@@ -252,7 +186,7 @@ export const View = () => {
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
               {Object.assign(
                 [],
-                t('project.data', { returnObjects: true })
+                t("project.data", { returnObjects: true })
               ).map((item: any, index) => (
                 <Card
                   key={index}
@@ -260,7 +194,7 @@ export const View = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className="flex flex-col gap-2 sm:gap-4 items-center">
+                  <div className="flex flex-col gap-2 sm:gap-3 items-center">
                     <Image
                       loading="lazy"
                       className="!w-32 !h-32 sm:!w-52 sm:!h-52 object-cover rounded-2xl sm:rounded-3xl"
@@ -270,6 +204,18 @@ export const View = () => {
                     <span className="text-xl font-medium break-all">
                       <Ellipsis direction="middle" content="vitalik.eth" />
                     </span>
+                    <Paragraph
+                      className="flex"
+                      copyable={{
+                        text: item?.contractAddress,
+                      }}
+                    >
+                      <Ellipsis
+                        className="text-sm opacity-80"
+                        direction="middle"
+                        content={item?.contractAddress}
+                      />
+                    </Paragraph>
                     <div className="flex gap-1 sm:gap-2 flex-wrap justify-center">
                       {item.telegramUrl && (
                         <Mbutton
@@ -316,10 +262,14 @@ export const View = () => {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default function Home() {
+export default function Home({
+  onChange,
+}: {
+  onChange?: (domain?: string) => void;
+}) {
   const { domain } = useParams();
   const datas = data.find((item) => item.domain === domain);
 
@@ -351,6 +301,7 @@ export default function Home() {
         ? { title: datas?.domain, icon: datas?.image }
         : { title: "$MEMES Memes.ac", icon: "/favicon.png" }
     );
+    onChange && onChange(domain);
   }, [domain]);
 
   return domain ? <Domain {...datas} /> : <View />;

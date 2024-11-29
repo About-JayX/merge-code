@@ -7,7 +7,7 @@ export const theme = createSlice({
  name: 'theme',
  // 初始化全局
  initialState: {
-  value: localStorage.getItem('theme') || 'light'
+  value: localStorage.getItem('theme') || 'dark'
  } as {
   value: 'light' | 'dark'
  },

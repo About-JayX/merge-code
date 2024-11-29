@@ -12,6 +12,10 @@ export const switchTheme = createAsyncThunk(
       const isTheme = value === "light" ? "dark" : "light";
 
       document.documentElement.setAttribute("class", isTheme);
+      document.documentElement.setAttribute(
+        "data-prefers-color-scheme",
+        isTheme
+      );
       localStorage.setItem("theme", isTheme);
       return isTheme;
     } catch (error) {

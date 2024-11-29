@@ -11,19 +11,11 @@ export default function Upload({
   image?: string
   onChange?: (image: string) => void
 }) {
+  console.log("image",image);
+  
   const [messageApi, contextHolder] = message.useMessage()
-  const [url, setUrl] = useState<string>()
+  const [url, setUrl] = useState<string>(image || "")
   const [loading, setLoading] = useState(false)
-  // const handleLocalRead = (file: File) => {
-  //   const reader = new FileReader()
-  //   reader.onload = event => {
-  //     const base64Url = event.target?.result as string
-  //     setUrl(base64Url) // 将 Base64 图片 URL 保存到状态中
-  //     onChange && onChange(base64Url)
-  //     setLoading(false) // 读取完成，停止加载状态
-  //   }
-  //   reader.readAsDataURL(file) // 将文件读取为 Base64 格式
-  // }
 
   const beforeUpload = async (file: File) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'

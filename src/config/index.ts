@@ -8,7 +8,7 @@ export const isDev: boolean = import.meta.env.DEV;
 // 路由
 export const router = {
   // 根据路由路经需要传参数
-  param: { "/": ["domain"] },
+  param: { "/": ["domain"],"/edit":["domain"]},
 };
 // 电报
 export const telegram = {
