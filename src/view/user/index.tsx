@@ -7,7 +7,7 @@ import { useWallet } from '@solana/wallet-adapter-react'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
 import { Typography } from 'antd'
 import { Ellipsis, Image } from 'antd-mobile'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 const { Paragraph } = Typography
 
@@ -17,6 +17,7 @@ export default function User() {
   const { token } = useAppSelector(state => state.user)
   const dispatch = useAppDispatch()
   const { setVisible } = useWalletModal()
+  const [tokens, setTokens] = useState({ data: [], total: 1 })
   const authorize = async () => {
     try {
       if (!publicKey) {
@@ -41,9 +42,15 @@ export default function User() {
       console.log(error, 'login fail')
     }
   }
-  const loadEditTokens = async () => {}
+  const loadEditTokens = async () => {
+    const result: any = await domain.ownerListAPI(
+      { current: 1, pageSize: 10 },
+      token
+    )
+    setTokens(result.data)
+  }
   useEffect(() => {
-    loadEditTokens()
+    token && loadEditTokens()
   }, [token])
   return (
     <div className="flex flex-col gap-20 mt-20">
@@ -75,32 +82,32 @@ export default function User() {
           <div className="border border-[--border-color]" />
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {token ? (
-              [{}, {}, {}, {}].map((_, index) => (
+              tokens.data.map((item: any, index) => (
                 <Card
                   key={index}
                   rel="noopener noreferrer"
-                  onClick={() => navigate('/edit/RiffRaff')}
+                  onClick={() => navigate(`/edit/${item.domain}`)}
                 >
                   <div className="flex flex-col gap-2 sm:gap-3 items-center">
                     <Image
                       loading="lazy"
                       lazy
                       className="!w-32 !h-32 sm:!w-52 sm:!h-52 object-cover rounded-2xl sm:rounded-3xl"
-                      src=""
+                      src={item.logo_url || ''}
                     />
                     <span className="text-xl font-medium break-all">
-                      <Ellipsis direction="middle" content="vitalik.eth" />
+                      <Ellipsis direction="middle" content={item.name} />
                     </span>
                     <Paragraph
                       className="flex"
                       copyable={{
-                        text: '3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq',
+                        text: item.contract_address,
                       }}
                     >
                       <Ellipsis
                         className="text-sm opacity-80"
                         direction="middle"
-                        content="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq"
+                        content={item.contract_address}
                       />
                     </Paragraph>
                     <Button className="!w-full" type="primary">

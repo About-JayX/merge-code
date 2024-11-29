@@ -8,7 +8,7 @@ import axios, {
 import { URL } from '@/config'
 
 const config: AxiosRequestConfig = {
-  timeout: 3000,
+  timeout: 10000,
   baseURL: URL.baseURL,
 }
 class Axios {
@@ -28,8 +28,12 @@ class Axios {
   get(url: string, params?: object): Promise<unknown> {
     return this.service.get(url, { params })
   }
-  post(url: string, params?: object | string): Promise<unknown> {
-    return this.service.post(url, params)
+  post(
+    url: string,
+    params?: object | string,
+    config?: AxiosRequestConfig<string | object>
+  ): Promise<unknown> {
+    return this.service.post(url, params, config)
   }
   put(url: string, params?: object): Promise<unknown> {
     return this.service.put(url, params)

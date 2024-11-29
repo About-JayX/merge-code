@@ -1,5 +1,5 @@
 import { Card, Input } from 'antd'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import Mbutton from '@/components/memes/button'
 import { useLocation } from 'react-router'
 import Icon from '@/components/icon'
@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
 import { useWallet } from '@solana/wallet-adapter-react'
 import {
-  clusterApiUrl,
   Connection,
   LAMPORTS_PER_SOL,
   PublicKey,

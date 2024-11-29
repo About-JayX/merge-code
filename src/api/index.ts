@@ -12,4 +12,14 @@ export const domain = {
     axios.post('/v2/domain/update-images', data),
   loginAPI: (data: { address: string; signature: any; message: any }) =>
     axios.post('/v2/domain/wallet-login', data),
+  ownerListAPI: (
+    data: {
+      current?: number
+      pageSize?: number
+    },
+    token?: string
+  ) =>
+    axios.post('/v2/domain/token-list-user', data, {
+      headers: { Authorization: token },
+    }),
 }
