@@ -40,10 +40,10 @@ const About = ({ ...props }) => {
             </div>
             <CSSTransition in={show} timeout={1000} classNames="about">
               <div className="flex flex-col justify-center gap-y-4 w-full lg:w-1/2 text-center lg:text-left">
-                <h1 className="text-stroke-sm text-5xl">
+                <h1 className="text-stroke-sm text-5xl break-all">
                   {props?.about?.title}
                 </h1>
-                <p className="text-2xl opacity-60">{props?.about?.text}</p>
+                <p className="text-2xl opacity-60 break-all">{props?.about?.text}</p>
               </div>
             </CSSTransition>
           </div>
