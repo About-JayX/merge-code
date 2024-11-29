@@ -1,24 +1,25 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { useDispatch, useSelector } from "react-redux";
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { useDispatch, useSelector } from 'react-redux'
 
-import telegram from "@/store/telegram";
-import theme from "./theme";
-
+import telegram from '@/store/telegram'
+import theme from './theme'
+import user from './user'
 const rootReducer = combineReducers({
   telegram,
-  theme
-});
+  theme,
+  user,
+})
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
     }),
-});
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
-export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
-export const useAppSelector = useSelector.withTypes<RootState>();
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
+export const useAppSelector = useSelector.withTypes<RootState>()

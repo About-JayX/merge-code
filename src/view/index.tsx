@@ -1,44 +1,50 @@
-import { Icon } from "@/components";
-import Domain from "@/components/domain";
-import Input from "@/components/memes/input";
-import { data } from "@/mock";
-import { Image, Typography } from "antd";
-import Mbutton from "@/components/memes/button";
-import { Ellipsis } from "antd-mobile";
-import { debounce } from "lodash";
-import { useCallback, useLayoutEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
-import { useTranslation } from "react-i18next";
-import Card from "@/components/memes/card";
-import partner from "@/config/partner";
-import { DownOutlined, UpOutlined } from "@ant-design/icons";
-import { domain } from "@/api";
-const { Paragraph } = Typography;
+import { Icon } from '@/components'
+import Domain from '@/components/domain'
+import Input from '@/components/memes/input'
+import { data } from '@/mock'
+import { Image, Typography } from 'antd'
+import Mbutton from '@/components/memes/button'
+import { Ellipsis } from 'antd-mobile'
+import { debounce } from 'lodash'
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router'
+import { useTranslation } from 'react-i18next'
+import Card from '@/components/memes/card'
+import partner from '@/config/partner'
+import { DownOutlined, UpOutlined } from '@ant-design/icons'
+import { domain } from '@/api'
+const { Paragraph } = Typography
 
 export const View = () => {
-  const navigate = useNavigate();
-  const { t } = useTranslation();
-  const [search, setSearch] = useState<string>("");
-  const [searchStatus, setSearchStatus] = useState<boolean>(false);
-  const [availableStatus, setAvailableStatus] = useState<boolean>(false);
-
+  const navigate = useNavigate()
+  const { t } = useTranslation()
+  const [search, setSearch] = useState<string>('')
+  const [searchStatus, setSearchStatus] = useState<boolean>(false)
+  const [availableStatus, setAvailableStatus] = useState<boolean>(false)
+  const [tokens, setTokens] = useState({ data: [], total: 1 })
   const onSearchChange = useCallback(
-    debounce(async (value) => {
-      if (value === "") {
-        setAvailableStatus(false);
-        setSearchStatus(false);
-        return;
+    debounce(async value => {
+      if (value === '') {
+        setAvailableStatus(false)
+        setSearchStatus(false)
+        return
       }
-      setSearch(value);
-      const result: any = await domain.verifyAPI({ domain: value });
+      setSearch(value)
+      const result: any = await domain.verifyAPI({ domain: value })
       if (!result.data) {
-        setAvailableStatus(true);
+        setAvailableStatus(true)
       }
-      setSearchStatus(false);
+      setSearchStatus(false)
     }, 1000),
     []
-  );
-
+  )
+  const init = async () => {
+    const result: any = await domain.getListAPI({ current: 1, pageSize: 12 })
+    setTokens(result.data)
+  }
+  useEffect(() => {
+    init()
+  }, [])
   return (
     <div className="flex sm:gap-20 flex-col pb-12">
       <main className="flex justify-center p-4">
@@ -46,24 +52,24 @@ export const View = () => {
           <div className="text-center grid gap-1 sm:gap-2">
             <div className="memes-title flex justify-center">
               <h1 className="text-4xl md:text-5xl font-bold uppercase btn-shine">
-                <span className="">{t("home.title")}</span>
+                <span className="">{t('home.title')}</span>
               </h1>
             </div>
 
             <span className="text-[--text-color] text-sm sm:text-base md:text-lg font-normal">
-              {t("home.text")}
+              {t('home.text')}
             </span>
             <div className="flex justify-center mt-2">
               <Paragraph
                 className="flex"
                 copyable={{
-                  text: t("home.contractAddress"),
+                  text: t('home.contractAddress'),
                 }}
               >
                 <Ellipsis
                   className="text-lg opacity-80"
                   direction="middle"
-                  content={t("home.contractAddress")}
+                  content={t('home.contractAddress')}
                 />
               </Paragraph>
             </div>
@@ -73,20 +79,20 @@ export const View = () => {
             placeholder="domain"
             addonBefore={`memes.ac /`}
             enterButton={
-              searchStatus ? "" : availableStatus ? "Available" : "Launch"
+              searchStatus ? '' : availableStatus ? 'Available' : 'Launch'
             }
-            onSearch={(_) => {
-              setAvailableStatus(false);
+            onSearch={_ => {
+              setAvailableStatus(false)
               if (availableStatus) {
-                navigate("/create", { state: { domain: search } });
+                navigate('/create', { state: { domain: search } })
               } else {
-                setSearchStatus(true);
+                setSearchStatus(true)
               }
             }}
-            onChange={(event) => {
-              setAvailableStatus(false);
-              setSearchStatus(true);
-              onSearchChange && onSearchChange(event.target.value);
+            onChange={event => {
+              setAvailableStatus(false)
+              setSearchStatus(true)
+              onSearchChange && onSearchChange(event.target.value)
             }}
           />
           <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center mt-8 gap-4 sm:gap-8">
@@ -103,15 +109,15 @@ export const View = () => {
           <div className="flex flex-col mt-16 sm:mt-24 gap-4 sm:gap-7">
             <span
               className="uppercase text-xl sm:text-3xl font-bold"
-              style={{ display: "-webkit-box" }}
+              style={{ display: '-webkit-box' }}
             >
               <div className="w-1 h-5 sm:h-6 bg-gradient-to-b from-[#A440FD] to-[#0DC8EC] rounded-lg mt-[6px] mr-2 sm:mr-3" />
-              {t("twitter.title")}
+              {t('twitter.title')}
             </span>
             <div className="grid grid-cols-1  gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {Object.assign(
                 [],
-                t("twitter.data", { returnObjects: true })
+                t('twitter.data', { returnObjects: true })
               ).map((item: any, index) => (
                 <div key={index} className="flex gap-3 sm:gap-4 text-current">
                   <div className="w-1 h-full relative flex justify-center">
@@ -156,8 +162,8 @@ export const View = () => {
                       className="text-sm sm:text-base !text-[--text-color]"
                       ellipsis={{
                         rows: 4,
-                        expandable: "collapsible",
-                        symbol: (expanded) =>
+                        expandable: 'collapsible',
+                        symbol: expanded =>
                           expanded ? <UpOutlined /> : <DownOutlined />,
                       }}
                     >
@@ -184,13 +190,10 @@ export const View = () => {
               </div>
             </span>
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-              {Object.assign(
-                [],
-                t("project.data", { returnObjects: true })
-              ).map((item: any, index) => (
+              {tokens.data.map((item: any, index) => (
                 <Card
                   key={index}
-                  href={item.webUrl}
+                  href={`/${item.domain}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -198,55 +201,55 @@ export const View = () => {
                     <Image
                       loading="lazy"
                       className="!w-32 !h-32 sm:!w-52 sm:!h-52 object-cover rounded-2xl sm:rounded-3xl"
-                      src={item.img}
+                      src={item.logo_url || ''}
                       preview={false}
                     />
                     <span className="text-xl font-medium break-all">
-                      <Ellipsis direction="middle" content="vitalik.eth" />
+                      <Ellipsis direction="middle" content={item.name} />
                     </span>
                     <Paragraph
                       className="flex"
                       copyable={{
-                        text: item?.contractAddress,
+                        text: item?.contract_address,
                       }}
                     >
                       <Ellipsis
                         className="text-sm opacity-80"
                         direction="middle"
-                        content={item?.contractAddress}
+                        content={item?.contract_address}
                       />
                     </Paragraph>
                     <div className="flex gap-1 sm:gap-2 flex-wrap justify-center">
-                      {item.telegramUrl && (
+                      {item.telegram_url && (
                         <Mbutton
-                          href={item.telegramUrl}
+                          href={item.telegram_url}
                           target="_blank"
                           className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
                         >
                           <Icon name="telegram" />
                         </Mbutton>
                       )}
-                      {item.twitterUrl && (
+                      {item.twitter_url && (
                         <Mbutton
-                          href={item.twitterUrl}
+                          href={item.twitter_url}
                           target="_blank"
                           className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
                         >
                           <Icon name="twitter" />
                         </Mbutton>
                       )}
-                      {item.dexUrl && (
+                      {item.dexscreener_url && (
                         <Mbutton
-                          href={item.dexUrl}
+                          href={item.dexscreener_url}
                           target="_blank"
                           className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
                         >
                           <Icon name="dexscreener" />
                         </Mbutton>
                       )}
-                      {item.pumpUrl && (
+                      {item.pump_url && (
                         <Mbutton
-                          href={item.pumpUrl}
+                          href={item.pump_url}
                           target="_blank"
                           className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
                         >
@@ -262,47 +265,47 @@ export const View = () => {
         </div>
       </main>
     </div>
-  );
-};
+  )
+}
 
 export default function Home({
   onChange,
 }: {
-  onChange?: (domain?: string) => void;
+  onChange?: (domain?: string) => void
 }) {
-  const { domain } = useParams();
-  const datas = data.find((item) => item.domain === domain);
+  const { domain } = useParams()
+  const datas = data.find(item => item.domain === domain)
 
   const SEO = ({
-    title = "",
-    icon = "",
+    title = '',
+    icon = '',
   }: {
-    title?: string;
-    icon?: string;
+    title?: string
+    icon?: string
   }) => {
-    document.title = title;
+    document.title = title
 
-    let favicon: any = document.querySelector('link[rel="icon"]');
+    let favicon: any = document.querySelector('link[rel="icon"]')
     if (favicon) {
       // 如果存在 favicon，直接修改 href
-      favicon.setAttribute("href", icon);
+      favicon.setAttribute('href', icon)
     } else {
       // 如果不存在，创建新的 favicon
-      favicon = document.createElement("link");
-      favicon.rel = "icon";
-      favicon.href = icon;
-      document.head.appendChild(favicon);
+      favicon = document.createElement('link')
+      favicon.rel = 'icon'
+      favicon.href = icon
+      document.head.appendChild(favicon)
     }
-  };
+  }
 
   useLayoutEffect(() => {
     SEO(
       domain
         ? { title: datas?.domain, icon: datas?.image }
-        : { title: "$MEMES Memes.ac", icon: "/favicon.png" }
-    );
-    onChange && onChange(domain);
-  }, [domain]);
+        : { title: '$MEMES Memes.ac', icon: '/favicon.png' }
+    )
+    onChange && onChange(domain)
+  }, [domain])
 
-  return domain ? <Domain {...datas} /> : <View />;
+  return domain ? <Domain {...datas} /> : <View />
 }

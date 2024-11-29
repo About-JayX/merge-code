@@ -9,5 +9,7 @@ export const domain = {
   verifyAPI: (data: { domain: string }) =>
     axios.post('/v2/domain/token-search', data),
   uploadImageAPI: (data: FormData) =>
-    axios.post('v2/domain/update-images', data),
+    axios.post('/v2/domain/update-images', data),
+  loginAPI: (data: { address: string; signature: any; message: any }) =>
+    axios.post('/v2/domain/wallet-login', data),
 }

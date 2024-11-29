@@ -1,5 +1,5 @@
 import { Card, Input } from 'antd'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Mbutton from '@/components/memes/button'
 import { useLocation } from 'react-router'
 import Icon from '@/components/icon'
@@ -47,8 +47,6 @@ export default function Create() {
     }
     try {
       const result: any = await domain.registerAPI(data)
-      console.log(result, '??')
-
       if (!result.success) throw Promise.reject('create error')
       if (!(result.data && result.data.iv))
         throw Promise.reject('Already registered')
@@ -102,55 +100,6 @@ export default function Create() {
       console.log(error, 'error_')
     }
   }
-
-  // // 交易前拿到全部参数:如果完成交易将数据转JSON数据上传到服务器或写入到合约等等...
-  // const sendSolana = async () => {
-  //   console.log('获取全部参数', data)
-  //   try {
-  //     const result: any = await domain.registerAPI(data)
-  //     if (!result.success) return Promise.reject('create error')
-
-  //     const iv = (result.data && result.data.iv) || ''
-
-  //     if (!iv) return Promise.reject('get iv error')
-  //   } catch (error) {
-  //     console.log(error, 'craete error_')
-  //   }
-
-  //   if (!publicKey) {
-  //     console.error('Wallet not connected')
-  //     return
-  //   }
-
-  //   try {
-  //     // 使用自定义 RPC 提供商
-  //     const connection = new Connection(
-  //       'https://api.zan.top/node/v1/solana/mainnet/0fe3a89037da49a49acd410c53bbd1dd'
-  //     )
-
-  //     const recipientPubKey = new PublicKey(
-  //       '9Mv7BPofspMKsSkxGFf9dnfQKM6RzbgCu4vFfYmRG8zh'
-  //     )
-  //     const transaction = new Transaction().add(
-  //       SystemProgram.transfer({
-  //         fromPubkey: publicKey,
-  //         toPubkey: recipientPubKey,
-  //         lamports: 0.05 * LAMPORTS_PER_SOL,
-  //       })
-  //     )
-  //     // 获取最近的 blockhash
-  //     const latestBlockhash = await connection.getLatestBlockhash()
-  //     transaction.recentBlockhash = latestBlockhash.blockhash
-  //     transaction.feePayer = publicKey
-  //     // 发送交易
-  //     const signature = await sendTransaction(transaction, connection)
-  //     console.log(`Transaction signature: ${signature}`)
-  //     // 完成交易区域
-  //     console.log('交易完成上传参数', JSON.stringify(data))
-  //   } catch (error) {
-  //     console.error('Transaction failed', error)
-  //   }
-  // }
 
   return (
     <div
