@@ -1,70 +1,66 @@
-import Domain from '@/components/domain'
-import { Fragment, useLayoutEffect, useState } from 'react'
-import { useParams } from 'react-router'
-import FormMobile from './form_mobile'
-import FormPc from './form_pc'
-import { domain as doMainAPI } from '@/api/index'
-import { useAppSelector } from '@/store'
+import Domain from "@/components/domain";
+import { Fragment, useLayoutEffect, useState } from "react";
+import { useParams } from "react-router";
+import FormMobile from "./form_mobile";
+import FormPc from "./form_pc";
+import { domain as doMainAPI } from "@/api/index";
+import { useAppSelector } from "@/store";
 export default function Edit() {
-  const { domain } = useParams()
+  const { domain } = useParams();
 
-  const [getData, setGetData] = useState<any>({})
+  const [getData, setGetData] = useState<any>({});
 
-  const { token } = useAppSelector(state => state.user)
-  const init = async () => {
-    const result: any = domain && (await doMainAPI.verifyAPI({ domain }))
-    setGetData({ ...result.data, ...JSON.parse(result.data.config) })
+  const { token } = useAppSelector((state) => state.user);
 
-    console.log(
-      { ...result.data, ...JSON.parse(result.data.config) },
-      '{ ...result.data, ...JSON.parse(result.data.config) }'
-    )
-  }
-  useLayoutEffect(() => {
-    init()
-  }, [domain])
+  const [backgroundColor, setBackgroundColor] = useState<string>("#fff");
+  const [backgroundPattern, setBackgroundPattern] = useState<string>("");
 
-  const [backgroundColor, setBackgroundColor] = useState<string>(
-    getData?.background?.color || '#fff'
-  )
-  const [backgroundPattern, setBackgroundPattern] = useState<string>(
-    getData?.background?.pattern || ''
-  )
-  const [backgroundImage, setBackgroundImageUrl] = useState<string>(
-    getData?.background?.custom || ''
-  )
-  const [textColor, setTextColor] = useState<string>(
-    getData?.text?.color || '#000'
-  )
-  const [buttonBackground, setButtonBackground] = useState(
-    getData?.button?.background || '#000'
-  )
-  const [buttonText, setButtonText] = useState(getData?.button?.text || '#fff')
-  const [buttonRounded, setButtonRounded] = useState(
-    getData?.button?.rounded || '!rounded-none'
-  )
+  const [backgroundImage, setBackgroundImageUrl] = useState<string>("");
+  const [textColor, setTextColor] = useState<string>("#000");
+  const [buttonBackground, setButtonBackground] = useState("#000");
+  const [buttonText, setButtonText] = useState("#fff");
+  const [buttonRounded, setButtonRounded] = useState("!rounded-none");
   const [about, setAbout] = useState<{
-    image?: string
-    title?: string
-    text?: string
-  }>(getData?.about || {})
+    image?: string;
+    title?: string;
+    text?: string;
+  }>({});
 
   const [buy, setBuy] = useState<{
-    advertiseImage1?: string
-    advertiseImage2?: string
-    buyLink1?: string
-    buyLink2?: string
-  }>(getData?.buy || {})
+    advertiseImage1?: string;
+    advertiseImage2?: string;
+    buyLink1?: string;
+    buyLink2?: string;
+  }>({});
 
-  const [roadmap, setRoadmap] = useState<{ title?: string; text?: string }[]>(
-    getData?.roadmap || [{ title: '', text: '' }]
-  )
+  const [roadmap, setRoadmap] = useState<{ title?: string; text?: string }[]>([
+    { title: "", text: "" },
+  ]);
 
   const fontFamily = [
-    { key: 'font-londrinaSolid', name: 'Londrina Solid' },
-    { key: 'font-poppinsSemiBold', name: 'Poppins SemiBold' },
-  ]
-  const [textFont, setTextFont] = useState<string>(fontFamily?.[0].key)
+    { key: "font-londrinaSolid", name: "Londrina Solid" },
+    { key: "font-poppinsSemiBold", name: "Poppins SemiBold" },
+  ];
+  const [textFont, setTextFont] = useState<string>(fontFamily?.[0].key);
+
+  const init = async () => {
+    const result: any = domain && (await doMainAPI.verifyAPI({ domain }));
+    let data = { ...result.data, ...JSON.parse(result.data.config) };
+    setBackgroundColor(data?.background?.color);
+    setBackgroundPattern(data?.background?.pattern);
+    setBackgroundImageUrl(data?.background?.custom);
+    setTextColor(data?.background?.color);
+    setButtonBackground(data?.button?.background);
+    setButtonText(data?.button?.text);
+    setButtonRounded(data?.button?.rounded);
+    setAbout(data?.about);
+    setBuy(data?.buy);
+    setRoadmap(data?.roadmap);
+    setGetData(data);
+  };
+  useLayoutEffect(() => {
+    init();
+  }, [domain]);
 
   const datas = {
     ...getData,
@@ -89,7 +85,10 @@ export default function Edit() {
       roadmap,
       contractAddress: getData?.contract_address,
     },
-  }
+  };
+  // console.log(datas);
+  console.log(location);
+
   const saveToken = async () => {
     const updateData = {
       Id: getData.Id, //网站ID
@@ -112,15 +111,16 @@ export default function Edit() {
           rounded: buttonRounded,
         },
       },
-    }
+    };
 
-    const result = await doMainAPI.updateDoMain(updateData, token)
-  }
+    const result = await doMainAPI.updateDoMain(updateData, token);
+    window.open(location.origin + "/" + getData?.domain, "_blank");
+  };
 
   return (
     <div className={`flex justify-center px-4 gap-4  min-h-screen items-start`}>
       <Fragment>
-        <div className="max-w-4xl overflow-hidden relative pb-48 sm:pb-0">
+        <div className="max-w-2xl overflow-hidden relative pb-48 sm:pb-0">
           <Domain {...datas} />
           <FormMobile
             save={saveToken}
@@ -171,5 +171,5 @@ export default function Edit() {
         />
       </Fragment>
     </div>
-  )
+  );
 }
