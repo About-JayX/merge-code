@@ -4,7 +4,7 @@ import Icon from "./components/icon";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { switchTheme } from "./hook/theme/switchTheme";
-import { useAppDispatch } from "./store";
+import { useAppDispatch, useAppSelector } from "./store";
 import { Ellipsis } from "antd-mobile";
 import { Fragment } from "react";
 import { useNavigate, useLocation } from "react-router";
@@ -14,17 +14,20 @@ export default function App() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  console.log("pathname",pathname);
-  
+  const { value } = useAppSelector((state) => state.theme);
+
   return (
     <Fragment>
       {(pathname === "/" || pathname === "/user") && (
         <header className="flex justify-center h-20 items-center sticky top-0  backdrop-blur-sm p-4 z-10">
           <nav className="w-full max-w-6xl flex items-center gap-1 sm:gap-3">
-            <div className="flex gap-0 items-center text-2xl font-bold flex-1">
-              <img className="w-16 h-16" src="/favicon.png" />
+            <a
+              className="flex gap-0 items-center text-2xl font-bold flex-1"
+              onClick={() => navigate("/")}
+            >
+              <img className="w-14 h-14 sm:w-16 sm:h-16" src="/favicon.png" />
               <span className=" hidden sm:block">MEMES</span>
-            </div>
+            </a>
             <div>
               <div className="flex gap-1 sm:gap-2 items-center text-lg">
                 <Mbutton
@@ -61,7 +64,7 @@ export default function App() {
               className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
               onClick={() => dispatch(switchTheme())}
             >
-              <Icon name="telegram" />
+              <Icon name={value} />
             </Mbutton>
             <Mbutton
               onClick={() => (publicKey ? navigate("/user") : setVisible(true))}

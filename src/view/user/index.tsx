@@ -3,26 +3,21 @@ import Card from "@/components/memes/card";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Typography } from "antd";
 import { Ellipsis, Image } from "antd-mobile";
-import {useNavigate} from "react-router"
+import { useNavigate } from "react-router";
 const { Paragraph } = Typography;
-
 
 export default function User() {
   const { publicKey } = useWallet();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col gap-20">
       <main className="flex justify-center p-4 mt-12">
         <div className="w-full max-w-6xl flex justify-center flex-col gap-7 sm:gap-10">
           <div className="grid gap-5 justify-items-center">
-            <div className="w-32 h-32">
-              <Image
-                src="https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=160&q=80"
-                width="100%"
-                height="100%"
-                className="rounded-full border-2 border-[--border-color]"
-              />
+            <div className="w-32 h-32 rounded-full border-2 p-5 border-[--border-color] flex justify-center items-center bg-[--card-color] overflow-hidden">
+              <Image src="/memes-001.png" className="!w-full !h-full dark:opacity-80"/>
             </div>
+
             {publicKey && (
               <Paragraph
                 className="flex"
@@ -40,8 +35,12 @@ export default function User() {
           </div>
           <div className="border border-[--border-color]" />
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {[{}, {},{},{}].map((_, index) => (
-              <Card key={index} rel="noopener noreferrer" onClick={()=>navigate("/edit/RiffRaff")}>
+            {[{}, {}, {}, {}].map((_, index) => (
+              <Card
+                key={index}
+                rel="noopener noreferrer"
+                onClick={() => navigate("/edit/RiffRaff")}
+              >
                 <div className="flex flex-col gap-2 sm:gap-3 items-center">
                   <Image
                     loading="lazy"

@@ -46,7 +46,11 @@
     <script crossorigin="anonymous">
       document.documentElement.setAttribute(
         "class",
-        window.localStorage.getItem("theme") || "light"
+        window.localStorage.getItem("theme") || "dark"
+      );
+      document.documentElement.setAttribute(
+        "data-prefers-color-scheme",
+        window.localStorage.getItem("theme") || "dark"
       );
       const originalConsoleError = console.error;
       console.error = function (...args) {

@@ -21,9 +21,9 @@ export default function Button({
         type === "default"
           ? ""
           : "bg-gradient-to-r from-[#A440FD] to-[#0DC8EC] border-none"
-      } ${className} ${
+      }  ${
         disabled ? "cursor-not-allowed opacity-50 hover:opacity-50" : ""
-      }`}
+      } ${className}`}
       rel="noopener noreferrer"
       {...props}
     >
