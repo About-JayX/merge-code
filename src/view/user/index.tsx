@@ -1,61 +1,61 @@
-import { domain } from "@/api";
-import Button from "@/components/memes/button";
-import Card from "@/components/memes/card";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { updateToken } from "@/store/user";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { useWalletModal } from "@solana/wallet-adapter-react-ui";
-import { Modal, Typography } from "antd";
-import { Ellipsis, Image } from "antd-mobile";
-import { Fragment, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-const { Paragraph } = Typography;
+import { domain } from '@/api'
+import Button from '@/components/memes/button'
+import Card from '@/components/memes/card'
+import { useAppDispatch, useAppSelector } from '@/store'
+import { updateToken } from '@/store/user'
+import { useWallet } from '@solana/wallet-adapter-react'
+import { useWalletModal } from '@solana/wallet-adapter-react-ui'
+import { Modal, Typography } from 'antd'
+import { Ellipsis, Image } from 'antd-mobile'
+import { Fragment, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
+const { Paragraph } = Typography
 
 export default function User() {
-  const { publicKey, signMessage } = useWallet();
-  const navigate = useNavigate();
-  const { token } = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
-  const { setVisible } = useWalletModal();
-  const [authorizeStatus, setAuthorizeStatus] = useState<boolean>(false);
-  const [tokens, setTokens] = useState({ data: [], total: 1 });
+  const { publicKey, signMessage } = useWallet()
+  const navigate = useNavigate()
+  const { token } = useAppSelector(state => state.user)
+  const dispatch = useAppDispatch()
+  const { setVisible } = useWalletModal()
+  const [authorizeStatus, setAuthorizeStatus] = useState<boolean>(false)
+  const [tokens, setTokens] = useState({ data: [], total: 1 })
   const authorize = async () => {
-    setAuthorizeStatus(true);
+    setAuthorizeStatus(true)
     try {
       if (!publicKey) {
-        setVisible(true);
-        return;
+        setVisible(true)
+        return
       }
 
-      const address = publicKey.toString();
-      const message = `BanDing wallet Address for memes, User Wallet Address is ${address.toLowerCase()}, Please confirm the sign`;
-      const encodedMessage = new TextEncoder().encode(message);
-      let signature: any = signMessage && (await signMessage(encodedMessage));
-      signature = Array.from(signature);
+      const address = publicKey.toString()
+      const message = `BanDing wallet Address for memes, User Wallet Address is ${address.toLowerCase()}, Please confirm the sign`
+      const encodedMessage = new TextEncoder().encode(message)
+      let signature: any = signMessage && (await signMessage(encodedMessage))
+      signature = Array.from(signature)
 
       const result: any = await domain.loginAPI({
         address,
         signature,
         message: Array.from(encodedMessage),
-      });
-      if (!result.success) throw new Error("request api fail");
-      dispatch(updateToken(result.data));
-      setAuthorizeStatus(false);
+      })
+      if (!result.success) throw new Error('request api fail')
+      dispatch(updateToken(result.data))
+      setAuthorizeStatus(false)
     } catch (error) {
-      console.log(error, "login fail");
-      setAuthorizeStatus(false);
+      console.log(error, 'login fail')
+      setAuthorizeStatus(false)
     }
-  };
+  }
   const loadEditTokens = async () => {
     const result: any = await domain.ownerListAPI(
       { current: 1, pageSize: 10 },
       token
-    );
-    setTokens(result.data);
-  };
+    )
+    setTokens(result.data)
+  }
   useEffect(() => {
-    token && loadEditTokens();
-  }, [token]);
+    token && loadEditTokens()
+  }, [token])
   return (
     <Fragment>
       <Modal title="" centered open={!token} footer closable={false}>
@@ -96,7 +96,7 @@ export default function User() {
                   <Ellipsis
                     className="text-lg font-bold opacity-80"
                     direction="middle"
-                    content={publicKey?.toBase58() || ""}
+                    content={publicKey?.toBase58() || ''}
                   />
                 </Paragraph>
               )}
@@ -115,21 +115,21 @@ export default function User() {
                         loading="lazy"
                         lazy
                         className="!w-32 !h-32 sm:!w-52 sm:!h-52 object-cover rounded-2xl sm:rounded-3xl"
-                        src=""
+                        src={item.logo_url || ''}
                       />
                       <span className="text-xl font-medium break-all">
-                        <Ellipsis direction="middle" content="vitalik.eth" />
+                        <Ellipsis direction="middle" content={item.name} />
                       </span>
                       <Paragraph
                         className="flex"
                         copyable={{
-                          text: "3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq",
+                          text: item.contract_address,
                         }}
                       >
                         <Ellipsis
                           className="text-sm opacity-80"
                           direction="middle"
-                          content="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq"
+                          content={item.contract_address}
                         />
                       </Paragraph>
                       <Button className="!w-full" type="primary">
@@ -143,5 +143,5 @@ export default function User() {
         </main>
       </div>
     </Fragment>
-  );
+  )
 }

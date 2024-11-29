@@ -22,4 +22,9 @@ export const domain = {
     axios.post('/v2/domain/token-list-user', data, {
       headers: { Authorization: token },
     }),
+
+  updateDoMain: (data: any, token: string) =>
+    axios.post('/v2/domain/edit-domian', data, {
+      headers: { Authorization: token },
+    }),
 }

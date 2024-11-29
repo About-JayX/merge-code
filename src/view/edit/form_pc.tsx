@@ -1,51 +1,43 @@
-import {
-  ColorPicker,
-  Input,
-  Button as AntdButton,
-  Collapse,
-} from "antd";
-import {
-  CloseOutlined,
-  DeleteOutlined,
-  PlusOutlined,
-} from "@ant-design/icons";
-import Button from "@/components/domain/button";
-import Mbutton from "@/components/memes/button";
-import Upload from "@/components/memes/upload";
+import { ColorPicker, Input, Button as AntdButton, Collapse } from 'antd'
+import { CloseOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons'
+import Button from '@/components/domain/button'
+import Mbutton from '@/components/memes/button'
+import Upload from '@/components/memes/upload'
 export default function FormPc({
   ...props
 }: {
-  backgroundColor?: string;
-  setBackgroundColor?: (e: string) => void;
-  setBackgroundPattern?: (e: string) => void;
-  backgroundImage?: string;
-  setBackgroundImageUrl?: (e: string) => void;
-  textColor?: string;
-  setTextColor?: (e: string) => void;
-  fontFamily?: any[];
-  setTextFont?: (e: string) => void;
-  buttonBackground?: string;
-  setButtonBackground?: (e: string) => void;
-  buttonText?: string;
-  setButtonText?: (e: string) => void;
-  setButtonRounded?: (e: string) => void;
-  about?: any;
-  setAbout?: (e: any) => void;
-  buy?: any;
-  setBuy?: (e: any) => void;
-  roadmap?: any;
-  setRoadmap?: (e: any) => void;
+  backgroundColor?: string
+  setBackgroundColor?: (e: string) => void
+  setBackgroundPattern?: (e: string) => void
+  backgroundImage?: string
+  setBackgroundImageUrl?: (e: string) => void
+  textColor?: string
+  setTextColor?: (e: string) => void
+  fontFamily?: any[]
+  setTextFont?: (e: string) => void
+  buttonBackground?: string
+  setButtonBackground?: (e: string) => void
+  buttonText?: string
+  setButtonText?: (e: string) => void
+  setButtonRounded?: (e: string) => void
+  about?: any
+  setAbout?: (e: any) => void
+  buy?: any
+  setBuy?: (e: any) => void
+  roadmap?: any
+  setRoadmap?: (e: any) => void
+  save: () => void
 }) {
   return (
     <div className="w-72 sticky top-4 flex-col gap-4 hidden xl:flex">
       <Collapse
         className="max-h-[calc(100vh-260px)] overflow-hidden overflow-y-auto"
-        defaultActiveKey={["background"]}
+        defaultActiveKey={['background']}
         accordion
         items={[
           {
-            key: "background",
-            label: "Background",
+            key: 'background',
+            label: 'Background',
             children: (
               <div className="grid gap-4">
                 <div className="flex gap-3 items-center">
@@ -54,9 +46,9 @@ export default function FormPc({
                     defaultValue={props.backgroundColor}
                     allowClear
                     size="small"
-                    onChange={(value) =>
+                    onChange={value =>
                       props.setBackgroundColor &&
-                      props.setBackgroundColor("#" + value.toHex())
+                      props.setBackgroundColor('#' + value.toHex())
                     }
                   />
                 </div>
@@ -67,7 +59,7 @@ export default function FormPc({
                       className="w-10 h-10 flex items-center justify-center bg-white text-black rounded-lg"
                       onClick={() =>
                         props.setBackgroundPattern &&
-                        props.setBackgroundPattern("")
+                        props.setBackgroundPattern('')
                       }
                     >
                       <CloseOutlined />
@@ -76,35 +68,35 @@ export default function FormPc({
                       className="w-10 h-10 pattern-1 rounded-lg"
                       onClick={() =>
                         props.setBackgroundPattern &&
-                        props.setBackgroundPattern("pattern-1")
+                        props.setBackgroundPattern('pattern-1')
                       }
                     />
                     <a
                       className="w-10 h-10 pattern-2 rounded-lg"
                       onClick={() =>
                         props.setBackgroundPattern &&
-                        props.setBackgroundPattern("pattern-2")
+                        props.setBackgroundPattern('pattern-2')
                       }
                     />
                     <a
                       className="w-10 h-10 pattern-3 rounded-lg"
                       onClick={() =>
                         props.setBackgroundPattern &&
-                        props.setBackgroundPattern("pattern-3")
+                        props.setBackgroundPattern('pattern-3')
                       }
                     />
                     <a
                       className="w-10 h-10 pattern-4 rounded-lg"
                       onClick={() =>
                         props.setBackgroundPattern &&
-                        props.setBackgroundPattern("pattern-4")
+                        props.setBackgroundPattern('pattern-4')
                       }
                     />
                     <a
                       className="w-10 h-10 pattern-5 rounded-lg"
                       onClick={() =>
                         props.setBackgroundPattern &&
-                        props.setBackgroundPattern("pattern-5")
+                        props.setBackgroundPattern('pattern-5')
                       }
                     />
                   </div>
@@ -120,8 +112,8 @@ export default function FormPc({
             ),
           },
           {
-            key: "text",
-            label: "Text",
+            key: 'text',
+            label: 'Text',
             children: (
               <div className="grid gap-4">
                 <div className="flex gap-3 items-center">
@@ -130,9 +122,9 @@ export default function FormPc({
                     defaultValue={props.textColor}
                     allowClear
                     size="small"
-                    onChange={(value) =>
+                    onChange={value =>
                       props.setTextColor &&
-                      props.setTextColor("#" + value.toHex())
+                      props.setTextColor('#' + value.toHex())
                     }
                   />
                 </div>
@@ -157,8 +149,8 @@ export default function FormPc({
             ),
           },
           {
-            key: "button",
-            label: "Button",
+            key: 'button',
+            label: 'Button',
             children: (
               <div className="grid gap-4">
                 <div className="flex gap-3 items-center">
@@ -167,9 +159,9 @@ export default function FormPc({
                     defaultValue={props.buttonBackground}
                     allowClear
                     size="small"
-                    onChange={(value) =>
+                    onChange={value =>
                       props.setButtonBackground &&
-                      props.setButtonBackground("#" + value.toHex())
+                      props.setButtonBackground('#' + value.toHex())
                     }
                   />
                 </div>
@@ -179,9 +171,9 @@ export default function FormPc({
                     defaultValue={props.buttonText}
                     allowClear
                     size="small"
-                    onChange={(value) =>
+                    onChange={value =>
                       props.setButtonText &&
-                      props.setButtonText("#" + value.toHex())
+                      props.setButtonText('#' + value.toHex())
                     }
                   />
                 </div>
@@ -196,7 +188,7 @@ export default function FormPc({
                       className="!rounded-none"
                       onClick={() =>
                         props.setButtonRounded &&
-                        props.setButtonRounded("!rounded-none")
+                        props.setButtonRounded('!rounded-none')
                       }
                     >
                       buy
@@ -209,7 +201,7 @@ export default function FormPc({
                       className="!rounded-md"
                       onClick={() =>
                         props.setButtonRounded &&
-                        props.setButtonRounded("!rounded-md")
+                        props.setButtonRounded('!rounded-md')
                       }
                     >
                       buy
@@ -222,7 +214,7 @@ export default function FormPc({
                       className="!rounded-lg"
                       onClick={() =>
                         props.setButtonRounded &&
-                        props.setButtonRounded("!rounded-lg")
+                        props.setButtonRounded('!rounded-lg')
                       }
                     >
                       buy
@@ -235,7 +227,7 @@ export default function FormPc({
                       className="!rounded-full"
                       onClick={() =>
                         props.setButtonRounded &&
-                        props.setButtonRounded("!rounded-full")
+                        props.setButtonRounded('!rounded-full')
                       }
                     >
                       buy
@@ -246,15 +238,15 @@ export default function FormPc({
             ),
           },
           {
-            key: "about",
-            label: "About Text",
+            key: 'about',
+            label: 'About Text',
             children: (
               <div className="grid gap-4">
                 <div className="flex flex-col gap-2">
                   <span className="text-sm">Image</span>
                   <Upload
                     image={props.about.image}
-                    onChange={(image) =>
+                    onChange={image =>
                       props.setAbout &&
                       props.setAbout((item: any) =>
                         Object.assign({}, item, { image })
@@ -266,7 +258,7 @@ export default function FormPc({
                   <span className="text-sm">Title</span>
                   <Input
                     defaultValue={props.about.title}
-                    onChange={(e) =>
+                    onChange={e =>
                       props.setAbout &&
                       props.setAbout((item: any) =>
                         Object.assign({}, item, { title: e.target.value })
@@ -278,7 +270,7 @@ export default function FormPc({
                   <span className="text-sm">Text</span>
                   <Input
                     defaultValue={props.about.text}
-                    onChange={(e) =>
+                    onChange={e =>
                       props.setAbout &&
                       props.setAbout((item: any) =>
                         Object.assign({}, item, { text: e.target.value })
@@ -290,8 +282,8 @@ export default function FormPc({
             ),
           },
           {
-            key: "buy",
-            label: "Buy Text",
+            key: 'buy',
+            label: 'Buy Text',
             children: (
               <div className="grid gap-4">
                 <div className="flex flex-wrap items-center gap-4">
@@ -299,7 +291,7 @@ export default function FormPc({
                     <span className="text-sm">Advertise1</span>
                     <Upload
                       image={props.buy.advertiseImage1}
-                      onChange={(image) =>
+                      onChange={image =>
                         props.setBuy &&
                         props.setBuy((item: any) =>
                           Object.assign({}, item, {
@@ -313,7 +305,7 @@ export default function FormPc({
                     <span className="text-sm">Advertise2</span>
                     <Upload
                       image={props.buy.advertiseImage2}
-                      onChange={(image) =>
+                      onChange={image =>
                         props.setBuy &&
                         props.setBuy((item: any) =>
                           Object.assign({}, item, {
@@ -329,7 +321,7 @@ export default function FormPc({
                   <span className="text-sm">Buy Link1</span>
                   <Input
                     defaultValue={props.buy.buyLink1}
-                    onChange={(e) =>
+                    onChange={e =>
                       props.setBuy &&
                       props.setBuy((item: any) =>
                         Object.assign({}, item, {
@@ -343,7 +335,7 @@ export default function FormPc({
                   <span className="text-sm">Buy Link2</span>
                   <Input
                     defaultValue={props.buy.buyLink2}
-                    onChange={(e) =>
+                    onChange={e =>
                       props.setBuy &&
                       props.setBuy((item: any) =>
                         Object.assign({}, item, {
@@ -357,8 +349,8 @@ export default function FormPc({
             ),
           },
           {
-            key: "roadmap",
-            label: "Roadmap Text",
+            key: 'roadmap',
+            label: 'Roadmap Text',
             children: (
               <div className="grid gap-4">
                 {props.roadmap.map((_: any, index: number) => (
@@ -372,7 +364,7 @@ export default function FormPc({
                               props.setRoadmap &&
                               props.setRoadmap([
                                 ...props.roadmap,
-                                { title: "", text: "" },
+                                { title: '', text: '' },
                               ])
                             }
                             icon={<PlusOutlined />}
@@ -399,22 +391,22 @@ export default function FormPc({
                     <div className="flex gap-3 items-center">
                       Title&nbsp;
                       <Input
-                        defaultValue={props.roadmap[index]["title"]}
-                        onChange={(e) => {
-                          const array = [...props.roadmap];
-                          array[index]["title"] = e.target.value;
-                          props.setRoadmap && props.setRoadmap(array);
+                        defaultValue={props.roadmap[index]['title']}
+                        onChange={e => {
+                          const array = [...props.roadmap]
+                          array[index]['title'] = e.target.value
+                          props.setRoadmap && props.setRoadmap(array)
                         }}
                       />
                     </div>
                     <div className="flex gap-3 items-center">
                       Text&nbsp;
                       <Input.TextArea
-                        defaultValue={props.roadmap[index]["text"]}
-                        onChange={(e) => {
-                          const array = [...props.roadmap];
-                          array[index]["text"] = e.target.value;
-                          props.setRoadmap && props.setRoadmap(array);
+                        defaultValue={props.roadmap[index]['text']}
+                        onChange={e => {
+                          const array = [...props.roadmap]
+                          array[index]['text'] = e.target.value
+                          props.setRoadmap && props.setRoadmap(array)
                         }}
                       />
                     </div>
@@ -425,7 +417,9 @@ export default function FormPc({
           },
         ]}
       />
-      <Mbutton type="primary">save</Mbutton>
+      <Mbutton type="primary" onClick={props.save}>
+        save
+      </Mbutton>
     </div>
-  );
+  )
 }

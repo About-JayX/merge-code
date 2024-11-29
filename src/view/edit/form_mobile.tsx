@@ -1,50 +1,51 @@
-import { ColorPicker, Dropdown, Input, Button as AntdButton } from "antd";
+import { ColorPicker, Dropdown, Input, Button as AntdButton } from 'antd'
 import {
   CloseOutlined,
   DeleteOutlined,
   DownOutlined,
   PlusOutlined,
-} from "@ant-design/icons";
-import Button from "@/components/domain/button";
-import Mbutton from "@/components/memes/button";
-import Upload from "@/components/memes/upload";
+} from '@ant-design/icons'
+import Button from '@/components/domain/button'
+import Mbutton from '@/components/memes/button'
+import Upload from '@/components/memes/upload'
 export default function FormMobile({
   ...props
 }: {
-  backgroundColor?: string;
-  setBackgroundColor?: (e: string) => void;
-  setBackgroundPattern?: (e: string) => void;
-  backgroundImage?: string;
-  setBackgroundImageUrl?: (e: string) => void;
-  textColor?: string;
-  setTextColor?: (e: string) => void;
-  fontFamily?: any[];
-  setTextFont?: (e: string) => void;
-  buttonBackground?: string;
-  setButtonBackground?: (e: string) => void;
-  buttonText?: string;
-  setButtonText?: (e: string) => void;
-  setButtonRounded?: (e: string) => void;
-  about?: any;
-  setAbout?: (e: any) => void;
-  buy?: any;
-  setBuy?: (e: any) => void;
-  roadmap?: any;
-  setRoadmap?: (e: any) => void;
+  backgroundColor?: string
+  setBackgroundColor?: (e: string) => void
+  setBackgroundPattern?: (e: string) => void
+  backgroundImage?: string
+  setBackgroundImageUrl?: (e: string) => void
+  textColor?: string
+  setTextColor?: (e: string) => void
+  fontFamily?: any[]
+  setTextFont?: (e: string) => void
+  buttonBackground?: string
+  setButtonBackground?: (e: string) => void
+  buttonText?: string
+  setButtonText?: (e: string) => void
+  setButtonRounded?: (e: string) => void
+  about?: any
+  setAbout?: (e: any) => void
+  buy?: any
+  setBuy?: (e: any) => void
+  roadmap?: any
+  setRoadmap?: (e: any) => void
+  save: () => void
 }) {
   return (
     <div className="fixed flex-col gap-4 bottom-[-1px] left-0 flex xl:hidden bg-[--bg-color] p-4 pb-8 w-full justify-center items-center z-50">
       <div className="max-w-4xl flex items-center justify-between flex-wrap gap-4 gap-x-5">
         <Dropdown
           placement="top"
-          trigger={["click"]}
+          trigger={['click']}
           menu={{
             onClick: (e: any) => {
-              e.preventDefault();
+              e.preventDefault()
             },
             items: [
               {
-                key: "background-color",
+                key: 'background-color',
                 label: (
                   <div className="flex gap-3 items-center">
                     <span className="text-sm">Color</span>
@@ -52,16 +53,16 @@ export default function FormMobile({
                       defaultValue={props.backgroundColor}
                       allowClear
                       size="small"
-                      onChange={(value) =>
+                      onChange={value =>
                         props.setBackgroundColor &&
-                        props.setBackgroundColor("#" + value.toHex())
+                        props.setBackgroundColor('#' + value.toHex())
                       }
                     />
                   </div>
                 ),
               },
               {
-                key: "background-pattern",
+                key: 'background-pattern',
                 label: (
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Pattern</span>
@@ -70,7 +71,7 @@ export default function FormMobile({
                         className="w-9 h-9 flex items-center justify-center bg-white text-black rounded-lg"
                         onClick={() =>
                           props.setBackgroundPattern &&
-                          props.setBackgroundPattern("")
+                          props.setBackgroundPattern('')
                         }
                       >
                         <CloseOutlined />
@@ -79,35 +80,35 @@ export default function FormMobile({
                         className="w-9 h-9 pattern-1 rounded-lg"
                         onClick={() =>
                           props.setBackgroundPattern &&
-                          props.setBackgroundPattern("pattern-1")
+                          props.setBackgroundPattern('pattern-1')
                         }
                       />
                       <a
                         className="w-9 h-9 pattern-2 rounded-lg"
                         onClick={() =>
                           props.setBackgroundPattern &&
-                          props.setBackgroundPattern("pattern-2")
+                          props.setBackgroundPattern('pattern-2')
                         }
                       />
                       <a
                         className="w-9 h-9 pattern-3 rounded-lg"
                         onClick={() =>
                           props.setBackgroundPattern &&
-                          props.setBackgroundPattern("pattern-3")
+                          props.setBackgroundPattern('pattern-3')
                         }
                       />
                       <a
                         className="w-9 h-9 pattern-4 rounded-lg"
                         onClick={() =>
                           props.setBackgroundPattern &&
-                          props.setBackgroundPattern("pattern-4")
+                          props.setBackgroundPattern('pattern-4')
                         }
                       />
                       <a
                         className="w-9 h-9 pattern-5 rounded-lg"
                         onClick={() =>
                           props.setBackgroundPattern &&
-                          props.setBackgroundPattern("pattern-5")
+                          props.setBackgroundPattern('pattern-5')
                         }
                       />
                     </div>
@@ -115,7 +116,7 @@ export default function FormMobile({
                 ),
               },
               {
-                key: "background-custom",
+                key: 'background-custom',
                 label: (
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Custom</span>
@@ -131,7 +132,7 @@ export default function FormMobile({
         >
           <a
             className="text-current text-sm flex items-center gap-2"
-            onClick={(e) => e.preventDefault()}
+            onClick={e => e.preventDefault()}
           >
             Background
             <DownOutlined />
@@ -139,14 +140,14 @@ export default function FormMobile({
         </Dropdown>
         <Dropdown
           placement="top"
-          trigger={["click"]}
+          trigger={['click']}
           menu={{
             onClick: (e: any) => {
-              e.preventDefault();
+              e.preventDefault()
             },
             items: [
               {
-                key: "text-color",
+                key: 'text-color',
                 label: (
                   <div className="flex gap-3 items-center">
                     <span className="text-sm">Color</span>
@@ -154,16 +155,16 @@ export default function FormMobile({
                       defaultValue={props.textColor}
                       allowClear
                       size="small"
-                      onChange={(value) =>
+                      onChange={value =>
                         props.setTextColor &&
-                        props.setTextColor("#" + value.toHex())
+                        props.setTextColor('#' + value.toHex())
                       }
                     />
                   </div>
                 ),
               },
               {
-                key: "text-font",
+                key: 'text-font',
                 label: (
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Font</span>
@@ -189,7 +190,7 @@ export default function FormMobile({
         >
           <a
             className="text-current text-sm flex items-center gap-2"
-            onClick={(e) => e.preventDefault()}
+            onClick={e => e.preventDefault()}
           >
             Text
             <DownOutlined />
@@ -197,14 +198,14 @@ export default function FormMobile({
         </Dropdown>
         <Dropdown
           placement="top"
-          trigger={["click"]}
+          trigger={['click']}
           menu={{
             onClick: (e: any) => {
-              e.preventDefault();
+              e.preventDefault()
             },
             items: [
               {
-                key: "button-background",
+                key: 'button-background',
                 label: (
                   <div className="flex gap-3 items-center">
                     <span className="text-sm">Background</span>
@@ -212,16 +213,16 @@ export default function FormMobile({
                       defaultValue={props.buttonBackground}
                       allowClear
                       size="small"
-                      onChange={(value) =>
+                      onChange={value =>
                         props.setButtonBackground &&
-                        props.setButtonBackground("#" + value.toHex())
+                        props.setButtonBackground('#' + value.toHex())
                       }
                     />
                   </div>
                 ),
               },
               {
-                key: "button-text",
+                key: 'button-text',
                 label: (
                   <div className="flex gap-3 items-center">
                     <span className="text-sm">Text</span>
@@ -229,16 +230,16 @@ export default function FormMobile({
                       defaultValue={props.buttonText}
                       allowClear
                       size="small"
-                      onChange={(value) =>
+                      onChange={value =>
                         props.setButtonText &&
-                        props.setButtonText("#" + value.toHex())
+                        props.setButtonText('#' + value.toHex())
                       }
                     />
                   </div>
                 ),
               },
               {
-                key: "button-rounded",
+                key: 'button-rounded',
                 label: (
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Rounded</span>
@@ -251,7 +252,7 @@ export default function FormMobile({
                         className="!rounded-none"
                         onClick={() =>
                           props.setButtonRounded &&
-                          props.setButtonRounded("!rounded-none")
+                          props.setButtonRounded('!rounded-none')
                         }
                       >
                         buy
@@ -264,7 +265,7 @@ export default function FormMobile({
                         className="!rounded-md"
                         onClick={() =>
                           props.setButtonRounded &&
-                          props.setButtonRounded("!rounded-md")
+                          props.setButtonRounded('!rounded-md')
                         }
                       >
                         buy
@@ -277,7 +278,7 @@ export default function FormMobile({
                         className="!rounded-lg"
                         onClick={() =>
                           props.setButtonRounded &&
-                          props.setButtonRounded("!rounded-lg")
+                          props.setButtonRounded('!rounded-lg')
                         }
                       >
                         buy
@@ -290,7 +291,7 @@ export default function FormMobile({
                         className="!rounded-full"
                         onClick={() =>
                           props.setButtonRounded &&
-                          props.setButtonRounded("!rounded-full")
+                          props.setButtonRounded('!rounded-full')
                         }
                       >
                         buy
@@ -302,30 +303,27 @@ export default function FormMobile({
             ],
           }}
         >
-          <a
-            className="text-current text-sm"
-            onClick={(e) => e.preventDefault()}
-          >
+          <a className="text-current text-sm" onClick={e => e.preventDefault()}>
             Button&nbsp;
             <DownOutlined />
           </a>
         </Dropdown>
         <Dropdown
           placement="top"
-          trigger={["click"]}
+          trigger={['click']}
           menu={{
             onClick: (e: any) => {
-              e.preventDefault();
+              e.preventDefault()
             },
             items: [
               {
-                key: "about-image",
+                key: 'about-image',
                 label: (
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Image</span>
                     <Upload
                       image={props.about.image}
-                      onChange={(image) =>
+                      onChange={image =>
                         props.setAbout &&
                         props.setAbout((item: any) =>
                           Object.assign({}, item, { image })
@@ -336,13 +334,13 @@ export default function FormMobile({
                 ),
               },
               {
-                key: "about-title",
+                key: 'about-title',
                 label: (
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Title</span>
                     <Input
                       defaultValue={props.about.title}
-                      onChange={(e) =>
+                      onChange={e =>
                         props.setAbout &&
                         props.setAbout((item: any) =>
                           Object.assign({}, item, {
@@ -355,13 +353,13 @@ export default function FormMobile({
                 ),
               },
               {
-                key: "about-text",
+                key: 'about-text',
                 label: (
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Text</span>
                     <Input
                       defaultValue={props.about.text}
-                      onChange={(e) =>
+                      onChange={e =>
                         props.setAbout &&
                         props.setAbout((item: any) =>
                           Object.assign({}, item, {
@@ -376,31 +374,28 @@ export default function FormMobile({
             ],
           }}
         >
-          <a
-            className="text-current text-sm"
-            onClick={(e) => e.preventDefault()}
-          >
+          <a className="text-current text-sm" onClick={e => e.preventDefault()}>
             About Text&nbsp;
             <DownOutlined />
           </a>
         </Dropdown>
         <Dropdown
           placement="top"
-          trigger={["click"]}
+          trigger={['click']}
           menu={{
             onClick: (e: any) => {
-              e.preventDefault();
+              e.preventDefault()
             },
             items: [
               {
-                key: "buy-advertise",
+                key: 'buy-advertise',
                 label: (
                   <div className="flex flex-wrap items-center gap-4">
                     <div className="flex flex-col gap-2">
                       <span className="text-sm">Advertise1</span>
                       <Upload
                         image={props.buy.advertiseImage1}
-                        onChange={(image) =>
+                        onChange={image =>
                           props.setBuy &&
                           props.setBuy((item: any) =>
                             Object.assign({}, item, {
@@ -414,7 +409,7 @@ export default function FormMobile({
                       <span className="text-sm">Advertise2</span>
                       <Upload
                         image={props.buy.advertiseImage2}
-                        onChange={(image) =>
+                        onChange={image =>
                           props.setBuy &&
                           props.setBuy((item: any) =>
                             Object.assign({}, item, {
@@ -428,13 +423,13 @@ export default function FormMobile({
                 ),
               },
               {
-                key: "buy-link1",
+                key: 'buy-link1',
                 label: (
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Buy Link1</span>
                     <Input
                       defaultValue={props.buy.buyLink1}
-                      onChange={(e) =>
+                      onChange={e =>
                         props.setBuy &&
                         props.setBuy((item: any) =>
                           Object.assign({}, item, {
@@ -447,13 +442,13 @@ export default function FormMobile({
                 ),
               },
               {
-                key: "buy-link2",
+                key: 'buy-link2',
                 label: (
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Buy Link2</span>
                     <Input
                       defaultValue={props.buy.buyLink2}
-                      onChange={(e) =>
+                      onChange={e =>
                         props.setBuy &&
                         props.setBuy((item: any) =>
                           Object.assign({}, item, {
@@ -468,23 +463,20 @@ export default function FormMobile({
             ],
           }}
         >
-          <a
-            className="text-current text-sm"
-            onClick={(e) => e.preventDefault()}
-          >
+          <a className="text-current text-sm" onClick={e => e.preventDefault()}>
             Buy Text&nbsp;
             <DownOutlined />
           </a>
         </Dropdown>
         <Dropdown
           placement="top"
-          trigger={["click"]}
+          trigger={['click']}
           menu={{
             items: [
               {
-                key: "roadmap-text",
+                key: 'roadmap-text',
                 onClick: (e: any) => {
-                  e.preventDefault();
+                  e.preventDefault()
                 },
                 label: (
                   <div className="grid gap-4">
@@ -499,7 +491,7 @@ export default function FormMobile({
                                   props.setRoadmap &&
                                   props.setRoadmap([
                                     ...props.roadmap,
-                                    { title: "", text: "" },
+                                    { title: '', text: '' },
                                   ])
                                 }
                                 icon={<PlusOutlined />}
@@ -525,22 +517,22 @@ export default function FormMobile({
                         <div className="flex gap-3 items-center">
                           Title&nbsp;
                           <Input
-                            defaultValue={props.roadmap[index]["title"]}
-                            onChange={(e) => {
-                              const array = [...props.roadmap];
-                              array[index]["title"] = e.target.value;
-                              props.setRoadmap && props.setRoadmap(array);
+                            defaultValue={props.roadmap[index]['title']}
+                            onChange={e => {
+                              const array = [...props.roadmap]
+                              array[index]['title'] = e.target.value
+                              props.setRoadmap && props.setRoadmap(array)
                             }}
                           />
                         </div>
                         <div className="flex gap-3 items-center">
                           Text&nbsp;
                           <Input.TextArea
-                            defaultValue={props.roadmap[index]["text"]}
-                            onChange={(e) => {
-                              const array = [...props.roadmap];
-                              array[index]["text"] = e.target.value;
-                              props.setRoadmap && props.setRoadmap(array);
+                            defaultValue={props.roadmap[index]['text']}
+                            onChange={e => {
+                              const array = [...props.roadmap]
+                              array[index]['text'] = e.target.value
+                              props.setRoadmap && props.setRoadmap(array)
                             }}
                           />
                         </div>
@@ -552,18 +544,15 @@ export default function FormMobile({
             ],
           }}
         >
-          <a
-            className="text-current text-sm"
-            onClick={(e) => e.preventDefault()}
-          >
+          <a className="text-current text-sm" onClick={e => e.preventDefault()}>
             Roadmap Text&nbsp;
             <DownOutlined />
           </a>
         </Dropdown>
       </div>
-      <Mbutton className="!min-w-48" type="primary">
+      <Mbutton className="!min-w-48" type="primary" onClick={props.save}>
         save
       </Mbutton>
     </div>
-  );
+  )
 }
