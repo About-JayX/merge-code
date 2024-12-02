@@ -14,17 +14,17 @@ export default function Domain({ ...props }) {
   useEffect(() => {
     setShowNav(true);
     setShowHome(true);
-    const homeTop = document.getElementById("about")?.offsetTop;
-    const buyCardTop = document.getElementById("buyToken")?.offsetTop;
-    const utilitiesTop = document.getElementById("roadmap")?.offsetTop;
+
     const handleScroll = () => {
-      // 获取滚动位置：window.scrollY
+      const aboutTop: any = document.getElementById("about")?.offsetTop;
+      const buyCardTop = document.getElementById("buyToken")?.offsetTop;
+      const utilitiesTop = document.getElementById("roadmap")?.offsetTop;
       const scrollY = window.scrollY;
-      if (homeTop && scrollY >= homeTop) setShowAbout(true);
+      if (aboutTop && scrollY >= aboutTop) setShowAbout(true);
       if (buyCardTop && scrollY >= buyCardTop) setShowBuyCard(true);
       if (utilitiesTop && scrollY >= utilitiesTop) setShowUtilities(true);
-      
     };
+    handleScroll()
     document.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -32,7 +32,9 @@ export default function Domain({ ...props }) {
     };
   }, []);
   return (
-    <div className={`w-full h-full min-h-screen relative overflow-x-hidden ${props?.text?.font}`}>
+    <div
+      className={`w-full h-full min-h-screen relative overflow-x-hidden ${props?.text?.font}`}
+    >
       <div
         style={{
           color: props?.text?.color,
