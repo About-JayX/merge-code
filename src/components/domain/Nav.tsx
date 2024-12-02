@@ -8,9 +8,9 @@ const Nav = ({ ...props }) => {
       <nav className="p-4 relative z-50 backdrop-blur-sm ">
         <div className="flex justify-between items-center  max-w-screen-xl mx-auto">
           <div className="flex gap-3 items-center justify-center">
-            {props?.telegram && (
+            {props?.telegram_url && (
               <a
-                href={props?.telegram}
+                href={props?.telegram_url}
                 target="_blank"
                 className="transition-all ease-in-out duration-300 hover:scale-[1.05]"
               >
@@ -20,9 +20,9 @@ const Nav = ({ ...props }) => {
                 />
               </a>
             )}
-            {props?.twitter && (
+            {props?.twitter_url && (
               <a
-                href={props?.twitter}
+                href={props?.twitter_url}
                 target="_blank"
                 className="transition-all ease-in-out duration-300 hover:scale-[1.05]"
               >
@@ -32,9 +32,9 @@ const Nav = ({ ...props }) => {
                 />
               </a>
             )}
-            {props?.pumpfun && (
+            {props?.pumpfun_url && (
               <a
-                href={props?.pumpfun}
+                href={props?.pumpfun_url}
                 target="_blank"
                 className="transition-all ease-in-out duration-300 hover:scale-[1.05]"
               >
@@ -44,9 +44,9 @@ const Nav = ({ ...props }) => {
                 />
               </a>
             )}
-            {props?.dexscreener && (
+            {props?.dexscreener_url && (
               <a
-                href={props?.dexscreener}
+                href={props?.dexscreener_url}
                 target="_blank"
                 className="transition-all ease-in-out duration-300 hover:scale-[1.05]"
               >
