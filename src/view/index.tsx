@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'
 import Card from '@/components/memes/card'
 import partner from '@/config/partner'
 import { DownOutlined, UpOutlined } from '@ant-design/icons'
-import { domain } from '@/api'
+import { domain as domainAPI } from '@/api'
 const { Paragraph } = Typography
 
 export const View = () => {
@@ -30,7 +30,7 @@ export const View = () => {
         return
       }
       setSearch(value)
-      const result: any = await domain.verifyAPI({ domain: value })
+      const result: any = await domainAPI.verifyAPI({ domain: value })
       if (!result.data) {
         setAvailableStatus(true)
       }
@@ -39,7 +39,7 @@ export const View = () => {
     []
   )
   const init = async () => {
-    const result: any = await domain.getListAPI({ current: 1, pageSize: 12 })
+    const result: any = await domainAPI.getListAPI({ current: 1, pageSize: 12 })
     setTokens(result.data)
   }
   useEffect(() => {
@@ -308,7 +308,7 @@ export default function Home({
   onChange?: (domain?: string) => void
 }) {
   const { domain } = useParams()
-  const datas = data.find(item => item.domain === domain)
+  const [datas, setDatas] = useState<any>({})
 
   const SEO = ({
     title = '',
@@ -331,11 +331,34 @@ export default function Home({
       document.head.appendChild(favicon)
     }
   }
+  const init = async () => {
+    const result: any = domain && (await domainAPI.verifyAPI({ domain }))
 
+    console.log(result, 'result_')
+
+    let data = { ...result.data, ...JSON.parse(result.data.config) }
+
+    setDatas(data)
+    // setBackgroundColor(data?.background?.color)
+    // setBackgroundPattern(data?.background?.pattern)
+    // setBackgroundImageUrl(data?.background?.custom)
+    // setTextColor(data?.background?.color)
+    // setButtonBackground(data?.button?.background)
+    // setButtonText(data?.button?.text)
+    // setButtonRounded(data?.button?.rounded)
+    // setAbout(data?.about)
+    // setBuy(data?.buy)
+    // setRoadmap(data?.roadmap)
+    // setGetData(data)
+  }
+  useEffect(() => {
+    console.log(datas, 'datas_')
+  }, [datas])
   useLayoutEffect(() => {
+    init()
     SEO(
       domain
-        ? { title: datas?.domain, icon: datas?.image }
+        ? { title: datas?.domain || '', icon: datas?.image || '' }
         : { title: '$MEMES Memes.ac', icon: '/favicon.png' }
     )
     onChange && onChange(domain)
