@@ -33,7 +33,7 @@ const Utilities = ({ ...props }) => {
                   </div>
                 </div>
               </CSSTransition>
-              {index + 1 >= props?.roadmap?.length &&
+              {/* {index + 1 >= props?.roadmap?.length &&
                 props?.roadmap?.length <= 3 &&
                 [{}, {}, {}].map((_, i) => (
                   <div
@@ -47,7 +47,7 @@ const Utilities = ({ ...props }) => {
                       <div className="flex gap-x-3 items-center justify-center lg:items-start lg:justify-start group w-full"></div>
                     </div>
                   </div>
-                ))}
+                ))} */}
             </Fragment>
           ))}
         </div>

@@ -14,13 +14,13 @@
     />
     <link
       rel="preload"
-      href="/fonts/poppinsSemiBold.woff2"
+      href="./fonts/poppinsSemiBold.woff2"
       as="font"
       type="font/woff2"
       importance="high"
       crossorigin
     />
-    <link rel="stylesheet" href="/fonts/index.css" />
+    <link rel="stylesheet" href="./fonts/index.css" />
     <style>
       :root[class="light"] {
         --bg-color: white;
@@ -43,7 +43,7 @@
         @apply min-h-screen bg-[--bg-color] text-[--title-color];
       }
     </style>
-    <script crossorigin="anonymous">
+    <script crossorigin="anonymous" type="module">
       document.documentElement.setAttribute(
         "class",
         window.localStorage.getItem("theme") || "dark"

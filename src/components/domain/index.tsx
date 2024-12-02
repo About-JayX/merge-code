@@ -19,7 +19,7 @@ export default function Domain({ ...props }) {
       const aboutTop: any = document.getElementById("about")?.offsetTop;
       const buyCardTop = document.getElementById("buyToken")?.offsetTop;
       const utilitiesTop = document.getElementById("roadmap")?.offsetTop;
-      const scrollY = window.scrollY;
+      const scrollY = window.scrollY * 2
       if (aboutTop && scrollY >= aboutTop) setShowAbout(true);
       if (buyCardTop && scrollY >= buyCardTop) setShowBuyCard(true);
       if (utilitiesTop && scrollY >= utilitiesTop) setShowUtilities(true);
@@ -31,9 +31,11 @@ export default function Domain({ ...props }) {
       document.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  console.log("props",props);
+  
   return (
     <div
-      className={`w-full h-full min-h-screen relative overflow-x-hidden ${props?.text?.font}`}
+      className={`w-full h-full min-h-screen relative overflow-x-hidden bg-[#181a20] ${props?.text?.font}`}
     >
       <div
         style={{

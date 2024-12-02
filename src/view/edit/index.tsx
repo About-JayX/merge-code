@@ -1,73 +1,77 @@
-import Domain from '@/components/domain'
-import { Fragment, useLayoutEffect, useState } from 'react'
-import { useParams } from 'react-router'
-import FormMobile from './form_mobile'
-import FormPc from './form_pc'
-import { domain as doMainAPI } from '@/api/index'
-import { useAppSelector } from '@/store'
-import { SEO } from '..'
+import Domain from "@/components/domain";
+import { Fragment, useLayoutEffect, useState } from "react";
+import { useParams } from "react-router";
+import FormMobile from "./form_mobile";
+import FormPc from "./form_pc";
+import { domain as doMainAPI } from "@/api/index";
+import { useAppSelector } from "@/store";
+import { SEO } from "..";
 export default function Edit() {
-  const { domain } = useParams()
+  const { domain } = useParams();
 
-  const [getData, setGetData] = useState<any>({})
+  const [getData, setGetData] = useState<any>({});
 
-  const { token } = useAppSelector(state => state.user)
+  const { token } = useAppSelector((state) => state.user);
 
-  const [backgroundColor, setBackgroundColor] = useState<string>('#fff')
-  const [backgroundPattern, setBackgroundPattern] = useState<string>('')
+  const [backgroundColor, setBackgroundColor] = useState<string>("#fff");
+  const [backgroundPattern, setBackgroundPattern] = useState<string>("");
 
-  const [backgroundImage, setBackgroundImageUrl] = useState<string>('')
-  const [textColor, setTextColor] = useState<string>('#000')
-  const [buttonBackground, setButtonBackground] = useState('#000')
-  const [buttonText, setButtonText] = useState('#fff')
-  const [buttonRounded, setButtonRounded] = useState('!rounded-none')
+  const [backgroundImage, setBackgroundImageUrl] = useState<string>("");
+  const [textColor, setTextColor] = useState<string>("#000");
+  const [buttonBackground, setButtonBackground] = useState("#000");
+  const [buttonText, setButtonText] = useState("#fff");
+  const [buttonRounded, setButtonRounded] = useState("!rounded-none");
   const [about, setAbout] = useState<{
-    image?: string
-    title?: string
-    text?: string
-  }>({title:"Please Enter About Title",text:"Please Enter About Text"})
+    image?: string;
+    title?: string;
+    text?: string;
+  }>({ title: "Please Enter About Title", text: "Please Enter About Text" });
 
   const [buy, setBuy] = useState<{
-    advertiseImage1?: string
-    advertiseImage2?: string
-    buyLink1?: string
-    buyLink2?: string
-  }>({buyLink1:"Please Enter Twitter Link",buyLink2:"Please Enter Telegram Link"})
+    advertiseImage1?: string;
+    advertiseImage2?: string;
+    buyLink1?: string;
+    buyLink2?: string;
+  }>({
+    buyLink1: "Please Enter Twitter Link",
+    buyLink2: "Please Enter Telegram Link",
+  });
 
   const [roadmap, setRoadmap] = useState<{ title?: string; text?: string }[]>([
-    { title: 'Please Enter Roadmap Title', text: 'Please Enter Roadmap Text' },
-  ])
+    { title: "Please Enter Roadmap Title", text: "Please Enter Roadmap Text" },
+  ]);
 
   const fontFamily = [
-    { key: 'font-londrinaSolid', name: 'Londrina Solid' },
-    { key: 'font-poppinsSemiBold', name: 'Poppins SemiBold' },
-  ]
-  const [textFont, setTextFont] = useState<string>(fontFamily?.[0].key)
+    { key: "font-londrinaSolid", name: "Londrina Solid" },
+    { key: "font-poppinsSemiBold", name: "Poppins SemiBold" },
+  ];
+  const [textFont, setTextFont] = useState<string>(fontFamily?.[0].key);
 
   const init = async () => {
-    const result: any = domain && (await doMainAPI.verifyAPI({ domain }))
+    const result: any = domain && (await doMainAPI.verifyAPI({ domain }));
     console.log(
       JSON.parse(result.data.config),
-      'JSON.parse(result.data.config)'
-    )
+      "JSON.parse(result.data.config)"
+    );
 
-    let data = { ...result.data, ...JSON.parse(result.data.config) }
-    data?.background?.color && setBackgroundColor(data?.background?.color)
-    data?.background?.pattern && setBackgroundPattern(data?.background?.pattern)
-    data?.background?.custom &&setBackgroundImageUrl(data?.background?.custom)
-    data?.background?.color && setTextColor(data?.background?.color)
-    data?.button?.background && setButtonBackground(data?.button?.background)
-    data?.button?.text && setButtonText(data?.button?.text)
-    data?.button?.rounded && setButtonRounded(data?.button?.rounded)
-    data?.about && setAbout(data?.about)
-    data?.buy && setBuy(data?.buy)
-    data?.roadmap?.length > 0 && setRoadmap(data?.roadmap)
-    data?.fontFamily?.length>0 && setTextFont(data?.fontFamily)
-    setGetData(data)
-  }
+    let data = { ...result.data, ...JSON.parse(result.data.config) };
+    data?.background?.color && setBackgroundColor(data?.background?.color);
+    data?.background?.pattern &&
+      setBackgroundPattern(data?.background?.pattern);
+    data?.background?.custom && setBackgroundImageUrl(data?.background?.custom);
+    data?.background?.color && setTextColor(data?.text?.color);
+    data?.button?.background && setButtonBackground(data?.button?.background);
+    data?.button?.text && setButtonText(data?.button?.text);
+    data?.button?.rounded && setButtonRounded(data?.button?.rounded);
+    data?.about && setAbout(data?.about);
+    data?.buy && setBuy(data?.buy);
+    data?.roadmap?.length > 0 && setRoadmap(data?.roadmap);
+    data?.fontFamily?.length > 0 && setTextFont(data?.fontFamily);
+    setGetData(data);
+  };
   useLayoutEffect(() => {
-    init()
-  }, [domain])
+    init();
+  }, [domain]);
 
   const datas = {
     ...getData,
@@ -92,7 +96,7 @@ export default function Edit() {
       roadmap,
       contractAddress: getData?.contract_address,
     },
-  }
+  };
 
   const saveToken = async () => {
     const updateData = {
@@ -116,17 +120,18 @@ export default function Edit() {
           rounded: buttonRounded,
         },
       },
-    }
+    };
 
-    await doMainAPI.updateDoMain(updateData, token)
-    window.open(location.origin + '/' + getData?.domain, '_blank')
-  }
+    await doMainAPI.updateDoMain(updateData, token);
+    window.open(location.origin + "/" + getData?.domain, "_blank");
+  };
 
-  SEO(
-    domain
-      ? { title: datas?.domain || "", icon: datas?.image || "" }
-      : { title: "$MEMES Memes.ac", icon: "/favicon.png" }
-  );
+  datas &&
+    SEO(
+      datas?.domain
+        ? { title: datas?.domain || "", icon: datas?.image || "" }
+        : { title: "$MEMES Memes.ac", icon: "/favicon.png" }
+    );
   return (
     <div className={`flex justify-center px-4 gap-4  min-h-screen items-start`}>
       <Fragment>
@@ -181,5 +186,5 @@ export default function Edit() {
         />
       </Fragment>
     </div>
-  )
+  );
 }
