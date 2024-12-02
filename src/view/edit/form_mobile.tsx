@@ -322,7 +322,7 @@ export default function FormMobile({
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Image</span>
                     <Upload
-                      image={props.about.image}
+                      image={props?.about?.image}
                       onChange={image =>
                         props.setAbout &&
                         props.setAbout((item: any) =>
@@ -339,7 +339,7 @@ export default function FormMobile({
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Title</span>
                     <Input
-                      defaultValue={props.about.title}
+                      defaultValue={props?.about?.title}
                       onChange={e =>
                         props.setAbout &&
                         props.setAbout((item: any) =>
@@ -358,7 +358,7 @@ export default function FormMobile({
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Text</span>
                     <Input
-                      defaultValue={props.about.text}
+                      defaultValue={props?.about?.text}
                       onChange={e =>
                         props.setAbout &&
                         props.setAbout((item: any) =>
@@ -394,7 +394,7 @@ export default function FormMobile({
                     <div className="flex flex-col gap-2">
                       <span className="text-sm">Advertise1</span>
                       <Upload
-                        image={props.buy.advertiseImage1}
+                        image={props?.buy?.advertiseImage1}
                         onChange={image =>
                           props.setBuy &&
                           props.setBuy((item: any) =>
@@ -408,7 +408,7 @@ export default function FormMobile({
                     <div className="flex flex-col gap-2">
                       <span className="text-sm">Advertise2</span>
                       <Upload
-                        image={props.buy.advertiseImage2}
+                        image={props?.buy?.advertiseImage2}
                         onChange={image =>
                           props.setBuy &&
                           props.setBuy((item: any) =>
@@ -428,7 +428,7 @@ export default function FormMobile({
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Buy Link1</span>
                     <Input
-                      defaultValue={props.buy.buyLink1}
+                      defaultValue={props?.buy?.buyLink1}
                       onChange={e =>
                         props.setBuy &&
                         props.setBuy((item: any) =>
@@ -447,7 +447,7 @@ export default function FormMobile({
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Buy Link2</span>
                     <Input
-                      defaultValue={props.buy.buyLink2}
+                      defaultValue={props?.buy?.buyLink2}
                       onChange={e =>
                         props.setBuy &&
                         props.setBuy((item: any) =>
@@ -480,7 +480,7 @@ export default function FormMobile({
                 },
                 label: (
                   <div className="grid gap-4">
-                    {props.roadmap.map((_: any, index: any) => (
+                    {props?.roadmap?.map((_: any, index: any) => (
                       <div key={index} className="flex flex-col gap-2">
                         <div className="flex gap-3 items-center justify-between">
                           <span className="text-sm">Roadmap {index + 1}</span>

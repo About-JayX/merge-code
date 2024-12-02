@@ -245,7 +245,7 @@ export default function FormPc({
                 <div className="flex flex-col gap-2">
                   <span className="text-sm">Image</span>
                   <Upload
-                    image={props.about.image}
+                    image={props?.about?.image}
                     onChange={image =>
                       props.setAbout &&
                       props.setAbout((item: any) =>
@@ -257,7 +257,7 @@ export default function FormPc({
                 <div className="flex flex-col gap-2">
                   <span className="text-sm">Title</span>
                   <Input
-                    defaultValue={props.about.title}
+                    defaultValue={props?.about?.title}
                     onChange={e =>
                       props.setAbout &&
                       props.setAbout((item: any) =>
@@ -269,10 +269,10 @@ export default function FormPc({
                 <div className="flex flex-col gap-2">
                   <span className="text-sm">Text</span>
                   <Input
-                    defaultValue={props.about.text}
+                    defaultValue={props?.about?.text}
                     onChange={e =>
-                      props.setAbout &&
-                      props.setAbout((item: any) =>
+                      props?.setAbout &&
+                      props?.setAbout((item: any) =>
                         Object.assign({}, item, { text: e.target.value })
                       )
                     }
@@ -290,10 +290,10 @@ export default function FormPc({
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Advertise1</span>
                     <Upload
-                      image={props.buy.advertiseImage1}
+                      image={props?.buy?.advertiseImage1}
                       onChange={image =>
-                        props.setBuy &&
-                        props.setBuy((item: any) =>
+                        props?.setBuy &&
+                        props?.setBuy((item: any) =>
                           Object.assign({}, item, {
                             advertiseImage1: image,
                           })
@@ -304,10 +304,10 @@ export default function FormPc({
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">Advertise2</span>
                     <Upload
-                      image={props.buy.advertiseImage2}
+                      image={props?.buy?.advertiseImage2}
                       onChange={image =>
-                        props.setBuy &&
-                        props.setBuy((item: any) =>
+                        props?.setBuy &&
+                        props?.setBuy((item: any) =>
                           Object.assign({}, item, {
                             advertiseImage2: image,
                           })
@@ -320,10 +320,10 @@ export default function FormPc({
                 <div className="flex flex-col gap-2">
                   <span className="text-sm">Buy Link1</span>
                   <Input
-                    defaultValue={props.buy.buyLink1}
+                    defaultValue={props?.buy?.buyLink1}
                     onChange={e =>
-                      props.setBuy &&
-                      props.setBuy((item: any) =>
+                      props?.setBuy &&
+                      props?.setBuy((item: any) =>
                         Object.assign({}, item, {
                           buyLink1: e.target.value,
                         })
@@ -334,10 +334,10 @@ export default function FormPc({
                 <div className="flex flex-col gap-2">
                   <span className="text-sm">Buy Link2</span>
                   <Input
-                    defaultValue={props.buy.buyLink2}
+                    defaultValue={props?.buy?.buyLink2}
                     onChange={e =>
-                      props.setBuy &&
-                      props.setBuy((item: any) =>
+                      props?.setBuy &&
+                      props?.setBuy((item: any) =>
                         Object.assign({}, item, {
                           buyLink2: e.target.value,
                         })
@@ -353,16 +353,16 @@ export default function FormPc({
             label: 'Roadmap Text',
             children: (
               <div className="grid gap-4">
-                {props.roadmap.map((_: any, index: number) => (
+                {props?.roadmap?.map((_: any, index: number) => (
                   <div key={index} className="flex flex-col gap-2">
                     <div className="flex gap-3 items-center justify-between">
                       <span className="text-sm">Roadmap {index + 1}</span>
                       <div className="flex gap-2 items-center">
-                        {index + 1 >= props.roadmap.length && (
+                        {index + 1 >= props?.roadmap.length && (
                           <AntdButton
                             onClick={() =>
-                              props.setRoadmap &&
-                              props.setRoadmap([
+                              props?.setRoadmap &&
+                              props?.setRoadmap([
                                 ...props.roadmap,
                                 { title: '', text: '' },
                               ])
@@ -371,12 +371,12 @@ export default function FormPc({
                             type="primary"
                           />
                         )}
-                        {props.roadmap.length > 1 && (
+                        {props?.roadmap?.length > 1 && (
                           <AntdButton
                             onClick={() =>
-                              props.setRoadmap &&
-                              props.setRoadmap(
-                                props.roadmap.filter(
+                              props?.setRoadmap &&
+                              props?.setRoadmap(
+                                props?.roadmap.filter(
                                   (_: any, idx: number) => idx !== index
                                 )
                               )
@@ -391,9 +391,9 @@ export default function FormPc({
                     <div className="flex gap-3 items-center">
                       Title&nbsp;
                       <Input
-                        defaultValue={props.roadmap[index]['title']}
+                        defaultValue={props?.roadmap?.[index]?.['title']}
                         onChange={e => {
-                          const array = [...props.roadmap]
+                          const array = [...props?.roadmap]
                           array[index]['title'] = e.target.value
                           props.setRoadmap && props.setRoadmap(array)
                         }}
