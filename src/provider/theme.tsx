@@ -23,7 +23,7 @@ export default function Theme({ children }: { children?: React.ReactNode }) {
         token: {
           colorPrimary: "#0DC8EC",
           // colorBgContainer: "var(--bg-color) !important",
-          colorText: "var(--title-color) !important",
+          // colorText: "var(--title-color) !important",
           colorBorder: "var(--border-color) !important",
           // colorLink: value === "dark" ? "#fffff !important" : "#000000 !important",
           // fontSize: 16,
