@@ -69,7 +69,7 @@ export default defineConfig(({ mode }) => ({
   esbuild: {
     target: "esnext",
   },
-  base:"./",
+  base:"/",
   css: {
     preprocessorOptions: {
       scss: {

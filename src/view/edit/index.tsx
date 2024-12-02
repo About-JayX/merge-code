@@ -48,6 +48,11 @@ export default function Edit() {
   const [textFont, setTextFont] = useState<string>(fontFamily?.[0].key);
 
   const init = async () => {
+
+
+
+    console.log(domain,"??");
+    
     const result: any = domain && (await doMainAPI.verifyAPI({ domain }));
     console.log(
       JSON.parse(result.data.config),
