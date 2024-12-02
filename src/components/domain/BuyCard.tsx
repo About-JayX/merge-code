@@ -59,53 +59,53 @@ const BuyCard = ({ ...props }) => {
             </div>
             <CSSTransition in={show} timeout={1000} classNames="hideToshow">
               <div className="flex gap-x-4">
-                <a
-                  href={props?.buy?.buyLink1}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button
-                    style={{
-                      display: "ruby",
-                      background: props?.button?.background,
-                      color: props?.button?.text,
+                {props?.buy?.buyLink1 && (
+                  <a
+                    onClick={() => {
+                      if (
+                        String(props?.buy?.buyLink1).indexOf("http") !== 0 ||
+                        String(props?.buy?.buyLink1).indexOf("https") !== 0
+                      )
+                        return;
+                      window.open(props?.buy?.buyLink1, "_blank");
                     }}
-                    className={`${props?.button?.rounded} py-3`}
+                    rel="noopener noreferrer"
                   >
-                    Buy Now&nbsp;
-                    <svg
-                      stroke="currentColor"
-                      fill="none"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      height="1em"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
+                    <Button
+                      style={{
+                        background: props?.button?.background,
+                        color: props?.button?.text,
+                      }}
+                      className={`${props?.button?.rounded} py-3`}
                     >
-                      <circle cx="8" cy="21" r="1"></circle>
-                      <circle cx="19" cy="21" r="1"></circle>
-                      <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-                    </svg>
-                  </Button>
-                </a>
-                <a
-                  href={props?.buy?.buyLink2}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button
-                    style={{
-                      display: "ruby",
-                      background: props?.button?.background,
-                      color: props?.button?.text,
+                      Twitter
+                    </Button>
+                  </a>
+                )}
+
+                {props?.buy?.buyLink2 && (
+                  <a
+                    onClick={() => {
+                      if (
+                        String(props?.buy?.buyLink2).indexOf("http") !== 0 ||
+                        String(props?.buy?.buyLink2).indexOf("https") !== 0
+                      )
+                        return;
+                      window.open(props?.buy?.buyLink2, "_blank");
                     }}
-                    className={`${props?.button?.rounded} py-3`}
+                    rel="noopener noreferrer"
                   >
-                    See Charts
-                  </Button>
-                </a>
+                    <Button
+                      style={{
+                        background: props?.button?.background,
+                        color: props?.button?.text,
+                      }}
+                      className={`${props?.button?.rounded} py-3`}
+                    >
+                      Telegram
+                    </Button>
+                  </a>
+                )}
               </div>
             </CSSTransition>
           </div>

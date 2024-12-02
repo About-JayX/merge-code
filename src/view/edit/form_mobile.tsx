@@ -426,7 +426,7 @@ export default function FormMobile({
                 key: 'buy-link1',
                 label: (
                   <div className="flex flex-col gap-2">
-                    <span className="text-sm">Buy Link1</span>
+                    <span className="text-sm">Twitter</span>
                     <Input
                       defaultValue={props?.buy?.buyLink1}
                       onChange={e =>
@@ -445,7 +445,7 @@ export default function FormMobile({
                 key: 'buy-link2',
                 label: (
                   <div className="flex flex-col gap-2">
-                    <span className="text-sm">Buy Link2</span>
+                    <span className="text-sm">Telegram</span>
                     <Input
                       defaultValue={props?.buy?.buyLink2}
                       onChange={e =>
