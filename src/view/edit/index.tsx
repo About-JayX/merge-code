@@ -25,17 +25,17 @@ export default function Edit() {
     image?: string
     title?: string
     text?: string
-  }>({})
+  }>({title:"Please Enter About Title",text:"Please Enter About Text"})
 
   const [buy, setBuy] = useState<{
     advertiseImage1?: string
     advertiseImage2?: string
     buyLink1?: string
     buyLink2?: string
-  }>({})
+  }>({buyLink1:"Please Enter Twitter Link",buyLink2:"Please Enter Telegram Link"})
 
   const [roadmap, setRoadmap] = useState<{ title?: string; text?: string }[]>([
-    { title: '', text: '' },
+    { title: 'Please Enter Roadmap Title', text: 'Please Enter Roadmap Text' },
   ])
 
   const fontFamily = [

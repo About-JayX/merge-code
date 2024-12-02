@@ -268,7 +268,7 @@ export default function FormPc({
                 </div>
                 <div className="flex flex-col gap-2">
                   <span className="text-sm">Text</span>
-                  <Input
+                  <Input.TextArea
                     defaultValue={props?.about?.text}
                     onChange={e =>
                       props?.setAbout &&
@@ -318,7 +318,7 @@ export default function FormPc({
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <span className="text-sm">Twitter</span>
+                  <span className="text-sm">Twitter Link</span>
                   <Input
                     defaultValue={props?.buy?.buyLink1}
                     onChange={e =>
@@ -332,7 +332,7 @@ export default function FormPc({
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <span className="text-sm">Telegram</span>
+                  <span className="text-sm">Telegram Link</span>
                   <Input
                     defaultValue={props?.buy?.buyLink2}
                     onChange={e =>

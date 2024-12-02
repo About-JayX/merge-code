@@ -32,9 +32,9 @@ const Nav = ({ ...props }) => {
                 />
               </a>
             )}
-            {props?.pumpfun_url && (
+            {props?.pump_url && (
               <a
-                href={props?.pumpfun_url}
+                href={props?.pump_url}
                 target="_blank"
                 className="transition-all ease-in-out duration-300 hover:scale-[1.05]"
               >

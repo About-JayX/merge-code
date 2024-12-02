@@ -50,8 +50,8 @@ const About = ({ ...props }) => {
         </CSSTransition>
         <CSSTransition in={show} timeout={1000} classNames="about">
           <div className="flex gap-x-4 items-center justify-center mt-5 mx-auto">
-            {props?.telegram && (
-              <a href="https://t.me/basedbrett">
+            {props?.telegram_url && (
+              <a href={props?.telegram_url}>
                 <Button
                   style={{
                     display: "ruby",
@@ -75,8 +75,8 @@ const About = ({ ...props }) => {
                 </Button>
               </a>
             )}
-            {props?.twitter && (
-              <a href="https://twitter.com/BasedBrett">
+            {props?.twitter_url && (
+              <a href={props?.twitter_url}>
                 <Button
                   style={{
                     display: "ruby",
