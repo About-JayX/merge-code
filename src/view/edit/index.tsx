@@ -61,7 +61,7 @@ export default function Edit() {
     setButtonRounded(data?.button?.rounded)
     setAbout(data?.about)
     setBuy(data?.buy)
-    setRoadmap(data?.roadmap)
+    data?.roadmap?.length > 0 && setRoadmap(data?.roadmap)
     setGetData(data)
   }
   useLayoutEffect(() => {
