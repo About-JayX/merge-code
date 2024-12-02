@@ -6,7 +6,7 @@ import Mbutton from "@/components/memes/button";
 import { Ellipsis } from "antd-mobile";
 import { debounce } from "lodash";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
-import { useParams, useNavigate, useLocation } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import Card from "@/components/memes/card";
 import partner from "@/config/partner";
@@ -328,7 +328,6 @@ export const SEO = ({
 
 export default function Home() {
   const { domain } = useParams();
-  const { pathname } = useLocation();
 
   const [datas, setDatas] = useState<any>({});
 

@@ -62,7 +62,7 @@ export default function Edit() {
     data?.about && setAbout(data?.about)
     data?.buy && setBuy(data?.buy)
     data?.roadmap?.length > 0 && setRoadmap(data?.roadmap)
-    data?.fontFamily.length>0 && setTextFont(data?.fontFamily)
+    data?.fontFamily?.length>0 && setTextFont(data?.fontFamily)
     setGetData(data)
   }
   useLayoutEffect(() => {
@@ -118,7 +118,7 @@ export default function Edit() {
       },
     }
 
-    const result = await doMainAPI.updateDoMain(updateData, token)
+    await doMainAPI.updateDoMain(updateData, token)
     window.open(location.origin + '/' + getData?.domain, '_blank')
   }
 

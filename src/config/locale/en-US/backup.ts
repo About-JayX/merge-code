@@ -1,4 +1,4 @@
-const projectData = [
+export default [
   {
     title: '$SD',
     text: 'Shark Dog',
