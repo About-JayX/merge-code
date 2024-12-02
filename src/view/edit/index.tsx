@@ -62,6 +62,7 @@ export default function Edit() {
     data?.about && setAbout(data?.about)
     data?.buy && setBuy(data?.buy)
     data?.roadmap?.length > 0 && setRoadmap(data?.roadmap)
+    data?.fontFamily.length>0 && setTextFont(data?.fontFamily)
     setGetData(data)
   }
   useLayoutEffect(() => {
