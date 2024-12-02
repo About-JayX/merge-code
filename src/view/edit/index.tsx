@@ -5,6 +5,7 @@ import FormMobile from './form_mobile'
 import FormPc from './form_pc'
 import { domain as doMainAPI } from '@/api/index'
 import { useAppSelector } from '@/store'
+import { SEO } from '..'
 export default function Edit() {
   const { domain } = useParams()
 
@@ -120,6 +121,11 @@ export default function Edit() {
     window.open(location.origin + '/' + getData?.domain, '_blank')
   }
 
+  SEO(
+    domain
+      ? { title: datas?.domain || "", icon: datas?.image || "" }
+      : { title: "$MEMES Memes.ac", icon: "/favicon.png" }
+  );
   return (
     <div className={`flex justify-center px-4 gap-4  min-h-screen items-start`}>
       <Fragment>

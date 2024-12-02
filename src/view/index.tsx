@@ -6,7 +6,7 @@ import Mbutton from "@/components/memes/button";
 import { Ellipsis } from "antd-mobile";
 import { debounce } from "lodash";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import Card from "@/components/memes/card";
 import partner from "@/config/partner";
@@ -304,38 +304,40 @@ export const View = () => {
   );
 };
 
+export const SEO = ({
+  title = "",
+  icon = "",
+}: {
+  title?: string;
+  icon?: string;
+}) => {
+  document.title = title;
+
+  let favicon: any = document.querySelector('link[rel="icon"]');
+  if (favicon) {
+    // 如果存在 favicon，直接修改 href
+    favicon.setAttribute("href", icon);
+  } else {
+    // 如果不存在，创建新的 favicon
+    favicon = document.createElement("link");
+    favicon.rel = "icon";
+    favicon.href = icon;
+    document.head.appendChild(favicon);
+  }
+};
+
 export default function Home() {
   const { domain } = useParams();
+  const { pathname } = useLocation();
+
   const [datas, setDatas] = useState<any>({});
 
-  const SEO = ({
-    title = "",
-    icon = "",
-  }: {
-    title?: string;
-    icon?: string;
-  }) => {
-    document.title = title;
-
-    let favicon: any = document.querySelector('link[rel="icon"]');
-    if (favicon) {
-      // 如果存在 favicon，直接修改 href
-      favicon.setAttribute("href", icon);
-    } else {
-      // 如果不存在，创建新的 favicon
-      favicon = document.createElement("link");
-      favicon.rel = "icon";
-      favicon.href = icon;
-      document.head.appendChild(favicon);
-    }
-  };
   const init = async () => {
     const result: any = domain && (await domainAPI.verifyAPI({ domain }));
 
     console.log(result, "result_");
 
     let data = { ...result.data, ...JSON.parse(result.data.config) };
-    console.log("data", data);
 
     setDatas({
       ...data,

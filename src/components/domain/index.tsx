@@ -24,7 +24,7 @@ export default function Domain({ ...props }) {
       if (buyCardTop && scrollY >= buyCardTop) setShowBuyCard(true);
       if (utilitiesTop && scrollY >= utilitiesTop) setShowUtilities(true);
     };
-    handleScroll()
+    handleScroll();
     document.addEventListener("scroll", handleScroll);
 
     return () => {
