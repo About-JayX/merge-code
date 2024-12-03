@@ -99,11 +99,11 @@ export default function Create() {
       setLoadStatus(false);
       setTimeout(() => {
         setLoadStatus(false);
-        navigate('/user')
+        navigate("/user");
       }, 1000);
     } catch (error) {
       console.log(error, "error_");
-      setLoadStatus(false)
+      setLoadStatus(false);
     }
   };
 
@@ -152,7 +152,9 @@ export default function Create() {
                 </div>
               </div>
               <div className="grid gap-2">
-                <span className="text-sm font-bold">Description</span>
+                <span className="text-sm font-bold">
+                  Description&nbsp;<span className="text-red-500">*</span>
+                </span>
                 <Input.TextArea
                   size="middle"
                   defaultValue={description}
@@ -160,7 +162,9 @@ export default function Create() {
                 />
               </div>
               <div className="grid gap-2">
-                <span className="text-sm font-bold">Contract Address</span>
+                <span className="text-sm font-bold">
+                  Contract Address&nbsp;<span className="text-red-500">*</span>
+                </span>
                 <Input
                   size="middle"
                   defaultValue={contractAddress}
@@ -184,11 +188,26 @@ export default function Create() {
                 />
               </div>
               <Mbutton
-                disabled={!avatarImageUrl || !name || !ticker || loadStatus}
+                disabled={
+                  !avatarImageUrl ||
+                  !name ||
+                  !ticker ||
+                  loadStatus ||
+                  !description ||
+                  !contractAddress
+                }
                 type="primary"
                 loading={loadStatus}
                 onClick={() => {
-                  if (!avatarImageUrl || !name || !ticker || loadStatus) return;
+                  if (
+                    !avatarImageUrl ||
+                    !name ||
+                    !ticker ||
+                    loadStatus ||
+                    !description ||
+                    !contractAddress
+                  )
+                    return;
                   publicKey ? register() : setVisible(true);
                 }}
               >
