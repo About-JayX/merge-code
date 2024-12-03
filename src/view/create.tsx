@@ -53,9 +53,9 @@ export default function Create() {
         throw Promise.reject("Already registered");
 
       const connection = new Connection(
-        "https://go.getblock.io/79260d59d6f84a648a0e75909aebc3f2",
+        "https://restless-polished-panorama.solana-mainnet.quiknode.pro/7dd704d7c27ed6266708c264ddd11d33754358d5",
         {
-          wsEndpoint: "https://go.getblock.io/0f0b2baad7c54856ab656600d50e0c32",
+          wsEndpoint: "wss://restless-polished-panorama.solana-mainnet.quiknode.pro/7dd704d7c27ed6266708c264ddd11d33754358d5",
           commitment: "confirmed",
         }
       );
