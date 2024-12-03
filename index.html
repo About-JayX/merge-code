@@ -43,6 +43,16 @@
         @apply min-h-screen bg-[--bg-color] text-[--title-color];
       }
     </style>
+    <script crossorigin="anonymous" type="module">
+      document.documentElement.setAttribute(
+        "class",
+        window.localStorage.getItem("theme") || "dark"
+      );
+      document.documentElement.setAttribute(
+        "data-prefers-color-scheme",
+        window.localStorage.getItem("theme") || "dark"
+      );
+    </script>
   </head>
 
   <body>
