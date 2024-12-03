@@ -1,11 +1,11 @@
-import { Card, Input, message } from "antd";
-import { Fragment, useState } from "react";
-import Mbutton from "@/components/memes/button";
-import { useLocation } from "react-router";
-import Icon from "@/components/icon";
-import { useNavigate } from "react-router";
-import { useWalletModal } from "@solana/wallet-adapter-react-ui";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { Card, Input, message } from 'antd'
+import { Fragment, useState } from 'react'
+import Mbutton from '@/components/memes/button'
+import { useLocation } from 'react-router'
+import Icon from '@/components/icon'
+import { useNavigate } from 'react-router'
+import { useWalletModal } from '@solana/wallet-adapter-react-ui'
+import { useWallet } from '@solana/wallet-adapter-react'
 import {
   Connection,
   LAMPORTS_PER_SOL,
@@ -13,65 +13,66 @@ import {
   SystemProgram,
   Transaction,
   TransactionInstruction,
-} from "@solana/web3.js";
-import Upload from "@/components/memes/upload";
-import { domain } from "@/api";
-import BigNumber from "bignumber.js";
+} from '@solana/web3.js'
+import Upload from '@/components/memes/upload'
+import { domain } from '@/api'
+import BigNumber from 'bignumber.js'
 
 export default function Create() {
-  const { state } = useLocation();
-  const navigate = useNavigate();
-  const [loadStatus, setLoadStatus] = useState<boolean>(false);
-  const [step, setStep] = useState<number>(0);
-  const [avatarImageUrl, setAvatarImageUrl] = useState<string>();
-  const [name, setName] = useState<string>("");
-  const [ticker, setTicker] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [contractAddress, setContractAddress] = useState<string>("");
-  const [twitter, setTwitter] = useState<string>("");
-  const [telegram, setTelegram] = useState<string>("");
-  const { setVisible } = useWalletModal();
-  const { publicKey, sendTransaction } = useWallet();
+  const { state } = useLocation()
+  const navigate = useNavigate()
+  const [loadStatus, setLoadStatus] = useState<boolean>(false)
+  const [step, setStep] = useState<number>(0)
+  const [avatarImageUrl, setAvatarImageUrl] = useState<string>()
+  const [name, setName] = useState<string>('')
+  const [ticker, setTicker] = useState<string>('')
+  const [description, setDescription] = useState<string>('')
+  const [contractAddress, setContractAddress] = useState<string>('')
+  const [twitter, setTwitter] = useState<string>('')
+  const [telegram, setTelegram] = useState<string>('')
+  const { setVisible } = useWalletModal()
+  const { publicKey, sendTransaction } = useWallet()
 
-  const [messageApi, contextHolder] = message.useMessage();
+  const [messageApi, contextHolder] = message.useMessage()
 
   const register = async () => {
-    if (!publicKey) return;
+    if (!publicKey) return
     const data = {
       domain: state?.domain,
-      image: avatarImageUrl || "",
+      image: avatarImageUrl || '',
       name,
       ticker,
       description,
       contractAddress,
       twitter,
       telegram,
-    };
+    }
     try {
-      setLoadStatus(true);
-      const result: any = await domain.registerAPI(data);
-      if (!result.success) throw Promise.reject("create error");
+      setLoadStatus(true)
+      const result: any = await domain.registerAPI(data)
+      if (!result.success) throw Promise.reject('create error')
       if (!(result.data && result.data.iv))
-        throw Promise.reject("Already registered");
+        throw Promise.reject('Already registered')
 
       const connection = new Connection(
-        "https://restless-polished-panorama.solana-mainnet.quiknode.pro/7dd704d7c27ed6266708c264ddd11d33754358d5",
+        'https://restless-polished-panorama.solana-mainnet.quiknode.pro/7dd704d7c27ed6266708c264ddd11d33754358d5',
         {
-          wsEndpoint: "wss://restless-polished-panorama.solana-mainnet.quiknode.pro/7dd704d7c27ed6266708c264ddd11d33754358d5",
-          commitment: "confirmed",
+          wsEndpoint:
+            'wss://restless-polished-panorama.solana-mainnet.quiknode.pro/7dd704d7c27ed6266708c264ddd11d33754358d5',
+          commitment: 'confirmed',
         }
-      );
+      )
 
       const recipientPubKey = new PublicKey(
-        "74A2G5b6oPK3PS3yX5rAtFwnYvxtbAuhckoWG125KMcP"
-      );
-      const fixedAmount = 0.00001;
+        '74A2G5b6oPK3PS3yX5rAtFwnYvxtbAuhckoWG125KMcP'
+      )
+      const fixedAmount = 0.00001
       const lamports = new BigNumber(fixedAmount)
         .multipliedBy(LAMPORTS_PER_SOL)
         .integerValue(BigNumber.ROUND_DOWN)
-        .toNumber();
+        .toNumber()
 
-      const transaction = new Transaction();
+      const transaction = new Transaction()
 
       transaction
         .add(
@@ -85,42 +86,44 @@ export default function Create() {
           new TransactionInstruction({
             keys: [],
             programId: new PublicKey(
-              "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"
+              'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr'
             ),
             data: Buffer.from(new TextEncoder().encode(result.data.iv)), // Encode memo
           })
-        );
-      const latestBlockhash = await connection.getLatestBlockhash();
+        )
+      const latestBlockhash = await connection.getLatestBlockhash()
 
-      transaction.recentBlockhash = latestBlockhash.blockhash;
-      transaction.feePayer = publicKey;
-      const signature = await sendTransaction(transaction, connection);
+      transaction.recentBlockhash = latestBlockhash.blockhash
+      transaction.feePayer = publicKey
+      const signature = await sendTransaction(transaction, connection)
 
-      console.log(`Transaction signature: ${signature}`);
-      messageApi.success("Transaction Success");
+      await connection.confirmTransaction(signature, 'confirmed')
+
+      console.log(`Transaction signature: ${signature}`)
+      messageApi.success('Transaction Success')
       // 完成交易区域
       setTimeout(() => {
-        setLoadStatus(false);
-        navigate("/user");
-      }, 1000);
+        setLoadStatus(false)
+        navigate('/user')
+      }, 1000)
     } catch (error) {
-      console.log(error, "error_");
-      setLoadStatus(false);
-      messageApi.error("Transaction Fail");
+      console.log(error, 'error_')
+      setLoadStatus(false)
+      messageApi.error('Transaction Fail')
     }
-  };
+  }
 
   return (
     <Fragment>
       {contextHolder}
       <div
         className={`flex justify-center px-4 gap-4  min-h-screen ${
-          step === 0 ? "items-center" : "items-start"
+          step === 0 ? 'items-center' : 'items-start'
         }`}
       >
         {step === 0 ? (
           <div className="flex flex-col gap-4 py-4">
-            <a className="text-current text-sm" onClick={() => navigate("/")}>
+            <a className="text-current text-sm" onClick={() => navigate('/')}>
               <Icon name="back" className="mt-[-3px]" />
               &nbsp; Back
             </a>
@@ -144,7 +147,7 @@ export default function Create() {
                       <Input
                         size="middle"
                         defaultValue={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={e => setName(e.target.value)}
                       />
                     </div>
                     <div className="grid gap-1">
@@ -154,7 +157,7 @@ export default function Create() {
                       <Input
                         size="middle"
                         defaultValue={ticker}
-                        onChange={(e) => setTicker(e.target.value)}
+                        onChange={e => setTicker(e.target.value)}
                       />
                     </div>
                   </div>
@@ -166,7 +169,7 @@ export default function Create() {
                   <Input.TextArea
                     size="middle"
                     defaultValue={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    onChange={e => setDescription(e.target.value)}
                   />
                 </div>
                 <div className="grid gap-2">
@@ -177,7 +180,7 @@ export default function Create() {
                   <Input
                     size="middle"
                     defaultValue={contractAddress}
-                    onChange={(e) => setContractAddress(e.target.value)}
+                    onChange={e => setContractAddress(e.target.value)}
                   />
                 </div>
                 <div className="grid gap-2">
@@ -185,7 +188,7 @@ export default function Create() {
                   <Input
                     size="middle"
                     defaultValue={twitter}
-                    onChange={(e) => setTwitter(e.target.value)}
+                    onChange={e => setTwitter(e.target.value)}
                   />
                 </div>
                 <div className="grid gap-2">
@@ -193,7 +196,7 @@ export default function Create() {
                   <Input
                     size="middle"
                     defaultValue={telegram}
-                    onChange={(e) => setTelegram(e.target.value)}
+                    onChange={e => setTelegram(e.target.value)}
                   />
                 </div>
                 <Mbutton
@@ -216,11 +219,11 @@ export default function Create() {
                       !description ||
                       !contractAddress
                     )
-                      return;
-                    publicKey ? register() : setVisible(true);
+                      return
+                    publicKey ? register() : setVisible(true)
                   }}
                 >
-                  {publicKey ? "Register" : "Connect wallet"}
+                  {publicKey ? 'Register' : 'Connect wallet'}
                 </Mbutton>
               </div>
             </Card>
@@ -246,16 +249,16 @@ export default function Create() {
                       // sendSolana()
                       // 完成把所有数据保存数据库
                     } else {
-                      setVisible(true);
+                      setVisible(true)
                     }
                   }}
                 >
-                  {publicKey ? "Launch" : "Connect wallet"}
+                  {publicKey ? 'Launch' : 'Connect wallet'}
                 </Mbutton>
                 <span className="text-center text-sm font-bold opacity-80">
                   {publicKey
-                    ? "Cost to create - 0.05 SOL"
-                    : " Connect your wallet to finish creating website."}
+                    ? 'Cost to create - 0.05 SOL'
+                    : ' Connect your wallet to finish creating website.'}
                 </span>
               </div>
             </div>
@@ -271,21 +274,21 @@ export default function Create() {
                     // sendSolana()
                     // 完成把所有数据保存数据库
                   } else {
-                    setVisible(true);
+                    setVisible(true)
                   }
                 }}
               >
-                {publicKey ? "Launch" : "Connect wallet"}
+                {publicKey ? 'Launch' : 'Connect wallet'}
               </Mbutton>
               <span className="text-center text-sm font-bold opacity-80">
                 {publicKey
-                  ? "Cost to create - 0.05 SOL"
-                  : " Connect your wallet to finish creating website."}
+                  ? 'Cost to create - 0.05 SOL'
+                  : ' Connect your wallet to finish creating website.'}
               </span>
             </div>
           </Fragment>
         )}
       </div>
     </Fragment>
-  );
+  )
 }
