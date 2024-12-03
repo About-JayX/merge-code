@@ -43,24 +43,6 @@
         @apply min-h-screen bg-[--bg-color] text-[--title-color];
       }
     </style>
-    <script crossorigin="anonymous" type="module">
-      document.documentElement.setAttribute(
-        "class",
-        window.localStorage.getItem("theme") || "dark"
-      );
-      document.documentElement.setAttribute(
-        "data-prefers-color-scheme",
-        window.localStorage.getItem("theme") || "dark"
-      );
-      const originalConsoleError = console.error;
-      console.error = function (...args) {
-        if (args[0]?.includes("validateDOMNesting")) {
-          // 忽略嵌套 <a> 的警告
-          return;
-        }
-        originalConsoleError.apply(console, args);
-      };
-    </script>
   </head>
 
   <body>

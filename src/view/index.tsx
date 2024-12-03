@@ -5,7 +5,7 @@ import { Image, Typography } from "antd";
 import Mbutton from "@/components/memes/button";
 import { Ellipsis } from "antd-mobile";
 import { debounce } from "lodash";
-import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useMemo, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import Card from "@/components/memes/card";
@@ -37,16 +37,19 @@ export const View = () => {
     }, 1000),
     []
   );
-  const init = async () => {
+
+  const init = useMemo(async () => {
     const result: any = await domainAPI.getListAPI({
       current: 1,
       pageSize: 12,
     });
-    setTokens(result.data);
-  };
-  useEffect(() => {
-    init();
+    return result.data;
   }, []);
+
+  useLayoutEffect(() => {
+    init.then((data) => setTokens(data));
+  }, [init]);
+
   return (
     <div className="flex sm:gap-20 flex-col pb-12">
       <main className="bg-[#181a20] flex justify-center p-4 pt-20 sm:pt-40 pb-8 sm:pb-24 text-white">
@@ -111,19 +114,28 @@ export const View = () => {
             placeholder="domain"
             addonBefore={`memes.ac /`}
             enterButton={
-              searchStatus ? "" : availableStatus ? "Available" : "Launch"
+              searchStatus
+                ? ""
+                : search
+                ? availableStatus
+                  ? "Available"
+                  : "Registered"
+                : "Launch"
             }
             onSearch={(_) => {
               setAvailableStatus(false);
+              setSearch(_)
               if (availableStatus) {
                 navigate("/create", { state: { domain: search } });
               } else {
                 setSearchStatus(true);
+                onSearchChange && onSearchChange(_);
               }
             }}
             onChange={(event) => {
               setAvailableStatus(false);
               setSearchStatus(true);
+              setSearch(event.target.value)
               onSearchChange && onSearchChange(event.target.value);
             }}
           />
@@ -292,6 +304,8 @@ export const View = () => {
                           <Icon name="pump" />
                         </Mbutton>
                       )}
+                      {!item.telegram_url && !item.twitter_url && !item.dexscreener_url && !item.pump_url && <Mbutton className="!opacity-0"/>}
+                      
                     </div>
                   </div>
                 </Card>
@@ -336,7 +350,10 @@ export default function Home() {
 
     console.log(result, "result_");
 
-    let data = { ...result.data, ...JSON.parse(result.data.config) };
+    let data = {
+      ...result?.data,
+      ...(result?.data?.config && JSON.parse(result?.data?.config)),
+    };
 
     setDatas({
       ...data,
