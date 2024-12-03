@@ -5,7 +5,7 @@ import FormMobile from "./form_mobile";
 import FormPc from "./form_pc";
 import { domain as doMainAPI } from "@/api/index";
 import { useAppSelector } from "@/store";
-import { SEO } from "..";
+import { SEO } from "@/util";
 export default function Edit() {
   const { domain } = useParams();
 
