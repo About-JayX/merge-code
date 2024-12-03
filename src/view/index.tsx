@@ -124,7 +124,7 @@ export const View = () => {
             }
             onSearch={(_) => {
               setAvailableStatus(false);
-              setSearch(_)
+              setSearch(_);
               if (availableStatus) {
                 navigate("/create", { state: { domain: search } });
               } else {
@@ -135,7 +135,7 @@ export const View = () => {
             onChange={(event) => {
               setAvailableStatus(false);
               setSearchStatus(true);
-              setSearch(event.target.value)
+              setSearch(event.target.value);
               onSearchChange && onSearchChange(event.target.value);
             }}
           />
@@ -304,8 +304,10 @@ export const View = () => {
                           <Icon name="pump" />
                         </Mbutton>
                       )}
-                      {!item.telegram_url && !item.twitter_url && !item.dexscreener_url && !item.pump_url && <Mbutton className="!opacity-0"/>}
-                      
+                      {!item.telegram_url &&
+                        !item.twitter_url &&
+                        !item.dexscreener_url &&
+                        !item.pump_url && <Mbutton className="!opacity-0" />}
                     </div>
                   </div>
                 </Card>
@@ -345,28 +347,25 @@ export default function Home() {
 
   const [datas, setDatas] = useState<any>({});
 
-  const init = async () => {
+  const init = useMemo(async () => {
     const result: any = domain && (await domainAPI.verifyAPI({ domain }));
-
-    console.log(result, "result_");
-
     let data = {
       ...result?.data,
       ...(result?.data?.config && JSON.parse(result?.data?.config)),
     };
-
-    setDatas({
+    return {
       ...data,
       image: data?.logo_url,
       contractAddress: data?.contract_address,
-    });
-  };
+    };
+  }, [domain]);
+
   useLayoutEffect(() => {
-    init();
-  }, []);
+    init.then((data) => setDatas(data));
+  }, [init]);
 
   SEO(
-    domain
+    datas?.domain
       ? { title: datas?.domain || "", icon: datas?.image || "" }
       : { title: "$MEMES Memes.ac", icon: "/favicon.png" }
   );
