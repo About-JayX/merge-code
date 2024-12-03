@@ -5,9 +5,9 @@ import { useAppDispatch, useAppSelector } from '@/store'
 import { updateToken } from '@/store/user'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
-import { Modal, Typography } from 'antd'
+import { message, Modal, Typography } from 'antd'
 import { Ellipsis, Image } from 'antd-mobile'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
 const { Paragraph } = Typography
 
@@ -19,6 +19,8 @@ export default function User() {
   const { setVisible } = useWalletModal()
   const [authorizeStatus, setAuthorizeStatus] = useState<boolean>(false)
   const [tokens, setTokens] = useState({ data: [], total: 1 })
+
+  const [messageApi, contextHolder] = message.useMessage();
   const authorize = async () => {
     setAuthorizeStatus(true)
     try {
@@ -38,26 +40,31 @@ export default function User() {
         signature,
         message: Array.from(encodedMessage),
       })
-      if (!result.success) throw new Error('request api fail')
+      if (!result.success) messageApi.error("Authorize Fail")
       dispatch(updateToken(result.data))
       setAuthorizeStatus(false)
+      messageApi.success("Authorize Success")
     } catch (error) {
       console.log(error, 'login fail')
       setAuthorizeStatus(false)
+      messageApi.error("Authorize Fail")
     }
   }
-  const loadEditTokens = async () => {
-    const result: any = await domain.ownerListAPI(
-      { current: 1, pageSize: 10 },
-      token
-    )
-    setTokens(result.data)
-  }
+
+  const loadEditTokens = useMemo(async () => {
+    const result: any = await domain.ownerListAPI({
+      current: 1,
+      pageSize: 10,
+    },token);
+    return result.data;
+  }, [token]);
+
   useEffect(() => {
-    token && loadEditTokens()
-  }, [token])
+    loadEditTokens.then((data) => setTokens(data));
+  },[loadEditTokens])
   return (
     <Fragment>
+      {contextHolder}
       <Modal title="" centered open={!token} footer closable={false}>
         <div className="flex flex-col gap-2 pt-4  text-center">
           <span className="text-4xl font-bold">Authorize</span>
@@ -112,7 +119,7 @@ export default function User() {
                   >
                     <div className="flex flex-col gap-2 sm:gap-3 items-center">
                       <Image
-                        loading="lazy"
+                        loading="eager"
                         lazy
                         className="!w-32 !h-32 sm:!w-52 sm:!h-52 object-cover rounded-2xl sm:rounded-3xl"
                         src={item.logo_url || ''}

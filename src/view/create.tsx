@@ -1,4 +1,4 @@
-import { Card, Input } from "antd";
+import { Card, Input, message } from "antd";
 import { Fragment, useState } from "react";
 import Mbutton from "@/components/memes/button";
 import { useLocation } from "react-router";
@@ -32,6 +32,8 @@ export default function Create() {
   const [telegram, setTelegram] = useState<string>("");
   const { setVisible } = useWalletModal();
   const { publicKey, sendTransaction } = useWallet();
+
+  const [messageApi, contextHolder] = message.useMessage();
 
   const register = async () => {
     if (!publicKey) return;
@@ -95,8 +97,8 @@ export default function Create() {
       const signature = await sendTransaction(transaction, connection);
 
       console.log(`Transaction signature: ${signature}`);
+      messageApi.success("Transaction Success");
       // 完成交易区域
-      setLoadStatus(false);
       setTimeout(() => {
         setLoadStatus(false);
         navigate("/user");
@@ -104,130 +106,165 @@ export default function Create() {
     } catch (error) {
       console.log(error, "error_");
       setLoadStatus(false);
+      messageApi.error("Transaction Fail");
     }
   };
 
   return (
-    <div
-      className={`flex justify-center px-4 gap-4  min-h-screen ${
-        step === 0 ? "items-center" : "items-start"
-      }`}
-    >
-      {step === 0 ? (
-        <div className="flex flex-col gap-4 py-4">
-          <a className="text-current text-sm" onClick={() => navigate("/")}>
-            <Icon name="back" className="mt-[-3px]" />
-            &nbsp; Back
-          </a>
-          <Card className="w-full">
-            <div className="grid gap-4">
-              <div className="grid gap-4 grid-cols-[auto,1fr]">
+    <Fragment>
+      {contextHolder}
+      <div
+        className={`flex justify-center px-4 gap-4  min-h-screen ${
+          step === 0 ? "items-center" : "items-start"
+        }`}
+      >
+        {step === 0 ? (
+          <div className="flex flex-col gap-4 py-4">
+            <a className="text-current text-sm" onClick={() => navigate("/")}>
+              <Icon name="back" className="mt-[-3px]" />
+              &nbsp; Back
+            </a>
+            <Card className="w-full">
+              <div className="grid gap-4">
+                <div className="grid gap-4 grid-cols-[auto,1fr]">
+                  <div className="grid gap-2">
+                    <span className="text-sm font-bold">
+                      Image <span className="text-red-500">*</span>
+                    </span>
+                    <Upload
+                      image={avatarImageUrl}
+                      onChange={setAvatarImageUrl}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-4 h-fit">
+                    <div className="grid gap-1">
+                      <span className="text-sm font-bold">
+                        Name <span className="text-red-500">*</span>
+                      </span>
+                      <Input
+                        size="middle"
+                        defaultValue={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    </div>
+                    <div className="grid gap-1">
+                      <span className="text-sm font-bold">
+                        Ticker <span className="text-red-500">*</span>
+                      </span>
+                      <Input
+                        size="middle"
+                        defaultValue={ticker}
+                        onChange={(e) => setTicker(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                </div>
                 <div className="grid gap-2">
                   <span className="text-sm font-bold">
-                    Image <span className="text-red-500">*</span>
+                    Description&nbsp;<span className="text-red-500">*</span>
                   </span>
-                  <Upload image={avatarImageUrl} onChange={setAvatarImageUrl} />
+                  <Input.TextArea
+                    size="middle"
+                    defaultValue={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
                 </div>
-                <div className="flex flex-col gap-4 h-fit">
-                  <div className="grid gap-1">
-                    <span className="text-sm font-bold">
-                      Name <span className="text-red-500">*</span>
-                    </span>
-                    <Input
-                      size="middle"
-                      defaultValue={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                  </div>
-                  <div className="grid gap-1">
-                    <span className="text-sm font-bold">
-                      Ticker <span className="text-red-500">*</span>
-                    </span>
-                    <Input
-                      size="middle"
-                      defaultValue={ticker}
-                      onChange={(e) => setTicker(e.target.value)}
-                    />
-                  </div>
+                <div className="grid gap-2">
+                  <span className="text-sm font-bold">
+                    Contract Address&nbsp;
+                    <span className="text-red-500">*</span>
+                  </span>
+                  <Input
+                    size="middle"
+                    defaultValue={contractAddress}
+                    onChange={(e) => setContractAddress(e.target.value)}
+                  />
                 </div>
-              </div>
-              <div className="grid gap-2">
-                <span className="text-sm font-bold">
-                  Description&nbsp;<span className="text-red-500">*</span>
-                </span>
-                <Input.TextArea
-                  size="middle"
-                  defaultValue={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
-              <div className="grid gap-2">
-                <span className="text-sm font-bold">
-                  Contract Address&nbsp;<span className="text-red-500">*</span>
-                </span>
-                <Input
-                  size="middle"
-                  defaultValue={contractAddress}
-                  onChange={(e) => setContractAddress(e.target.value)}
-                />
-              </div>
-              <div className="grid gap-2">
-                <span className="text-sm font-bold">Twitter</span>
-                <Input
-                  size="middle"
-                  defaultValue={twitter}
-                  onChange={(e) => setTwitter(e.target.value)}
-                />
-              </div>
-              <div className="grid gap-2">
-                <span className="text-sm font-bold">Telegram</span>
-                <Input
-                  size="middle"
-                  defaultValue={telegram}
-                  onChange={(e) => setTelegram(e.target.value)}
-                />
-              </div>
-              <Mbutton
-                disabled={
-                  !avatarImageUrl ||
-                  !name ||
-                  !ticker ||
-                  loadStatus ||
-                  !description ||
-                  !contractAddress
-                }
-                type="primary"
-                loading={loadStatus}
-                onClick={() => {
-                  if (
+                <div className="grid gap-2">
+                  <span className="text-sm font-bold">Twitter</span>
+                  <Input
+                    size="middle"
+                    defaultValue={twitter}
+                    onChange={(e) => setTwitter(e.target.value)}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <span className="text-sm font-bold">Telegram</span>
+                  <Input
+                    size="middle"
+                    defaultValue={telegram}
+                    onChange={(e) => setTelegram(e.target.value)}
+                  />
+                </div>
+                <Mbutton
+                  disabled={
                     !avatarImageUrl ||
                     !name ||
                     !ticker ||
                     loadStatus ||
                     !description ||
                     !contractAddress
-                  )
-                    return;
-                  publicKey ? register() : setVisible(true);
-                }}
-              >
-                {publicKey ? "Register" : "Connect wallet"}
-              </Mbutton>
-            </div>
-          </Card>
-        </div>
-      ) : (
-        <Fragment>
-          <div className="max-w-4xl overflow-hidden relative pb-48 sm:pb-0">
-            <div className="fixed flex-col gap-4 bottom-0 left-0 flex xl:hidden bg-[--bg-color] p-4 pb-8 w-full justify-center items-center z-50">
-              <div className="max-w-4xl flex items-center justify-between flex-wrap gap-4 gap-x-5">
-                <a className="!text-current text-sm" onClick={() => setStep(0)}>
-                  <Icon name="back" className="mt-[-3px]" />
-                  &nbsp;Previous step
-                </a>
+                  }
+                  type="primary"
+                  loading={loadStatus}
+                  onClick={() => {
+                    if (
+                      !avatarImageUrl ||
+                      !name ||
+                      !ticker ||
+                      loadStatus ||
+                      !description ||
+                      !contractAddress
+                    )
+                      return;
+                    publicKey ? register() : setVisible(true);
+                  }}
+                >
+                  {publicKey ? "Register" : "Connect wallet"}
+                </Mbutton>
               </div>
+            </Card>
+          </div>
+        ) : (
+          <Fragment>
+            <div className="max-w-4xl overflow-hidden relative pb-48 sm:pb-0">
+              <div className="fixed flex-col gap-4 bottom-0 left-0 flex xl:hidden bg-[--bg-color] p-4 pb-8 w-full justify-center items-center z-50">
+                <div className="max-w-4xl flex items-center justify-between flex-wrap gap-4 gap-x-5">
+                  <a
+                    className="!text-current text-sm"
+                    onClick={() => setStep(0)}
+                  >
+                    <Icon name="back" className="mt-[-3px]" />
+                    &nbsp;Previous step
+                  </a>
+                </div>
+                <Mbutton
+                  className="!min-w-48"
+                  type="primary"
+                  onClick={() => {
+                    if (publicKey) {
+                      // sendSolana()
+                      // 完成把所有数据保存数据库
+                    } else {
+                      setVisible(true);
+                    }
+                  }}
+                >
+                  {publicKey ? "Launch" : "Connect wallet"}
+                </Mbutton>
+                <span className="text-center text-sm font-bold opacity-80">
+                  {publicKey
+                    ? "Cost to create - 0.05 SOL"
+                    : " Connect your wallet to finish creating website."}
+                </span>
+              </div>
+            </div>
+            <div className="w-72 sticky top-4 flex-col gap-4 hidden xl:flex">
+              <a className="text-current text-sm" onClick={() => setStep(0)}>
+                <Icon name="back" className="mt-[-3px]" />
+                &nbsp; Previous step
+              </a>
               <Mbutton
-                className="!min-w-48"
                 type="primary"
                 onClick={() => {
                   if (publicKey) {
@@ -246,33 +283,9 @@ export default function Create() {
                   : " Connect your wallet to finish creating website."}
               </span>
             </div>
-          </div>
-          <div className="w-72 sticky top-4 flex-col gap-4 hidden xl:flex">
-            <a className="text-current text-sm" onClick={() => setStep(0)}>
-              <Icon name="back" className="mt-[-3px]" />
-              &nbsp; Previous step
-            </a>
-            <Mbutton
-              type="primary"
-              onClick={() => {
-                if (publicKey) {
-                  // sendSolana()
-                  // 完成把所有数据保存数据库
-                } else {
-                  setVisible(true);
-                }
-              }}
-            >
-              {publicKey ? "Launch" : "Connect wallet"}
-            </Mbutton>
-            <span className="text-center text-sm font-bold opacity-80">
-              {publicKey
-                ? "Cost to create - 0.05 SOL"
-                : " Connect your wallet to finish creating website."}
-            </span>
-          </div>
-        </Fragment>
-      )}
-    </div>
+          </Fragment>
+        )}
+      </div>
+    </Fragment>
   );
 }

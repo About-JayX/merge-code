@@ -52,14 +52,6 @@
         "data-prefers-color-scheme",
         window.localStorage.getItem("theme") || "dark"
       );
-      const originalConsoleError = console.error;
-      console.error = function (...args) {
-        if (args[0]?.includes("validateDOMNesting")) {
-          // 忽略嵌套 <a> 的警告
-          return;
-        }
-        originalConsoleError.apply(console, args);
-      };
     </script>
   </head>
 
