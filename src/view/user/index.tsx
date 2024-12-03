@@ -87,9 +87,9 @@ export default function User() {
           <div className="w-full max-w-6xl flex justify-center flex-col gap-7 sm:gap-10">
             <div className="grid gap-5 justify-items-center">
               <div className="w-32 h-32 rounded-full border-2 p-5 border-[--border-color] flex justify-center items-center bg-[--card-color] overflow-hidden">
-                <Image
+                <img
                   src="/memes-001.png"
-                  className="!w-full !h-full dark:opacity-80"
+                  className="!w-full !h-full dark:opacity-80 !bg-transparent"
                 />
               </div>
 

@@ -2,7 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "tailwindcss/variants";
-@import url(./transition.scss);
+@import "./transition.scss";
 
 * {
   ::-webkit-scrollbar {
