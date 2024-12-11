@@ -1,3 +1,13 @@
+/**
+ * App.tsx
+ * 主应用程序组件，负责以下功能：
+ * 1. 全局布局结构的实现
+ * 2. 导航栏的渲染和交互
+ * 3. 钱包连接功能的集成
+ * 4. 主题切换的实现
+ * 5. 用户登录状态的管理
+ */
+
 import Router from "@/router";
 import Mbutton from "@/components/memes/button";
 import Icon from "./components/icon";
@@ -10,9 +20,18 @@ import { Fragment } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Dropdown } from "antd";
+
+/**
+ * App 组件
+ * 实现了应用的主要布局和功能：
+ * - 顶部导航栏（仅在首页和用户页面显示）
+ * - 钱包连接功能
+ * - 主题切换
+ * - 用户菜单
+ */
 export default function App() {
   const { setVisible } = useWalletModal();
-  const { publicKey,disconnect } = useWallet();
+  const { publicKey, disconnect } = useWallet();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -20,9 +39,12 @@ export default function App() {
 
   return (
     <Fragment>
+      {/* 顶部导航栏，仅在首页和用户页面显示 */}
       {(pathname === "/" || pathname === "/user") && (
         <header className="flex justify-center h-20 items-center fixed top-0 left-0 w-full backdrop-blur-sm p-4 z-50">
+          {/* 导航栏内容容器 */}
           <nav className="w-full max-w-6xl flex items-center gap-1 sm:gap-3">
+            {/* Logo 和网站名称 */}
             <a
               className="flex gap-1 items-center text-4xl font-bold flex-1"
               onClick={() => navigate("/")}
@@ -33,6 +55,7 @@ export default function App() {
               </span>
             </a>
             <div>
+              {/* 社交媒体链接按钮组 */}
               <div className="hidden sm:flex gap-1 sm:gap-2 items-center text-lg ">
                 <Mbutton
                   href="https://t.me/memes_ac_entry"
@@ -64,24 +87,14 @@ export default function App() {
                 </Mbutton>
               </div>
             </div>
+            {/* 主题切换按钮 */}
             <Mbutton
-              className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
               onClick={() => dispatch(switchTheme())}
+              className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
             >
               <Icon name={value} />
             </Mbutton>
-            {/* <Mbutton
-              onClick={() => (publicKey ? navigate("/user") : setVisible(true))}
-              className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-28"
-              type="primary"
-              target="_blank"
-            >
-              {publicKey ? (
-                <Ellipsis direction="middle" content={publicKey?.toBase58()} />
-              ) : (
-                "Connect"
-              )}
-            </Mbutton> */}
+            {/* 钱包连接/用户菜单 */}
             {publicKey ? (
               <Dropdown
                 placement="bottomRight"
@@ -105,7 +118,6 @@ export default function App() {
                   ],
                 }}
               >
-                {/* <a onClick={(e) => e.preventDefault()}>测试</a> */}
                 <Mbutton
                   onClick={(e) => e.preventDefault()}
                   className="!min-w-36 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-36"
@@ -120,7 +132,7 @@ export default function App() {
               </Dropdown>
             ) : (
               <Mbutton
-                onClick={()=>setVisible(true)}
+                onClick={() => setVisible(true)}
                 className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-28"
                 type="primary"
                 target="_blank"
@@ -131,7 +143,7 @@ export default function App() {
           </nav>
         </header>
       )}
-
+      {/* 主要路由内容 */}
       <Router />
     </Fragment>
   );

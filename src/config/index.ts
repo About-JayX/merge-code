@@ -24,6 +24,13 @@ export const features = {
    * false: 隐藏该模块
    */
   showRaidLeaders: false,
+
+  /**
+   * 是否显示 Partner 模块
+   * true: 显示该模块
+   * false: 隐藏该模块
+   */
+  showPartner: false,
 };
 
 /**

@@ -1,3 +1,12 @@
+/**
+ * 路由配置文件
+ * 实现了以下功能：
+ * 1. 动态路由的生成
+ * 2. 组件的懒加载
+ * 3. 国际化路由支持
+ * 4. 路由参数的处理
+ */
+
 import React, { lazy, Suspense, useEffect, useMemo } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -5,12 +14,22 @@ import { locale } from '@/config'
 import { router } from '@/config'
 import type { RouterType } from '@/type'
 
+// 从配置文件中获取路由参数
 const param: Record<string, string[]> = router.param
 
-// 动态导入视图组件
+// 使用 Vite 的 import.meta.glob 动态导入视图组件
 const view = import.meta.glob<RouterType.ImportMetaGlobType>('@/view/**/*.tsx')
 
-// 生成路由
+/**
+ * 生成路由配置
+ * @param pages - 页面组件的导入信息数组
+ * @returns 路由配置数组
+ * 
+ * 处理逻辑：
+ * 1. 解析文件路径，提取组件名和目录路径
+ * 2. 生成路由路径
+ * 3. 使用 React.lazy 实现组件懒加载
+ */
 const generateRoutes = (
   pages: [string, () => Promise<{ default: React.ComponentType }>][]
 ): RouterType.RouterDataType[] => {
@@ -38,11 +57,29 @@ const generateRoutes = (
   })
 }
 
+/**
+ * 路由组件
+ * 实现功能：
+ * 1. 动态生成路由配置
+ * 2. 处理国际化路由
+ * 3. 渲染路由组件
+ */
 export default function Router() {
   const { i18n } = useTranslation()
 
-  // 生成基础路由
-  const routes = useMemo(() => generateRoutes(Object.entries(view)), [])
+  // 根据当前语言更新路由配置
+  useEffect(() => {
+    const supportedLangs = Object.keys(locale)
+    if (!supportedLangs.includes(i18n.language)) {
+      i18n.changeLanguage(supportedLangs[0])
+    }
+  }, [i18n.language])
+
+  // 使用 useMemo 缓存路由配置，避免不必要的重复计算
+  const routes = useMemo(
+    () => generateRoutes(Object.entries(view)),
+    []
+  )
 
   // 生成多语言路由
   const langRoutes = useMemo(() => {
@@ -69,14 +106,6 @@ export default function Router() {
     () => [...routes, ...langRoutes],
     [routes, langRoutes]
   )
-
-  // 确保语言支持
-  useEffect(() => {
-    const supportedLangs = Object.keys(locale)
-    if (!supportedLangs.includes(i18n.language)) {
-      i18n.changeLanguage(supportedLangs[0])
-    }
-  }, [i18n.language])
 
   return (
     <Suspense>
