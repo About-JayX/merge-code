@@ -19,7 +19,7 @@ import partner from "@/config/partner";
 import { domain as domainAPI } from "@/api";
 import { SEO } from "@/util";
 import Twitter from "@/components/memes/home/twitter";
-import MyDomain from "@/components/memes/home/myDomain";
+import ProjectList from "@/components/memes/home/ProjectList";
 import { features } from "@/config";
 
 const { Paragraph } = Typography;
@@ -198,8 +198,8 @@ export const View = () => {
         <div className="w-full max-w-6xl flex justify-center flex-col gap-2 sm:gap-10">
           {/* 根据配置控制 Raid Leaders 模块显示 */}
           {features.showRaidLeaders && <Twitter />}
-          {/* 我的域名模块 */}
-          <MyDomain />
+          {/* 项目列表模块 */}
+          <ProjectList />
         </div>
       </main>
     </div>
