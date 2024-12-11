@@ -124,3 +124,58 @@ export default {
 - postcss-pxtorem 用于单位转换
 - antd-mobile 提供移动端 UI 组件
 - 响应式设计通过 Tailwind CSS 实现
+
+## 支付功能
+
+### 概述
+
+本项目使用 Solana 区块链网络处理域名注册支付。用户需要连接 Solana 钱包并支付少量 SOL 来完成域名注册。
+
+### 技术实现
+
+- **区块链网络**: Solana Mainnet
+- **钱包集成**: @solana/wallet-adapter-react
+- **区块链交互**: @solana/web3.js
+- **数值计算**: BigNumber.js
+
+### 支付流程
+
+1. **连接钱包**
+   - 用户需要安装并连接支持 Solana 的钱包（如 Phantom）
+   - 钱包需要有足够的 SOL 余额
+
+2. **域名注册**
+   - 填写项目基本信息（图片、名称、描述等）
+   - 系统会创建包含以下内容的交易：
+     - 转账指令：支付 0.00001 SOL
+     - 备注指令：记录注册信息
+
+3. **交易确认**
+   - 交易发送到 Solana 网络
+   - 等待区块确认（'confirmed' 级别）
+   - 成功后自动跳转到用户页面
+
+### 技术细节
+
+```typescript
+// 支付金额
+const fixedAmount = 0.00001 // SOL
+const lamports = new BigNumber(fixedAmount)
+  .multipliedBy(LAMPORTS_PER_SOL)
+  .integerValue(BigNumber.ROUND_DOWN)
+  .toNumber()
+
+// 接收地址
+const recipientPubKey = new PublicKey(
+  '74A2G5b6oPK3PS3yX5rAtFwnYvxtbAuhckoWG125KMcP'
+)
+```
+
+### 注意事项
+
+1. 确保钱包中有足够的 SOL（支付金额 + 交易费用）
+2. 交易可能因网络拥堵而延迟
+3. 如遇交易失败，请检查：
+   - 钱包余额
+   - 网络连接
+   - 区块链网络状态

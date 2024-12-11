@@ -86,7 +86,7 @@ export const View = () => {
               </h1>
             </div>
 
-            <span className="text-white/50 text-sm sm:text-base md:text-lg font-normal">
+            <span className="text-white/50 text-lg sm:text-xl md:text-2xl font-normal">
               {t("home.text")}
             </span>
 

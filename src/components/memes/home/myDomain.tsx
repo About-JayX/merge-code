@@ -71,9 +71,18 @@ export default function MyDomain() {
   }, []);
 
   return (
-    <div className="flex flex-col mt-16 sm:mt-24 gap-5 sm:gap-7">
+    <div className="flex flex-col mt-2 sm:mt-2 gap-3 sm:gap-5">
+      {/* 项目说明文案区域 */}
+      <div className="relative px-4">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/5 to-transparent dark:from-transparent dark:via-purple-400/5 dark:to-transparent blur-2xl -z-10"></div>
+        <p className="text-base sm:text-lg dark:text-white/80 text-black/80 py-3 leading-relaxed font-medium">
+          Discover and explore <span className="text-purple-600 dark:text-purple-400">MEMES projects</span> built with our fast and modern website builder. 
+          <span className="block mt-0.5">Join the community and showcase your project.</span>
+        </p>
+      </div>
+
       {/* 标题区域：使用渐变色和装饰条 */}
-      <header className="uppercase text-xl sm:text-3xl font-bold">
+      <header className="uppercase text-xl sm:text-3xl font-bold px-4">
         <div className="flex items-center relative gap-3">
           {/* 左侧渐变装饰条 */}
           <div className="w-1 h-full">
@@ -90,104 +99,85 @@ export default function MyDomain() {
         </div>
       </header>
 
-      {/* 项目卡片网格布局
-       * 响应式设计：
-       * - 移动端：2列
-       * - 平板：3列
-       * - 桌面：4列
-       */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+      {/* 项目卡片网格布局 */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4">
         {tokens.data.map((item, index) => (
           <Card
             key={index}
             href={`/${item.domain}`}
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:shadow-lg transition-shadow duration-300 overflow-hidden"
           >
             {/* 项目信息卡片内容 */}
-            <div className="flex flex-col gap-2 sm:gap-3 items-center">
-              {/* 项目 Logo 图片
-               * - 支持懒加载
-               * - 设置默认图片
-               * - 禁用预览功能
-               */}
-              <Image
-                loading="lazy"
-                className="!w-32 !h-32 sm:!w-52 sm:!h-52 object-cover rounded-2xl sm:rounded-3xl"
-                src={item.logo_url || "/default-logo.png"}
-                alt={item.name || "Project Logo"}
-                fallback="/default-logo.png"
-                preview={false}
-              />
-              {/* 项目名称：使用省略组件处理过长文本 */}
-              <span className="text-xl font-medium break-all">
-                <Ellipsis direction="middle" content={item.name || "Unknown"} />
-              </span>
-              {/* 合约地址：支持复制功能 */}
-              <Paragraph
-                className="flex"
-                copyable={{
-                  text: item?.contract_address || "",
-                }}
-              >
-                <Ellipsis
-                  className="text-sm opacity-80"
-                  direction="middle"
-                  content={item?.contract_address || "No Address"}
+            <div className="flex flex-col gap-3">
+              {/* Logo 和基本信息区域 */}
+              <div className="flex items-start gap-3">
+                <Image
+                  loading="lazy"
+                  className="!w-16 !h-16 sm:!w-20 sm:!h-20 object-cover rounded-full flex-shrink-0"
+                  src={item.logo_url || "/default-logo.png"}
+                  alt={item.name || "Project Logo"}
+                  fallback="/default-logo.png"
+                  preview={false}
                 />
-              </Paragraph>
+                <div className="flex flex-col gap-1 min-w-0">
+                  <span className="text-base sm:text-lg font-medium line-clamp-1">
+                    {item.name || "Unknown"}
+                  </span>
+                  <Paragraph
+                    className="flex"
+                    copyable={{
+                      text: item?.contract_address || "",
+                    }}
+                  >
+                    <Ellipsis
+                      className="text-xs sm:text-sm opacity-80"
+                      direction="middle"
+                      content={item?.contract_address || "No Address"}
+                    />
+                  </Paragraph>
+                </div>
+              </div>
 
-              {/* 社交媒体链接按钮组
-               * 根据项目配置动态显示不同的社交媒体链接
-               */}
-              <div className="flex gap-1 sm:gap-2 flex-wrap justify-center">
-                {/* Telegram 链接按钮 */}
+              {/* 社交媒体链接区域 */}
+              <div className="flex gap-1.5 flex-wrap">
                 {item.telegram_url && (
                   <Mbutton
                     href={item.telegram_url}
                     target="_blank"
-                    className="!min-w-7 !min-h-7 sm:!min-w-10 sm:!min-h-10"
+                    className="!min-w-8 !min-h-8"
                   >
-                    <Icon name="telegram" />
+                    <Icon name="telegram" className="text-base" />
                   </Mbutton>
                 )}
-                {/* Twitter 链接按钮 */}
                 {item.twitter_url && (
                   <Mbutton
                     href={item.twitter_url}
                     target="_blank"
-                    className="!min-w-7 !min-h-7 sm:!min-w-10 sm:!min-h-10"
+                    className="!min-w-8 !min-h-8"
                   >
-                    <Icon name="twitter" />
+                    <Icon name="twitter" className="text-base" />
                   </Mbutton>
                 )}
-                {/* Dexscreener 链接按钮 */}
                 {item.dexscreener_url && (
                   <Mbutton
                     href={item.dexscreener_url}
                     target="_blank"
-                    className="!min-w-7 !min-h-7 sm:!min-w-10 sm:!min-h-10"
+                    className="!min-w-8 !min-h-8"
                   >
-                    <Icon name="dexscreener" />
+                    <Icon name="dexscreener" className="text-base" />
                   </Mbutton>
                 )}
-                {/* Pump 链接按钮 */}
                 {item.pump_url && (
                   <Mbutton
                     href={item.pump_url}
                     target="_blank"
-                    className="!min-w-7 !min-h-7 sm:!min-w-10 sm:!min-h-10"
+                    className="!min-w-8 !min-h-8"
                   >
-                    <Icon name="pump" />
+                    <Icon name="pump" className="text-base" />
                   </Mbutton>
                 )}
-                {/* 占位按钮：当没有任何社交链接时，保持布局一致性 */}
-                {!item.telegram_url &&
-                  !item.twitter_url &&
-                  !item.dexscreener_url &&
-                  !item.pump_url && (
-                    <Mbutton className="!opacity-0" aria-hidden="true" />
-                  )}
               </div>
             </div>
           </Card>
