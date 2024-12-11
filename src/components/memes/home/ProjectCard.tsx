@@ -18,7 +18,7 @@ export default function ProjectCard({ item }: ProjectCardProps) {
   };
 
   return (
-    <div className="group relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/20 dark:to-gray-700/20 rounded-2xl shadow-sm hover:shadow-md dark:shadow-gray-900/30 transition-all duration-300 border border-gray-100/50 dark:border-gray-700/50 backdrop-blur-sm overflow-hidden">
+    <div className="group relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/20 dark:to-gray-700/20 rounded-2xl shadow-sm hover:shadow-md dark:shadow-gray-900/30 transition-all duration-300 border-2 border-gray-200 dark:border-gray-600 backdrop-blur-sm overflow-hidden">
       {/* 背景图片容器 */}
       <div 
         className="absolute inset-0 w-full h-full"
@@ -33,7 +33,7 @@ export default function ProjectCard({ item }: ProjectCardProps) {
       />
 
       {/* 渐变遮罩 */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-white/45 to-white/50 dark:from-gray-900/40 dark:via-gray-900/45 dark:to-gray-900/50" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-white/65 to-white/70 dark:from-gray-900/40 dark:via-gray-900/45 dark:to-gray-900/50" />
 
       {/* 内容区域 */}
       <a
