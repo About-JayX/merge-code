@@ -81,11 +81,11 @@ export default function MyDomain() {
           </div>
           {/* 标题文本，包含渐变色效果 */}
           <span>
-            Projects served by&nbsp;
+            Projects On&nbsp;
             <span className="font-extrabold bg-gradient-to-r from-[#9F44FC] to-[#10C5EC] bg-clip-text text-transparent">
               Memes.ac
             </span>
-            <br />(Partial CTO)
+            <br />
           </span>
         </div>
       </header>

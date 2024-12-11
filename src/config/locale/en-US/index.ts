@@ -12,7 +12,7 @@ export default {
     lang: 'Language',
     home: {
       title: 'Memes.ac',
-      text: 'Memes.ac is designed for Meme (CTO) projects, offering website building, operations, and design services. Holders of the $MEMES token can participate in platform governance and voting, and enjoy exclusive benefits, helping your Meme project stand out in the community and advancing the development of autonomous communities.',
+      text: 'Fast Websites for MEMES Projects',
       contractAddress: 'BoGovexaH9cMKZg6bFgDgsrqj81MvWu6hKdcNK4Mpump',
       bnt1: {
         title: 'Buy $MEMES',
@@ -24,7 +24,7 @@ export default {
       },
     },
     project: {
-      title: 'Projects served by Memes.ac (Partial CTO)',
+      title: 'Projects',
       text: 'Memes',
       data: [],
     },
