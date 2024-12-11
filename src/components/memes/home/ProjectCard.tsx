@@ -18,7 +18,7 @@ export default function ProjectCard({ item }: ProjectCardProps) {
   };
 
   return (
-    <div className="group relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/20 dark:to-gray-700/20 rounded-2xl shadow-sm hover:shadow-md dark:shadow-gray-900/30 transition-all duration-300 border-2 border-gray-200 dark:border-gray-600 backdrop-blur-sm overflow-hidden">
+    <div className="group relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/20 dark:to-gray-700/20 rounded-2xl shadow-sm hover:shadow-xl dark:shadow-gray-900/30 hover:dark:shadow-gray-900/50 transition-all duration-300 border-2 border-gray-200 dark:border-gray-600 hover:border-gray-300 hover:dark:border-gray-500 active:scale-[0.98] hover:-translate-y-0.5 backdrop-blur-sm overflow-hidden">
       {/* 背景图片容器 */}
       <div 
         className="absolute inset-0 w-full h-full"
@@ -57,7 +57,7 @@ export default function ProjectCard({ item }: ProjectCardProps) {
             </div>
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-medium text-gray-900 dark:text-gray-100 truncate text-sm sm:text-base">
+            <h3 className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base sm:text-lg tracking-wide">
               {item.name || "Unknown"}
             </h3>
             <span className="inline-block text-xs sm:text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 truncate transition-colors cursor-pointer">
@@ -87,33 +87,33 @@ export default function ProjectCard({ item }: ProjectCardProps) {
           {item.telegram_url && (
             <button
               onClick={(e) => handleSocialClick(e, item.telegram_url!)}
-              className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-gray-900 hover:bg-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 border border-gray-900 dark:border-gray-700 transition-colors"
+              className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-white/80 hover:bg-white dark:bg-black/80 dark:hover:bg-black border border-gray-200 dark:border-gray-700 transition-all duration-200 hover:scale-110"
             >
-              <Icon name="telegram" className="text-sm sm:text-base text-white dark:text-gray-300" />
+              <Icon name="telegram" className="text-sm sm:text-base" />
             </button>
           )}
           {item.twitter_url && (
             <button
               onClick={(e) => handleSocialClick(e, item.twitter_url!)}
-              className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-gray-900 hover:bg-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 border border-gray-900 dark:border-gray-700 transition-colors"
+              className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-white/80 hover:bg-white dark:bg-black/80 dark:hover:bg-black border border-gray-200 dark:border-gray-700 transition-all duration-200 hover:scale-110"
             >
-              <Icon name="twitter" className="text-sm sm:text-base text-white dark:text-gray-300" />
+              <Icon name="twitter" className="text-sm sm:text-base" />
             </button>
           )}
           {item.dexscreener_url && (
             <button
               onClick={(e) => handleSocialClick(e, item.dexscreener_url!)}
-              className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-gray-900 hover:bg-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 border border-gray-900 dark:border-gray-700 transition-colors"
+              className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-white/80 hover:bg-white dark:bg-black/80 dark:hover:bg-black border border-gray-200 dark:border-gray-700 transition-all duration-200 hover:scale-110"
             >
-              <Icon name="dexscreener" className="text-sm sm:text-base text-white dark:text-gray-300" />
+              <Icon name="dexscreener" className="text-sm sm:text-base" />
             </button>
           )}
           {item.pump_url && (
             <button
               onClick={(e) => handleSocialClick(e, item.pump_url!)}
-              className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-gray-900 hover:bg-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 border border-gray-900 dark:border-gray-700 transition-colors"
+              className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-white/80 hover:bg-white dark:bg-black/80 dark:hover:bg-black border border-gray-200 dark:border-gray-700 transition-all duration-200 hover:scale-110"
             >
-              <Icon name="pump" className="text-sm sm:text-base text-white dark:text-gray-300" />
+              <Icon name="pump" className="text-sm sm:text-base" />
             </button>
           )}
         </div>

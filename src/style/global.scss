@@ -4,6 +4,18 @@
 @import "tailwindcss/variants";
 @import "./transition.scss";
 
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --icon-color: #000000;
+}
+
+:root[class~="dark"] {
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --icon-color: #D1D5DB;
+}
+
 * {
   ::-webkit-scrollbar {
     @apply w-2 h-1 bg-[--card-color] rounded-2xl;
@@ -267,4 +279,26 @@
 
 .adm-image-tip{
  @apply bg-[--bg-color] 
+}
+
+// SVG 图标样式
+svg {
+  @apply align-middle w-[1em] h-[1em] inline-block;
+
+  &.current-fill {
+    fill: currentColor;
+  }
+}
+
+// 社交图标样式
+.social-icon {
+  svg {
+    fill: #000000;
+  }
+}
+
+:root[class~="dark"] .social-icon {
+  svg {
+    fill: #D1D5DB;
+  }
 }

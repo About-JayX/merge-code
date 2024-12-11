@@ -34,6 +34,16 @@ export default defineConfig(({ mode }) => ({
             name: "removeDimensions",
             active: true,
           },
+          {
+            name: "addAttributesToSVGElement",
+            params: {
+              attributes: [
+                { fill: "currentColor" },
+                { "fill-rule": "evenodd" },
+                { "clip-rule": "evenodd" }
+              ]
+            }
+          }
         ],
       },
     }),
