@@ -87,7 +87,7 @@ export const View = () => {
           {/* 标题和描述区域 */}
           <div className="text-center grid gap-4 sm:gap-6 justify-items-center z-10">
             <div className="memes-title flex justify-center">
-              <h1 className="text-5xl md:text-6xl font-bold uppercase btn-shine -mr-2">
+              <h1 className="text-4xl md:text-6xl font-bold uppercase btn-shine -mr-2">
                 {t("home.title")}
               </h1>
             </div>

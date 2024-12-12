@@ -20,7 +20,7 @@ import { Fragment } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { DownOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Dropdown, Typography } from "antd";
-import {useTranslation} from "react-i18next"
+import { useTranslation } from "react-i18next";
 import { webTelegramUrl } from "./config";
 const { Paragraph } = Typography;
 
@@ -39,7 +39,7 @@ export default function App() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { value } = useAppSelector((state) => state.theme);
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   return (
     <Fragment>
       {/* 顶部导航栏，仅在首页和用户页面显示 */}
@@ -53,10 +53,13 @@ export default function App() {
               onClick={() => navigate("/")}
             >
               <img className="w-14 h-14 sm:w-16 sm:h-16" src="/favicon.png" />
-              {/* <span className="hidden sm:block bg-clip-text text-transparent bg-gradient-to-r from-[#9E45FC] to-[#0DADCE]">
-                MEMES
-              </span> */}
-              <img className="h-8 hidden sm:block" src="/logo-title.png" />
+              <div className="hidden sm:block">
+                <img className="h-8 block dark:hidden" src="/logo-title.png" />
+                <img
+                  className="h-8 hidden dark:block"
+                  src="/logo-title-dark.png"
+                />
+              </div>
             </a>
             {/* 主题切换按钮 */}
             <Mbutton
@@ -109,7 +112,8 @@ export default function App() {
                     direction="middle"
                     content={publicKey?.toBase58()}
                   />
-                  &nbsp;<DownOutlined className="icon-hover"/>
+                  &nbsp;
+                  <DownOutlined className="icon-hover" />
                 </Mbutton>
               </Dropdown>
             ) : (

@@ -27,9 +27,9 @@ export default function Input({
         <div className="darkBorderBg hidden dark:block" />
         <div className="darkBorderBg hidden dark:block" />
         <div className="white hidden dark:block" />
-        <div className="border hidden dark:block" />
+        <div className="borders hidden dark:block" />
         <div id="main">
-          <div className="input relative card-animation overflow-hidden">
+          <div className="input relative card-animation overflow-hidden border">
             <div className="z-10 flex items-center bg-[--card-color] w-full h-full px-4 py-2 rounded-xl">
               <div id="search-icon">{addonBefore}</div>
               <div className="flex-1 relative ">

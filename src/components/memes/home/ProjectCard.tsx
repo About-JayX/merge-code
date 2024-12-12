@@ -3,6 +3,7 @@ import Icon from "@/components/icon";
 import { TokenItem } from "@/types/domain";
 import { Ellipsis } from "antd-mobile";
 import Card from "../card";
+import Button from "../button";
 
 const { Paragraph } = Typography;
 
@@ -12,11 +13,11 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ item }: ProjectCardProps) {
   const handleSocialClick = (
-    e: React.MouseEvent<HTMLButtonElement>,
+    // e: React.MouseEvent<HTMLButtonElement>,
     url: string
   ) => {
-    e.preventDefault();
-    e.stopPropagation();
+    // e.preventDefault();
+    // e.stopPropagation();
     window.open(url, "_blank");
   };
 
@@ -56,7 +57,7 @@ export default function ProjectCard({ item }: ProjectCardProps) {
             </div>
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base sm:text-lg tracking-wide">
+            <h3 className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base sm:text-2xl tracking-wide">
               {item.name || "Unknown"}
             </h3>
             <Ellipsis
@@ -86,36 +87,40 @@ export default function ProjectCard({ item }: ProjectCardProps) {
         {/* 社交媒体按钮部分 */}
         <div className="flex gap-1.5 sm:gap-2">
           {item.telegram_url && (
-            <button
-              onClick={(e) => handleSocialClick(e, item.telegram_url!)}
-              className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-white/80 hover:bg-white dark:bg-black/80 dark:hover:bg-black border border-gray-200 dark:border-gray-700 transition-all duration-200 hover:scale-110"
+            <Button
+              type="card"
+              onClick={() => handleSocialClick(item.telegram_url!)}
+              className="!min-w-7 !min-h-7 sm:!min-w-10 sm:!min-h-10"
             >
               <Icon name="telegram" className="text-sm sm:text-base" />
-            </button>
+            </Button>
           )}
           {item.twitter_url && (
-            <button
-              onClick={(e) => handleSocialClick(e, item.twitter_url!)}
-              className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-white/80 hover:bg-white dark:bg-black/80 dark:hover:bg-black border border-gray-200 dark:border-gray-700 transition-all duration-200 hover:scale-110"
+            <Button
+              type="card"
+              onClick={() => handleSocialClick(item.twitter_url!)}
+              className="!min-w-7 !min-h-7 sm:!min-w-10 sm:!min-h-10"
             >
               <Icon name="twitter" className="text-sm sm:text-base" />
-            </button>
+            </Button>
           )}
           {item.dexscreener_url && (
-            <button
-              onClick={(e) => handleSocialClick(e, item.dexscreener_url!)}
-              className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-white/80 hover:bg-white dark:bg-black/80 dark:hover:bg-black border border-gray-200 dark:border-gray-700 transition-all duration-200 hover:scale-110"
+            <Button
+              type="card"
+              onClick={() => handleSocialClick(item.dexscreener_url!)}
+              className="!min-w-7 !min-h-7 sm:!min-w-10 sm:!min-h-10"
             >
               <Icon name="dexscreener" className="text-sm sm:text-base" />
-            </button>
+            </Button>
           )}
           {item.pump_url && (
-            <button
-              onClick={(e) => handleSocialClick(e, item.pump_url!)}
-              className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-white/80 hover:bg-white dark:bg-black/80 dark:hover:bg-black border border-gray-200 dark:border-gray-700 transition-all duration-200 hover:scale-110"
+            <Button
+              type="card"
+              onClick={() => handleSocialClick(item.pump_url!)}
+              className="!min-w-7 !min-h-7 sm:!min-w-10 sm:!min-h-10"
             >
               <Icon name="pump" className="text-sm sm:text-base" />
-            </button>
+            </Button>
           )}
         </div>
       </a>

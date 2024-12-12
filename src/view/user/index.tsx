@@ -137,7 +137,7 @@ export default function User() {
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base sm:text-lg tracking-wide">
+                          <h3 className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base sm:text-2xl tracking-wide">
                             {item.name || "Unknown"}
                           </h3>
                           <Ellipsis

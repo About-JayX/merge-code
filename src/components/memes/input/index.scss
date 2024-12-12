@@ -1,7 +1,7 @@
 .memes-input {
   /* From Uiverse.io by Lakshay-art */
   .white,
-  .border,
+  .borders,
   .darkBorderBg,
   .glow {
     @apply max-h-20 max-w-80 sm:max-w-96 w-full h-full absolute overflow-hidden rounded-xl blur-sm;
@@ -10,7 +10,11 @@
     }
   }
   .input {
-    @apply bg-[--card-color] border-[1px] border-[--border-color] w-80 sm:w-96 h-14 rounded-xl flex items-center gap-2 p-[2px] justify-between text-base font-medium;
+    @apply bg-[--card-color] border-none w-80 sm:w-96 h-14 rounded-xl flex items-center gap-2 p-[2px] justify-between text-base font-medium relative;
+    &::before {
+      content: "";
+      @apply absolute w-full h-full left-0 top-0 border-[2px] border-[--border-color] rounded-xl z-10;
+    }
   }
   #poda {
     @apply flex items-center justify-center flex-col;
@@ -76,10 +80,10 @@
     //  animation: rotate 4s linear infinite;
     transition: all 2s;
   }
-  .border {
+  .borders {
     @apply max-h-14 max-w-80 sm:max-w-96 rounded-xl blur-[0.5px];
   }
-  .border::before {
+  .borders::before {
     content: "";
     text-align: center;
     top: 50%;
@@ -135,7 +139,7 @@
   #poda:hover > .white::before {
     transform: translate(-50%, -50%) rotate(263deg);
   }
-  #poda:hover > .border::before {
+  #poda:hover > .borders::before {
     transform: translate(-50%, -50%) rotate(250deg);
   }
 
@@ -148,7 +152,7 @@
   #poda:hover > .white::before {
     transform: translate(-50%, -50%) rotate(-97deg);
   }
-  #poda:hover > .border::before {
+  #poda:hover > .borders::before {
     transform: translate(-50%, -50%) rotate(-110deg);
   }
 
@@ -164,7 +168,7 @@
     transform: translate(-50%, -50%) rotate(443deg);
     transition: all 4s;
   }
-  #poda:focus-within > .border::before {
+  #poda:focus-within > .borders::before {
     transform: translate(-50%, -50%) rotate(430deg);
     transition: all 4s;
   }

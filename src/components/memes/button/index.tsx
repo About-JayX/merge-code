@@ -8,7 +8,7 @@ interface ButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 export default function Button({
   loading = false,
   type = "default",
-  className,
+  className="",
   disabled = false,
   ...props
 }: {
@@ -17,7 +17,7 @@ export default function Button({
   return (
     <a
       id="memes-button-icon"
-      className={`relative text-current text-sm sm:text-base !text-white font-medium ${
+      className={`transition-all duration-200 hover:scale-110 relative text-current text-sm sm:text-base text-white font-medium ${
         type === "primary"
           ? "bg-gradient-to-r from-[#A440FD] to-[#0DC8EC] border-none"
           : ""
