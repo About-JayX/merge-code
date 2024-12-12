@@ -2,7 +2,7 @@ import { Fragment, type AnchorHTMLAttributes } from "react";
 import "./index.scss";
 import { LoadingOutlined } from "@ant-design/icons";
 interface ButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  type?: "default" | "primary";
+  type?: "default" | "primary" | "card";
   loading?: boolean;
 }
 export default function Button({
@@ -18,9 +18,13 @@ export default function Button({
     <a
       id="memes-button-icon"
       className={`relative text-current text-sm sm:text-base !text-white font-medium ${
-        type === "default"
-          ? ""
-          : "bg-gradient-to-r from-[#A440FD] to-[#0DC8EC] border-none"
+        type === "primary"
+          ? "bg-gradient-to-r from-[#A440FD] to-[#0DC8EC] border-none"
+          : ""
+      }${
+        type === "card"
+          ? "!bg-[--card-color] !border-[--border-color] !border !text-[--title-color]"
+          : ""
       }  ${
         disabled ? "cursor-not-allowed opacity-50 hover:opacity-50" : ""
       } ${className}`}

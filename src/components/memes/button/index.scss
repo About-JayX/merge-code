@@ -29,4 +29,15 @@
     );
     animation: rotate 4s linear infinite;
   }
+  
+  .icon-hover{
+    @apply  ease-in-out rotate-0 transition-all duration-300 text-xs;
+  }
+  &:hover {
+    .icon-hover{
+      @apply  rotate-180;
+    }
+    
+  }
+  
 }

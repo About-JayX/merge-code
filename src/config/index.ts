@@ -49,6 +49,8 @@ export const router = {
   },
 };
 
+export const webTelegramUrl = "https://t.me/memes_ac_bot"
+
 /**
  * Telegram 相关配置
  * 包含机器人URL和初始化数据

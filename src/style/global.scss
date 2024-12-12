@@ -13,7 +13,7 @@
 :root[class~="dark"] {
   --bg-color: #000000;
   --text-color: #ffffff;
-  --icon-color: #D1D5DB;
+  --icon-color: #d1d5db;
 }
 
 * {
@@ -185,38 +185,47 @@
   --c1: #c0b299;
   --c2: #a4a9aa;
   --c3: #2c2e2a;
-  
-  --p:at 45% 40%,#0000 75%,;
-  --g1:conic-gradient(var(--p) var(--c1) 0);
-  --g2:conic-gradient(var(--p) var(--c2) 0);
-  background:
-    var(--g1),var(--g2) calc(2*var(--s)) 0,
-    var(--g2) calc(3*var(--s)) var(--s),
-    var(--g1) var(--s) var(--s) var(--c3);
-  background-size: calc(4*var(--s)) calc(2*var(--s));
+
+  --p: at 45% 40%, #0000 75%;
+  --g1: conic-gradient(var(--p) var(--c1) 0);
+  --g2: conic-gradient(var(--p) var(--c2) 0);
+  background: var(--g1), var(--g2) calc(2 * var(--s)) 0,
+    var(--g2) calc(3 * var(--s)) var(--s), var(--g1) var(--s) var(--s) var(--c3);
+  background-size: calc(4 * var(--s)) calc(2 * var(--s));
 }
 
 .memes-title {
   .btn-shine {
     background-color: currentColor;
-    background: linear-gradient(to right, #9f9f9f 0, var(--title-color) 10%, #9f9f9f 20%);
+    background: linear-gradient(
+      to right,
+      #9f9f9f 0,
+      var(--title-color) 10%,
+      #9f9f9f 20%
+    );
     background-position: 0;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shine 1.5s infinite linear;
     animation-fill-mode: forwards;
     -webkit-text-size-adjust: none;
-    @apply w-[9em] sm:w-[320px]
+    @apply w-[6em] sm:w-[8em];
   }
   @-moz-keyframes shine {
     0% {
       background-position: 0;
     }
     60% {
-      background-position: 290px;
+      background-position: 7em;
+      @media screen and (min-width: 768px) {
+        background-position: 5em;
+      }
     }
     100% {
-      background-position: 290px;
+      background-position: 7em;
+      @media screen and (min-width: 768px) {
+        background-position: 5em;
+      }
     }
   }
   @-webkit-keyframes shine {
@@ -224,10 +233,16 @@
       background-position: 0;
     }
     60% {
-      background-position: 290px;
+      background-position: 7em;
+      @media screen and (min-width: 768px) {
+        background-position: 5em;
+      }
     }
     100% {
-      background-position: 290px;
+      background-position: 7em;
+      @media screen and (min-width: 768px) {
+        background-position: 5em;
+      }
     }
   }
   @-o-keyframes shine {
@@ -235,10 +250,16 @@
       background-position: 0;
     }
     60% {
-      background-position: 290px;
+      background-position: 7em;
+      @media screen and (min-width: 768px) {
+        background-position: 5em;
+      }
     }
     100% {
-      background-position: 290px;
+      background-position: 7em;
+      @media screen and (min-width: 768px) {
+        background-position: 5em;
+      }
     }
   }
   @keyframes shine {
@@ -246,10 +267,16 @@
       background-position: 0;
     }
     60% {
-      background-position: 290px;
+      background-position: 7em;
+      @media screen and (min-width: 768px) {
+        background-position: 5em;
+      }
     }
     100% {
-      background-position: 290px;
+      background-position: 7em;
+      @media screen and (min-width: 768px) {
+        background-position: 5em;
+      }
     }
   }
 }
@@ -263,20 +290,22 @@
   max-height: 50vh;
 }
 
-.ant-typography-copy,.ant-typography-expand,.ant-typography-collapse{
-  color:currentColor !important
+.ant-typography-copy,
+.ant-typography-expand,
+.ant-typography-collapse {
+  color: currentColor !important;
 }
 
-.ant-collapse{
-  @apply border
+.ant-collapse {
+  @apply border;
 }
 
-.ant-typography{
+.ant-typography {
   margin-bottom: 0 !important;
 }
 
-.adm-image-tip{
- @apply bg-[--bg-color] 
+.adm-image-tip {
+  @apply bg-[--bg-color];
 }
 
 // SVG 图标样式
@@ -297,6 +326,6 @@ svg {
 
 :root[class~="dark"] .social-icon {
   svg {
-    fill: #D1D5DB;
+    fill: #d1d5db;
   }
 }

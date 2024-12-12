@@ -74,68 +74,29 @@ export const View = () => {
   );
 
   return (
-    <div className="flex sm:gap-20 flex-col pb-12">
+    <div
+      className={`flex  flex-col pb-12 ${
+        features.showPartner || features.showRaidLeaders
+          ? "sm:gap-20"
+          : "sm:gap-0"
+      } `}
+    >
       {/* 主要内容区域：包含标题、搜索框和社交媒体链接 */}
       <main className="flex justify-center p-4 pt-20 sm:pt-40 pb-8 sm:pb-24">
         <div className="w-full max-w-6xl flex justify-center flex-col gap-6 sm:gap-10">
           {/* 标题和描述区域 */}
-          <div className="text-center grid gap-4 sm:gap-2 justify-items-center z-10">
+          <div className="text-center grid gap-4 sm:gap-6 justify-items-center z-10">
             <div className="memes-title flex justify-center">
-              <h1 className="text-4xl md:text-5xl font-bold uppercase btn-shine">
+              <h1 className="text-5xl md:text-6xl font-bold uppercase btn-shine -mr-2">
                 {t("home.title")}
               </h1>
             </div>
 
-            <span className="text-[--text-color] text-lg sm:text-xl md:text-2xl font-normal">
-              {t("home.text")}
+            <span className="font-bold text-lg sm:text-xl md:text-2xl -mt-[9px] sm:-mt-[18px]">
+              {t("home.text").toLocaleUpperCase()}
             </span>
-
-            {/* 移动端社交媒体按钮组 */}
-            <div className="flex sm:hidden gap-1 sm:gap-2 items-center text-lg">
-              {/* Telegram 链接 */}
-              <Mbutton
-                href="https://t.me/memes_ac_entry"
-                target="_blank"
-                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
-              >
-                <Icon name="telegram" />
-              </Mbutton>
-              {/* Twitter 链接 */}
-              <Mbutton
-                href="https://x.com/memes_dot_ac"
-                target="_blank"
-                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
-              >
-                <Icon name="twitter" />
-              </Mbutton>
-              {/* DexScreener 链接 */}
-              <Mbutton
-                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
-                href="https://dexscreener.com/solana/fa7wk5hqnszx1dcvbncgaj2rvgsknkwtnu3jydxvrsnw"
-                target="_blank"
-              >
-                <Icon name="dexscreener" />
-              </Mbutton>
-              {/* Pump 链接 */}
-              <Mbutton
-                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
-                href="https://pump.fun/coin/BoGovexaH9cMKZg6bFgDgsrqj81MvWu6hKdcNK4Mpump"
-                target="_blank"
-              >
-                <Icon name="pump" />
-              </Mbutton>
-            </div>
-            {/* 购买 $MEMES 按钮 */}
-            <Mbutton
-              type="primary"
-              target="_blank"
-              href={t("home.bnt1.url")}
-              className="!min-w-40   md:!hidden"
-            >
-              {t("home.bnt1.title")}
-            </Mbutton>
             {/* 合约地址显示和复制功能 */}
-            <div className="flex justify-center mt-2">
+            <div className="flex justify-center -mt-2 max-w-64">
               <Paragraph
                 className="flex text-[--title-color]"
                 copyable={{
@@ -149,10 +110,20 @@ export const View = () => {
                 />
               </Paragraph>
             </div>
+            {/* 购买 $MEMES 按钮 */}
+            <Mbutton
+              type="primary"
+              target="_blank"
+              href={t("home.bnt1.url")}
+              className="!min-w-40   md:!hidden"
+            >
+              {t("home.bnt1.title")}
+            </Mbutton>
           </div>
 
           {/* 域名搜索输入框 */}
           <Input
+            className="-mt-[9px] sm:-mt-[18px]"
             loading={searchStatus}
             placeholder="domain"
             addonBefore={`memes.ac /`}
@@ -183,6 +154,42 @@ export const View = () => {
               onSearchChange && onSearchChange(event.target.value);
             }}
           />
+
+          {/* 移动端社交媒体按钮组 */}
+          <div className="flex flex-wrap gap-3 sm:gap-6 items-center text-lg justify-center -mt-[9px] sm:-mt-[18px]">
+            {/* Telegram 链接 */}
+            <Mbutton
+              href="https://t.me/memes_ac_entry"
+              target="_blank"
+              className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
+            >
+              <Icon name="telegram" />
+            </Mbutton>
+            {/* Twitter 链接 */}
+            <Mbutton
+              href="https://x.com/memes_dot_ac"
+              target="_blank"
+              className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
+            >
+              <Icon name="twitter" />
+            </Mbutton>
+            {/* DexScreener 链接 */}
+            <Mbutton
+              className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
+              href="https://dexscreener.com/solana/fa7wk5hqnszx1dcvbncgaj2rvgsknkwtnu3jydxvrsnw"
+              target="_blank"
+            >
+              <Icon name="dexscreener" />
+            </Mbutton>
+            {/* Pump 链接 */}
+            <Mbutton
+              className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
+              href="https://pump.fun/coin/BoGovexaH9cMKZg6bFgDgsrqj81MvWu6hKdcNK4Mpump"
+              target="_blank"
+            >
+              <Icon name="pump" />
+            </Mbutton>
+          </div>
 
           {/* 合作伙伴展示区域 */}
           {features.showPartner && (

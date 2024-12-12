@@ -18,9 +18,11 @@ import { useAppDispatch, useAppSelector } from "./store";
 import { Ellipsis } from "antd-mobile";
 import { Fragment } from "react";
 import { useNavigate, useLocation } from "react-router";
-import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { Dropdown } from "antd";
+import { DownOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { Dropdown, Typography } from "antd";
 import {useTranslation} from "react-i18next"
+import { webTelegramUrl } from "./config";
+const { Paragraph } = Typography;
 
 /**
  * App 组件
@@ -51,63 +53,32 @@ export default function App() {
               onClick={() => navigate("/")}
             >
               <img className="w-14 h-14 sm:w-16 sm:h-16" src="/favicon.png" />
-              <span className="hidden sm:block bg-clip-text text-transparent bg-gradient-to-b from-[#9E45FC] to-[#0DADCE]">
+              {/* <span className="hidden sm:block bg-clip-text text-transparent bg-gradient-to-r from-[#9E45FC] to-[#0DADCE]">
                 MEMES
-              </span>
+              </span> */}
+              <img className="h-8 hidden sm:block" src="/logo-title.png" />
             </a>
-            <div>
-              {/* 社交媒体链接按钮组 */}
-              <div className="hidden sm:flex gap-1 sm:gap-2 items-center text-lg ">
-                <Mbutton
-                  href="https://t.me/memes_ac_entry"
-                  target="_blank"
-                  className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
-                >
-                  <Icon name="telegram" />
-                </Mbutton>
-                <Mbutton
-                  href="https://x.com/memes_dot_ac"
-                  target="_blank"
-                  className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
-                >
-                  <Icon name="twitter" />
-                </Mbutton>
-                <Mbutton
-                  className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
-                  href="https://dexscreener.com/solana/fa7wk5hqnszx1dcvbncgaj2rvgsknkwtnu3jydxvrsnw"
-                  target="_blank"
-                >
-                  <Icon name="dexscreener" />
-                </Mbutton>
-                <Mbutton
-                  className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
-                  href="https://pump.fun/coin/BoGovexaH9cMKZg6bFgDgsrqj81MvWu6hKdcNK4Mpump"
-                  target="_blank"
-                >
-                  <Icon name="pump" />
-                </Mbutton>
-              </div>
-            </div>
             {/* 主题切换按钮 */}
             <Mbutton
+              type="card"
               onClick={() => dispatch(switchTheme())}
               className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
             >
               <Icon name={value} />
             </Mbutton>
-            {/* 购买 $MEMES 按钮 */}
+            {/* 电报机器人按钮 */}
             <Mbutton
-              type="primary"
+              type="card"
               target="_blank"
-              href={t("home.bnt1.url")}
-              className="!min-w-24 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-36 !hidden md:!block"
+              href={webTelegramUrl}
+              className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
             >
-              {t("home.bnt1.title")}
+              <Icon name="telegramBot" />
             </Mbutton>
             {/* 钱包连接/用户菜单 */}
             {publicKey ? (
               <Dropdown
-                placement="bottomRight"
+                placement="bottomCenter"
                 menu={{
                   items: [
                     {
@@ -130,26 +101,36 @@ export default function App() {
               >
                 <Mbutton
                   onClick={(e) => e.preventDefault()}
-                  className="!min-w-36 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-36"
-                  type="primary"
+                  className="!min-w-28 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-32"
+                  type="card"
                   target="_blank"
                 >
                   <Ellipsis
                     direction="middle"
                     content={publicKey?.toBase58()}
                   />
+                  &nbsp;<DownOutlined className="icon-hover"/>
                 </Mbutton>
               </Dropdown>
             ) : (
               <Mbutton
                 onClick={() => setVisible(true)}
                 className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-28"
-                type="primary"
+                type="card"
                 target="_blank"
               >
                 Connect
               </Mbutton>
             )}
+            {/* 购买 $MEMES 按钮 */}
+            <Mbutton
+              type="primary"
+              target="_blank"
+              href={t("home.bnt1.url")}
+              className="!min-w-24 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-36 !hidden md:!block"
+            >
+              {t("home.bnt1.title")}
+            </Mbutton>
           </nav>
         </header>
       )}
