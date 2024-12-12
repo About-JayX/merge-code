@@ -199,15 +199,13 @@
 .memes-title {
   .btn-shine {
     background-color: currentColor;
-    background: linear-gradient(to right, #9f9f9f 0, #fff 10%, #9f9f9f 20%);
+    background: linear-gradient(to right, #9f9f9f 0, var(--title-color) 10%, #9f9f9f 20%);
     background-position: 0;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shine 1.5s infinite linear;
     animation-fill-mode: forwards;
     -webkit-text-size-adjust: none;
-    // max-width: 320px;
-    // width: 320px;
     @apply w-[9em] sm:w-[320px]
   }
   @-moz-keyframes shine {

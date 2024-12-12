@@ -26,7 +26,7 @@ export default memo(function Icon({
       style={style}
       aria-hidden="true"
     >
-      <use href={`#icon-${iconName}`} />
+      <use href={`#icon-${name}`} />
     </svg>
   );
 });

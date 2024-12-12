@@ -107,7 +107,7 @@ export default function App() {
                       onClick: () => navigate("/user"),
                     },
                     {
-                      type: 'divider',
+                      type: "divider",
                     },
                     {
                       key: "out",
