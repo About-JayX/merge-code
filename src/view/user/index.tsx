@@ -120,7 +120,9 @@ export default function User() {
                     rel="noopener noreferrer"
                     onClick={() => navigate(`/edit/${item.domain}`)}
                   >
+                    
                     <div className=" relative p-3 sm:p-4 text-current flex flex-col gap-2 sm:gap-3">
+                      {/* 头像和名称部分 */}
                       <div className="flex items-center gap-2 sm:gap-3">
                         <div className="relative flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10">
                           <div className="w-full h-full rounded-full overflow-hidden bg-black dark:bg-gray-700">
