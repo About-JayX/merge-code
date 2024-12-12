@@ -61,7 +61,7 @@ export const View = () => {
         setSearchStatus(false);
         return;
       }
-      
+
       setSearch(value);
       // 调用 API 验证域名是否可用
       const result: any = await domainAPI.verifyAPI({ domain: value });
@@ -125,7 +125,15 @@ export const View = () => {
                 <Icon name="pump" />
               </Mbutton>
             </div>
-
+            {/* 购买 $MEMES 按钮 */}
+            <Mbutton
+              type="primary"
+              target="_blank"
+              href={t("home.bnt1.url")}
+              className="!min-w-40   md:!hidden"
+            >
+              {t("home.bnt1.title")}
+            </Mbutton>
             {/* 合约地址显示和复制功能 */}
             <div className="flex justify-center mt-2">
               <Paragraph
@@ -194,7 +202,7 @@ export const View = () => {
       </main>
 
       {/* 功能模块区域 */}
-      <main className="flex justify-center px-4">
+      <main className="flex justify-center px-2">
         <div className="w-full max-w-6xl flex justify-center flex-col gap-2 sm:gap-10">
           {/* 根据配置控制 Raid Leaders 模块显示 */}
           {features.showRaidLeaders && <Twitter />}

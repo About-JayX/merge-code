@@ -89,7 +89,7 @@ export default function User() {
         <main className="flex justify-center p-4 mt-12">
           <div className="w-full max-w-6xl flex justify-center flex-col gap-7 sm:gap-10">
             <div className="grid gap-5 justify-items-center">
-              <div className="w-32 h-32 rounded-full border-2 p-5 border-[--border-color] flex justify-center items-center bg-[--card-color] overflow-hidden">
+              <div className="w-32 h-32 rounded-full border-2 p-5 !border-[#5f5f5f71] flex justify-center items-center bg-[#282d37] overflow-hidden">
                 <img
                   src="/memes-001.png"
                   className="!w-full !h-full dark:opacity-80 !bg-transparent"
@@ -120,7 +120,6 @@ export default function User() {
                     rel="noopener noreferrer"
                     onClick={() => navigate(`/edit/${item.domain}`)}
                   >
-                    
                     <div className=" relative p-3 sm:p-4 text-current flex flex-col gap-2 sm:gap-3">
                       {/* 头像和名称部分 */}
                       <div className="flex items-center gap-2 sm:gap-3">
@@ -139,9 +138,11 @@ export default function User() {
                           <h3 className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base sm:text-lg tracking-wide">
                             {item.name || "Unknown"}
                           </h3>
-                          <span className="inline-block text-xs sm:text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 truncate transition-colors cursor-pointer">
-                            memes.ac/{item.domain}
-                          </span>
+                          <Ellipsis
+                            direction="end"
+                            className="block text-xs sm:text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 truncate transition-colors cursor-pointer"
+                            content={`memes.ac/${item.domain}`}
+                          />
                         </div>
                       </div>
                       <Button className="!w-full" type="primary">

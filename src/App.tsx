@@ -20,6 +20,7 @@ import { Fragment } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Dropdown } from "antd";
+import {useTranslation} from "react-i18next"
 
 /**
  * App 组件
@@ -36,7 +37,7 @@ export default function App() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { value } = useAppSelector((state) => state.theme);
-
+  const {t} = useTranslation()
   return (
     <Fragment>
       {/* 顶部导航栏，仅在首页和用户页面显示 */}
@@ -93,6 +94,15 @@ export default function App() {
               className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
             >
               <Icon name={value} />
+            </Mbutton>
+            {/* 购买 $MEMES 按钮 */}
+            <Mbutton
+              type="primary"
+              target="_blank"
+              href={t("home.bnt1.url")}
+              className="!min-w-24 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-36 !hidden md:!block"
+            >
+              {t("home.bnt1.title")}
             </Mbutton>
             {/* 钱包连接/用户菜单 */}
             {publicKey ? (

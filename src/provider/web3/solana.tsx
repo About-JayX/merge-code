@@ -7,6 +7,7 @@ import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import {
   PhantomWalletAdapter,
   SolflareWalletAdapter,
+  BitgetWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
 import { clusterApiUrl } from "@solana/web3.js";
 import "@solana/wallet-adapter-react-ui/styles.css";
@@ -16,7 +17,11 @@ export default function Solana({ children }: { children?: React.ReactNode }) {
   const network = clusterApiUrl("mainnet-beta");
 
   // 配置钱包列表
-  const wallets = [new SolflareWalletAdapter(), new PhantomWalletAdapter()];
+  const wallets = [
+    new SolflareWalletAdapter(),
+    new BitgetWalletAdapter(),
+    new PhantomWalletAdapter(),
+  ];
 
   return (
     <ConnectionProvider endpoint={network}>

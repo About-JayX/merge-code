@@ -138,7 +138,7 @@ export default function Edit() {
         : { title: "$MEMES Memes.ac", icon: "/favicon.png" }
     );
   return (
-    <div className={`flex justify-center px-4 gap-4  min-h-screen items-start`}>
+    <div className={`flex justify-center px-2 gap-4  min-h-screen items-start`}>
       <Fragment>
         <div className="max-w-2xl overflow-hidden relative pb-48 sm:pb-0">
           <Domain {...datas} />

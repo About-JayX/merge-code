@@ -10,8 +10,8 @@
   .filterBorder::before {
     content: "";
     text-align: center;
-    top: 50%;
-    left: 50%;
+    top: -300px;
+    left: -300px;
     transform: translate(-50%, -50%) rotate(90deg);
     position: absolute;
     width: 600px;

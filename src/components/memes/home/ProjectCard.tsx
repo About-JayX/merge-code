@@ -59,9 +59,11 @@ export default function ProjectCard({ item }: ProjectCardProps) {
             <h3 className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base sm:text-lg tracking-wide">
               {item.name || "Unknown"}
             </h3>
-            <span className="inline-block text-xs sm:text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 truncate transition-colors cursor-pointer">
-              memes.ac/{item.domain}
-            </span>
+            <Ellipsis
+              direction="end"
+              className="block text-xs sm:text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 truncate transition-colors cursor-pointer"
+              content={`memes.ac/${item.domain}`}
+            />
           </div>
         </div>
 
