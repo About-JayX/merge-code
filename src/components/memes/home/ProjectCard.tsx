@@ -36,7 +36,7 @@ export default function ProjectCard({ item }: ProjectCardProps) {
       />
 
       <a
-        href={`/${item.domain}`}
+        href={`/${item.domain.toLowerCase()}`}
         target="_blank"
         rel="noopener noreferrer"
         className=" relative p-3 sm:p-4 text-current flex flex-col gap-2 sm:gap-3"
