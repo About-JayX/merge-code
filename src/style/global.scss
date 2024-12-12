@@ -193,15 +193,22 @@
     var(--g2) calc(3 * var(--s)) var(--s), var(--g1) var(--s) var(--s) var(--c3);
   background-size: calc(4 * var(--s)) calc(2 * var(--s));
 }
-
+.light {
+  --from-color: var(--title-color);
+  --to-color: #938f8f;
+}
+.dark {
+  --from-color: #9f9f9f;
+  --to-color: var(--title-color);
+}
 .memes-title {
   .btn-shine {
     background-color: currentColor;
     background: linear-gradient(
       to right,
-      #9f9f9f 0,
-      var(--title-color) 10%,
-      #9f9f9f 20%
+      var(--from-color) 0,
+      var(--to-color) 10%,
+      var(--from-color) 20%
     );
     background-position: 0;
     -webkit-background-clip: text;
@@ -210,6 +217,8 @@
     animation-fill-mode: forwards;
     -webkit-text-size-adjust: none;
     @apply w-[8em] sm:w-[8em];
+  }
+  .dark .btn-shine {
   }
   @-moz-keyframes shine {
     0% {
