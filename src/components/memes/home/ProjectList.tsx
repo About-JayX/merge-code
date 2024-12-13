@@ -8,6 +8,7 @@ import { Fragment, useEffect, useState } from "react";
 import { domain } from "@/api";
 import ProjectCard from "./ProjectCard";
 import { useTranslation } from "react-i18next";
+import { Pagination } from "antd";
 
 // 项目列表组件
 export default function ProjectList() {
@@ -23,14 +24,14 @@ export default function ProjectList() {
   const { t } = useTranslation();
 
   const project: any = t("project", { returnObjects: true });
-  console.log();
+  const [page,setPage] = useState(1)
 
   // 获取项目列表数据
   useEffect(() => {
     const fetchTokens = async () => {
       try {
-        const result:any = await domain.getListAPI({
-          current: 1,
+        const result: any = await domain.getListAPI({
+          current: page,
           pageSize: 12,
         });
         console.log("API Response:", result);
@@ -41,7 +42,7 @@ export default function ProjectList() {
     };
 
     fetchTokens();
-  }, []);
+  }, [page]);
 
   return (
     <div className="flex flex-col mt-2 sm:mt-2 gap-3 sm:gap-5 min-h-screen">
@@ -90,6 +91,12 @@ export default function ProjectList() {
           <ProjectCard key={index} item={item} />
         ))}
       </div>
+      {tokens.data.length !== 0 && (
+        <div className="flex justify-center">
+        <Pagination simple pageSize={12} total={tokens.total} onChange={(page)=>setPage(page)}/>
+      </div>
+      )}
+      
     </div>
   );
 }

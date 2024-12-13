@@ -21,7 +21,7 @@ import { useNavigate, useLocation } from "react-router";
 import { DownOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Dropdown } from "antd";
 import { useTranslation } from "react-i18next";
-import { webTelegramUrl } from "./config";
+import { locale, webTelegramUrl } from "./config";
 
 /**
  * App 组件
@@ -38,20 +38,20 @@ export default function App() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { value } = useAppSelector((state) => state.theme);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <Fragment>
       {/* 顶部导航栏，仅在首页和用户页面显示 */}
       {(pathname === "/" || pathname === "/user") && (
         <header className="flex justify-center h-20 items-center fixed top-0 left-0 w-full backdrop-blur-sm p-4 px-3 z-50">
           {/* 导航栏内容容器 */}
-          <nav className="w-full max-w-6xl flex items-center gap-1 sm:gap-3">
+          <nav className="w-full max-w-6xl flex  items-center gap-1 sm:gap-3 justify-between">
             {/* Logo 和网站名称 */}
             <a
-              className="flex gap-1 items-center text-4xl font-bold flex-1"
+              className="flex gap-1 items-center text-4xl font-bold sm:flex-1"
               onClick={() => navigate("/")}
             >
-              <img className="w-14 h-14 sm:w-16 sm:h-16" src="/favicon.png" />
+              <img className="w-12 h-12 sm:w-16 sm:h-16" src="/favicon.png" />
               <div className="hidden sm:block">
                 <img className="h-8 block dark:hidden" src="/logo-title.png" />
                 <img
@@ -60,80 +60,106 @@ export default function App() {
                 />
               </div>
             </a>
-            {/* 主题切换按钮 */}
-            <Mbutton
-              type="card"
-              onClick={() => dispatch(switchTheme())}
-              className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
-            >
-              <Icon name={value} />
-            </Mbutton>
-            {/* 电报机器人按钮 */}
-            <Mbutton
-              type="card"
-              target="_blank"
-              href={webTelegramUrl}
-              className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
-            >
-              <Icon name="telegramBot" />
-            </Mbutton>
-            {/* 钱包连接/用户菜单 */}
-            {publicKey ? (
+            <div className="flex  items-center gap-1.5 sm:gap-3 flex-0">
+              {/* 主题切换按钮 */}
+              <Mbutton
+                type="card"
+                onClick={() => dispatch(switchTheme())}
+                className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
+              >
+                <Icon name={value} />
+              </Mbutton>
+              {/* 语言切换 */}
               <Dropdown
                 placement="bottomCenter"
                 menu={{
-                  items: [
-                    {
-                      key: "user",
-                      label: t("public.myPersonal"),
-                      icon: <UserOutlined />,
-                      onClick: () => navigate("/user"),
+                  items: Object.entries(locale).map(([key, value]: any) => ({
+                    key,
+                    label: value.translation.language,
+                    onClick: () => {
+                      i18n.changeLanguage(key);
                     },
-                    {
-                      type: "divider",
-                    },
-                    {
-                      key: "out",
-                      label: t("public.disconnect"),
-                      icon: <LogoutOutlined />,
-                      onClick: () => disconnect(),
-                    },
-                  ],
+                  })),
                 }}
               >
                 <Mbutton
                   onClick={(e) => e.preventDefault()}
-                  className="!min-w-24 !min-h-8 sm:!min-w-10 sm:!min-h-10 break-all max-w-32 !py-0"
+                  className="!min-w-10 !min-h-8 sm:!min-w-10 sm:!min-h-10 break-all max-w-32 !py-0"
                   type="card"
                   target="_blank"
                 >
-                  <Ellipsis
-                    direction="middle"
-                    content={publicKey?.toBase58()}
-                  />
-                  &nbsp;
-                  <DownOutlined className="icon-hover" />
+                  {t("lang")}
                 </Mbutton>
               </Dropdown>
-            ) : (
-              <Mbutton
-                onClick={() => setVisible(true)}
-                className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10 break-all max-w-28"
+              {/* 钱包连接/用户菜单 */}
+              {publicKey ? (
+                <Dropdown
+                  placement="bottomCenter"
+                  menu={{
+                    items: [
+                      {
+                        key: "user",
+                        label: t("public.myPersonal"),
+                        icon: <UserOutlined />,
+                        onClick: () => navigate("/user"),
+                      },
+                      {
+                        type: "divider",
+                      },
+                      {
+                        key: "out",
+                        label: t("public.disconnect"),
+                        icon: <LogoutOutlined />,
+                        onClick: () => disconnect(),
+                      },
+                    ],
+                  }}
+                >
+                  <Mbutton
+                    onClick={(e) => e.preventDefault()}
+                    className="!min-w-24 !min-h-8 sm:!min-w-10 sm:!min-h-10 break-all max-w-32 !py-0"
+                    type="card"
+                    target="_blank"
+                  >
+                    <Ellipsis
+                      // collapseText="..."
+
+                      direction="middle"
+                      content={publicKey?.toBase58()}
+                    />
+                    &nbsp;
+                    <DownOutlined className="icon-hover" />
+                  </Mbutton>
+                </Dropdown>
+              ) : (
+                <Mbutton
+                  onClick={() => setVisible(true)}
+                  className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10 break-all max-w-28"
+                  type="card"
+                  target="_blank"
+                >
+                  {t("public.connect")}
+                </Mbutton>
+              )}
+              {/* 电报机器人按钮 */}
+              {/* <Mbutton
                 type="card"
                 target="_blank"
+                href={webTelegramUrl}
+                className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
               >
-                {t("public.connect")}
+                <Icon name="telegramBot" />
+              </Mbutton> */}
+              {/* 购买 $MEMES 按钮 */}
+              <Mbutton
+                type="primary"
+                target="_blank"
+                href={t("home.bnt1.url")}
+                className="!min-w-20 !min-h-8 sm:!min-w-10 sm:!min-h-10 break-all max-w-36"
+              >
+                {t("home.bnt1.title")}
               </Mbutton>
-            )}
-            {/* 购买 $MEMES 按钮 */}
-            <Mbutton
-              type="primary"
-              target="_blank"
-              href={t("home.bnt1.url")}
-              className="!min-w-20 !min-h-8 sm:!min-w-10 sm:!min-h-10 break-all max-w-36"
-            >
-              {t("home.bnt1.title")}
-            </Mbutton>
+            </div>
           </nav>
         </header>
       )}

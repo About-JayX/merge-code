@@ -341,3 +341,13 @@ svg {
     fill: #d1d5db;
   }
 }
+
+.light {
+  --skeleton-bg-color: #d6dadf81;
+  --skeleton-bg-colors: #e9eaeb;
+}
+
+.dark {
+  --skeleton-bg-color: #1d212868;
+  --skeleton-bg-colors: #282d37;
+}

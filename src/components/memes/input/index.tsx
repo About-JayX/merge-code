@@ -37,7 +37,7 @@ export default function Input({
                   placeholder={placeholder}
                   type="text"
                   name="text"
-                  className="w-full bg-transparent outline-none px-1"
+                  className="w-full bg-transparent outline-none"
                   onChange={(event) => {
                     setInput(event.target.value);
                     onChange && onChange(event);

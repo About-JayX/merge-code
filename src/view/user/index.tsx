@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { updateToken } from "@/store/user";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
-import { message, Modal, Typography } from "antd";
+import { message, Modal, Pagination, Skeleton, Typography } from "antd";
 import { Ellipsis, Image } from "antd-mobile";
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
@@ -54,11 +54,12 @@ export default function User() {
     }
   };
 
+  const [page, setPage] = useState(1);
   const loadEditTokens = useMemo(async () => {
     const result: any = await domain.ownerListAPI(
       {
-        current: 1,
-        pageSize: 10,
+        current: page,
+        pageSize: 12,
       },
       token
     );
@@ -68,12 +69,24 @@ export default function User() {
   useEffect(() => {
     loadEditTokens.then((data) => setTokens(data));
   }, [loadEditTokens]);
+
+  const [status, setStatus] = useState(true);
+
+  useEffect(() => {
+    if (tokens && tokens.data.length > 0) {
+      setTimeout(() => {
+        setStatus(false);
+      }, 1000);
+    }
+  }, [tokens]);
   return (
     <Fragment>
       {contextHolder}
       <Modal title="" centered open={!token} footer closable={false}>
         <div className="flex flex-col gap-2 pt-4  text-center">
-          <span className="text-4xl font-bold">{t("public.authorizeTitle")}</span>
+          <span className="text-4xl font-bold">
+            {t("public.authorizeTitle")}
+          </span>
           <span className="text-base font-normal text-[--text-color]">
             {t("public.authorizeText")}
           </span>
@@ -123,38 +136,84 @@ export default function User() {
                     rel="noopener noreferrer"
                     onClick={() => navigate(`/edit/${item.domain}`)}
                   >
-                    <div className=" relative p-3 sm:p-4 text-current flex flex-col gap-2 sm:gap-3">
+                    <div className=" relative p-2 sm:p-4 text-current flex flex-col gap-2 sm:gap-3">
                       {/* 头像和名称部分 */}
                       <div className="flex items-center gap-2 sm:gap-3">
                         <div className="relative flex-shrink-0 w-10 h-10 sm:w-16 sm:h-16">
-                          <div className="w-full h-full rounded-full border border-[--border-color] overflow-hidden bg-black dark:bg-gray-700">
+                          <Skeleton.Node
+                            active
+                            className={`!w-full !h-full !rounded-full border !border-[--border-color]  ${
+                              status ? "" : "!hidden"
+                            }`}
+                          />
+                          <div
+                            className={`w-full h-full rounded-full border !border-[--border-color] flex items-center justify-center overflow-hidden ${
+                              status ? "!hidden" : ""
+                            }`}
+                          >
                             <Image
                               loading="lazy"
                               className="w-full h-full object-cover"
                               src={item.logo_url || "/default-logo.png"}
                               alt={item.name || "Project Logo"}
                               fallback="/default-logo.png"
+                              preview={false}
                             />
                           </div>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base sm:text-2xl tracking-wide">
+                        <div className="flex-1 min-w-0 flex flex-col gap-1">
+                          <Skeleton.Node
+                            active
+                            className={`!w-full !h-6 sm:!h-8 ${
+                              status ? "" : "!hidden"
+                            }`}
+                          />
+                          <h3
+                            className={`font-semibold text-gray-900 dark:text-gray-100 truncate text-base sm:text-2xl tracking-wide ${
+                              status ? "!hidden" : ""
+                            }`}
+                          >
                             {item.name || "Unknown"}
                           </h3>
+                          <Skeleton.Node
+                            active
+                            className={`!w-full !h-4 sm:!h-5 ${
+                              status ? "" : "!hidden"
+                            } ${status ? "" : "!hidden"}`}
+                          />
                           <Ellipsis
                             direction="end"
-                            className="block text-xs sm:text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 truncate transition-colors cursor-pointer"
+                            className={`block text-xs sm:text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 truncate transition-colors cursor-pointer ${
+                              status ? "!hidden" : ""
+                            }`}
                             content={`memes.ac/${item.domain}`}
                           />
                         </div>
                       </div>
-                      <Button className="!w-full" type="primary">
+                      <Skeleton.Node
+                        active
+                        className={`!w-full !h-10 ${status ? "" : "!hidden"}`}
+                      />
+                      <Button
+                        className={`!w-full ${status ? "!hidden" : ""}`}
+                        type="primary"
+                      >
                         {t("public.edit")}
                       </Button>
                     </div>
                   </Card>
                 ))}
             </div>
+            {tokens.data.length !== 0 && (
+              <div className="flex justify-center">
+                <Pagination
+                  simple
+                  pageSize={12}
+                  total={tokens.total}
+                  onChange={(page) => setPage(page)}
+                />
+              </div>
+            )}
           </div>
         </main>
       </div>

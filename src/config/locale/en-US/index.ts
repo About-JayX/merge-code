@@ -11,7 +11,7 @@ import message from "./message";
 export default {
   translation: {
     language: "English (American)",
-    lang: "Language",
+    lang: "EN",
     home: {
       title: "Memes.ac",
       text: "Fast Websites for MEMES Projects",

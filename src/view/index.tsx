@@ -21,6 +21,8 @@ import { SEO } from "@/util";
 import Twitter from "@/components/memes/home/twitter";
 import ProjectList from "@/components/memes/home/ProjectList";
 import { features } from "@/config";
+import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const { Paragraph } = Typography;
 
@@ -47,6 +49,9 @@ export const View = () => {
   const [search, setSearch] = useState<string>("");
   const [searchStatus, setSearchStatus] = useState<boolean>(false);
   const [availableStatus, setAvailableStatus] = useState<boolean>(false);
+
+  const { setVisible } = useWalletModal();
+  const { publicKey } = useWallet();
 
   /**
    * 处理域名搜索
@@ -128,15 +133,21 @@ export const View = () => {
                 : t("public.launch")
             }
             onSearch={(_) => {
-              setAvailableStatus(false);
-              setSearch(_);
-              if (availableStatus) {
-                // 域名可用时跳转到创建页面
-                navigate("/create", { state: { domain: search } });
-              } else {
-                setSearchStatus(true);
-                onSearchChange && onSearchChange(_);
+              if(!search) return
+              if(publicKey){
+                setAvailableStatus(false);
+                setSearch(_);
+                if (availableStatus) {
+                  // 域名可用时跳转到创建页面
+                  navigate("/create", { state: { domain: search } });
+                } else {
+                  setSearchStatus(true);
+                  onSearchChange && onSearchChange(_);
+                }
+              }else{
+                setVisible(true);
               }
+              
             }}
             onChange={(event) => {
               setAvailableStatus(false);
