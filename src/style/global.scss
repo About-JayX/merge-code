@@ -18,13 +18,13 @@
 
 * {
   ::-webkit-scrollbar {
-    @apply w-2 h-1 bg-[--card-color] rounded-2xl;
+    @apply w-2 h-1 bg-[--bg-color] rounded-2xl;
   }
   ::-webkit-scrollbar-track {
     @apply my-4;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-[--bg-color] rounded-2xl;
+    @apply bg-[--card-color] opacity-50 rounded-2xl;
   }
 }
 

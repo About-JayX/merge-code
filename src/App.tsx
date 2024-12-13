@@ -19,10 +19,9 @@ import { Ellipsis } from "antd-mobile";
 import { Fragment } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { DownOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { Dropdown, Typography } from "antd";
+import { Dropdown } from "antd";
 import { useTranslation } from "react-i18next";
 import { webTelegramUrl } from "./config";
-const { Paragraph } = Typography;
 
 /**
  * App 组件
@@ -44,7 +43,7 @@ export default function App() {
     <Fragment>
       {/* 顶部导航栏，仅在首页和用户页面显示 */}
       {(pathname === "/" || pathname === "/user") && (
-        <header className="flex justify-center h-20 items-center fixed top-0 left-0 w-full backdrop-blur-sm p-4 z-50">
+        <header className="flex justify-center h-20 items-center fixed top-0 left-0 w-full backdrop-blur-sm p-4 px-3 z-50">
           {/* 导航栏内容容器 */}
           <nav className="w-full max-w-6xl flex items-center gap-1 sm:gap-3">
             {/* Logo 和网站名称 */}
@@ -65,7 +64,7 @@ export default function App() {
             <Mbutton
               type="card"
               onClick={() => dispatch(switchTheme())}
-              className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
+              className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
             >
               <Icon name={value} />
             </Mbutton>
@@ -74,7 +73,7 @@ export default function App() {
               type="card"
               target="_blank"
               href={webTelegramUrl}
-              className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10"
+              className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
             >
               <Icon name="telegramBot" />
             </Mbutton>
@@ -86,7 +85,7 @@ export default function App() {
                   items: [
                     {
                       key: "user",
-                      label: "My Personal",
+                      label: t("public.myPersonal"),
                       icon: <UserOutlined />,
                       onClick: () => navigate("/user"),
                     },
@@ -95,7 +94,7 @@ export default function App() {
                     },
                     {
                       key: "out",
-                      label: "Disconnect",
+                      label: t("public.disconnect"),
                       icon: <LogoutOutlined />,
                       onClick: () => disconnect(),
                     },
@@ -104,7 +103,7 @@ export default function App() {
               >
                 <Mbutton
                   onClick={(e) => e.preventDefault()}
-                  className="!min-w-28 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-32"
+                  className="!min-w-24 !min-h-8 sm:!min-w-10 sm:!min-h-10 break-all max-w-32 !py-0"
                   type="card"
                   target="_blank"
                 >
@@ -119,11 +118,11 @@ export default function App() {
             ) : (
               <Mbutton
                 onClick={() => setVisible(true)}
-                className="!min-w-9 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-28"
+                className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10 break-all max-w-28"
                 type="card"
                 target="_blank"
               >
-                Connect
+                {t("public.connect")}
               </Mbutton>
             )}
             {/* 购买 $MEMES 按钮 */}
@@ -131,7 +130,7 @@ export default function App() {
               type="primary"
               target="_blank"
               href={t("home.bnt1.url")}
-              className="!min-w-24 !min-h-9 sm:!min-w-10 sm:!min-h-10 break-all max-w-36 !hidden md:!block"
+              className="!min-w-20 !min-h-8 sm:!min-w-10 sm:!min-h-10 break-all max-w-36"
             >
               {t("home.bnt1.title")}
             </Mbutton>

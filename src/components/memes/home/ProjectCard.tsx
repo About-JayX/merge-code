@@ -1,6 +1,5 @@
 import { Typography, Image } from "antd";
 import Icon from "@/components/icon";
-import { TokenItem } from "@/types/domain";
 import { Ellipsis } from "antd-mobile";
 import Card from "../card";
 import Button from "../button";
@@ -8,7 +7,7 @@ import Button from "../button";
 const { Paragraph } = Typography;
 
 interface ProjectCardProps {
-  item: TokenItem;
+  item: any;
 }
 
 export default function ProjectCard({ item }: ProjectCardProps) {
@@ -45,7 +44,7 @@ export default function ProjectCard({ item }: ProjectCardProps) {
         {/* 头像和名称部分 */}
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="relative flex-shrink-0 w-10 h-10 sm:w-16 sm:h-16">
-            <div className="w-full h-full rounded-full border border-[--border-color] overflow-hidden bg-black dark:bg-gray-700">
+            <div className="w-full h-full rounded-full border !border-[--border-color] overflow-hidden">
               <Image
                 loading="lazy"
                 className="w-full h-full object-cover"
@@ -69,7 +68,7 @@ export default function ProjectCard({ item }: ProjectCardProps) {
         </div>
 
         {/* 合约地址部分 */}
-        <div className=" flex items-center gap-2 bg-gray-100 dark:bg-gray-700/50 rounded-lg py-1.5 sm:py-2 px-2 sm:px-3">
+        <div className=" flex items-center  gap-2 !bg-black/5 dark:!bg-white/5  border border-[--border-color] rounded-lg py-1.5 sm:py-2 px-2 sm:px-3">
           <Paragraph
             className="flex-1 mb-0 flex items-center [&_.ant-typography-copy]:order-last [&_.ant-typography-copy]:ml-2"
             copyable={{

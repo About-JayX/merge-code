@@ -12,7 +12,7 @@ const Nav = ({ ...props }) => {
               <a
                 href={props?.telegram_url}
                 target="_blank"
-                className="transition-all ease-in-out duration-300 hover:scale-[1.05]"
+                className="transition-all ease-in-out duration-300 hover:scale-[1.05] text-white"
               >
                 <Icon
                   name="telegram"
@@ -24,7 +24,7 @@ const Nav = ({ ...props }) => {
               <a
                 href={props?.twitter_url}
                 target="_blank"
-                className="transition-all ease-in-out duration-300 hover:scale-[1.05]"
+                className="transition-all ease-in-out duration-300 hover:scale-[1.05] text-white"
               >
                 <Icon
                   name="twitter"
@@ -48,7 +48,7 @@ const Nav = ({ ...props }) => {
               <a
                 href={props?.dexscreener_url}
                 target="_blank"
-                className="transition-all ease-in-out duration-300 hover:scale-[1.05]"
+                className="transition-all ease-in-out duration-300 hover:scale-[1.05] text-white"
               >
                 <Icon
                   name="dexscreener"

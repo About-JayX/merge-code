@@ -10,6 +10,7 @@ import { Ellipsis, Image } from "antd-mobile";
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 const { Paragraph } = Typography;
+import { useTranslation } from "react-i18next";
 
 export default function User() {
   const { publicKey, signMessage } = useWallet();
@@ -21,6 +22,8 @@ export default function User() {
   const [tokens, setTokens] = useState({ data: [], total: 1 });
 
   const [messageApi, contextHolder] = message.useMessage();
+
+  const { t } = useTranslation();
   const authorize = async () => {
     setAuthorizeStatus(true);
     try {
@@ -40,14 +43,14 @@ export default function User() {
         signature,
         message: Array.from(encodedMessage),
       });
-      if (!result.success) messageApi.error("Authorize Fail");
+      if (!result.success) messageApi.error(t("message.authorize.fail"));
       dispatch(updateToken(result.data));
       setAuthorizeStatus(false);
-      messageApi.success("Authorize Success");
+      messageApi.success(t("message.authorize.success"));
     } catch (error) {
       console.log(error, "login fail");
       setAuthorizeStatus(false);
-      messageApi.error("Authorize Fail");
+      messageApi.error(t("message.authorize.fail"));
     }
   };
 
@@ -70,9 +73,9 @@ export default function User() {
       {contextHolder}
       <Modal title="" centered open={!token} footer closable={false}>
         <div className="flex flex-col gap-2 pt-4  text-center">
-          <span className="text-4xl font-bold">Authorize</span>
+          <span className="text-4xl font-bold">{t("public.authorizeTitle")}</span>
           <span className="text-base font-normal text-[--text-color]">
-            Authorize Text
+            {t("public.authorizeText")}
           </span>
           <Button
             type="primary"
@@ -81,7 +84,7 @@ export default function User() {
             loading={authorizeStatus}
             disabled={authorizeStatus}
           >
-            Authorize
+            {t("public.authorize")}
           </Button>
         </div>
       </Modal>
@@ -119,9 +122,7 @@ export default function User() {
                     key={index}
                     rel="noopener noreferrer"
                     onClick={() => navigate(`/edit/${item.domain}`)}
-                    
                   >
-                    
                     <div className=" relative p-3 sm:p-4 text-current flex flex-col gap-2 sm:gap-3">
                       {/* 头像和名称部分 */}
                       <div className="flex items-center gap-2 sm:gap-3">
@@ -148,7 +149,7 @@ export default function User() {
                         </div>
                       </div>
                       <Button className="!w-full" type="primary">
-                        Edit
+                        {t("public.edit")}
                       </Button>
                     </div>
                   </Card>

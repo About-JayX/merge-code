@@ -110,31 +110,22 @@ export const View = () => {
                 />
               </Paragraph>
             </div>
-            {/* 购买 $MEMES 按钮 */}
-            <Mbutton
-              type="primary"
-              target="_blank"
-              href={t("home.bnt1.url")}
-              className="!min-w-40   md:!hidden"
-            >
-              {t("home.bnt1.title")}
-            </Mbutton>
           </div>
 
           {/* 域名搜索输入框 */}
           <Input
             className="-mt-[9px] sm:-mt-[18px]"
             loading={searchStatus}
-            placeholder="domain"
+            placeholder={t("public.domain")}
             addonBefore={`memes.ac /`}
             enterButton={
               searchStatus
                 ? ""
                 : search
                 ? availableStatus
-                  ? "Available"
-                  : "Registered"
-                : "Launch"
+                  ? t("public.available")
+                  : t("public.registered")
+                : t("public.launch")
             }
             onSearch={(_) => {
               setAvailableStatus(false);

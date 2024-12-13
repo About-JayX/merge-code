@@ -16,7 +16,7 @@ export const theme = createSlice({
   // 初始状态
   initialState: {
     // 从 localStorage 获取主题设置，默认为亮色主题
-    value: localStorage.getItem('theme') || 'light'
+    value: localStorage.getItem('theme') || 'dark'
   } as {
     value: 'light' | 'dark'
   },

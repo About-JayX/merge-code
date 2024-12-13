@@ -4,27 +4,32 @@
  * 包括项目的基本信息和社交媒体链接
  */
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { domain } from "@/api";
-import { TokenItem } from "@/types/domain";
 import ProjectCard from "./ProjectCard";
+import { useTranslation } from "react-i18next";
 
 // 项目列表组件
 export default function ProjectList() {
   // 状态管理
   const [tokens, setTokens] = useState<{
-    data: TokenItem[];
+    data: any[];
     total: number;
   }>({
     data: [],
     total: 1,
   });
 
+  const { t } = useTranslation();
+
+  const project: any = t("project", { returnObjects: true });
+  console.log();
+
   // 获取项目列表数据
   useEffect(() => {
     const fetchTokens = async () => {
       try {
-        const result = await domain.getListAPI({
+        const result:any = await domain.getListAPI({
           current: 1,
           pageSize: 12,
         });
@@ -47,24 +52,34 @@ export default function ProjectList() {
             <div className="w-1 h-full bg-gradient-to-b from-[#A440FD] to-[#0DC8EC] rounded-lg absolute top-0 left-0" />
           </div>
           <span>
-            Projects On&nbsp;
-            <span className="font-extrabold bg-gradient-to-r from-[#9F44FC] to-[#10C5EC] bg-clip-text text-transparent">
-              Memes.ac
-            </span>
+            {project.title.map((item: any, index: number) => (
+              <Fragment key={index}>
+                {!item.status && item.content}
+                {item.status && (
+                  <span className="font-extrabold bg-gradient-to-r from-[#9F44FC] to-[#10C5EC] bg-clip-text text-transparent">
+                    {item.content}
+                  </span>
+                )}
+                &nbsp;
+              </Fragment>
+            ))}
           </span>
         </div>
-         {/* 项目说明文案区域 */}
+        {/* 项目说明文案区域 */}
         <div className="w-auto h-full relative grid grid-cols-[auto,1fr] justify-center pl-4">
           <div className="border-l border-[#5F5F5F]/30 absolute top-0 left-[1.5px] w-[1px] h-full" />
-          <p className="text-base sm:text-lg dark:text-white/80 text-black/80 py-2 font-medium">
-            Discover and explore{" "}
-            <span className="text-purple-600 dark:text-purple-400">
-              MEMES projects
-            </span>{" "}
-            built with our fast and modern website builder.
-            <span className="block mt-0.5">
-              Join the community and showcase your project.
-            </span>
+          <p className="whitespace-break-spaces text-base sm:text-lg dark:text-white/80 text-black/80 py-2 font-normal">
+            {project.text.map((item: any, index: number) => (
+              <Fragment key={index}>
+                {!item.status && item.content}
+                {item.status && (
+                  <span className="text-purple-600 dark:text-purple-400">
+                    {item.content}
+                  </span>
+                )}
+                &nbsp;
+              </Fragment>
+            ))}
           </p>
         </div>
       </header>
