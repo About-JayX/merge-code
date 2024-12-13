@@ -76,7 +76,7 @@ export default function User() {
     if (tokens && tokens.data.length > 0) {
       setTimeout(() => {
         setStatus(false);
-      }, 1000);
+      }, 500);
     }
   }, [tokens]);
   return (
@@ -157,7 +157,6 @@ export default function User() {
                               src={item.logo_url || "/default-logo.png"}
                               alt={item.name || "Project Logo"}
                               fallback="/default-logo.png"
-                              preview={false}
                             />
                           </div>
                         </div>

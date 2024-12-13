@@ -49,29 +49,14 @@ export default defineConfig(({ mode }) => ({
     }),
     react(),
     viteImagemin({
-      gifsicle: {
-        optimizationLevel: 7,
-        interlaced: false,
-      },
-      optipng: {
-        optimizationLevel: 7,
-      },
-      mozjpeg: {
-        quality: 75,
-      },
-      pngquant: {
-        quality: [0.65, 0.8],
-        speed: 4,
-      },
+      gifsicle: { optimizationLevel: 7, interlaced: false },
+      optipng: { optimizationLevel: 7 },
+      mozjpeg: { quality: 65 },
+      pngquant: { quality: [0.5, 0.65], speed: 2 },
       svgo: {
         plugins: [
-          {
-            name: "removeViewBox",
-          },
-          {
-            name: "removeEmptyAttrs",
-            active: false,
-          },
+          { name: "removeViewBox" },
+          { name: "removeEmptyAttrs", active: false },
         ],
       },
     }),

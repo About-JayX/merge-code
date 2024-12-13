@@ -27,7 +27,7 @@ export default function ProjectCard({ item }: ProjectCardProps) {
     if (item && Object.keys(item).length > 0) {
       setTimeout(() => {
         setStatus(false);
-      }, 1000);
+      }, 500);
     }
   }, [item]);
   return (

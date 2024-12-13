@@ -142,14 +142,17 @@ export default function App() {
                 </Mbutton>
               )}
               {/* 电报机器人按钮 */}
-              {/* <Mbutton
-                type="card"
-                target="_blank"
-                href={webTelegramUrl}
-                className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
-              >
-                <Icon name="telegramBot" />
-              </Mbutton> */}
+              <div className="hidden sm:block">
+                <Mbutton
+                  type="card"
+                  target="_blank"
+                  href={webTelegramUrl}
+                  className="!min-w-8 !min-h-8 sm:!min-w-10 sm:!min-h-10"
+                >
+                  <Icon name="telegramBot" />
+                </Mbutton>
+              </div>
+
               {/* 购买 $MEMES 按钮 */}
               <Mbutton
                 type="primary"
