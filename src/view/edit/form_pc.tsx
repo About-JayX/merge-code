@@ -1,7 +1,7 @@
 import Icon from "@/components/icon";
 import { Collapse, ColorPicker, Divider, Input, Button } from "antd";
 import { useNavigate } from "react-router";
-import { CloseOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
+import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import Upload from "@/components/memes/upload";
 import Mbutton from "@/components/memes/button";
 
@@ -477,52 +477,7 @@ export const Roadmap = ({
       {props?.roadmap?.map((_: any, index: number) => (
         <div key={index} className="flex flex-col gap-2">
           <div className="flex gap-3 items-center justify-between">
-            <span className="text-sm">Roadmap {index + 1}</span>
-            <div className="flex gap-2 items-center">
-              {index + 1 >= props?.roadmap.length && (
-                <Button
-                  onClick={() =>
-                    onChange &&
-                    onChange({
-                      ...props,
-                      roadmap: [...props.roadmap, { title: "", text: "" }],
-                    })
-                  }
-                  icon={<PlusOutlined />}
-                  type="primary"
-                />
-              )}
-              {props?.roadmap?.length > 1 && (
-                <Button
-                  onClick={() =>
-                    onChange &&
-                    onChange({
-                      ...props,
-                      roadmap: [
-                        ...props.roadmap.filter(
-                          (_: any, idx: number) => idx !== index
-                        ),
-                      ],
-                    })
-                  }
-                  icon={<DeleteOutlined />}
-                  type="primary"
-                  danger
-                />
-              )}
-            </div>
-          </div>
-          <div className="flex gap-3 items-center">
-            Title&nbsp;
-            <Input
-              defaultValue={props?.roadmap?.[index]?.["title"]}
-              onChange={(e) => {
-                const array = [...props?.roadmap];
-                array[index]["title"] = e.target.value;
-
-                onChange && onChange({ ...props, roadmap: [...array] });
-              }}
-            />
+            <span className="text-sm">Step {index + 1}</span>
           </div>
           <div className="flex gap-3 items-center">
             Text&nbsp;
@@ -606,7 +561,7 @@ export default function FormPc({
   ...props
 }: {
   onChange?: (data?: any) => void;
-  save?:()=>void
+  save?: () => void;
 }) {
   const navigate = useNavigate();
   return (
@@ -642,7 +597,7 @@ export default function FormPc({
           },
           {
             key: "roadmap",
-            label: "Roadmap",
+            label: "How to buy",
             children: <Roadmap {...props} onChange={onChange} />,
           },
           {
@@ -652,7 +607,7 @@ export default function FormPc({
           },
         ]}
       />
-      <Mbutton type="primary" onClick={()=>save && save()}>
+      <Mbutton type="primary" onClick={() => save && save()}>
         save
       </Mbutton>
     </div>

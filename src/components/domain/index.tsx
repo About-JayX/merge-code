@@ -282,7 +282,7 @@ export const Section2 = ({ ...props }) => {
         <div
           className="aspect-square xl:w-[493px] xl:h-[493px] rounded-xl p-6"
           style={{
-            border: `1px solid ${props?.text?.color}`,
+            border: `1px solid ${props?.button?.background}`,
           }}
         >
           <img
@@ -341,25 +341,26 @@ export const Section3 = ({ ...props }) => {
   );
 };
 
-export const Roadmap = ({ ...props }) => {
+export const HowToBuy = ({ ...props }) => {
   const MemesCardItem = ({
-    title = "",
     text = "",
+    index = 0,
   }: {
     title?: string;
     text?: string;
+    index?: number;
   }) => {
     return (
       <MemesCard {...props}>
         <div className="flex flex-col gap-4 sm:gap-6 xl:gap-7">
           <div className="grid grid-cols-[70px,1fr] xl:grid-cols-[83px,1fr] gap-4 sm:gap-6 xl:gap-8 items-center">
             <div className="aspect-square p-[6px] bg-white/20 rounded-2xl">
-              <img
-                src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp"
-                className="aspect-square rounded-xl object-cover"
+              <Icon
+                name={`howToBuy/${index + 1}`}
+                className="aspect-square rounded-xl w-full h-full object-cover"
               />
             </div>
-            <span className={`text-2xl xl:text-3xl font-normal`}>{title}</span>
+            <span className={`text-2xl xl:text-3xl font-normal`}>{`Step ${index+1}`}</span>
           </div>
           <span
             className={`${memesTextSize} !text-base xl:!text-2xl font-normal`}
@@ -373,13 +374,18 @@ export const Roadmap = ({ ...props }) => {
   return (
     <div className="flex flex-col items-center gap-14">
       <Section type="top">
-        <span className={`${memesTitleSize}`}>Roadmap</span>
+        <span className={`${memesTitleSize}`}>How to buy?</span>
       </Section>
       {props?.roadmap?.length && (
         <Section type="top" className="w-full">
           <div className="grid gap-5 w-full">
             {props.roadmap.map((item: any, index: number) => (
-              <MemesCardItem key={index} title={item.title} text={item.text} />
+              <MemesCardItem
+                key={index}
+                title={item.title}
+                text={item.text}
+                index={index}
+              />
             ))}
           </div>
         </Section>
@@ -486,7 +492,7 @@ export default function Domain({ ...props }) {
         <Section1 {...props} />
         <Section2 {...props} />
         <Section3 {...props} />
-        <Roadmap {...props} />
+        <HowToBuy {...props} />
         <Section type="bottom">
           <About {...props} />
         </Section>

@@ -15,15 +15,13 @@ export default function Edit() {
 
   const init = async () => {
     const result: any = domain && (await doMainAPI.verifyAPI({ domain }));
-    let data = { ...result.data, ...JSON.parse(result.data?.config) };
-    console.log(data);
-
-    data = {
+    const data = { ...result.data, ...JSON.parse(result.data?.config) };
+    const datas = {
       ...data,
       background: {
-        color:data?.background && data?.background.color || "#000000",
-        pattern:data?.background && data?.background.pattern || "",
-        custom: data?.background&& data?.background.custom || "",
+        color: (data?.background && data?.background.color) || "#000000",
+        pattern: (data?.background && data?.background.pattern) || "",
+        custom: (data?.background && data?.background.custom) || "",
       },
       text: {
         color: data?.text?.color || "#ffffff",
@@ -37,48 +35,48 @@ export default function Edit() {
         background: data?.card?.background || "#0F0F0F",
       },
       section1: {
-        title: "",
-        text: "",
-        box:{
-          left:{
-            image:""
+        title: data?.section1?.title || "",
+        text: data?.section1?.text || "",
+        box: {
+          left: {
+            image: data?.section1?.box?.left?.image || "",
           },
-          right:{
-            title:"",
-            text:"",
-            image:"",
-            bntText:"",
-            bntUrl:""
-          }
-        }
+          right: {
+            title: data?.section1?.box?.right?.title || "",
+            text: data?.section1?.box?.right?.text || "",
+            image: data?.section1?.box?.right?.image || "",
+            bntText: data?.section1?.box?.right?.bntText || "",
+            bntUrl: data?.section1?.box?.right?.bntUrl || "",
+          },
+        },
       },
-      section2:{
-        title:"",
-        text:"",
-        bntText:"",
-        bntUtl:"",
-        image:""
+      section2: {
+        title: data?.section2?.title || "",
+        text: data?.section2?.text || "",
+        bntText: data?.section2?.bntText || "",
+        bntUtl: data?.section2?.bntUtl || "",
+        image: data?.section2?.image || "",
       },
-      section3:[],
-      roadmap: data?.roadmap || [],
-      about:{
-        title:"",
-        text:"",
-        bntText:"",
-        bntUrl:""
-      }
+      section3: data?.section3 || [],
+      roadmap: data?.roadmap || [{}, {}, {}],
+      about: {
+        title: data?.about?.title || "",
+        text: data?.about?.text || "",
+        bntText: data?.about?.bntText || "",
+        bntUrl: data?.about?.bntUrl || "",
+      },
     };
-    setData({ ...data });
+    console.log("data", { ...datas });
+
+    setData({ ...datas });
   };
   useLayoutEffect(() => {
     init();
   }, [domain]);
 
   const saveToken = async () => {
-    console.log("data",data);
-    
-    // await doMainAPI.updateDoMain(data, token);
-    // window.open(location.origin + "/" + data?.domain, "_blank");
+    await doMainAPI.updateDoMain({ Id: data.Id, config: data }, token);
+    window.open(location.origin + "/" + data?.domain, "_blank");
   };
 
   data &&
@@ -93,9 +91,9 @@ export default function Edit() {
       <Fragment>
         <div className="max-w-6xl w-full overflow-hidden relative pb-48 sm:pb-0">
           <Domain {...data} />
-          <FormMobile {...data} onChange={setData} save={()=>saveToken()}/>
+          <FormMobile {...data} onChange={setData} save={() => saveToken()} />
         </div>
-        <FormPc {...data} onChange={setData} save={()=>saveToken()}/>
+        <FormPc {...data} onChange={setData} save={() => saveToken()} />
       </Fragment>
     </div>
   );

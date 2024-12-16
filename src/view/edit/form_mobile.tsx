@@ -104,7 +104,7 @@ export default function FormMobile({
             ],
           }}
         >
-          <a>Roadmap</a>
+          <a>How to buy</a>
         </Dropdown>
         <Dropdown
           placement="top"

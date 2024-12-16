@@ -14,7 +14,7 @@ export const user = createSlice({
   
   // 初始状态
   initialState: {
-    token: '', // 用户认证 token
+    token: sessionStorage.getItem('token') || "", // 用户认证 token
   } as {
     token: string
   },
@@ -24,6 +24,7 @@ export const user = createSlice({
     // 更新用户 token
     updateToken(state, action) {
       state.token = action.payload
+      sessionStorage.setItem('token',action.payload)
     },
   },
 })
