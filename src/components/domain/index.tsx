@@ -1,9 +1,11 @@
 import { Ellipsis } from "antd-mobile";
+import { motion, useInView } from "motion/react";
 import Icon from "../icon";
-import "./index.scss";
+import { Fragment, useRef } from "react";
+import { copy } from "@/util";
 
 export const memesSize =
-  "min-w-10 min-h-10 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
+  "min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
 
 export const memesTitleSize = "text-2xl sm:text-4xl xl:text-6xl font-bold";
 export const memesSubTitleSize = " text-2xl sm:text-3 xl:text-4xl font-normal";
@@ -12,10 +14,54 @@ export const memesTextSize =
 export const memesTextColor =
   "bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] bg-clip-text text-transparent";
 
-export const MemesIcon = ({ className = "",name="" }: { className?: string,name?:string }) => {
+export const Section = ({
+  children,
+  type = "top",
+  className = "",
+}: {
+  type?: "top" | "left" | "right" | "bottom";
+  children?: React.ReactNode;
+  className?: string;
+}) => {
+  const ref = useRef(null);
+
+  const isInView = useInView(ref);
+
+  const variants = {
+    top: { opacity: 0, y: -50 },
+    left: { opacity: 0, x: -50 },
+    right: { opacity: 0, x: 50 },
+    bottom: { opacity: 0, y: 50 },
+    visible: { opacity: 1, x: 0, y: 0 },
+  };
+
+  return (
+    <motion.div
+      className={className}
+      ref={ref}
+      initial={type}
+      animate={isInView ? "visible" : type}
+      variants={variants}
+      transition={{ duration: 0.5 }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+export const MemesIcon = ({
+  className = "",
+  style = {},
+  name = "",
+}: {
+  className?: string;
+  style?: React.CSSProperties;
+  name?: string;
+}) => {
   return (
     <div
       className={`${memesSize} bg-white/10 border border-white/10 rounded-full flex items-center justify-center ${className}`}
+      style={style}
     >
       <Icon name={name} className="text-lg sm:text-xl" />
     </div>
@@ -26,7 +72,7 @@ export const MemesBtn = ({
   children,
   className = "",
   type = "primary",
-  style={},
+  style = {},
   onClick,
   ...props
 }: {
@@ -34,18 +80,22 @@ export const MemesBtn = ({
   style?: React.CSSProperties;
   children?: React.ReactNode;
   type?: "default" | "primary";
+  [key: string]: any;
   onClick?: () => void;
 }) => {
+  const bntStyle = {
+    ...style,
+    background: type === "primary" ? props.button?.background : "",
+    color: type === "primary" ? props.button?.text : props.button?.background,
+    border: `1px solid ${props.button?.background}`,
+  };
   return (
     <button
-      style={style}
-      className={`${memesSize} rounded ${
-        type === "primary"
-          ? "bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] text-[#242904]"
-          : "border border-[#FFB004] text-[#FFB305]"
-      } px-4 font-bold text-xs sm:text-sm xl:text-xl sm:min-w-40 xl:min-w-48 ${className}`}
-      {...props}
+      style={{ ...bntStyle }}
+      className={`${memesSize} rounded 
+      px-3 font-bold text-xs sm:text-sm xl:text-xl sm:min-w-40 xl:min-w-48 ${className}`}
       onClick={onClick}
+      {...props}
     >
       {children}
     </button>
@@ -59,179 +109,248 @@ export const MemesCard = ({
 }: {
   className?: string;
   children?: React.ReactNode;
+  [key: string]: any;
 }) => {
   return (
-    <div className={`bg-[#0F0F0F] rounded-2xl p-6 ${className}`} {...props}>
+    <div
+      className={` rounded-2xl p-6 ${className}`}
+      style={{ background: props.card?.background }}
+    >
       {children}
     </div>
   );
 };
 
-export const MemesHome = () => {
+export const MemesHome = ({ ...props }) => {
   return (
     <div className="grid  md:grid-cols-[1fr,260px] xl:grid-cols-[1fr,384px] gap-12 sm:gap-16 md:gap-12 xl:gap-28 items-center justify-items-center sm:justify-between">
-      <div className="flex flex-col ">
-        <p className="text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all">
-          $MINIDOGE 
-          <span className={`${memesTextColor}`}>(CTO)</span> {"\n"} - Minidoge
-        </p>
-        <p className="text-base sm:text-lg md:text-base xl:text-xl mt-4">
-          Carrying forward the inheritance of $DOGE, blessed by Elon Musk,
-          $MINIDOGE continues the revolution.
-        </p>
-        <div className="grid grid-cols-[auto,1fr] gap-4 sm:gap-8 md:gap-4 xl:gap-5 items-center mt-4 sm:mt-8 md:mt-8 xl:mt-16">
-          <MemesBtn className="">Let’s Explore</MemesBtn>
-          <div className="grid grid-cols-[auto,1fr] gap-4 items-center w-full">
-            <div className="p-[6px] bg-gradient-to-b from-[#FFAC03]/15 to-[#FFC10B]/15 rounded-full">
-              <MemesIcon name="copy" className=" shadow-[0px_0px_8px_4px_rgba(0,0,0,0.25)_inset] bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] text-[#271D02] min-w-[calc(56px-6px)] min-h-[calc(56px-6px)]" />
-            </div>
-            <div className="flex flex-col break-all">
-              <Ellipsis
-                className="text-base md:text-2xl font-normal"
-                direction="middle"
-                content="0x0000000000000000000000000000000000000000"
-              />
-              <span className="text-xs md:text-base font-normal opacity-50">
-                CA
-              </span>
-            </div>
+      <div className="flex flex-col w-full">
+        {props.name && (
+          <Section type="left">
+            <p className="text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all">
+              {String(props.name).toUpperCase()}
+            </p>
+          </Section>
+        )}
+        {props.description && (
+          <Section type="left">
+            <p className="text-base sm:text-lg md:text-base xl:text-xl mt-4">
+              {props.description}
+            </p>
+          </Section>
+        )}
+
+        <Section type="bottom">
+          <div className="grid grid-cols-[auto,1fr] gap-4 sm:gap-8 md:gap-4 xl:gap-5 items-center mt-4 sm:mt-8 md:mt-8 xl:mt-16">
+            {props.contract_address && (
+              <a
+                href={`https://raydium.io/swap/?inputMint=sol&outputMint=${props.contract_address}`}
+                target="_blank"
+              >
+                <MemesBtn {...props}>
+                  BUY&nbsp;${String(props.ticker).toUpperCase()}
+                </MemesBtn>
+              </a>
+            )}
+            <a
+              className="grid grid-cols-[auto,1fr] gap-4 items-center w-full"
+              onClick={async () => await copy(props.contract_address)}
+            >
+              <div className="p-[6px] relative rounded-full">
+                <div
+                  className="absolute top-0 left-0 w-full h-full rounded-full -z-10 opacity-15"
+                  style={{
+                    background: props.button?.background,
+                  }}
+                />
+                <MemesIcon
+                  name="copy"
+                  className=" shadow-[0px_0px_8px_4px_rgba(0,0,0,0.25)_inset]  min-w-[calc(56px-6px)] min-h-[calc(56px-6px)]"
+                  style={{
+                    background: props.button?.background,
+                    color: props.button?.text,
+                  }}
+                />
+              </div>
+              <div className="flex flex-col break-all">
+                <Ellipsis
+                  className="text-base md:text-2xl font-normal"
+                  direction="middle"
+                  content={props.contract_address}
+                />
+                <span className="text-xs md:text-base font-normal opacity-50">
+                  CA
+                </span>
+              </div>
+            </a>
           </div>
-        </div>
+        </Section>
       </div>
-      <div className="w-72 h-72 md:w-full md:h-full">
-        <img
-          src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp"
-          alt="Token Image"
-          className="object-cover aspect-square rounded-full z-10"
-        />
-      </div>
+      {props.logo_url && (
+        <Section type="right">
+          <div className="w-72 h-72 md:w-full md:h-full">
+            <img
+              src={props.logo_url}
+              alt="Token Image"
+              className="object-cover aspect-square rounded-full w-72 h-72 z-10"
+            />
+          </div>
+        </Section>
+      )}
     </div>
   );
 };
 
-export const Section1 = () => {
+export const Section1 = ({ ...props }) => {
   return (
     <div className="flex flex-col gap-10">
       <div className="text-center flex flex-col gap-4 xl:gap-5">
-        <span className={`${memesTitleSize}`}>The Revolution Begins</span>
-        <span className={`${memesTextSize}`}>
-          Join the $MINIDOGE CTO movement - where every holder is an owner,
-          every voice matters. Together, we're building the first truly
-          community-driven inheritance of $DOGE.
-        </span>
+        <Section type="top">
+          <span className={`${memesTitleSize}`}>{props?.section1?.title}</span>
+        </Section>
+        <Section type="top">
+          <span className={`${memesTextSize}`}>{props?.section1?.text}</span>
+        </Section>
       </div>
-      <MemesCard>
-        <div className="grid  sm:grid-cols-[1fr,1fr] xl:grid-cols-[527px,1fr] gap-4 sm:gap-8 xl:gap-12">
-          <img
-            src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp"
-            className="w-full xl:w-[527px] h-[90vw] sm:h-[60vw] xl:h-[695px] rounded-xl object-cover"
-          />
-          <div className="flex flex-col">
-            <span className={`${memesSubTitleSize}`}>
-              Hot Trending on this week{" "}
-            </span>
-            <span className={`${memesTextSize} mt-4 sm:mt-4 xl:mt-8`}>
-              $MINIDOGE emerges as the true inheritor of $DOGE. As a CTO
-              (Community-Taken-Over) token, we represent the first shot against
-              centralized power in the crypto space.
-            </span>
-            <img
-              src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp"
-              className="w-full h-[40vw] sm:h-[22vw] xl:h-[262px] mt-4 sm:mt-4 xl:mt-11 rounded-xl object-cover"
-            />
-            <div>
-              <MemesBtn className=" mt-4 sm:mt-4 xl:mt-14" type="default">
-                Place a Bid
-              </MemesBtn>
-            </div>
+      <Section type="top">
+        <MemesCard {...props}>
+          <div className="grid  sm:grid-cols-[1fr,1fr] xl:grid-cols-[527px,1fr] gap-4 sm:gap-8 xl:gap-12">
+            <Section type="left">
+              <img
+                src={props?.section1?.box.left.image}
+                className="w-full xl:w-[527px] h-[90vw] sm:h-[60vw] xl:h-[695px] rounded-xl object-cover"
+              />
+            </Section>
+
+            <Section type="right">
+              <div className="flex flex-col">
+                <span className={`${memesSubTitleSize}`}>
+                  {props?.section1?.box.right.title}
+                </span>
+                <span className={`${memesTextSize} mt-4 sm:mt-4 xl:mt-8`}>
+                  {props?.section1?.box.right.text}
+                </span>
+                {props?.section1?.box.right.image && (
+                  <img
+                    src={props?.section1?.box.right.image}
+                    className="w-full h-[40vw] sm:h-[22vw] xl:h-[262px] mt-4 sm:mt-4 xl:mt-11 rounded-xl object-cover"
+                  />
+                )}
+                {props?.section1?.box.right.bntText && (
+                  <a href={props?.section1?.box.right.bntUrl} target="_blank">
+                    <MemesBtn
+                      className=" mt-4 sm:mt-4 xl:mt-14"
+                      type="default"
+                      {...props}
+                    >
+                      {props?.section1?.box.right.bntText}
+                    </MemesBtn>
+                  </a>
+                )}
+              </div>
+            </Section>
           </div>
-        </div>
-      </MemesCard>
+        </MemesCard>
+      </Section>
     </div>
   );
 };
 
-export const Section2 = () => {
+export const Section2 = ({ ...props }) => {
   return (
     <div className="grid sm:grid-cols-[1fr,1fr] xl:grid-cols-[1fr,493px] items-center gap-6 sm:gap-6 xl:gap-16">
-      <div className="flex flex-col">
-        <span className={`${memesTitleSize} max-w-md`}>Power to Community</span>
-        <span className={`${memesTextSize} mt-4 sm:mt-4 xl:mt-8 max-w-xl`}>
-          In an era dominated by VCs and whales, $MINIDOGE CTO stands as a
-          symbol of community resistance. We're taking back control, one token
-          at a time.
-        </span>
-        <div className="mt-4 sm:mt-4 xl:mt-16">
-          <MemesBtn>Connect Wallet</MemesBtn>
+      <Section type="left">
+        <div className="flex flex-col">
+          <span className={`${memesTitleSize} max-w-md`}>
+            {props?.section2?.title}
+          </span>
+          <span className={`${memesTextSize} mt-4 sm:mt-4 xl:mt-8 max-w-xl`}>
+            {props?.section2?.text}
+          </span>
+          {props?.section2?.bntText && (
+            <a
+              href={props?.section2?.bntUtl}
+              target="_blank"
+              className="mt-4 sm:mt-4 xl:mt-16"
+            >
+              <MemesBtn {...props}>{props?.section2?.bntText}</MemesBtn>
+            </a>
+          )}
         </div>
-      </div>
-      <div>
-        <div className="aspect-square xl:w-[493px] xl:h-[493px] rounded-xl p-6 border border-[#FFB004]">
+      </Section>
+      <Section type="right">
+        <div
+          className="aspect-square xl:w-[493px] xl:h-[493px] rounded-xl p-6"
+          style={{
+            border: `1px solid ${props?.text?.color}`,
+          }}
+        >
           <img
-            src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp"
+            src={props?.section2?.image}
             className="aspect-square  rounded-xl object-cover"
           />
         </div>
-      </div>
+      </Section>
     </div>
   );
 };
 
-export const Section3 = () => {
+export const Section3 = ({ ...props }) => {
   return (
     <div className="flex flex-col gap-4 sm:gap-4 md:gap-8 xl:gap-16 items-center">
-      <p className={`${memesTitleSize}`}>
-        <span className={`${memesTextColor}`}>Professional</span> team
-      </p>
-      <div className="w-full grid gap-3 sm:gap-4">
-        <div className="grid grid-cols-3 gap-3 sm:gap-4">
-          <img
-            src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp"
-            alt="Image 1"
-            className="h-full w-full object-cover aspect-square rounded-xl"
-          />
-          <img
-            src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp"
-            alt="Image 2"
-            className="h-full w-full object-cover aspect-square rounded-xl"
-          />
-          <img
-            src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp"
-            alt="Image 3"
-            className="h-full w-full object-cover aspect-square rounded-xl"
-          />
+      <Section type="top">
+        <p className={`${memesTitleSize}`}>
+          {/* <span className={`${memesTextColor}`}>Professional</span> team */}
+          Professional team
+        </p>
+      </Section>
+      <Section type="top">
+        <div className="w-full flex flex-col">
+          {props.section3 && (
+            <Fragment>
+              {/* 第一排：最多显示3个 */}
+              <div className="grid grid-cols-3 gap-3 sm:gap-4 justify-center">
+                {props.section3.slice(0, 3).map((item: any, index: number) => (
+                  <img
+                    key={index}
+                    src={item}
+                    alt={item}
+                    className="h-full w-full object-cover aspect-square rounded-xl"
+                  />
+                ))}
+              </div>
+
+              {/* 第二排：从第4个开始，显示最多4个 */}
+              {props.section3.length > 3 && (
+                <div className="grid grid-cols-4 gap-3 sm:gap-4 justify-items-center mt-4">
+                  {props.section3.slice(3).map((item: any, index: number) => (
+                    <img
+                      key={index}
+                      src={item}
+                      alt={item}
+                      className="h-full w-full object-cover aspect-square rounded-xl"
+                    />
+                  ))}
+                </div>
+              )}
+            </Fragment>
+          )}
         </div>
-        <div className="grid grid-cols-4 gap-3 sm:gap-4">
-          <img
-            src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp"
-            alt="Image 1"
-            className="h-full w-full object-cover aspect-square rounded-lg"
-          />
-          <img
-            src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp"
-            alt="Image 2"
-            className="h-full w-full object-cover aspect-square rounded-lg"
-          />
-          <img
-            src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp"
-            alt="Image 3"
-            className="h-full w-full object-cover aspect-square rounded-lg"
-          />
-          <img
-            src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp"
-            alt="Image 4"
-            className="h-full w-full object-cover aspect-square rounded-lg"
-          />
-        </div>
-      </div>
+      </Section>
     </div>
   );
 };
 
-export const Section4 = () => {
-  const MemesCardItem = ({ text = "" }: { text?: string }) => {
+export const Roadmap = ({ ...props }) => {
+  const MemesCardItem = ({
+    title = "",
+    text = "",
+  }: {
+    title?: string;
+    text?: string;
+  }) => {
     return (
-      <MemesCard>
+      <MemesCard {...props}>
         <div className="flex flex-col gap-4 sm:gap-6 xl:gap-7">
           <div className="grid grid-cols-[70px,1fr] xl:grid-cols-[83px,1fr] gap-4 sm:gap-6 xl:gap-8 items-center">
             <div className="aspect-square p-[6px] bg-white/20 rounded-2xl">
@@ -240,11 +359,7 @@ export const Section4 = () => {
                 className="aspect-square rounded-xl object-cover"
               />
             </div>
-            <span
-              className={`text-2xl xl:text-3xl font-normal ${memesTextColor}`}
-            >
-              Step 1
-            </span>
+            <span className={`text-2xl xl:text-3xl font-normal`}>{title}</span>
           </div>
           <span
             className={`${memesTextSize} !text-base xl:!text-2xl font-normal`}
@@ -257,68 +372,124 @@ export const Section4 = () => {
   };
   return (
     <div className="flex flex-col items-center gap-14">
-      <span className={`${memesTitleSize}`}>How to buy?</span>
-      <div className="grid gap-5 w-full">
-        {[
-          {
-            text: "Download the Phantom app for mobile users, and download the Phantom Chrome extension for desktop users.",
-          },
-          {
-            text: "Fund your wallet with Solana, you can buy Solana from an exchange or cross chain swap and send it to your wallet.",
-          },
-          {
-            text: "Go to Jupiter and swap your Solana for $BITCAT. (We recommend using Jupiter to avoid MEV bots.)",
-          },
-        ].map((item, index) => (
-          <MemesCardItem key={index} text={item.text} />
-        ))}
-      </div>
+      <Section type="top">
+        <span className={`${memesTitleSize}`}>Roadmap</span>
+      </Section>
+      {props?.roadmap?.length && (
+        <Section type="top" className="w-full">
+          <div className="grid gap-5 w-full">
+            {props.roadmap.map((item: any, index: number) => (
+              <MemesCardItem key={index} title={item.title} text={item.text} />
+            ))}
+          </div>
+        </Section>
+      )}
     </div>
   );
 };
 
-export const About = () => {
+export const About = ({ ...props }) => {
   return (
-    <MemesCard className="bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28">
-      <div className="w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-gradient-to-l from-[#FFAE04]/15 to-[#FFC30C]/15 -mt-[calc(96px+32px)] sm:-mt-[calc(114px+48px)] p-6">
+    <MemesCard className="bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-white">
+      <div className="w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-gradient-to-l from-[#FFAE04]/15 to-[#FFC30C]/15 -mt-[calc(96px+32px)] sm:-mt-[calc(114px+48px)] p-6 flex justify-center items-center">
         <img
-          src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp"
-          className="aspect-square rounded-full object-cover"
+          src={props.logo_url}
+          className="aspect-square rounded-full object-cover w-full h-full"
         />
       </div>
       <span
         className={`${memesTitleSize} text-3xl sm:text-3xl md:text-3xl xl:text-4xl mt-4 sm:mt-5`}
       >
-        MINIDOGE COIN
+        {props?.about?.title}
       </span>
       <span className={`${memesTextSize} mt-3 sm:mt-6 sm:max-w-96`}>
-        Subscription get interesting offers from us and gtet the best technology
-        for your various activites
+        {props?.about?.text}
       </span>
-      <MemesBtn className="mt-6 xl:mt-12 !bg-white from-transparent to-transparent">
-        Get Started
-      </MemesBtn>
+      {props?.about?.bntText && (
+        <a href={props?.about?.bntUrl}>
+          <MemesBtn className="mt-6 xl:mt-12 !bg-white from-transparent to-transparent !border-transparent !text-black">
+            {props?.about?.bntText}
+          </MemesBtn>
+        </a>
+      )}
     </MemesCard>
   );
 };
-
-export default function Domain() {
+export default function Domain({ ...props }) {
+  if (Object.keys(props).length === 0) return;
   return (
-    <div className="bg-black min-h-screen w-full flex flex-col pb-12 gap-8 sm:gap-8 xl:gap-24 items-center text-white transition-all ease-in-out duration-300">
-      <header className="p-4 sm:p-8 md:pt-8 md:px-16 flex gap-4 items-center w-full max-w-screen-xl">
-        <img src="https://gd-hbimg.huaban.com/e2926c32441be67bc5e8d05b3461cc7147a4635816d39e-fOMnpk_fw1200webp" className="w-14 h-14 md:w-16 md:h-16 rounded-full" />
-        <div className="flex-1" />
-        <MemesIcon name="twitter"/>
-        <MemesIcon name="telegram"/>
-        <MemesBtn>BUY$MINIDOG</MemesBtn>
-      </header>
-      <main className="px-4 sm:p-8 md:px-16 w-full max-w-screen-xl flex flex-col gap-12 sm:gap-24 md:gap-28 xl:gap-44">
-        <MemesHome />
-        <Section1 />
-        <Section2 />
-        <Section3 />
-        <Section4 />
-        <About />
+    <div
+      className={`min-h-screen w-full flex flex-col pb-12 gap-8 sm:gap-8 xl:gap-24 items-center transition-all ease-in-out duration-300 overflow-hidden relative ${props.background?.pattern}`}
+      style={{ color: props.text?.color }}
+    >
+      <div className="w-full h-screen fixed top-0 left-0 ">
+        <div
+          className="w-full h-full"
+          style={{
+            backgroundImage: `url(${props.background?.custom})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+      </div>
+      <div
+        className="absolute top-0 left-0 w-full h-full  opacity-50"
+        style={{
+          background: props.background?.color,
+        }}
+      />
+      <Section className="w-full flex justify-center z-10">
+        <header className="p-3 sm:p-8 md:pt-8 md:px-16 flex gap-1 sm:gap-4 items-center w-full max-w-screen-xl">
+          {props.logo_url && (
+            <img
+              src={props.logo_url}
+              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full"
+            />
+          )}
+
+          <div className="flex-1" />
+          {props.twitter_url && (
+            <a href={props.twitter_url} target="_blank">
+              <MemesIcon name="twitter" />
+            </a>
+          )}
+          {props.telegram_url && (
+            <a href={props.telegram_url} target="_blank">
+              <MemesIcon name="telegram" />
+            </a>
+          )}
+          {props.dexscreener_url && (
+            <a href={props.dexscreener_url} target="_blank">
+              <MemesIcon name="dexscreener" />
+            </a>
+          )}
+          {props.pump_url && (
+            <a href={props.pump_url} target="_blank">
+              <MemesIcon name="pump" />
+            </a>
+          )}
+          {props.contract_address && (
+            <a
+              href={`https://raydium.io/swap/?inputMint=sol&outputMint=${props.contract_address}`}
+              target="_blank"
+            >
+              <MemesBtn {...props}>
+                BUY&nbsp;${String(props.ticker).toUpperCase()}
+              </MemesBtn>
+            </a>
+          )}
+        </header>
+      </Section>
+      <main className="px-3 sm:p-8 md:px-16 w-full max-w-screen-xl flex flex-col gap-12 sm:gap-24 md:gap-28 xl:gap-48 z-10">
+        <MemesHome {...props} />
+        <Section1 {...props} />
+        <Section2 {...props} />
+        <Section3 {...props} />
+        <Roadmap {...props} />
+        <Section type="bottom">
+          <About {...props} />
+        </Section>
       </main>
     </div>
   );

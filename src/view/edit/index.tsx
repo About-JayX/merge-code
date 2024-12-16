@@ -9,186 +9,93 @@ import { SEO } from "@/util";
 export default function Edit() {
   const { domain } = useParams();
 
-  const [getData, setGetData] = useState<any>({});
+  const [data, setData] = useState<any>({});
 
   const { token } = useAppSelector((state) => state.user);
 
-  const [backgroundColor, setBackgroundColor] = useState<string>("#fff");
-  const [backgroundPattern, setBackgroundPattern] = useState<string>("");
-
-  const [backgroundImage, setBackgroundImageUrl] = useState<string>("");
-  const [textColor, setTextColor] = useState<string>("#000");
-  const [buttonBackground, setButtonBackground] = useState("#000");
-  const [buttonText, setButtonText] = useState("#fff");
-  const [buttonRounded, setButtonRounded] = useState("!rounded-none");
-  const [about, setAbout] = useState<{
-    image?: string;
-    title?: string;
-    text?: string;
-  }>({ title: "Please Enter About Title", text: "Please Enter About Text" });
-
-  const [buy, setBuy] = useState<{
-    advertiseImage1?: string;
-    advertiseImage2?: string;
-    buyLink1?: string;
-    buyLink2?: string;
-  }>({
-    buyLink1: "Please Enter Twitter Link",
-    buyLink2: "Please Enter Telegram Link",
-  });
-
-  const [roadmap, setRoadmap] = useState<{ title?: string; text?: string }[]>([
-    { title: "Please Enter Roadmap Title", text: "Please Enter Roadmap Text" },
-  ]);
-
-  const fontFamily = [
-    { key: "font-londrinaSolid", name: "Londrina Solid" },
-    { key: "font-poppinsSemiBold", name: "Poppins SemiBold" },
-  ];
-  const [textFont, setTextFont] = useState<string>(fontFamily?.[0].key);
-
   const init = async () => {
-
-
-
-    console.log(domain,"??");
-    
     const result: any = domain && (await doMainAPI.verifyAPI({ domain }));
-    console.log(
-      JSON.parse(result.data.config),
-      "JSON.parse(result.data.config)"
-    );
+    let data = { ...result.data, ...JSON.parse(result.data?.config) };
+    console.log(data);
 
-    let data = { ...result.data, ...JSON.parse(result.data.config) };
-    data?.background?.color && setBackgroundColor(data?.background?.color);
-    data?.background?.pattern &&
-      setBackgroundPattern(data?.background?.pattern);
-    data?.background?.custom && setBackgroundImageUrl(data?.background?.custom);
-    data?.background?.color && setTextColor(data?.text?.color);
-    data?.button?.background && setButtonBackground(data?.button?.background);
-    data?.button?.text && setButtonText(data?.button?.text);
-    data?.button?.rounded && setButtonRounded(data?.button?.rounded);
-    data?.about && setAbout(data?.about);
-    data?.buy && setBuy(data?.buy);
-    data?.roadmap?.length > 0 && setRoadmap(data?.roadmap);
-    data?.fontFamily?.length > 0 && setTextFont(data?.fontFamily);
-    setGetData(data);
+    data = {
+      ...data,
+      background: {
+        color:data?.background && data?.background.color || "#000000",
+        pattern:data?.background && data?.background.pattern || "",
+        custom: data?.background&& data?.background.custom || "",
+      },
+      text: {
+        color: data?.text?.color || "#ffffff",
+        font: data?.text?.font || "font-poppinsSemiBold",
+      },
+      button: {
+        background: data?.button?.background || "#FFAC03",
+        text: data?.button?.text || "#ffffff",
+      },
+      card: {
+        background: data?.card?.background || "#0F0F0F",
+      },
+      section1: {
+        title: "",
+        text: "",
+        box:{
+          left:{
+            image:""
+          },
+          right:{
+            title:"",
+            text:"",
+            image:"",
+            bntText:"",
+            bntUrl:""
+          }
+        }
+      },
+      section2:{
+        title:"",
+        text:"",
+        bntText:"",
+        bntUtl:"",
+        image:""
+      },
+      section3:[],
+      roadmap: data?.roadmap || [],
+      about:{
+        title:"",
+        text:"",
+        bntText:"",
+        bntUrl:""
+      }
+    };
+    setData({ ...data });
   };
   useLayoutEffect(() => {
     init();
   }, [domain]);
 
-  const datas = {
-    ...getData,
-    ...{
-      image: getData?.logo_url,
-      background: {
-        color: backgroundColor,
-        pattern: backgroundPattern,
-        custom: backgroundImage,
-      },
-      button: {
-        background: buttonBackground,
-        text: buttonText,
-        rounded: buttonRounded,
-      },
-      text: {
-        color: textColor,
-        font: textFont,
-      },
-      about,
-      buy,
-      roadmap,
-      contractAddress: getData?.contract_address,
-    },
-  };
-
   const saveToken = async () => {
-    const updateData = {
-      Id: getData.Id, //网站ID
-      config: {
-        background: {
-          color: backgroundColor,
-          pattern: backgroundPattern,
-          custom: backgroundImage,
-        },
-        about,
-        buy,
-        text: {
-          color: textColor,
-          font: textFont,
-        },
-        roadmap,
-        button: {
-          background: buttonBackground,
-          text: buttonText,
-          rounded: buttonRounded,
-        },
-      },
-    };
-
-    await doMainAPI.updateDoMain(updateData, token);
-    window.open(location.origin + "/" + getData?.domain, "_blank");
+    console.log("data",data);
+    
+    // await doMainAPI.updateDoMain(data, token);
+    // window.open(location.origin + "/" + data?.domain, "_blank");
   };
 
-  datas &&
+  data &&
     SEO(
-      datas?.domain
-        ? { title: datas?.domain || "", icon: datas?.image || "" }
+      data?.domain
+        ? { title: data?.domain || "", icon: data?.logo_url || "" }
         : { title: "$MEMES Memes.ac", icon: "/favicon.png" }
     );
+  if (Object.keys(data).length === 0) return;
   return (
     <div className={`flex justify-center px-2 gap-4  min-h-screen items-start`}>
       <Fragment>
-        <div className="max-w-2xl overflow-hidden relative pb-48 sm:pb-0">
-          <Domain {...datas} />
-          <FormMobile
-            save={saveToken}
-            backgroundColor={backgroundColor}
-            setBackgroundColor={setBackgroundColor}
-            setBackgroundPattern={setBackgroundPattern}
-            backgroundImage={backgroundImage}
-            setBackgroundImageUrl={setBackgroundImageUrl}
-            textColor={textColor}
-            setTextColor={setTextColor}
-            fontFamily={fontFamily}
-            setTextFont={setTextFont}
-            buttonBackground={buttonBackground}
-            setButtonBackground={setButtonBackground}
-            buttonText={buttonText}
-            setButtonText={setButtonText}
-            setButtonRounded={setButtonRounded}
-            about={about}
-            setAbout={setAbout}
-            buy={buy}
-            setBuy={setBuy}
-            roadmap={roadmap}
-            setRoadmap={setRoadmap}
-          />
+        <div className="max-w-6xl w-full overflow-hidden relative pb-48 sm:pb-0">
+          <Domain {...data} />
+          <FormMobile {...data} onChange={setData} save={()=>saveToken()}/>
         </div>
-        <FormPc
-          save={saveToken}
-          backgroundColor={backgroundColor}
-          setBackgroundColor={setBackgroundColor}
-          setBackgroundPattern={setBackgroundPattern}
-          backgroundImage={backgroundImage}
-          setBackgroundImageUrl={setBackgroundImageUrl}
-          textColor={textColor}
-          setTextColor={setTextColor}
-          fontFamily={fontFamily}
-          setTextFont={setTextFont}
-          buttonBackground={buttonBackground}
-          setButtonBackground={setButtonBackground}
-          buttonText={buttonText}
-          setButtonText={setButtonText}
-          setButtonRounded={setButtonRounded}
-          about={about}
-          setAbout={setAbout}
-          buy={buy}
-          setBuy={setBuy}
-          roadmap={roadmap}
-          setRoadmap={setRoadmap}
-        />
+        <FormPc {...data} onChange={setData} save={()=>saveToken()}/>
       </Fragment>
     </div>
   );
