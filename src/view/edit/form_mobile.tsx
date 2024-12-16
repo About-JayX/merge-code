@@ -5,7 +5,7 @@ import {
   DownOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import Button from "@/components/domain/button";
+import {MemesBtn as Button} from "@/components/domain";
 import Mbutton from "@/components/memes/button";
 import Upload from "@/components/memes/upload";
 import Icon from "@/components/icon";

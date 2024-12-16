@@ -26,20 +26,26 @@ export const MemesBtn = ({
   children,
   className = "",
   type = "primary",
+  style={},
+  onClick,
   ...props
 }: {
   className?: string;
+  style?: React.CSSProperties;
   children?: React.ReactNode;
   type?: "default" | "primary";
+  onClick?: () => void;
 }) => {
   return (
     <button
+      style={style}
       className={`${memesSize} rounded ${
         type === "primary"
           ? "bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] text-[#242904]"
           : "border border-[#FFB004] text-[#FFB305]"
       } px-4 font-bold text-xs sm:text-sm xl:text-xl sm:min-w-40 xl:min-w-48 ${className}`}
       {...props}
+      onClick={onClick}
     >
       {children}
     </button>
