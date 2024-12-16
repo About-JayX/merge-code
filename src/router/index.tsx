@@ -24,7 +24,7 @@ const view = import.meta.glob<RouterType.ImportMetaGlobType>('@/view/**/*.tsx')
  * 生成路由配置
  * @param pages - 页面组件的导入信息数组
  * @returns 路由配置数组
- * 
+ *
  * 处理逻辑：
  * 1. 解析文件路径，提取组件名和目录路径
  * 2. 生成路由路径
@@ -36,6 +36,7 @@ const generateRoutes = (
   return pages.map(([path, page]) => {
     const segments = path.split('/')
     const componentName = segments.pop()?.replace(/.tsx$/, '') ?? ''
+
     const dirPath = segments
       .slice(segments.indexOf('view') + 1)
       .map(seg => seg.toLowerCase())
@@ -76,10 +77,7 @@ export default function Router() {
   }, [i18n.language])
 
   // 使用 useMemo 缓存路由配置，避免不必要的重复计算
-  const routes = useMemo(
-    () => generateRoutes(Object.entries(view)),
-    []
-  )
+  const routes = useMemo(() => generateRoutes(Object.entries(view)), [])
 
   // 生成多语言路由
   const langRoutes = useMemo(() => {

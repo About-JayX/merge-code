@@ -1,31 +1,31 @@
-import { Ellipsis } from "antd-mobile";
-import { motion, useInView } from "motion/react";
-import Icon from "../icon";
-import { Fragment, useRef } from "react";
-import { copy } from "@/util";
+import { Ellipsis } from 'antd-mobile'
+import { motion, useInView } from 'motion/react'
+import Icon from '../icon'
+import { Fragment, useRef } from 'react'
+import { copy } from '@/util'
 
 export const memesSize =
-  "min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
+  'min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14'
 
-export const memesTitleSize = "text-2xl sm:text-4xl xl:text-6xl font-bold";
-export const memesSubTitleSize = " text-2xl sm:text-3 xl:text-4xl font-normal";
+export const memesTitleSize = 'text-2xl sm:text-4xl xl:text-6xl font-bold'
+export const memesSubTitleSize = ' text-2xl sm:text-3 xl:text-4xl font-normal'
 export const memesTextSize =
-  " text-sm sm:text-sm xl:text-base font-normal opacity-60";
+  ' text-sm sm:text-sm xl:text-base font-normal opacity-60'
 export const memesTextColor =
-  "bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] bg-clip-text text-transparent";
+  'bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] bg-clip-text text-transparent'
 
 export const Section = ({
   children,
-  type = "top",
-  className = "",
+  type = 'top',
+  className = '',
 }: {
-  type?: "top" | "left" | "right" | "bottom";
-  children?: React.ReactNode;
-  className?: string;
+  type?: 'top' | 'left' | 'right' | 'bottom'
+  children?: React.ReactNode
+  className?: string
 }) => {
-  const ref = useRef(null);
+  const ref = useRef(null)
 
-  const isInView = useInView(ref);
+  const isInView = useInView(ref)
 
   const variants = {
     top: { opacity: 0, y: -50 },
@@ -33,30 +33,30 @@ export const Section = ({
     right: { opacity: 0, x: 50 },
     bottom: { opacity: 0, y: 50 },
     visible: { opacity: 1, x: 0, y: 0 },
-  };
+  }
 
   return (
     <motion.div
       className={className}
       ref={ref}
       initial={type}
-      animate={isInView ? "visible" : type}
+      animate={isInView ? 'visible' : type}
       variants={variants}
       transition={{ duration: 0.5 }}
     >
       {children}
     </motion.div>
-  );
-};
+  )
+}
 
 export const MemesIcon = ({
-  className = "",
+  className = '',
   style = {},
-  name = "",
+  name = '',
 }: {
-  className?: string;
-  style?: React.CSSProperties;
-  name?: string;
+  className?: string
+  style?: React.CSSProperties
+  name?: string
 }) => {
   return (
     <div
@@ -65,30 +65,30 @@ export const MemesIcon = ({
     >
       <Icon name={name} className="text-lg sm:text-xl" />
     </div>
-  );
-};
+  )
+}
 
 export const MemesBtn = ({
   children,
-  className = "",
-  type = "primary",
+  className = '',
+  type = 'primary',
   style = {},
   onClick,
   ...props
 }: {
-  className?: string;
-  style?: React.CSSProperties;
-  children?: React.ReactNode;
-  type?: "default" | "primary";
-  [key: string]: any;
-  onClick?: () => void;
+  className?: string
+  style?: React.CSSProperties
+  children?: React.ReactNode
+  type?: 'default' | 'primary'
+  [key: string]: any
+  onClick?: () => void
 }) => {
   const bntStyle = {
     ...style,
-    background: type === "primary" ? props.button?.background : "",
-    color: type === "primary" ? props.button?.text : props.button?.background,
+    background: type === 'primary' ? props.button?.background : '',
+    color: type === 'primary' ? props.button?.text : props.button?.background,
     border: `1px solid ${props.button?.background}`,
-  };
+  }
   return (
     <button
       style={{ ...bntStyle }}
@@ -99,17 +99,17 @@ export const MemesBtn = ({
     >
       {children}
     </button>
-  );
-};
+  )
+}
 
 export const MemesCard = ({
-  className = "",
+  className = '',
   children,
   ...props
 }: {
-  className?: string;
-  children?: React.ReactNode;
-  [key: string]: any;
+  className?: string
+  children?: React.ReactNode
+  [key: string]: any
 }) => {
   return (
     <div
@@ -118,8 +118,8 @@ export const MemesCard = ({
     >
       {children}
     </div>
-  );
-};
+  )
+}
 
 export const MemesHome = ({ ...props }) => {
   return (
@@ -134,7 +134,7 @@ export const MemesHome = ({ ...props }) => {
         )}
         {props.description && (
           <Section type="left">
-            <p className="text-base sm:text-lg md:text-base xl:text-xl mt-4">
+            <p className="text-base sm:text-lg md:text-base xl:text-xl mt-4 text-[#a3a3a5]">
               {props.description}
             </p>
           </Section>
@@ -174,11 +174,11 @@ export const MemesHome = ({ ...props }) => {
               </div>
               <div className="flex flex-col break-all">
                 <Ellipsis
-                  className="text-base md:text-2xl font-normal"
+                  className="text-base md:text-2xl font-normal text-white"
                   direction="middle"
                   content={props.contract_address}
                 />
-                <span className="text-xs md:text-base font-normal opacity-50">
+                <span className="text-xs md:text-base font-normal opacity-50 text-white">
                   CA
                 </span>
               </div>
@@ -186,20 +186,20 @@ export const MemesHome = ({ ...props }) => {
           </div>
         </Section>
       </div>
-      {props.logo_url && (
+      {props.banner_url && (
         <Section type="right">
-          <div className="w-72 h-72 md:w-full md:h-full">
+          <div className="sm:w-[22rem] sm:h-[22rem] xl:w-[26rem] xl:h-[26rem] md:w-full md:h-full">
             <img
-              src={props.logo_url}
+              src={props.banner_url}
               alt="Token Image"
-              className="object-cover aspect-square rounded-full w-72 h-72 z-10"
+              className="object-cover aspect-square sm:w-[22rem] sm:h-[22rem] xl:w-[26rem] xl:h-[26rem]  z-10"
             />
           </div>
         </Section>
       )}
     </div>
-  );
-};
+  )
+}
 
 export const Section1 = ({ ...props }) => {
   return (
@@ -253,8 +253,8 @@ export const Section1 = ({ ...props }) => {
         </MemesCard>
       </Section>
     </div>
-  );
-};
+  )
+}
 
 export const Section2 = ({ ...props }) => {
   return (
@@ -292,16 +292,15 @@ export const Section2 = ({ ...props }) => {
         </div>
       </Section>
     </div>
-  );
-};
+  )
+}
 
 export const Section3 = ({ ...props }) => {
   return (
     <div className="flex flex-col gap-4 sm:gap-4 md:gap-8 xl:gap-16 items-center">
       <Section type="top">
         <p className={`${memesTitleSize}`}>
-          {/* <span className={`${memesTextColor}`}>Professional</span> team */}
-          Professional team
+          <span className={`${memesTextColor}`}>Professional</span> team
         </p>
       </Section>
       <Section type="top">
@@ -338,17 +337,17 @@ export const Section3 = ({ ...props }) => {
         </div>
       </Section>
     </div>
-  );
-};
+  )
+}
 
 export const HowToBuy = ({ ...props }) => {
   const MemesCardItem = ({
-    text = "",
+    text = '',
     index = 0,
   }: {
-    title?: string;
-    text?: string;
-    index?: number;
+    title?: string
+    text?: string
+    index?: number
   }) => {
     return (
       <MemesCard {...props}>
@@ -360,7 +359,9 @@ export const HowToBuy = ({ ...props }) => {
                 className="aspect-square rounded-xl w-full h-full object-cover"
               />
             </div>
-            <span className={`text-2xl xl:text-3xl font-normal`}>{`Step ${index+1}`}</span>
+            <span
+              className={`text-2xl xl:text-3xl font-normal ${memesTextColor}`}
+            >{`Step ${index + 1}`}</span>
           </div>
           <span
             className={`${memesTextSize} !text-base xl:!text-2xl font-normal`}
@@ -369,8 +370,8 @@ export const HowToBuy = ({ ...props }) => {
           </span>
         </div>
       </MemesCard>
-    );
-  };
+    )
+  }
   return (
     <div className="flex flex-col items-center gap-14">
       <Section type="top">
@@ -391,8 +392,8 @@ export const HowToBuy = ({ ...props }) => {
         </Section>
       )}
     </div>
-  );
-};
+  )
+}
 
 export const About = ({ ...props }) => {
   return (
@@ -419,13 +420,13 @@ export const About = ({ ...props }) => {
         </a>
       )}
     </MemesCard>
-  );
-};
+  )
+}
 export default function Domain({ ...props }) {
-  if (Object.keys(props).length === 0) return;
+  if (Object.keys(props).length === 0) return
   return (
     <div
-      className={`min-h-screen w-full flex flex-col pb-12 gap-8 sm:gap-8 xl:gap-24 items-center transition-all ease-in-out duration-300 overflow-hidden relative ${props.background?.pattern}`}
+      className={`min-h-screen w-full flex flex-col pb-12 gap-8 sm:gap-8 xl:gap-24  items-center transition-all ease-in-out duration-300 overflow-hidden relative ${props.background?.pattern}`}
       style={{ color: props.text?.color }}
     >
       <div className="w-full h-screen fixed top-0 left-0 ">
@@ -433,14 +434,14 @@ export default function Domain({ ...props }) {
           className="w-full h-full"
           style={{
             backgroundImage: `url(${props.background?.custom})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
           }}
         />
       </div>
       <div
-        className="absolute top-0 left-0 w-full h-full  opacity-50"
+        className="absolute top-0 left-0 w-full h-full"
         style={{
           background: props.background?.color,
         }}
@@ -457,12 +458,12 @@ export default function Domain({ ...props }) {
           <div className="flex-1" />
           {props.twitter_url && (
             <a href={props.twitter_url} target="_blank">
-              <MemesIcon name="twitter" />
+              <MemesIcon className="text-white" name="twitter" />
             </a>
           )}
           {props.telegram_url && (
             <a href={props.telegram_url} target="_blank">
-              <MemesIcon name="telegram" />
+              <MemesIcon className="text-white" name="telegram" />
             </a>
           )}
           {props.dexscreener_url && (
@@ -498,5 +499,5 @@ export default function Domain({ ...props }) {
         </Section>
       </main>
     </div>
-  );
+  )
 }
