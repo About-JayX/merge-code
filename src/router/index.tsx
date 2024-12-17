@@ -8,7 +8,7 @@
  */
 
 import React, { lazy, Suspense, useEffect, useMemo } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { locale } from '@/config'
 import { router } from '@/config'
@@ -67,6 +67,7 @@ const generateRoutes = (
  */
 export default function Router() {
   const { i18n } = useTranslation()
+  const navigate = useNavigate()
 
   // 根据当前语言更新路由配置
   useEffect(() => {
