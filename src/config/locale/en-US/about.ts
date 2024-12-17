@@ -1,6 +1,6 @@
 export default {
-  title: "MINIDOGE COIN",
-  text: "Subscription get interesting offers from us and gtet the best technology for your various activites",
-  bntText: "Get Started",
-  bntUrl: "",
+  title: "$MINIDOGE BUILD",
+  text: "$MINIDOGE CTO Foundation is committed to promoting the globalization of #Minidoge IP, not limited to animation, film and television, ecological development, and charitable donations (for children and stray animals).",
+  bntText: "CTO Foundation",
+  bntUrl: "https://minidoge-cto-foundation.gitbook.io/minidoge",
 };
