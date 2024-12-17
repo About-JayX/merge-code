@@ -8,7 +8,8 @@ import { defineConfig, loadEnv } from "vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 import viteImagemin from "vite-plugin-imagemin";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
-import {nodePolyfills} from "vite-plugin-node-polyfills";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
+import copy from "rollup-plugin-copy";
 export default defineConfig(({ mode }) => ({
   define: {
     "process.env": loadEnv(mode, process.cwd()),
@@ -40,31 +41,32 @@ export default defineConfig(({ mode }) => ({
               attributes: [
                 { fill: "currentColor" },
                 { "fill-rule": "evenodd" },
-                { "clip-rule": "evenodd" }
-              ]
-            }
-          }
+                { "clip-rule": "evenodd" },
+              ],
+            },
+          },
         ],
       },
     }),
     react(),
-    viteImagemin({
-      gifsicle: { optimizationLevel: 7, interlaced: false },
-      optipng: { optimizationLevel: 7 },
-      mozjpeg: { quality: 65 },
-      pngquant: { quality: [0.5, 0.65], speed: 2 },
-      svgo: {
-        plugins: [
-          { name: "removeViewBox" },
-          { name: "removeEmptyAttrs", active: false },
-        ],
-      },
-    }),
+    process.env.NODE_ENV === "production" &&
+      viteImagemin({
+        gifsicle: { optimizationLevel: 7, interlaced: false },
+        optipng: { optimizationLevel: 7 },
+        mozjpeg: { quality: 65 },
+        pngquant: { quality: [0.5, 0.65], speed: 2 },
+        svgo: {
+          plugins: [
+            { name: "removeViewBox" },
+            { name: "removeEmptyAttrs", active: false },
+          ],
+        },
+      }),
   ],
   esbuild: {
     target: "esnext",
   },
-  base:"/",
+  base: "/",
   css: {
     preprocessorOptions: {
       scss: {
@@ -83,7 +85,6 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-     
     },
   },
   build: {
@@ -95,6 +96,18 @@ export default defineConfig(({ mode }) => ({
         chunkFileNames: "assets/[name].[hash].js",
         assetFileNames: "assets/[name].[hash].[ext]",
       },
+      plugins: [
+        copy({
+          targets: [
+            {
+              src: "src/assets/**/*.tgs",
+              dest: "dist/assets",
+            }, // 忽略 .tgs 文件
+            { src: "src/assets/**/*.json", dest: "dist/assets" }, // 包含 .json 文件
+          ],
+          hook: "writeBundle", // 在写入包时执行
+        }),
+      ],
     },
   },
   server: {
