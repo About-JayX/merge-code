@@ -5,8 +5,11 @@ import { Fragment, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { copy } from "@/util";
 import nav from "@/config/nav";
+import contractAddress from "@/config/contractAddress";
 import { Modal } from "antd";
+import Tgs from "../tgs";
 import { Tweet } from "react-tweet";
+
 export const memesSize =
   "min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
 
@@ -140,11 +143,11 @@ export const MemesHome = ({ ...props }) => {
       <Modal open={isModalOpen} centered footer={null} closable={false} width="auto">
         <div className="flex flex-col items-center px-8 py-4">
           {isModalOpen && (
-            <div
+            <Tgs
+              name="success"
               className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"
-            >
-              <Icon name="success" className="w-full h-full" />
-            </div>
+              onChange={(value) => isModalOpen && setIsModalOpen(!value)}
+            />
           )}
           <span className="text-lg sm:text-xl md:text-2xl font-bold mt-2">
             {t("message.copy.success")}
@@ -206,7 +209,7 @@ export const MemesHome = ({ ...props }) => {
                 <div
                   className={`p-[6px] relative rounded-full cursor-pointer ${memesHover}`}
                   onClick={async () => {
-                    await navigator.clipboard.writeText(props.contractAddress);
+                    await navigator.clipboard.writeText(contractAddress);
                     setIsModalOpen(true);
                   }}
                 >
@@ -229,14 +232,14 @@ export const MemesHome = ({ ...props }) => {
                   <div
                     className={`cursor-pointer ${memesHover}`}
                     onClick={async () => {
-                      await navigator.clipboard.writeText(props.contractAddress);
+                      await navigator.clipboard.writeText(contractAddress);
                       setIsModalOpen(true);
                     }}
                   >
                     <Ellipsis
                       className="text-base md:text-2xl font-normal text-white"
                       direction="middle"
-                      content={props.contractAddress}
+                      content={contractAddress}
                     />
                   </div>
                   <a
