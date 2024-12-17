@@ -2,8 +2,8 @@ import { Ellipsis } from 'antd-mobile'
 import { motion, useInView } from 'motion/react'
 import Icon from '../icon'
 import { Fragment, useRef } from 'react'
+import { Tweet } from 'react-tweet'
 import { copy } from '@/util'
-
 export const memesSize =
   'min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14'
 
@@ -216,10 +216,9 @@ export const Section1 = ({ ...props }) => {
         <MemesCard {...props}>
           <div className="grid  sm:grid-cols-[1fr,1fr] xl:grid-cols-[527px,1fr] gap-4 sm:gap-8 xl:gap-12">
             <Section type="left">
-              <img
-                src={props?.section1?.box.left.image}
-                className="w-full xl:w-[527px] h-[90vw] sm:h-[60vw] xl:h-[695px] rounded-xl object-cover"
-              />
+              <div data-theme="light" className="light">
+                <Tweet id="1865304483070169440"></Tweet>
+              </div>
             </Section>
 
             <Section type="right">
@@ -231,10 +230,9 @@ export const Section1 = ({ ...props }) => {
                   {props?.section1?.box.right.text}
                 </span>
                 {props?.section1?.box.right.image && (
-                  <img
-                    src={props?.section1?.box.right.image}
-                    className="w-full h-[40vw] sm:h-[22vw] xl:h-[262px] mt-4 sm:mt-4 xl:mt-11 rounded-xl object-cover"
-                  />
+                  <div data-theme="light" className="light">
+                    <Tweet id="1865305060307009884"></Tweet>
+                  </div>
                 )}
                 {props?.section1?.box.right.bntText && (
                   <a href={props?.section1?.box.right.bntUrl} target="_blank">
