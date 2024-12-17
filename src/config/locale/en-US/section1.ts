@@ -1,7 +1,7 @@
 import s1Left from "@/assets/image/section1/left.png";
 import s1Right from "@/assets/image/section1/right.png";
 export default {
-  title: "I‘m $MINIDOGE CEO",
+  title: "About $MINIDOGE",
   text: 'On December 7, 2024, Elon Musk posted a tweet featuring an image of "DogeFather" (Musk) carrying his "DogeSon" on his shoulders, accompanied by the caption "Doge & Minidoge".',
   box: {
     left: { image: s1Left },
