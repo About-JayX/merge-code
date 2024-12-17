@@ -247,7 +247,7 @@ export const Section1 = ({ ...props }) => {
             <span className={`${memesTitleSize}`}>{section1?.title}</span>
           </Section>
           <Section type="top">
-            <span className={`${memesTextSize}`}>{section1?.text}</span>
+            <span className="text-base sm:text-xl xl:text-2xl font-bold opacity-60 leading-relaxed">{section1?.text}</span>
           </Section>
         </div>
         <Section type="top">
@@ -346,10 +346,10 @@ export const Section3 = () => {
   return (
     <div className="flex flex-col gap-4 sm:gap-4 md:gap-8 xl:gap-16 items-center">
       <Section type="top">
-        <p className={`${memesTitleSize}`}>
+        <div className={`${memesTitleSize}`}>
           {section3.title.length >= 0 && (
             <Section type="left">
-              <p className="text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all">
+              <div className="text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all">
                 {section3.title.map((text: any, index: number) => (
                   <span
                     key={index}
@@ -358,10 +358,10 @@ export const Section3 = () => {
                     {text.content}
                   </span>
                 ))}
-              </p>
+              </div>
             </Section>
           )}
-        </p>
+        </div>
       </Section>
       <Section type="top">
         <div className="w-full flex flex-col">
@@ -503,7 +503,7 @@ export default function Domain({ ...props }) {
   if (Object.keys(props).length === 0) return
   return (
     <div
-      className={`min-h-screen w-full flex flex-col pb-12 gap-8 sm:gap-8 xl:gap-0  items-center  overflow-hidden relative ${props.background?.pattern}`}
+      className={`min-h-screen w-full flex flex-col pb-12 gap-8 sm:gap-8 xl:gap-0 items-center overflow-hidden relative text-content ${props.background?.pattern}`}
       style={{ color: props.text?.color }}
     >
       <div className="w-full h-screen fixed top-0 left-0 ">

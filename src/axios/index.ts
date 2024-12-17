@@ -5,7 +5,7 @@ import axios, {
   InternalAxiosRequestConfig,
 } from 'axios'
 
-import { URL } from '@/config'
+import { api } from '@/config'
 
 /**
  * Axios 基础配置
@@ -14,7 +14,7 @@ import { URL } from '@/config'
  */
 const config: AxiosRequestConfig = {
   timeout: 10000,
-  baseURL: URL.baseURL,
+  baseURL: api.baseURL,
 }
 
 /**
@@ -49,44 +49,40 @@ class Axios {
   }
 
   /**
-   * GET 请求方法
-   * @param url 请求地址
-   * @param params 请求参数（查询字符串）
+   * 发送请求
+   * @param config 请求配置
+   * @returns Promise
    */
-  get(url: string, params?: object): Promise<unknown> {
-    return this.service.get(url, { params })
+  request<T = any, R = AxiosResponse<T>>(config: AxiosRequestConfig): Promise<R> {
+    return this.service.request(config)
   }
 
   /**
-   * POST 请求方法
+   * 发送GET请求
    * @param url 请求地址
-   * @param params 请求体数据
-   * @param config 额外的配置选项
+   * @param config 请求配置
+   * @returns Promise
    */
-  post(
+  get<T = any, R = AxiosResponse<T>>(
     url: string,
-    params?: object | string,
-    config?: AxiosRequestConfig<string | object>
-  ): Promise<unknown> {
-    return this.service.post(url, params, config)
+    config?: AxiosRequestConfig
+  ): Promise<R> {
+    return this.service.get(url, config)
   }
 
   /**
-   * PUT 请求方法
+   * 发送POST请求
    * @param url 请求地址
-   * @param params 请求体数据
+   * @param data 请求数据
+   * @param config 请求配置
+   * @returns Promise
    */
-  put(url: string, params?: object): Promise<unknown> {
-    return this.service.put(url, params)
-  }
-
-  /**
-   * DELETE 请求方法
-   * @param url 请求地址
-   * @param params 请求参数（查询字符串）
-   */
-  delete(url: string, params?: object): Promise<unknown> {
-    return this.service.delete(url, { params })
+  post<T = any, R = AxiosResponse<T>>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<R> {
+    return this.service.post(url, data, config)
   }
 }
 
