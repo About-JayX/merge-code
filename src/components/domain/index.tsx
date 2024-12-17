@@ -521,10 +521,13 @@ export default function Domain({ ...props }) {
       />
       <Section className="w-full flex justify-center z-10">
         <header className="p-3 sm:p-8 md:pt-8 md:px-16 flex gap-1 sm:gap-4 items-center w-full max-w-screen-xl">
-          <img
-            src="/logo.png"
-            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full"
-          />
+          <div className="grid grid-cols-[48px,auto] sm:grid-cols-[56px,auto] md:grid-cols-[64px,auto] items-center gap-3">
+            <img
+              src="/logo.png"
+              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full"
+            />
+            <span className={`${memesTextColor} sm:text-4xl md:text-5xl font-bold hidden sm:block `}>MINIDOGE</span>
+          </div>
 
           <div className="flex-1" />
           {nav.twitter_url && (
