@@ -482,6 +482,71 @@ export const HowToBuy = ({ ...props }) => {
     text?: string;
     index?: number;
   }) => {
+    // 第三个卡片添加链接
+    if (index === 2) {
+      return (
+        <a 
+          href="https://raydium.io/swap/?inputMint=sol&outputMint=8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu" 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          <MemesCard {...props} className={`${memesHover}`}>
+            <div className="flex flex-col gap-4 sm:gap-6 xl:gap-7">
+              <div className="grid grid-cols-[70px,1fr] xl:grid-cols-[83px,1fr] gap-4 sm:gap-6 xl:gap-8 items-center">
+                <div className="aspect-square p-[6px] bg-white/20 rounded-2xl">
+                  <Icon
+                    name={`howToBuy/${3 - index}`}
+                    className="aspect-square rounded-xl w-full h-full object-cover"
+                  />
+                </div>
+                <span
+                  className={`text-2xl xl:text-3xl font-normal ${memesTextColor}`}
+                  dangerouslySetInnerHTML={{ __html: title }}
+                ></span>
+              </div>
+              <span
+                className={`${memesTextSize} !text-base xl:!text-2xl font-normal`}
+                dangerouslySetInnerHTML={{ __html: text }}
+              ></span>
+            </div>
+          </MemesCard>
+        </a>
+      );
+    }
+
+    // 第二个卡片添加链接
+    if (index === 1) {
+      return (
+        <a 
+          href="https://phantom.com/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          <MemesCard {...props} className={`${memesHover}`}>
+            <div className="flex flex-col gap-4 sm:gap-6 xl:gap-7">
+              <div className="grid grid-cols-[70px,1fr] xl:grid-cols-[83px,1fr] gap-4 sm:gap-6 xl:gap-8 items-center">
+                <div className="aspect-square p-[6px] bg-white/20 rounded-2xl">
+                  <Icon
+                    name={`howToBuy/${3 - index}`}
+                    className="aspect-square rounded-xl w-full h-full object-cover"
+                  />
+                </div>
+                <span
+                  className={`text-2xl xl:text-3xl font-normal ${memesTextColor}`}
+                  dangerouslySetInnerHTML={{ __html: title }}
+                ></span>
+              </div>
+              <span
+                className={`${memesTextSize} !text-base xl:!text-2xl font-normal`}
+                dangerouslySetInnerHTML={{ __html: text }}
+              ></span>
+            </div>
+          </MemesCard>
+        </a>
+      );
+    }
+
+    // 第一个卡片不可点击
     return (
       <MemesCard {...props} className={`${memesHover}`}>
         <div className="flex flex-col gap-4 sm:gap-6 xl:gap-7">
