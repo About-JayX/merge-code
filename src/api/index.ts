@@ -10,7 +10,7 @@ export const domain = {
    * @param data.current 当前页码
    * @param data.pageSize 每页数量
    */
-  getListAPI: (data: { current?: number; pageSize?: number }) =>
+  getListAPI: (_: { current?: number; pageSize?: number }) =>
     // axios.post('/v2/domain/token-list', data),
     Promise.resolve({ data: [] }),
 
@@ -18,7 +18,7 @@ export const domain = {
    * 注册域名
    * @param data 域名详情
    */
-  registerAPI: (data: any) =>
+  registerAPI: (_: any) =>
     // axios.post('/v2/domain/token-create', data),
     Promise.resolve({ data: null }),
 
@@ -26,7 +26,7 @@ export const domain = {
    * 验证域名
    * @param data.domain 要验证的域名
    */
-  verifyAPI: (data: { domain: string }) =>
+  verifyAPI: (_: { domain: string }) =>
     // axios.post('/v2/domain/token-search', data),
     Promise.resolve({ data: null }),
 
@@ -35,7 +35,7 @@ export const domain = {
    * @param data FormData 对象
    * @returns 上传结果
    */
-  uploadImageAPI: (data: FormData) =>
+  uploadImageAPI: (_: FormData) =>
     // axios.post('/v2/domain/update-images', data),
     Promise.resolve({ data: null }),
 
@@ -45,7 +45,7 @@ export const domain = {
    * @param data.signature 签名
    * @param data.message 消息
    */
-  loginAPI: (data: { address: string; signature: any; message: any }) =>
+  loginAPI: (_: { address: string; signature: any; message: any }) =>
     // axios.post('/v2/domain/wallet-login', data),
     Promise.resolve({ data: null }),
 
@@ -56,7 +56,7 @@ export const domain = {
    * @param token 用户token
    */
   ownerListAPI: (
-    data: { current?: number; pageSize?: number },
+    _: { current?: number; pageSize?: number },
     token: string,
   ) =>
     // axios.post('/v2/domain/token-list-user', data, {
