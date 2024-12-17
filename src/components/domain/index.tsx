@@ -8,7 +8,7 @@ import nav from "@/config/nav";
 import contractAddress from "@/config/contractAddress";
 import { Modal } from "antd";
 import Tgs from "../tgs";
-
+import { Tweet } from "react-tweet";
 export const memesSize =
   "min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
 
@@ -153,7 +153,9 @@ export const MemesHome = ({ ...props }) => {
         <div className="flex flex-col w-full">
           {home.title.length >= 0 && (
             <Section type="left">
-              <p className={`${memesTitleSize} text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all`}>
+              <p
+                className={`${memesTitleSize} text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all`}
+              >
                 {home.title.map((text: any, index: number) => (
                   <span
                     key={index}
@@ -251,11 +253,16 @@ export const Section1 = ({ ...props }) => {
         <Section type="top">
           <MemesCard>
             <div className="grid  sm:grid-cols-[1fr,1fr] xl:grid-cols-[527px,1fr] gap-4 sm:gap-8 xl:gap-12">
-              <Section type="left">
+              {/* <Section type="left">
                 <img
                   src={section1?.box.left.image}
                   className="w-full xl:w-[527px]  xl:h-[695px] rounded-xl object-cover"
                 />
+              </Section> */}
+              <Section type="left">
+                <div data-theme="light" className="light">
+                  <Tweet id="1865304483070169440"></Tweet>
+                </div>
               </Section>
 
               <Section type="right">
@@ -267,10 +274,9 @@ export const Section1 = ({ ...props }) => {
                     {section1?.box.right.text}
                   </span>
                   {section1?.box.right.image && (
-                    <img
-                      src={section1?.box.right.image}
-                      className="w-full  mt-4 sm:mt-4 xl:mt-11 rounded-xl object-cover"
-                    />
+                    <div data-theme="light" className="light">
+                      <Tweet id="1865305060307009884"></Tweet>
+                    </div>
                   )}
                   {section1?.box.right.bntText && (
                     <a href={section1?.box.right.bntUrl} target="_blank">
@@ -467,9 +473,7 @@ export const About = () => {
       >
         {about?.title}
       </span>
-      <span className={`${memesTextSize} mt-3 sm:mt-6`}>
-        {about?.text}
-      </span>
+      <span className={`${memesTextSize} mt-3 sm:mt-6`}>{about?.text}</span>
       {about?.bntText && (
         <a href={about?.bntUrl}>
           <MemesBtn className="mt-6 xl:mt-12 !bg-white from-transparent to-transparent !border-transparent !text-black">
@@ -481,12 +485,16 @@ export const About = () => {
   );
 };
 
-export const Footer = () =>{
+export const Footer = () => {
   const { t } = useTranslation();
-  return <div className="flex flex-col gap-6">
-    <span className={`${memesTextSize} text-center w-full`}>{t("footer")}</span>
-  </div>
-}
+  return (
+    <div className="flex flex-col gap-6">
+      <span className={`${memesTextSize} text-center w-full`}>
+        {t("footer")}
+      </span>
+    </div>
+  );
+};
 export default function Domain({ ...props }) {
   if (Object.keys(props).length === 0) return;
   return (
