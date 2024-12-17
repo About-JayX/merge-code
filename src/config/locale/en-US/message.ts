@@ -1,6 +1,6 @@
 export default {
-  authorize: {
-    fail: "Authorize Fail",
-    success: "Authorize Success",
+  copy: {
+    fail: "Copy Fail",
+    success: "Copy Success",
   },
 };
