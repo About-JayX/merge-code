@@ -1,3 +1,3 @@
 export default {
-  buy: "Buy",
+  buy: "Buy $MINIDOGE",
 };

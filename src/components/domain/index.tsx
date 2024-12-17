@@ -158,7 +158,11 @@ export const MemesHome = ({ ...props }) => {
                 {home.title.map((text: any, index: number) => (
                   <span
                     key={index}
-                    className={text.status ? `${memesTextColor}` : ""}
+                    className={
+                      text.status || index === 2
+                        ? `${text.status ? memesTextColor : ""} text-2xl sm:text-3xl md:text-2xl xl:text-4xl`
+                        : ""
+                    }
                   >
                     {text.content}
                   </span>
@@ -168,7 +172,7 @@ export const MemesHome = ({ ...props }) => {
           )}
           {home.text && (
             <Section type="left">
-              <p className="text-base sm:text-lg md:text-base xl:text-xl mt-4 text-[#a3a3a5]">
+              <p className="text-base sm:text-lg md:text-base xl:text-xl mt-4 sm:mt-4 xl:mt-8">
                 {home.text}
               </p>
             </Section>
@@ -179,17 +183,17 @@ export const MemesHome = ({ ...props }) => {
               {contractAddress && (
                 <a href={home.buyUrl} target="_blank">
                   <MemesBtn>
-                    {publics.buy}&nbsp;${String(props.ticker).toUpperCase()}
+                    {publics.buy}
                   </MemesBtn>
                 </a>
               )}
-              <a
-                className={`grid grid-cols-[auto,1fr] gap-4 items-center w-full ${memesHover}`}
-                onClick={async () =>
-                  await copy(contractAddress, () => setIsModalOpen(true))
-                }
-              >
-                <div className="p-[6px] relative rounded-full">
+              <div className="grid grid-cols-[auto,1fr] gap-4 items-center w-full">
+                <div
+                  className={`p-[6px] relative rounded-full cursor-pointer ${memesHover}`}
+                  onClick={async () =>
+                    await copy(contractAddress, () => setIsModalOpen(true))
+                  }
+                >
                   <div
                     className="absolute top-0 left-0 w-full h-full rounded-full -z-10 opacity-15"
                     style={{
@@ -206,16 +210,29 @@ export const MemesHome = ({ ...props }) => {
                   />
                 </div>
                 <div className="flex flex-col break-all">
-                  <Ellipsis
-                    className="text-base md:text-2xl font-normal text-white"
-                    direction="middle"
-                    content={contractAddress}
-                  />
-                  <span className="text-xs md:text-base font-normal opacity-50 text-white">
-                    {t("home.contractAddressText")}
-                  </span>
+                  <div
+                    className={`cursor-pointer ${memesHover}`}
+                    onClick={async () =>
+                      await copy(contractAddress, () => setIsModalOpen(true))
+                    }
+                  >
+                    <Ellipsis
+                      className="text-base md:text-2xl font-normal text-white"
+                      direction="middle"
+                      content={contractAddress}
+                    />
+                  </div>
+                  <a
+                    href="https://pump.fun/coin/8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu"
+                    target="_blank"
+                    className={`${memesHover}`}
+                  >
+                    <span className="text-xs md:text-base font-normal opacity-50 text-white">
+                      {t("home.contractAddressText")}
+                    </span>
+                  </a>
                 </div>
-              </a>
+              </div>
             </div>
           </Section>
         </div>
