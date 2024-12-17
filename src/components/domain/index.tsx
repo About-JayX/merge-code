@@ -1,9 +1,13 @@
 import { Ellipsis } from "antd-mobile";
 import { motion, useInView } from "motion/react";
 import Icon from "../icon";
-import { Fragment, useRef } from "react";
+import { Fragment, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { copy } from "@/util";
-import { message } from "antd";
+import nav from "@/config/nav";
+import contractAddress from "@/config/contractAddress";
+// import { Modal } from "antd";
+// import Tgs from "../tgs";
 
 export const memesSize =
   "min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
@@ -124,16 +128,24 @@ export const MemesCard = ({
 };
 
 export const MemesHome = ({ ...props }) => {
-  const [messageApi, contextHolder] = message.useMessage();
+  const { t } = useTranslation();
+  const [_, setIsModalOpen] = useState(true);
+
+  const home: any = t("home", { returnObjects: true });
+  const publics: any = t("public", { returnObjects: true });
   return (
     <Fragment>
-      {contextHolder}
+      {/* <Modal open={isModalOpen} centered footer closable={false}>
+        <div className="flex flex-col items-center">
+          <Tgs name="success" className="text-[180px]"/>
+        </div>
+      </Modal> */}
       <div className="grid  md:grid-cols-[1fr,250px] lg:grid-cols-[1fr,380px]  gap-12 sm:gap-16 md:gap-6 xl:gap-12 items-center justify-items-center sm:justify-between">
         <div className="flex flex-col w-full">
-          {props.name.length >= 0 && (
+          {home.title.length >= 0 && (
             <Section type="left">
               <p className="text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all">
-                {props.name.map((text: any, index: number) => (
+                {home.title.map((text: any, index: number) => (
                   <span
                     key={index}
                     className={text.status ? `${memesTextColor}` : ""}
@@ -144,32 +156,30 @@ export const MemesHome = ({ ...props }) => {
               </p>
             </Section>
           )}
-          {props.description && (
+          {home.text && (
             <Section type="left">
               <p className="text-base sm:text-lg md:text-base xl:text-xl mt-4 text-[#a3a3a5]">
-                {props.description}
+                {home.text}
               </p>
             </Section>
           )}
 
           <Section type="bottom">
             <div className="grid grid-cols-[auto,1fr] gap-4 sm:gap-8 md:gap-4 xl:gap-5 items-center mt-4 sm:mt-8 md:mt-8 xl:mt-16">
-              {props.contract_address && (
+              {contractAddress && (
                 <a
-                  href={`https://raydium.io/swap/?inputMint=sol&outputMint=${props.contract_address}`}
+                  href={`https://raydium.io/swap/?inputMint=sol&outputMint=${contractAddress}`}
                   target="_blank"
                 >
-                  <MemesBtn {...props}>
-                    BUY&nbsp;${String(props.ticker).toUpperCase()}
+                  <MemesBtn>
+                    {publics.buy}&nbsp;${String(props.ticker).toUpperCase()}
                   </MemesBtn>
                 </a>
               )}
               <a
                 className={`grid grid-cols-[auto,1fr] gap-4 items-center w-full ${memesHover}`}
                 onClick={async () =>
-                  await copy(props.contract_address, () =>
-                    messageApi.success("Copy Success")
-                  )
+                  await copy(contractAddress, () => setIsModalOpen(true))
                 }
               >
                 <div className="p-[6px] relative rounded-full">
@@ -192,7 +202,7 @@ export const MemesHome = ({ ...props }) => {
                   <Ellipsis
                     className="text-base md:text-2xl font-normal text-white"
                     direction="middle"
-                    content={props.contract_address}
+                    content={contractAddress}
                   />
                   <span className="text-xs md:text-base font-normal opacity-50 text-white">
                     CA
@@ -219,17 +229,17 @@ export const MemesHome = ({ ...props }) => {
 };
 
 export const Section1 = ({ ...props }) => {
+  const { t } = useTranslation();
+  const section1: any = t("section1", { returnObjects: true });
   return (
     <Fragment>
       <div className="flex flex-col gap-10">
         <div className="text-center flex flex-col gap-4 xl:gap-5">
           <Section type="top">
-            <span className={`${memesTitleSize}`}>
-              {props?.section1?.title}
-            </span>
+            <span className={`${memesTitleSize}`}>{section1?.title}</span>
           </Section>
           <Section type="top">
-            <span className={`${memesTextSize}`}>{props?.section1?.text}</span>
+            <span className={`${memesTextSize}`}>{section1?.text}</span>
           </Section>
         </div>
         <Section type="top">
@@ -237,7 +247,7 @@ export const Section1 = ({ ...props }) => {
             <div className="grid  sm:grid-cols-[1fr,1fr] xl:grid-cols-[527px,1fr] gap-4 sm:gap-8 xl:gap-12">
               <Section type="left">
                 <img
-                  src={props?.section1?.box.left.image}
+                  src={section1?.box.left.image}
                   className="w-full xl:w-[527px]  xl:h-[695px] rounded-xl object-cover"
                 />
               </Section>
@@ -245,25 +255,25 @@ export const Section1 = ({ ...props }) => {
               <Section type="right">
                 <div className="flex flex-col">
                   <span className={`${memesSubTitleSize}`}>
-                    {props?.section1?.box.right.title}
+                    {section1?.box.right.title}
                   </span>
                   <span className={`${memesTextSize} mt-4 sm:mt-4 xl:mt-8`}>
-                    {props?.section1?.box.right.text}
+                    {section1?.box.right.text}
                   </span>
-                  {props?.section1?.box.right.image && (
+                  {section1?.box.right.image && (
                     <img
-                      src={props?.section1?.box.right.image}
+                      src={section1?.box.right.image}
                       className="w-full  mt-4 sm:mt-4 xl:mt-11 rounded-xl object-cover"
                     />
                   )}
-                  {props?.section1?.box.right.bntText && (
-                    <a href={props?.section1?.box.right.bntUrl} target="_blank">
+                  {section1?.box.right.bntText && (
+                    <a href={section1?.box.right.bntUrl} target="_blank">
                       <MemesBtn
                         className=" mt-4 sm:mt-4 xl:mt-14"
                         type="default"
                         {...props}
                       >
-                        {props?.section1?.box.right.bntText}
+                        {section1?.box.right.bntText}
                       </MemesBtn>
                     </a>
                   )}
@@ -278,23 +288,25 @@ export const Section1 = ({ ...props }) => {
 };
 
 export const Section2 = ({ ...props }) => {
+  const { t } = useTranslation();
+  const section2: any = t("section2", { returnObjects: true });
   return (
     <div className="grid sm:grid-cols-[1fr,1fr] xl:grid-cols-[1fr,493px] items-center gap-6 sm:gap-6 xl:gap-16">
       <Section type="left">
         <div className="flex flex-col">
           <span className={`${memesTitleSize} max-w-md`}>
-            {props?.section2?.title}
+            {section2?.title}
           </span>
           <span className={`${memesTextSize} mt-4 sm:mt-4 xl:mt-8 max-w-xl`}>
-            {props?.section2?.text}
+            {section2?.text}
           </span>
-          {props?.section2?.bntText && (
+          {section2.bntText && (
             <a
-              href={props?.section2?.bntUtl}
+              href={section2?.bntUtl}
               target="_blank"
               className="mt-4 sm:mt-4 xl:mt-16"
             >
-              <MemesBtn {...props}>{props?.section2?.bntText}</MemesBtn>
+              <MemesBtn {...props}>{section2?.bntText}</MemesBtn>
             </a>
           )}
         </div>
@@ -307,7 +319,7 @@ export const Section2 = ({ ...props }) => {
           }}
         >
           <img
-            src={props?.section2?.image}
+            src={section2?.image}
             className="aspect-square  rounded-xl object-cover"
           />
         </div>
@@ -316,15 +328,17 @@ export const Section2 = ({ ...props }) => {
   );
 };
 
-export const Section3 = ({ ...props }) => {
+export const Section3 = () => {
+  const { t } = useTranslation();
+  const section3: any = t("section3", { returnObjects: true });
   return (
     <div className="flex flex-col gap-4 sm:gap-4 md:gap-8 xl:gap-16 items-center">
       <Section type="top">
         <p className={`${memesTitleSize}`}>
-          {props.section3.title.length >= 0 && (
+          {section3.title.length >= 0 && (
             <Section type="left">
               <p className="text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all">
-                {props.section3.title.map((text: any, index: number) => (
+                {section3.title.map((text: any, index: number) => (
                   <span
                     key={index}
                     className={text.status ? `${memesTextColor}` : ""}
@@ -339,13 +353,24 @@ export const Section3 = ({ ...props }) => {
       </Section>
       <Section type="top">
         <div className="w-full flex flex-col">
-          {props.section3.data && (
+          {section3.data && (
             <Fragment>
               {/* 第一排：最多显示3个 */}
               <div className="grid grid-cols-3 gap-3 sm:gap-4 justify-center">
-                {props.section3.data
-                  .slice(0, 3)
-                  .map((item: any, index: number) => (
+                {section3.data.slice(0, 3).map((item: any, index: number) => (
+                  <img
+                    key={index}
+                    src={item}
+                    alt={item}
+                    className="h-full w-full object-cover aspect-square rounded-xl"
+                  />
+                ))}
+              </div>
+
+              {/* 第二排：从第4个开始，显示最多4个 */}
+              {section3.data.length > 3 && (
+                <div className="grid grid-cols-4 gap-3 sm:gap-4 justify-items-center mt-4">
+                  {section3.data.slice(3).map((item: any, index: number) => (
                     <img
                       key={index}
                       src={item}
@@ -353,21 +378,6 @@ export const Section3 = ({ ...props }) => {
                       className="h-full w-full object-cover aspect-square rounded-xl"
                     />
                   ))}
-              </div>
-
-              {/* 第二排：从第4个开始，显示最多4个 */}
-              {props.section3.data.length > 3 && (
-                <div className="grid grid-cols-4 gap-3 sm:gap-4 justify-items-center mt-4">
-                  {props.section3.data
-                    .slice(3)
-                    .map((item: any, index: number) => (
-                      <img
-                        key={index}
-                        src={item}
-                        alt={item}
-                        className="h-full w-full object-cover aspect-square rounded-xl"
-                      />
-                    ))}
                 </div>
               )}
             </Fragment>
@@ -379,6 +389,8 @@ export const Section3 = ({ ...props }) => {
 };
 
 export const HowToBuy = ({ ...props }) => {
+  const { t } = useTranslation();
+  const howToBuy: any = t("howToBuy", { returnObjects: true });
   const MemesCardItem = ({
     text = "",
     index = 0,
@@ -413,12 +425,12 @@ export const HowToBuy = ({ ...props }) => {
   return (
     <div className="flex flex-col items-center gap-14">
       <Section type="top">
-        <span className={`${memesTitleSize}`}>How to buy?</span>
+        <span className={`${memesTitleSize}`}>{howToBuy.title}</span>
       </Section>
-      {props?.roadmap?.length && (
+      {howToBuy.data?.length && (
         <Section type="top" className="w-full">
           <div className="grid gap-5 w-full">
-            {props.roadmap.map((item: any, index: number) => (
+            {howToBuy.data.map((item: any, index: number) => (
               <MemesCardItem
                 key={index}
                 title={item.title}
@@ -433,27 +445,29 @@ export const HowToBuy = ({ ...props }) => {
   );
 };
 
-export const About = ({ ...props }) => {
+export const About = () => {
+  const { t } = useTranslation();
+  const about: any = t("about", { returnObjects: true });
   return (
     <MemesCard className="bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-white">
       <div className="w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-gradient-to-l from-[#FFAE04]/15 to-[#FFC30C]/15 -mt-[calc(96px+32px)] sm:-mt-[calc(114px+48px)] p-6 flex justify-center items-center">
         <img
-          src={props.logo_url}
+          src={"/logo.png"}
           className="aspect-square rounded-full object-cover w-full h-full"
         />
       </div>
       <span
         className={`${memesTitleSize} text-3xl sm:text-3xl md:text-3xl xl:text-4xl mt-4 sm:mt-5`}
       >
-        {props?.about?.title}
+        {about?.title}
       </span>
       <span className={`${memesTextSize} mt-3 sm:mt-6 sm:max-w-96`}>
-        {props?.about?.text}
+        {about?.text}
       </span>
-      {props?.about?.bntText && (
-        <a href={props?.about?.bntUrl}>
+      {about?.bntText && (
+        <a href={about?.bntUrl}>
           <MemesBtn className="mt-6 xl:mt-12 !bg-white from-transparent to-transparent !border-transparent !text-black">
-            {props?.about?.bntText}
+            {about?.bntText}
           </MemesBtn>
         </a>
       )}
@@ -486,42 +500,35 @@ export default function Domain({ ...props }) {
       />
       <Section className="w-full flex justify-center z-10">
         <header className="p-3 sm:p-8 md:pt-8 md:px-16 flex gap-1 sm:gap-4 items-center w-full max-w-screen-xl">
-          {props.logo_url && (
-            <img
-              src={props.logo_url}
-              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full"
-            />
-          )}
+          <img
+            src="/logo.png"
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full"
+          />
 
           <div className="flex-1" />
-          {props.twitter_url && (
-            <a href={props.twitter_url} target="_blank">
+          {nav.twitter_url && (
+            <a href={nav.twitter_url} target="_blank">
               <MemesIcon className="text-white" name="twitter" />
             </a>
           )}
-          {props.telegram_url && (
-            <a href={props.telegram_url} target="_blank">
+          {nav.telegram_url && (
+            <a href={nav.telegram_url} target="_blank">
               <MemesIcon className="text-white" name="telegram" />
             </a>
           )}
-          {props.dexscreener_url && (
-            <a href={props.dexscreener_url} target="_blank">
-              <MemesIcon name="dexscreener" />
+          {nav.tiktok_url && (
+            <a href={nav.tiktok_url} target="_blank">
+              <MemesIcon className="text-white" name="tiktok" />
             </a>
           )}
-          {props.pump_url && (
-            <a href={props.pump_url} target="_blank">
-              <MemesIcon name="pump" />
+          {nav.youtube_url && (
+            <a href={nav.youtube_url} target="_blank">
+              <MemesIcon className="text-white" name="youtube" />
             </a>
           )}
-          {props.contract_address && (
-            <a
-              href={`https://raydium.io/swap/?inputMint=sol&outputMint=${props.contract_address}`}
-              target="_blank"
-            >
-              <MemesBtn {...props}>
-                BUY&nbsp;${String(props.ticker).toUpperCase()}
-              </MemesBtn>
+          {nav.instagram_url && (
+            <a href={nav.instagram_url} target="_blank">
+              <MemesIcon className="text-white" name="instagram" />
             </a>
           )}
         </header>

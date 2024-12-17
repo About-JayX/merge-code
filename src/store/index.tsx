@@ -13,12 +13,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import telegram from '@/store/telegram'
 import theme from './theme'
 import user from './user'
+import tgs from './tgs'
 
 // 组合所有 reducers
 const rootReducer = combineReducers({
   telegram, // Telegram 相关状态
   theme,    // 主题相关状态
   user,     // 用户相关状态
+  tgs
 })
 
 // 创建 Redux store
