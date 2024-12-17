@@ -238,6 +238,19 @@ export const MemesHome = ({ ...props }) => {
 export const Section1 = ({ ...props }) => {
   const { t } = useTranslation();
   const section1: any = t("section1", { returnObjects: true });
+  const Tweets = ({ id,className="",imageUrl="" }: { id: string,className?:string,imageUrl:string }) => {
+    const [errorStatus, setErrorStatus] = useState<boolean>(false);
+    return errorStatus ? (
+      <img
+        src={imageUrl}
+        className={className}
+      />
+    ) : (
+      <div data-theme="light" className={`light ${className}`}>
+        <Tweet id={id} onError={() => setErrorStatus(true)}/>
+      </div>
+    );
+  };
   return (
     <Fragment>
       <div className="flex flex-col gap-10">
@@ -254,16 +267,8 @@ export const Section1 = ({ ...props }) => {
         <Section type="top">
           <MemesCard {...props} className={`${memesHover}`}>
             <div className="grid  sm:grid-cols-[1fr,1fr] xl:grid-cols-[527px,1fr] gap-4 sm:gap-8 xl:gap-12">
-              {/* <Section type="left">
-                <img
-                  src={section1?.box.left.image}
-                  className="w-full xl:w-[527px]  xl:h-[695px] rounded-xl object-cover"
-                />
-              </Section> */}
               <Section type="left">
-                <div data-theme="light" className="light">
-                  <Tweet id="1865304483070169440"></Tweet>
-                </div>
+                <Tweets id="1865304483070169440" imageUrl={section1?.box.left.image} className="w-full xl:w-[527px]  xl:h-[695px] rounded-xl object-cover"/>
               </Section>
 
               <Section type="right">
@@ -275,9 +280,7 @@ export const Section1 = ({ ...props }) => {
                     {section1?.box.right.text}
                   </span>
                   {section1?.box.right.image && (
-                    <div data-theme="light" className="light">
-                      <Tweet id="1865305060307009884"></Tweet>
-                    </div>
+                    <Tweets id="1865305060307009884" imageUrl={section1?.box.right.image} className="w-full  mt-4 sm:mt-4 xl:mt-11 rounded-xl object-cover"/>
                   )}
                   {section1?.box.right.bntText && (
                     <a href={section1?.box.right.bntUrl} target="_blank">
