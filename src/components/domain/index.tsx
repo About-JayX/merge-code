@@ -394,7 +394,7 @@ export const Section3 = () => {
   );
 };
 
-export const HowToBuy = ({ ...props }) => {
+export const HowToBuy = () => {
   const { t } = useTranslation();
   const howToBuy: any = t("howToBuy", { returnObjects: true });
   const MemesCardItem = ({
@@ -467,7 +467,7 @@ export const About = () => {
       >
         {about?.title}
       </span>
-      <span className={`${memesTextSize} mt-3 sm:mt-6 sm:max-w-96`}>
+      <span className={`${memesTextSize} mt-3 sm:mt-6`}>
         {about?.text}
       </span>
       {about?.bntText && (
@@ -480,6 +480,13 @@ export const About = () => {
     </MemesCard>
   );
 };
+
+export const Footer = () =>{
+  const { t } = useTranslation();
+  return <div className="flex flex-col gap-6">
+    <span className={`${memesTextSize} text-center w-full`}>{t("footer")}</span>
+  </div>
+}
 export default function Domain({ ...props }) {
   if (Object.keys(props).length === 0) return;
   return (
@@ -545,8 +552,11 @@ export default function Domain({ ...props }) {
         <Section2 {...props} />
         <Section3 {...props} />
         <HowToBuy {...props} />
-        <Section type="bottom">
+        <Section type="top">
           <About {...props} />
+        </Section>
+        <Section type="bottom">
+          <Footer {...props} />
         </Section>
       </main>
     </div>

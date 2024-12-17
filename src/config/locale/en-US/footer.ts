@@ -1,0 +1,1 @@
+export default "$MINIDOGE is only a MEME cultural token. This website is built by the CTO team and does not constitute investment advice."
