@@ -6,40 +6,41 @@
  * 3. 主题持久化（通过 localStorage）
  */
 
-import { createSlice } from '@reduxjs/toolkit'
-import { switchTheme } from '@/hook/theme/switchTheme'
+import { createSlice } from "@reduxjs/toolkit";
+import { switchTheme } from "@/hook/theme/switchTheme";
 
 export const theme = createSlice({
   // Slice 名称
-  name: 'theme',
-  
+  name: "theme",
+
   // 初始状态
   initialState: {
     // 从 localStorage 获取主题设置，默认为亮色主题
-    value: localStorage.getItem('theme') || 'dark'
+    // value: localStorage.getItem('theme') || 'dark'
+    value: "dark",
   } as {
-    value: 'light' | 'dark'
+    value: "light" | "dark";
   },
-  
+
   // 同步操作的 reducers
   reducers: {
     // 更新主题状态
     updateTheme(state, action) {
-      state.value = action.payload
-    }
+      state.value = action.payload;
+    },
   },
-  
+
   // 异步操作的 reducers
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     // 处理主题切换的异步操作完成后的状态更新
     builder.addCase(switchTheme.fulfilled, (state, action) => {
-      state.value = action.payload
-    })
-  }
-})
+      state.value = action.payload;
+    });
+  },
+});
 
 // 导出同步操作的 action creators
-export const { updateTheme } = theme.actions
+export const { updateTheme } = theme.actions;
 
 // 导出 reducer
-export default theme.reducer
+export default theme.reducer;

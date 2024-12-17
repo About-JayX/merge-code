@@ -1,4 +1,4 @@
-export const copy = async (url: string) => {
+export const copy = async (url: string,onSuccess?: () => void) => {
   const inviteLink = url;
 
   try {
@@ -10,6 +10,7 @@ export const copy = async (url: string) => {
     textArea.select();
     try {
       document.execCommand("copy");
+      onSuccess && onSuccess()
     } catch (_) {
       return;
     }
