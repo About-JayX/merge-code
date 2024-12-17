@@ -333,6 +333,12 @@
   max-height: 50vh;
 }
 
+.text-content {
+  p, span, h1, h2, h3, h4, h5, h6, a {
+    @apply transition-all duration-300 ease-in-out hover:opacity-80 hover:-translate-y-0.5 cursor-pointer;
+  }
+}
+
 .ant-typography-copy,
 .ant-typography-expand,
 .ant-typography-collapse {
