@@ -5,9 +5,7 @@ import { Fragment, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { copy } from "@/util";
 import nav from "@/config/nav";
-import contractAddress from "@/config/contractAddress";
 import { Modal } from "antd";
-import Tgs from "../tgs";
 import { Tweet } from "react-tweet";
 export const memesSize =
   "min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
@@ -142,11 +140,11 @@ export const MemesHome = ({ ...props }) => {
       <Modal open={isModalOpen} centered footer={null} closable={false} width="auto">
         <div className="flex flex-col items-center px-8 py-4">
           {isModalOpen && (
-            <Tgs
-              name="success"
+            <div
               className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"
-              onChange={(value) => isModalOpen && setIsModalOpen(!value)}
-            />
+            >
+              <Icon name="success" className="w-full h-full" />
+            </div>
           )}
           <span className="text-lg sm:text-xl md:text-2xl font-bold mt-2">
             {t("message.copy.success")}
@@ -199,18 +197,16 @@ export const MemesHome = ({ ...props }) => {
 
           <Section type="bottom">
             <div className="grid grid-cols-[auto,1fr] gap-4 sm:gap-8 md:gap-4 xl:gap-5 items-center mt-4 sm:mt-8 md:mt-8 xl:mt-16">
-              {contractAddress && (
-                <a href={home.buyUrl} target="_blank">
-                  <MemesBtn>
-                    {publics.buy}
-                  </MemesBtn>
-                </a>
-              )}
+              <a href={home.buyUrl} target="_blank">
+                <MemesBtn>
+                  {publics.buy}
+                </MemesBtn>
+              </a>
               <div className="grid grid-cols-[auto,1fr] gap-4 items-center w-full">
                 <div
                   className={`p-[6px] relative rounded-full cursor-pointer ${memesHover}`}
                   onClick={async () => {
-                    await navigator.clipboard.writeText(contractAddress);
+                    await navigator.clipboard.writeText(props.contractAddress);
                     setIsModalOpen(true);
                   }}
                 >
@@ -233,14 +229,14 @@ export const MemesHome = ({ ...props }) => {
                   <div
                     className={`cursor-pointer ${memesHover}`}
                     onClick={async () => {
-                      await navigator.clipboard.writeText(contractAddress);
+                      await navigator.clipboard.writeText(props.contractAddress);
                       setIsModalOpen(true);
                     }}
                   >
                     <Ellipsis
                       className="text-base md:text-2xl font-normal text-white"
                       direction="middle"
-                      content={contractAddress}
+                      content={props.contractAddress}
                     />
                   </div>
                   <a
@@ -640,7 +636,10 @@ export const Footer = () => {
   );
 };
 export default function Domain({ ...props }) {
-  if (Object.keys(props).length === 0) return;
+  if (Object.keys(props).length === 0) return null;
+  
+  const { nav = {} } = props;
+  
   return (
     <div
       className={`min-h-screen w-full flex flex-col pb-12 gap-8 sm:gap-8 xl:gap-0 items-center overflow-hidden relative text-content ${props.background?.pattern}`}

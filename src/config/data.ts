@@ -1,4 +1,5 @@
 import banner from "@/assets/image/banner/banner.png";
+import nav from "./nav";
 
 const data = async () => {
   return {
@@ -16,6 +17,7 @@ const data = async () => {
       background: "#FFC10B",
       text: "#242904",
     },
+    nav,
   };
 };
 
