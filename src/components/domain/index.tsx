@@ -1,40 +1,42 @@
-import { Ellipsis } from 'antd-mobile'
-import { motion, useInView } from 'motion/react'
-import Icon from '../icon'
-import { Fragment, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { copy } from '@/util'
-import nav from '@/config/nav'
-import contractAddress from '@/config/contractAddress'
-import { Modal } from 'antd'
-import Tgs from '../tgs'
-import { Tweet } from 'react-tweet'
+import { Ellipsis } from "antd-mobile";
+import { motion, useInView } from "motion/react";
+import Icon from "../icon";
+import { Fragment, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { copy } from "@/util";
+import nav from "@/config/nav";
+import contractAddress from "@/config/contractAddress";
+import { Modal } from "antd";
+import Tgs from "../tgs";
+import { Tweet } from "react-tweet";
 export const memesSize =
-  'min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14'
+  "min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
 
-export const memesTitleSize = 'text-2xl sm:text-4xl xl:text-6xl font-bold orbitron'
-export const memesSubTitleSize = 'text-2xl sm:text-3xl xl:text-4xl font-normal orbitron'
+export const memesTitleSize =
+  "text-2xl sm:text-4xl xl:text-6xl font-bold orbitron";
+export const memesSubTitleSize =
+  "text-2xl sm:text-3xl xl:text-4xl font-normal orbitron";
 export const memesTextSize =
-  ' text-sm sm:text-sm xl:text-base font-normal opacity-50'
+  " text-sm sm:text-sm xl:text-base font-normal opacity-50";
 export const memesBntColor =
-  'bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] text-black'
+  "bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] text-black";
 export const memesTextColor =
-  'bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] bg-clip-text text-transparent'
+  "bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] bg-clip-text text-transparent";
 export const memesHover =
-  'transition-all ease-in-out duration-300 hover:opacity-80 hover:scale-105 hover:shadow-lg'
+  "transition-all ease-in-out duration-300 hover:opacity-80 hover:scale-105 hover:shadow-lg";
 
 export const Section = ({
   children,
-  type = 'top',
-  className = '',
+  type = "top",
+  className = "",
 }: {
-  type?: 'top' | 'left' | 'right' | 'bottom'
-  children?: React.ReactNode
-  className?: string
+  type?: "top" | "left" | "right" | "bottom";
+  children?: React.ReactNode;
+  className?: string;
 }) => {
-  const ref = useRef(null)
+  const ref = useRef(null);
 
-  const isInView = useInView(ref)
+  const isInView = useInView(ref);
 
   const variants = {
     top: { opacity: 0, y: -50 },
@@ -42,30 +44,30 @@ export const Section = ({
     right: { opacity: 0, x: 50 },
     bottom: { opacity: 0, y: 50 },
     visible: { opacity: 1, x: 0, y: 0 },
-  }
+  };
 
   return (
     <motion.div
       className={className}
       ref={ref}
       initial={type}
-      animate={isInView ? 'visible' : type}
+      animate={isInView ? "visible" : type}
       variants={variants}
       transition={{ duration: 0.5 }}
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 export const MemesIcon = ({
-  className = '',
+  className = "",
   style = {},
-  name = '',
+  name = "",
 }: {
-  className?: string
-  style?: React.CSSProperties
-  name?: string
+  className?: string;
+  style?: React.CSSProperties;
+  name?: string;
 }) => {
   return (
     <div
@@ -74,64 +76,61 @@ export const MemesIcon = ({
     >
       <Icon name={name} className="text-lg sm:text-xl" />
     </div>
-  )
-}
+  );
+};
 
 export const MemesBtn = ({
   children,
-  className = '',
-  type = 'primary',
+  className = "",
+  type = "primary",
   style = {},
   onClick,
   ...props
 }: {
-  className?: string
-  style?: React.CSSProperties
-  children?: React.ReactNode
-  type?: 'default' | 'primary'
-  [key: string]: any
-  onClick?: () => void
+  className?: string;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+  type?: "default" | "primary";
+  [key: string]: any;
+  onClick?: () => void;
 }) => {
   return (
     <button
       className={`${memesSize} rounded 
       px-3 font-bold text-xs sm:text-sm xl:text-xl sm:min-w-40 xl:min-w-48 ${
-        type === 'primary'
+        type === "primary"
           ? memesBntColor
-          : 'border border-[#FFB004] text-[#FFB004]'
+          : "border border-[#FFB004] text-[#FFB004]"
       } ${memesHover} ${className}`}
       onClick={onClick}
       {...props}
     >
       {children}
     </button>
-  )
-}
+  );
+};
 
 export const MemesCard = ({
-  className = '',
+  className = "",
   children,
 }: {
-  className?: string
-  children?: React.ReactNode
-  [key: string]: any
+  className?: string;
+  children?: React.ReactNode;
+  [key: string]: any;
 }) => {
   return (
-    <div
-      className={` rounded-2xl p-6 ${memesHover} ${className}`}
-      style={{ background: '#0F0F0F' }}
-    >
+    <div className={` rounded-2xl bg-[#0F0F0F] p-6 ${memesHover} ${className}`}>
       {children}
     </div>
-  )
-}
+  );
+};
 
 export const MemesHome = ({ ...props }) => {
-  const { t } = useTranslation()
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { t } = useTranslation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const home: any = t('home', { returnObjects: true })
-  const publics: any = t('public', { returnObjects: true })
+  const home: any = t("home", { returnObjects: true });
+  const publics: any = t("public", { returnObjects: true });
   return (
     <Fragment>
       <Modal open={isModalOpen} centered footer closable={false}>
@@ -140,12 +139,12 @@ export const MemesHome = ({ ...props }) => {
             <Tgs
               name="success"
               className="text-[180px]"
-              onChange={value => isModalOpen && setIsModalOpen(!value)}
+              onChange={(value) => isModalOpen && setIsModalOpen(!value)}
             />
           )}
 
           <span className="text-2xl font-bold">
-            {t('message.copy.success')}
+            {t("message.copy.success")}
           </span>
         </div>
       </Modal>
@@ -159,7 +158,7 @@ export const MemesHome = ({ ...props }) => {
                 {home.title.map((text: any, index: number) => (
                   <span
                     key={index}
-                    className={text.status ? `${memesTextColor}` : ''}
+                    className={text.status ? `${memesTextColor}` : ""}
                   >
                     {text.content}
                   </span>
@@ -213,7 +212,7 @@ export const MemesHome = ({ ...props }) => {
                     content={contractAddress}
                   />
                   <span className="text-xs md:text-base font-normal opacity-50 text-white">
-                    {t('home.contractAddressText')}
+                    {t("home.contractAddressText")}
                   </span>
                 </div>
               </a>
@@ -233,12 +232,12 @@ export const MemesHome = ({ ...props }) => {
         )}
       </div>
     </Fragment>
-  )
-}
+  );
+};
 
 export const Section1 = ({ ...props }) => {
-  const { t } = useTranslation()
-  const section1: any = t('section1', { returnObjects: true })
+  const { t } = useTranslation();
+  const section1: any = t("section1", { returnObjects: true });
   return (
     <Fragment>
       <div className="flex flex-col gap-10">
@@ -247,7 +246,9 @@ export const Section1 = ({ ...props }) => {
             <span className={`${memesTitleSize}`}>{section1?.title}</span>
           </Section>
           <Section type="top">
-            <span className="text-base sm:text-xl xl:text-2xl font-bold opacity-60 leading-relaxed">{section1?.text}</span>
+            <span className="text-base sm:text-xl xl:text-2xl font-bold opacity-60 leading-relaxed">
+              {section1?.text}
+            </span>
           </Section>
         </div>
         <Section type="top">
@@ -296,12 +297,12 @@ export const Section1 = ({ ...props }) => {
         </Section>
       </div>
     </Fragment>
-  )
-}
+  );
+};
 
 export const Section2 = ({ ...props }) => {
-  const { t } = useTranslation()
-  const section2: any = t('section2', { returnObjects: true })
+  const { t } = useTranslation();
+  const section2: any = t("section2", { returnObjects: true });
   return (
     <div className="grid sm:grid-cols-[1fr,1fr] xl:grid-cols-[1fr,493px] items-center gap-6 sm:gap-6 xl:gap-16">
       <Section type="left">
@@ -337,12 +338,12 @@ export const Section2 = ({ ...props }) => {
         </div>
       </Section>
     </div>
-  )
-}
+  );
+};
 
 export const Section3 = () => {
-  const { t } = useTranslation()
-  const section3: any = t('section3', { returnObjects: true })
+  const { t } = useTranslation();
+  const section3: any = t("section3", { returnObjects: true });
   return (
     <div className="flex flex-col gap-4 sm:gap-4 md:gap-8 xl:gap-16 items-center">
       <Section type="top">
@@ -353,7 +354,7 @@ export const Section3 = () => {
                 {section3.title.map((text: any, index: number) => (
                   <span
                     key={index}
-                    className={text.status ? `${memesTextColor}` : ''}
+                    className={text.status ? `${memesTextColor}` : ""}
                   >
                     {text.content}
                   </span>
@@ -399,19 +400,19 @@ export const Section3 = () => {
         </div>
       </Section>
     </div>
-  )
-}
+  );
+};
 
 export const HowToBuy = ({ ...props }) => {
-  const { t } = useTranslation()
-  const howToBuy: any = t('howToBuy', { returnObjects: true })
+  const { t } = useTranslation();
+  const howToBuy: any = t("howToBuy", { returnObjects: true });
   const MemesCardItem = ({
-    text = '',
+    text = "",
     index = 0,
   }: {
-    title?: string
-    text?: string
-    index?: number
+    title?: string;
+    text?: string;
+    index?: number;
   }) => {
     return (
       <MemesCard {...props} className={`${memesHover}`}>
@@ -434,8 +435,8 @@ export const HowToBuy = ({ ...props }) => {
           </span>
         </div>
       </MemesCard>
-    )
-  }
+    );
+  };
   return (
     <div className="flex flex-col items-center gap-14">
       <Section type="top">
@@ -456,19 +457,19 @@ export const HowToBuy = ({ ...props }) => {
         </Section>
       )}
     </div>
-  )
-}
+  );
+};
 
 export const About = () => {
-  const { t } = useTranslation()
-  const about: any = t('about', { returnObjects: true })
+  const { t } = useTranslation();
+  const about: any = t("about", { returnObjects: true });
   return (
     <MemesCard
       className={`bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-white ${memesHover}`}
     >
       <div className="w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-gradient-to-l from-[#FFAE04]/15 to-[#FFC30C]/15 -mt-[calc(96px+32px)] sm:-mt-[calc(114px+48px)] p-6 flex justify-center items-center">
         <img
-          src={'/logo.png'}
+          src={"/logo.png"}
           className="aspect-square rounded-full object-cover w-full h-full"
         />
       </div>
@@ -479,28 +480,28 @@ export const About = () => {
       </span>
       <span className={`${memesTextSize} mt-3 sm:mt-6`}>{about?.text}</span>
       {about?.bntText && (
-        <a href={about?.bntUrl} className={memesHover}>
+        <a href={about?.bntUrl} className={memesHover} target="_blank">
           <MemesBtn className="mt-6 xl:mt-12 !bg-white from-transparent to-transparent !border-transparent !text-black">
             {about?.bntText}
           </MemesBtn>
         </a>
       )}
     </MemesCard>
-  )
-}
+  );
+};
 
 export const Footer = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-6">
       <span className={`${memesTextSize} text-center w-full`}>
-        {t('footer')}
+        {t("footer")}
       </span>
     </div>
-  )
-}
+  );
+};
 export default function Domain({ ...props }) {
-  if (Object.keys(props).length === 0) return
+  if (Object.keys(props).length === 0) return;
   return (
     <div
       className={`min-h-screen w-full flex flex-col pb-12 gap-8 sm:gap-8 xl:gap-0 items-center overflow-hidden relative text-content ${props.background?.pattern}`}
@@ -511,9 +512,9 @@ export default function Domain({ ...props }) {
           className="w-full h-full"
           style={{
             backgroundImage: `url(${props.background?.custom})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
           }}
         />
       </div>
@@ -530,7 +531,11 @@ export default function Domain({ ...props }) {
               src="/logo.png"
               className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full"
             />
-            <span className={`${memesTextColor} sm:text-3xl md:text-4xl font-bold hidden sm:block orbitron`}>MINIDOGE</span>
+            <span
+              className={`${memesTextColor} sm:text-3xl md:text-4xl font-bold hidden sm:block orbitron`}
+            >
+              MINIDOGE
+            </span>
           </div>
 
           <div className="flex-1" />
@@ -575,5 +580,5 @@ export default function Domain({ ...props }) {
         </Section>
       </main>
     </div>
-  )
+  );
 }
