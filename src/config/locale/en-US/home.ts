@@ -4,6 +4,6 @@ export default {
     { content: " (CTO) ", status: true },
     { content: "\n- Minidoge" },
   ],
-  text: "Carrying forward the inheritance of $DOGE, blessed by Elon Musk, $MINIDOGE continues the revolution.",
+  text: "$MINIDOGE represents the inheritance of $DOGE, just as Elon Musk (the DogeFather) guides his successor (DogeSon). ",
   buyUrl:"https://raydium.io/swap/?inputMint=sol&outputMint=8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu"
 };
