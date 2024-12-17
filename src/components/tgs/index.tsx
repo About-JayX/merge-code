@@ -27,10 +27,12 @@ export default memo(function Tgs({
   useEffect(() => {
     onChange && onChange(false);
     if (data.length <= 0) return;
+    
     const find = data.find((item) => item.name === name);
     if (!find) return;
     if (!tgsRef.current) return;
     if (tgsRef && tgsRef.current) {
+      
       tgsRef.current = lottie.loadAnimation({
         container: tgsRef.current!,
         renderer: "canvas",
@@ -40,7 +42,7 @@ export default memo(function Tgs({
       });
       tgsRef.current.addEventListener("complete", () => {
         onChange && onChange(true);
-        tgsRef.current.loop = true
+        tgsRef.current?.goToAndPlay(0, true);
       })
     }
   }, [data]);

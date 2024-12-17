@@ -111,7 +111,6 @@ export const MemesBtn = ({
 export const MemesCard = ({
   className = "",
   children,
-  ...props
 }: {
   className?: string;
   children?: React.ReactNode;
@@ -120,7 +119,7 @@ export const MemesCard = ({
   return (
     <div
       className={` rounded-2xl p-6 ${className}`}
-      style={{ background: props.card?.background }}
+      style={{ background: "#0F0F0F" }}
     >
       {children}
     </div>
@@ -137,15 +136,24 @@ export const MemesHome = ({ ...props }) => {
     <Fragment>
       <Modal open={isModalOpen} centered footer closable={false}>
         <div className="flex flex-col items-center">
-          <Tgs name="success" className="text-[180px]" onChange={(value)=>setIsModalOpen(!value)}/>
-          <span className="text-2xl font-bold">{t("message.copy.success")}</span>
+          {isModalOpen && (
+            <Tgs
+              name="success"
+              className="text-[180px]"
+              onChange={(value) => isModalOpen && setIsModalOpen(!value)}
+            />
+          )}
+
+          <span className="text-2xl font-bold">
+            {t("message.copy.success")}
+          </span>
         </div>
       </Modal>
       <div className="grid  md:grid-cols-[1fr,250px] lg:grid-cols-[1fr,380px]  gap-12 sm:gap-16 md:gap-6 xl:gap-12 items-center justify-items-center sm:justify-between">
         <div className="flex flex-col w-full">
           {home.title.length >= 0 && (
             <Section type="left">
-              <p className="text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all">
+              <p className={`${memesTitleSize} text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all`}>
                 {home.title.map((text: any, index: number) => (
                   <span
                     key={index}
@@ -168,10 +176,7 @@ export const MemesHome = ({ ...props }) => {
           <Section type="bottom">
             <div className="grid grid-cols-[auto,1fr] gap-4 sm:gap-8 md:gap-4 xl:gap-5 items-center mt-4 sm:mt-8 md:mt-8 xl:mt-16">
               {contractAddress && (
-                <a
-                  href={`https://raydium.io/swap/?inputMint=sol&outputMint=${contractAddress}`}
-                  target="_blank"
-                >
+                <a href={home.buyUrl} target="_blank">
                   <MemesBtn>
                     {publics.buy}&nbsp;${String(props.ticker).toUpperCase()}
                   </MemesBtn>
@@ -206,7 +211,7 @@ export const MemesHome = ({ ...props }) => {
                     content={contractAddress}
                   />
                   <span className="text-xs md:text-base font-normal opacity-50 text-white">
-                    CA
+                    {t("home.contractAddressText")}
                   </span>
                 </div>
               </a>
@@ -244,7 +249,7 @@ export const Section1 = ({ ...props }) => {
           </Section>
         </div>
         <Section type="top">
-          <MemesCard {...props}>
+          <MemesCard>
             <div className="grid  sm:grid-cols-[1fr,1fr] xl:grid-cols-[527px,1fr] gap-4 sm:gap-8 xl:gap-12">
               <Section type="left">
                 <img
@@ -401,7 +406,7 @@ export const HowToBuy = ({ ...props }) => {
     index?: number;
   }) => {
     return (
-      <MemesCard {...props}>
+      <MemesCard>
         <div className="flex flex-col gap-4 sm:gap-6 xl:gap-7">
           <div className="grid grid-cols-[70px,1fr] xl:grid-cols-[83px,1fr] gap-4 sm:gap-6 xl:gap-8 items-center">
             <div className="aspect-square p-[6px] bg-white/20 rounded-2xl">
@@ -450,7 +455,7 @@ export const About = () => {
   const { t } = useTranslation();
   const about: any = t("about", { returnObjects: true });
   return (
-    <MemesCard className="bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-white">
+    <MemesCard className="!bg-gradient-to-r !from-[#FFAF03] !to-[#FF5900] !shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-white">
       <div className="w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-gradient-to-l from-[#FFAE04]/15 to-[#FFC30C]/15 -mt-[calc(96px+32px)] sm:-mt-[calc(114px+48px)] p-6 flex justify-center items-center">
         <img
           src={"/logo.png"}
@@ -479,7 +484,7 @@ export default function Domain({ ...props }) {
   if (Object.keys(props).length === 0) return;
   return (
     <div
-      className={`min-h-screen w-full flex flex-col pb-12 gap-8 sm:gap-8 xl:gap-0  items-center transition-all ease-in-out duration-300 overflow-hidden relative ${props.background?.pattern}`}
+      className={`min-h-screen w-full flex flex-col pb-12 gap-8 sm:gap-8 xl:gap-0  items-center  overflow-hidden relative ${props.background?.pattern}`}
       style={{ color: props.text?.color }}
     >
       <div className="w-full h-screen fixed top-0 left-0 ">
