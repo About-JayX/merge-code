@@ -6,11 +6,11 @@ export default {
   box: {
     left: { image: s1Left },
     right: {
-      bntText: "Place a Bid",
-      bntUrl: "",
+      bntText: "MINIDOGE's X",
+      bntUrl: "https://x.com/MINIDOGE_X",
       image: s1Right,
-      title: "Hot Trending on this week",
-      text: "$MINIDOGE emerges as the true inheritor of $DOGE. As a CTO (Community-Taken-Over) token, we represent the first shot against centralized power in the crypto space.",
+      title: "Inheritance of $DOGE",
+      text: "This symbolizes the legacy and future of Dogecoin being carried forward through $MINIDOGE. With the collective efforts of the $MINIDOGE community, we are fully committed to driving $MINIDOGE toward the milestone of a $1 billion market cap.",
     },
   },
 };
