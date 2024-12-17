@@ -3,14 +3,12 @@ import { motion, useInView } from "motion/react";
 import Icon from "../icon";
 import { Fragment, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { copy } from "@/util";
-import nav from "@/config/nav";
 import contractAddress from "@/config/contractAddress";
 import { Modal } from "antd";
 import Tgs from "../tgs";
-import { Tweet } from "react-tweet";
+import { images } from '@/assets/images';
 
-export const memesSize =
+const memesSize =
   "min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
 
 export const memesTitleSize =
@@ -600,10 +598,15 @@ export const About = () => {
       className={`bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-black ${memesHover}`}
     >
       <div className="w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-gradient-to-l from-[#FFAE04]/15 to-[#FFC30C]/15 -mt-[calc(96px+32px)] sm:-mt-[calc(114px+48px)] p-6 flex justify-center items-center">
-        <img
-          src={"/logo.png"}
-          className="aspect-square rounded-full object-cover w-full h-full"
-        />
+        <picture>
+          <source srcSet={images.logo} type="image/webp" />
+          <img
+            src={images.logo}
+            className="aspect-square rounded-full object-cover w-full h-full"
+            loading="lazy"
+            alt="logo"
+          />
+        </picture>
       </div>
       <span
         className={`${memesTitleSize} text-3xl sm:text-3xl md:text-3xl xl:text-4xl mt-4 sm:mt-5`}
@@ -668,10 +671,15 @@ export default function Domain({ ...props }) {
       <Section className="w-full flex justify-center z-10">
         <header className="p-3 sm:p-8 md:pt-8 md:px-16 flex gap-1 sm:gap-4 items-center w-full max-w-screen-xl">
           <div className="grid grid-cols-[48px,auto] sm:grid-cols-[56px,auto] md:grid-cols-[64px,auto] items-center gap-3">
-            <img
-              src="/logo.png"
-              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full"
-            />
+            <picture>
+              <source srcSet={images.logo} type="image/webp" />
+              <img
+                src={images.logo}
+                className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full"
+                loading="eager"
+                alt="logo"
+              />
+            </picture>
             <span
               className={`${memesTextColor} sm:text-3xl md:text-4xl font-bold hidden sm:block orbitron`}
             >

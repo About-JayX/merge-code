@@ -10,6 +10,7 @@ import viteImagemin from "vite-plugin-imagemin";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import copy from "rollup-plugin-copy";
+
 export default defineConfig(({ mode }) => ({
   define: {
     "process.env": loadEnv(mode, process.cwd()),
@@ -51,14 +52,38 @@ export default defineConfig(({ mode }) => ({
     react(),
     process.env.NODE_ENV === "production" &&
       viteImagemin({
-        gifsicle: { optimizationLevel: 7, interlaced: false },
-        optipng: { optimizationLevel: 7 },
-        mozjpeg: { quality: 65 },
-        pngquant: { quality: [0.5, 0.65], speed: 2 },
+        gifsicle: {
+          optimizationLevel: 7,
+          interlaced: false,
+        },
+        optipng: {
+          optimizationLevel: 7,
+        },
+        mozjpeg: {
+          quality: 75,
+          progressive: true,
+        },
+        pngquant: {
+          quality: [0.7, 0.8],
+          speed: 4,
+          strip: true,
+        },
+        webp: {
+          quality: 70,
+          method: 6,
+          lossless: false,
+          nearLossless: 60,
+        },
         svgo: {
           plugins: [
-            { name: "removeViewBox" },
-            { name: "removeEmptyAttrs", active: false },
+            {
+              name: 'removeViewBox',
+              active: false,
+            },
+            {
+              name: 'removeEmptyAttrs',
+              active: true,
+            },
           ],
         },
       }),
@@ -95,6 +120,11 @@ export default defineConfig(({ mode }) => ({
         entryFileNames: "assets/[name].[hash].js",
         chunkFileNames: "assets/[name].[hash].js",
         assetFileNames: "assets/[name].[hash].[ext]",
+        manualChunks: {
+          'antd': ['antd'],
+          'antd-mobile': ['antd-mobile'],
+          'vendor': ['react', 'react-dom', 'react-router-dom'],
+        }
       },
       plugins: [
         copy({
@@ -109,6 +139,10 @@ export default defineConfig(({ mode }) => ({
         }),
       ],
     },
+    chunkSizeWarningLimit: 2000,
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'antd', 'antd-mobile'],
   },
   server: {
     host: true,
