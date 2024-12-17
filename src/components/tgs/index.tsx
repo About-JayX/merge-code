@@ -40,6 +40,7 @@ export default memo(function Tgs({
       });
       tgsRef.current.addEventListener("complete", () => {
         onChange && onChange(true);
+        tgsRef.current.loop = true
       })
     }
   }, [data]);

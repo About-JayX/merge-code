@@ -6,8 +6,8 @@ import { useTranslation } from "react-i18next";
 import { copy } from "@/util";
 import nav from "@/config/nav";
 import contractAddress from "@/config/contractAddress";
-// import { Modal } from "antd";
-// import Tgs from "../tgs";
+import { Modal } from "antd";
+import Tgs from "../tgs";
 
 export const memesSize =
   "min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
@@ -129,17 +129,18 @@ export const MemesCard = ({
 
 export const MemesHome = ({ ...props }) => {
   const { t } = useTranslation();
-  const [_, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const home: any = t("home", { returnObjects: true });
   const publics: any = t("public", { returnObjects: true });
   return (
     <Fragment>
-      {/* <Modal open={isModalOpen} centered footer closable={false}>
+      <Modal open={isModalOpen} centered footer closable={false}>
         <div className="flex flex-col items-center">
-          <Tgs name="success" className="text-[180px]"/>
+          <Tgs name="success" className="text-[180px]" onChange={(value)=>setIsModalOpen(!value)}/>
+          <span className="text-2xl font-bold">{t("message.copy.success")}</span>
         </div>
-      </Modal> */}
+      </Modal>
       <div className="grid  md:grid-cols-[1fr,250px] lg:grid-cols-[1fr,380px]  gap-12 sm:gap-16 md:gap-6 xl:gap-12 items-center justify-items-center sm:justify-between">
         <div className="flex flex-col w-full">
           {home.title.length >= 0 && (
