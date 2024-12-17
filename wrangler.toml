@@ -1,0 +1,9 @@
+[build]
+command = "npm run build"
+publishDir = "dist"
+baseDirectory = "."
+
+[build.environment]
+NODE_VERSION = "18.18.0"
+[site]
+bucket = "./dist"
