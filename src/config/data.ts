@@ -8,6 +8,9 @@ const data = async () => {
     card: {
       background: "#0F0F0F",
     },
+    banner: {
+      image: banner,
+    },
     banner_url: banner,
     button: {
       background: "#FFC10B",
