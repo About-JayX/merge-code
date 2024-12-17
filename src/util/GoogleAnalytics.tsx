@@ -23,10 +23,12 @@ const GoogleAnalytics = () => {
     // 初始化 Google Analytics
     window.dataLayer = window.dataLayer || []
     window.gtag = function gtag() {
+      console.log('Google Analytics Event:', arguments)
       window.dataLayer.push(arguments)
     }
     window.gtag('js', new Date())
     window.gtag('config', GA_MEASUREMENT_ID)
+    console.log('Google Analytics Initialized with ID:', GA_MEASUREMENT_ID)
 
     // 清理脚本
     return () => {
@@ -41,6 +43,7 @@ const GoogleAnalytics = () => {
       page_location: window.location.href,
       page_title: document.title
     })
+    console.log('Page view event sent:', location.pathname)
   }, [location])
 
   return null

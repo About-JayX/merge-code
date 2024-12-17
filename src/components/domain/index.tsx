@@ -125,6 +125,12 @@ export const MemesCard = ({
   );
 };
 
+export const ImageLink = ({ children }: { children: React.ReactNode }) => (
+  <a href="https://t.me/MINIDOGE_MEMES_RAIDS" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+    {children}
+  </a>
+);
+
 export const MemesHome = ({ ...props }) => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -133,17 +139,16 @@ export const MemesHome = ({ ...props }) => {
   const publics: any = t("public", { returnObjects: true });
   return (
     <Fragment>
-      <Modal open={isModalOpen} centered footer closable={false}>
-        <div className="flex flex-col items-center">
+      <Modal open={isModalOpen} centered footer={null} closable={false} width="auto">
+        <div className="flex flex-col items-center px-8 py-4">
           {isModalOpen && (
             <Tgs
               name="success"
-              className="text-[180px]"
+              className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"
               onChange={(value) => isModalOpen && setIsModalOpen(!value)}
             />
           )}
-
-          <span className="text-2xl font-bold">
+          <span className="text-lg sm:text-xl md:text-2xl font-bold mt-2">
             {t("message.copy.success")}
           </span>
         </div>
@@ -158,10 +163,11 @@ export const MemesHome = ({ ...props }) => {
                 {home.title.map((text: any, index: number) => (
                   <span
                     key={index}
+                    style={
+                      text.status ? { fontSize: '50%', opacity: 0.8 } : undefined
+                    }
                     className={
-                      text.status || index === 2
-                        ? `${text.status ? memesTextColor : ""} text-2xl sm:text-3xl md:text-2xl xl:text-4xl`
-                        : ""
+                      text.status ? memesTextColor : ""
                     }
                   >
                     {text.content}
@@ -173,7 +179,20 @@ export const MemesHome = ({ ...props }) => {
           {home.text && (
             <Section type="left">
               <p className="text-base sm:text-lg md:text-base xl:text-xl mt-4 sm:mt-4 xl:mt-8">
-                {home.text}
+                {home.text.map((text: any, index: number) => (
+                  <span
+                    key={index}
+                    className={`${
+                      text.highlight
+                        ? memesTextColor + " font-bold"
+                        : text.special
+                        ? "text-[#FFC10B] font-semibold"
+                        : ""
+                    }`}
+                  >
+                    {text.content}
+                  </span>
+                ))}
               </p>
             </Section>
           )}
@@ -190,9 +209,10 @@ export const MemesHome = ({ ...props }) => {
               <div className="grid grid-cols-[auto,1fr] gap-4 items-center w-full">
                 <div
                   className={`p-[6px] relative rounded-full cursor-pointer ${memesHover}`}
-                  onClick={async () =>
-                    await copy(contractAddress, () => setIsModalOpen(true))
-                  }
+                  onClick={async () => {
+                    await navigator.clipboard.writeText(contractAddress);
+                    setIsModalOpen(true);
+                  }}
                 >
                   <div
                     className="absolute top-0 left-0 w-full h-full rounded-full -z-10 opacity-15"
@@ -212,9 +232,10 @@ export const MemesHome = ({ ...props }) => {
                 <div className="flex flex-col break-all">
                   <div
                     className={`cursor-pointer ${memesHover}`}
-                    onClick={async () =>
-                      await copy(contractAddress, () => setIsModalOpen(true))
-                    }
+                    onClick={async () => {
+                      await navigator.clipboard.writeText(contractAddress);
+                      setIsModalOpen(true);
+                    }}
                   >
                     <Ellipsis
                       className="text-base md:text-2xl font-normal text-white"
@@ -225,11 +246,9 @@ export const MemesHome = ({ ...props }) => {
                   <a
                     href="https://pump.fun/coin/8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu"
                     target="_blank"
-                    className={`${memesHover}`}
+                    className={`text-sm text-white/60 ${memesHover}`}
                   >
-                    <span className="text-xs md:text-base font-normal opacity-50 text-white">
-                      {t("home.contractAddressText")}
-                    </span>
+                    $MINIDOGE<span style={{ fontSize: '50%', opacity: 0.8 }}>(CTO)</span> from pump.fun
                   </a>
                 </div>
               </div>
@@ -238,12 +257,14 @@ export const MemesHome = ({ ...props }) => {
         </div>
         {props.banner_url && (
           <Section type="right">
-            <div className="sm:w-[22rem] sm:h-[22rem] xl:w-[26rem] xl:h-[26rem] md:w-full md:h-full">
-              <img
-                src={props.banner_url}
-                alt="Token Image"
-                className="object-contain aspect-square w-full h-full z-10"
-              />
+            <div className="sm:w-[22rem] sm:h-[22rem] xl:w-[26rem] xl:h-[26rem] md:w-full md:h-full transition-transform duration-300 hover:scale-105">
+              <ImageLink>
+                <img
+                  src={props.banner_url}
+                  alt="Token Image"
+                  className="object-contain aspect-square w-full h-full z-10"
+                />
+              </ImageLink>
             </div>
           </Section>
         )}
@@ -255,17 +276,13 @@ export const MemesHome = ({ ...props }) => {
 export const Section1 = ({ ...props }) => {
   const { t } = useTranslation();
   const section1: any = t("section1", { returnObjects: true });
-  const Tweets = ({ id,className="",imageUrl="" }: { id: string,className?:string,imageUrl:string }) => {
-    const [errorStatus, setErrorStatus] = useState<boolean>(false);
-    return errorStatus ? (
-      <img
-        src={imageUrl}
-        className={className}
-      />
-    ) : (
-      <div data-theme="light" className={`light ${className}`}>
-        <Tweet id={id} onError={() => setErrorStatus(true)}/>
-      </div>
+  const Tweets = ({ id, className = "", imageUrl = "" }: { id: string; className?: string; imageUrl: string }) => {
+    return (
+      <a href={`https://x.com/elonmusk/status/${id}`} target="_blank" rel="noopener noreferrer">
+        <div className={`${memesHover}`}>
+          <img src={imageUrl} className={className} />
+        </div>
+      </a>
     );
   };
   return (
@@ -275,10 +292,21 @@ export const Section1 = ({ ...props }) => {
           <Section type="top">
             <span className={`${memesTitleSize}`}>{section1?.title}</span>
           </Section>
-          <Section type="top">
-            <span className="text-base sm:text-xl xl:text-2xl font-bold opacity-60 leading-relaxed">
-              {section1?.text}
-            </span>
+          <Section type="left">
+            <p className="text-base sm:text-lg md:text-base xl:text-xl mt-4 sm:mt-4 xl:mt-8">
+              {section1?.text.map((text: any, index: number) => (
+                <span
+                  key={index}
+                  className={`${
+                    text.highlight
+                      ? memesTextColor + " font-bold"
+                      : ""
+                  }`}
+                >
+                  {text.content}
+                </span>
+              ))}
+            </p>
           </Section>
         </div>
         <Section type="top">
@@ -290,12 +318,23 @@ export const Section1 = ({ ...props }) => {
 
               <Section type="right">
                 <div className="flex flex-col">
-                  <span className={`${memesSubTitleSize}`}>
+                  <span className="text-base sm:text-xl xl:text-2xl font-bold">
                     {section1?.box.right.title}
                   </span>
-                  <span className={`${memesTextSize} mt-4 sm:mt-4 xl:mt-8`}>
-                    {section1?.box.right.text}
-                  </span>
+                  <p className="text-base sm:text-lg md:text-base xl:text-xl mt-4 sm:mt-4 xl:mt-8 opacity-60 leading-relaxed">
+                    {section1?.box.right.text.map((text: any, index: number) => (
+                      <span
+                        key={index}
+                        className={`${
+                          text.highlight
+                            ? memesTextColor + " font-bold opacity-100"
+                            : ""
+                        }`}
+                      >
+                        {text.content}
+                      </span>
+                    ))}
+                  </p>
                   {section1?.box.right.image && (
                     <Tweets id="1865305060307009884" imageUrl={section1?.box.right.image} className="w-full  mt-4 sm:mt-4 xl:mt-11 rounded-xl object-cover"/>
                   )}
@@ -330,12 +369,14 @@ export const Section2 = ({ ...props }) => {
           <span className={`${memesTitleSize} max-w-md`}>
             {section2?.title}
           </span>
-          <span className={`${memesTextSize} mt-4 sm:mt-4 xl:mt-8 max-w-xl`}>
-            {section2?.text}
+          <span
+            className={`${memesTextSize} mt-4 sm:mt-4 xl:mt-8 max-w-xl`}
+            dangerouslySetInnerHTML={{ __html: section2?.text }}
+          >
           </span>
           {section2.bntText && (
             <a
-              href={section2?.bntUtl}
+              href={section2?.bntUrl}
               target="_blank"
               className={`mt-4 sm:mt-4 xl:mt-16 ${memesHover}`}
             >
@@ -351,10 +392,12 @@ export const Section2 = ({ ...props }) => {
             border: `1px solid ${props?.button?.background}`,
           }}
         >
-          <img
-            src={section2?.image}
-            className="aspect-square  rounded-xl object-cover"
-          />
+          <ImageLink>
+            <img
+              src={section2?.image}
+              className="aspect-square rounded-xl object-cover"
+            />
+          </ImageLink>
         </div>
       </Section>
     </div>
@@ -391,13 +434,15 @@ export const Section3 = () => {
               {/* 第一排：最多显示3个 */}
               <div className="grid grid-cols-3 gap-3 sm:gap-4 justify-center">
                 {section3.data.slice(0, 3).map((item: any, index: number) => (
-                  <div key={index} className={`aspect-square ${memesHover}`}>
-                    <img
-                      src={item}
-                      alt={item}
-                      className="h-full w-full object-cover aspect-square rounded-xl"
-                    />
-                  </div>
+                  <ImageLink key={index}>
+                    <div className={`aspect-square ${memesHover}`}>
+                      <img
+                        src={item}
+                        alt={item}
+                        className="h-full w-full object-cover aspect-square rounded-xl"
+                      />
+                    </div>
+                  </ImageLink>
                 ))}
               </div>
 
@@ -405,13 +450,15 @@ export const Section3 = () => {
               {section3.data.length > 3 && (
                 <div className="grid grid-cols-4 gap-3 sm:gap-4 justify-items-center mt-4">
                   {section3.data.slice(3).map((item: any, index: number) => (
-                    <div key={index} className={`aspect-square ${memesHover}`}>
-                      <img
-                        src={item}
-                        alt={item}
-                        className="h-full w-full object-cover aspect-square rounded-xl"
-                      />
-                    </div>
+                    <ImageLink key={index}>
+                      <div className={`aspect-square ${memesHover}`}>
+                        <img
+                          src={item}
+                          alt={item}
+                          className="h-full w-full object-cover aspect-square rounded-xl"
+                        />
+                      </div>
+                    </ImageLink>
                   ))}
                 </div>
               )}
@@ -428,6 +475,7 @@ export const HowToBuy = ({ ...props }) => {
   const howToBuy: any = t("howToBuy", { returnObjects: true });
   const MemesCardItem = ({
     text = "",
+    title = "",
     index = 0,
   }: {
     title?: string;
@@ -440,19 +488,19 @@ export const HowToBuy = ({ ...props }) => {
           <div className="grid grid-cols-[70px,1fr] xl:grid-cols-[83px,1fr] gap-4 sm:gap-6 xl:gap-8 items-center">
             <div className="aspect-square p-[6px] bg-white/20 rounded-2xl">
               <Icon
-                name={`howToBuy/${index + 1}`}
+                name={`howToBuy/${3 - index}`}
                 className="aspect-square rounded-xl w-full h-full object-cover"
               />
             </div>
             <span
               className={`text-2xl xl:text-3xl font-normal ${memesTextColor}`}
-            >{`Step ${index + 1}`}</span>
+              dangerouslySetInnerHTML={{ __html: title }}
+            ></span>
           </div>
           <span
             className={`${memesTextSize} !text-base xl:!text-2xl font-normal`}
-          >
-            {text}
-          </span>
+            dangerouslySetInnerHTML={{ __html: text }}
+          ></span>
         </div>
       </MemesCard>
     );
@@ -460,7 +508,7 @@ export const HowToBuy = ({ ...props }) => {
   return (
     <div className="flex flex-col items-center gap-14">
       <Section type="top">
-        <span className={`${memesTitleSize}`}>{howToBuy.title}</span>
+        <span className={`${memesTitleSize}`} dangerouslySetInnerHTML={{ __html: howToBuy.title }}></span>
       </Section>
       {howToBuy.data?.length && (
         <Section type="top" className="w-full">
@@ -485,7 +533,7 @@ export const About = () => {
   const about: any = t("about", { returnObjects: true });
   return (
     <MemesCard
-      className={`bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-white ${memesHover}`}
+      className={`bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-black ${memesHover}`}
     >
       <div className="w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-gradient-to-l from-[#FFAE04]/15 to-[#FFC30C]/15 -mt-[calc(96px+32px)] sm:-mt-[calc(114px+48px)] p-6 flex justify-center items-center">
         <img
@@ -498,7 +546,10 @@ export const About = () => {
       >
         {about?.title}
       </span>
-      <span className={`${memesTextSize} mt-3 sm:mt-6`}>{about?.text}</span>
+      <div 
+        className={`${memesTextSize} mt-3 sm:mt-6 max-w-3xl mx-auto leading-relaxed space-y-4 font-medium`}
+        dangerouslySetInnerHTML={{ __html: about?.text }}
+      />
       {about?.bntText && (
         <a href={about?.bntUrl} className={memesHover} target="_blank">
           <MemesBtn className="mt-6 xl:mt-12 !bg-white from-transparent to-transparent !border-transparent !text-black">
@@ -513,10 +564,13 @@ export const About = () => {
 export const Footer = () => {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col gap-6">
-      <span className={`${memesTextSize} text-center w-full`}>
-        {t("footer")}
-      </span>
+    <div className="flex flex-col gap-6 w-full py-8 px-4 mt-8">
+      <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+        <p 
+          className={`${memesTextSize} text-center block leading-relaxed opacity-80`}
+          dangerouslySetInnerHTML={{ __html: t("footer") }}
+        />
+      </div>
     </div>
   );
 };

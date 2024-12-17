@@ -1,6 +1,6 @@
 export default {
   title: "$MINIDOGE BUILD",
-  text: "$MINIDOGE CTO Foundation is committed to promoting the globalization of #Minidoge IP, not limited to animation, film and television, ecological development, and charitable donations (for children and stray animals).",
+  text: "<b>$MINIDOGE CTO Foundation</b> is committed to promoting the global expansion of <i>#Minidoge IP</i> through:<br/><div class='grid grid-cols-2 gap-4 mt-4'><div><b>• Animation & Entertainment</b><br/><b>• Film & Television Production</b></div><div><b>• Ecosystem Development</b><br/><b>• Charitable Initiatives</b></div></div><div class='mt-2'><i>Supporting children and stray animals worldwide</i></div>",
   bntText: "CTO Foundation",
   bntUrl: "https://minidoge-cto-foundation.gitbook.io/minidoge",
 };
