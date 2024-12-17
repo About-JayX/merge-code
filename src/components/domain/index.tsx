@@ -21,7 +21,7 @@ export const memesBntColor =
 export const memesTextColor =
   "bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] bg-clip-text text-transparent";
 export const memesHover =
-  "transition-all ease-in-out duration-300 hover:opacity-50";
+  "transition-all ease-in-out duration-300 hover:opacity-80 hover:scale-105 hover:shadow-lg";
 
 export const Section = ({
   children,
@@ -119,7 +119,7 @@ export const MemesCard = ({
 }) => {
   return (
     <div
-      className={` rounded-2xl p-6 ${className}`}
+      className={` rounded-2xl p-6 ${memesHover} ${className}`}
       style={{ background: props.card?.background }}
     >
       {children}
@@ -151,7 +151,7 @@ export const MemesHome = ({ ...props }) => {
                     key={index}
                     className={text.status ? `${memesTextColor}` : ""}
                   >
-                    {text.content.toUpperCase()}
+                    {text.content}
                   </span>
                 ))}
               </p>
@@ -244,7 +244,7 @@ export const Section1 = ({ ...props }) => {
           </Section>
         </div>
         <Section type="top">
-          <MemesCard {...props}>
+          <MemesCard {...props} className={`${memesHover}`}>
             <div className="grid  sm:grid-cols-[1fr,1fr] xl:grid-cols-[527px,1fr] gap-4 sm:gap-8 xl:gap-12">
               <Section type="left">
                 <img
@@ -305,7 +305,7 @@ export const Section2 = ({ ...props }) => {
             <a
               href={section2?.bntUtl}
               target="_blank"
-              className="mt-4 sm:mt-4 xl:mt-16"
+              className={`mt-4 sm:mt-4 xl:mt-16 ${memesHover}`}
             >
               <MemesBtn {...props}>{section2?.bntText}</MemesBtn>
             </a>
@@ -314,7 +314,7 @@ export const Section2 = ({ ...props }) => {
       </Section>
       <Section type="right">
         <div
-          className="aspect-square xl:w-[493px] xl:h-[493px] rounded-xl p-6"
+          className={`aspect-square xl:w-[493px] xl:h-[493px] rounded-xl p-6 ${memesHover}`}
           style={{
             border: `1px solid ${props?.button?.background}`,
           }}
@@ -359,12 +359,13 @@ export const Section3 = () => {
               {/* 第一排：最多显示3个 */}
               <div className="grid grid-cols-3 gap-3 sm:gap-4 justify-center">
                 {section3.data.slice(0, 3).map((item: any, index: number) => (
-                  <img
-                    key={index}
-                    src={item}
-                    alt={item}
-                    className="h-full w-full object-cover aspect-square rounded-xl"
-                  />
+                  <div key={index} className={`aspect-square ${memesHover}`}>
+                    <img
+                      src={item}
+                      alt={item}
+                      className="h-full w-full object-cover aspect-square rounded-xl"
+                    />
+                  </div>
                 ))}
               </div>
 
@@ -372,12 +373,13 @@ export const Section3 = () => {
               {section3.data.length > 3 && (
                 <div className="grid grid-cols-4 gap-3 sm:gap-4 justify-items-center mt-4">
                   {section3.data.slice(3).map((item: any, index: number) => (
-                    <img
-                      key={index}
-                      src={item}
-                      alt={item}
-                      className="h-full w-full object-cover aspect-square rounded-xl"
-                    />
+                    <div key={index} className={`aspect-square ${memesHover}`}>
+                      <img
+                        src={item}
+                        alt={item}
+                        className="h-full w-full object-cover aspect-square rounded-xl"
+                      />
+                    </div>
                   ))}
                 </div>
               )}
@@ -401,7 +403,7 @@ export const HowToBuy = ({ ...props }) => {
     index?: number;
   }) => {
     return (
-      <MemesCard {...props}>
+      <MemesCard {...props} className={`${memesHover}`}>
         <div className="flex flex-col gap-4 sm:gap-6 xl:gap-7">
           <div className="grid grid-cols-[70px,1fr] xl:grid-cols-[83px,1fr] gap-4 sm:gap-6 xl:gap-8 items-center">
             <div className="aspect-square p-[6px] bg-white/20 rounded-2xl">
@@ -450,7 +452,7 @@ export const About = () => {
   const { t } = useTranslation();
   const about: any = t("about", { returnObjects: true });
   return (
-    <MemesCard className="bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-white">
+    <MemesCard className={`bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-white ${memesHover}`}>
       <div className="w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-gradient-to-l from-[#FFAE04]/15 to-[#FFC30C]/15 -mt-[calc(96px+32px)] sm:-mt-[calc(114px+48px)] p-6 flex justify-center items-center">
         <img
           src={"/logo.png"}
@@ -466,7 +468,7 @@ export const About = () => {
         {about?.text}
       </span>
       {about?.bntText && (
-        <a href={about?.bntUrl}>
+        <a href={about?.bntUrl} className={memesHover}>
           <MemesBtn className="mt-6 xl:mt-12 !bg-white from-transparent to-transparent !border-transparent !text-black">
             {about?.bntText}
           </MemesBtn>
@@ -503,32 +505,32 @@ export default function Domain({ ...props }) {
         <header className="p-3 sm:p-8 md:pt-8 md:px-16 flex gap-1 sm:gap-4 items-center w-full max-w-screen-xl">
           <img
             src="/logo.png"
-            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full"
+            className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full ${memesHover}`}
           />
 
           <div className="flex-1" />
           {nav.twitter_url && (
-            <a href={nav.twitter_url} target="_blank">
+            <a href={nav.twitter_url} target="_blank" className={memesHover}>
               <MemesIcon className="text-white" name="twitter" />
             </a>
           )}
           {nav.telegram_url && (
-            <a href={nav.telegram_url} target="_blank">
+            <a href={nav.telegram_url} target="_blank" className={memesHover}>
               <MemesIcon className="text-white" name="telegram" />
             </a>
           )}
           {nav.tiktok_url && (
-            <a href={nav.tiktok_url} target="_blank">
+            <a href={nav.tiktok_url} target="_blank" className={memesHover}>
               <MemesIcon className="text-white" name="tiktok" />
             </a>
           )}
           {nav.youtube_url && (
-            <a href={nav.youtube_url} target="_blank">
+            <a href={nav.youtube_url} target="_blank" className={memesHover}>
               <MemesIcon className="text-white" name="youtube" />
             </a>
           )}
           {nav.instagram_url && (
-            <a href={nav.instagram_url} target="_blank">
+            <a href={nav.instagram_url} target="_blank" className={memesHover}>
               <MemesIcon className="text-white" name="instagram" />
             </a>
           )}

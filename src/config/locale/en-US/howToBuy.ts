@@ -1,5 +1,5 @@
 export default {
-  title: "How to buy?",
+  title: "How To Buy $MINIDOGE?",
   data: [
     {
       title: "Step 1",
