@@ -7,10 +7,11 @@ import section3 from "./section3";
 import howToBuy from "./howToBuy";
 import about from "./about";
 import footer from "./footer";
+
 export default {
   translation: {
-    language: "English",
-    lang: "Lang",
+    language: "한국어",
+    lang: "언어",
     home,
     section1,
     section2,

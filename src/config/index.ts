@@ -5,8 +5,13 @@
 
 import type { Resource } from "i18next";
 import enUS from "@/config/locale/en-US";
+import koKR from "@/config/locale/ko-KR";
 import zhHK from "@/config/locale/zh-HK";
+import jaJP from "@/config/locale/ja-JP";
+
 // import type { TelegramType } from "@/type";
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
 
 /**
  * 环境判断
@@ -50,8 +55,6 @@ export const router = {
   },
 };
 
-// export const webTelegramUrl = "https://t.me/memes_ac_bot"
-
 /**
  * Telegram 相关配置
  * 包含机器人URL和初始化数据
@@ -64,7 +67,7 @@ export const telegram = {
 
 /**
  * API 配置
- * 包含API相关的配置项
+ * 包含API相���的配置项
  */
 export const api = {
   /**
@@ -83,5 +86,22 @@ export const api = {
  */
 export const locale = {
   "en-US": enUS,
+  "ko-KR": koKR,
   "zh-HK": zhHK,
+  "ja-JP": jaJP,
 } as Resource;
+
+i18n
+  .use(initReactI18next)
+  .init({
+    resources: locale,
+    fallbackLng: "en-US",
+    supportedLngs: ["en-US","ko-KR","zh-HK","ja-JP"],
+    interpolation: {
+      escapeValue: false
+    },
+    detection: {
+      order: ['querystring', 'cookie', 'localStorage', 'navigator'],
+      caches: ['localStorage', 'cookie'],
+    }
+  });

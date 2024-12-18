@@ -9,7 +9,7 @@ import about from "./about";
 import footer from "./footer";
 export default {
   translation: {
-    language: "繁体中文（中国香港）",
+    language: "繁体中文",
     lang: "語言",
     home,
     section1,
