@@ -77,11 +77,11 @@ export default defineConfig(({ mode }) => ({
         svgo: {
           plugins: [
             {
-              name: 'removeViewBox',
+              name: "removeViewBox",
               active: false,
             },
             {
-              name: 'removeEmptyAttrs',
+              name: "removeEmptyAttrs",
               active: true,
             },
           ],
@@ -96,6 +96,7 @@ export default defineConfig(({ mode }) => ({
     preprocessorOptions: {
       scss: {
         quietDeps: true,
+        api: 'modern-compiler'
       },
     },
     postcss: {
@@ -121,10 +122,10 @@ export default defineConfig(({ mode }) => ({
         chunkFileNames: "assets/[name].[hash].js",
         assetFileNames: "assets/[name].[hash].[ext]",
         manualChunks: {
-          'antd': ['antd'],
-          'antd-mobile': ['antd-mobile'],
-          'vendor': ['react', 'react-dom', 'react-router-dom'],
-        }
+          antd: ["antd"],
+          "antd-mobile": ["antd-mobile"],
+          vendor: ["react", "react-dom", "react-router-dom"],
+        },
       },
       plugins: [
         copy({
@@ -138,11 +139,18 @@ export default defineConfig(({ mode }) => ({
           hook: "writeBundle", // 在写入包时执行
         }),
       ],
+      onwarn(warning, warn) {
+        if (warning.code === "EVAL" && warning.id?.includes("lottie-web")) {
+          // 忽略 lottie-web 的 eval 警告
+          return;
+        }
+        warn(warning); // 其他警告继续输出
+      },
     },
     chunkSizeWarningLimit: 2000,
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'antd', 'antd-mobile'],
+    include: ["react", "react-dom", "antd", "antd-mobile"],
   },
   server: {
     host: true,

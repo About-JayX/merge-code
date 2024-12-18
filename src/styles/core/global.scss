@@ -1,8 +1,9 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-@import 'tailwindcss/variants';
-@import './transition.scss';
+@use "./transition.scss" as *;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
 
 :root {
   --bg-color: #ffffff;
