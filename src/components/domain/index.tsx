@@ -258,9 +258,9 @@ export const MemesHome = ({ ...props }) => {
                   >
                     $MINIDOGE
                     <span style={{ fontSize: "50%", opacity: 0.8 }}>
-                      (CTO)
+                      {" "}
                     </span>{" "}
-                    from pump.fun
+                    - pump.fun
                   </a>
                 </div>
               </div>
