@@ -21,6 +21,8 @@ import ptBR from "@/config/locale/pt-BR";
 import esES from "@/config/locale/es-ES";
 import itIT from "@/config/locale/it-IT";
 import hiIN from "@/config/locale/hi-IN";
+import faIR from "@/config/locale/fa-IR";
+import arSA from "@/config/locale/ar-SA";
 
 // import type { TelegramType } from "@/type";
 import i18n from "i18next";
@@ -104,7 +106,9 @@ export const locale = {
   "ja-JP": jaJP,
   "zh-CN": zhCN,
   "zh-HK": zhHK,
+  "ar-SA": arSA,
   "hi-IN": hiIN,
+  "fa-IR": faIR,
   "id-ID": idID,
   "th-TH": thTH,
   "vi-VN": viVN,
@@ -122,7 +126,7 @@ i18n
   .init({
     resources: locale,
     fallbackLng: "en-US",
-    supportedLngs: ["en-US", "ko-KR", "ms-MY", "ja-JP", "zh-CN", "zh-HK", "hi-IN", "id-ID", "th-TH", "vi-VN", "tr-TR", "ru-RU", "fr-FR", "de-DE", "pt-BR", "es-ES", "it-IT"],
+    supportedLngs: ["en-US", "ko-KR", "ms-MY", "ja-JP", "zh-CN", "zh-HK", "ar-SA", "hi-IN", "fa-IR", "id-ID", "th-TH", "vi-VN", "tr-TR", "ru-RU", "fr-FR", "de-DE", "pt-BR", "es-ES", "it-IT"],
     interpolation: {
       escapeValue: false
     },
