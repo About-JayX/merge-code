@@ -8,6 +8,19 @@ import enUS from "@/config/locale/en-US";
 import koKR from "@/config/locale/ko-KR";
 import zhHK from "@/config/locale/zh-HK";
 import jaJP from "@/config/locale/ja-JP";
+import msMY from "@/config/locale/ms-MY";
+import zhCN from "@/config/locale/zh-CN";
+import idID from "@/config/locale/id-ID";
+import thTH from "@/config/locale/th-TH";
+import viVN from "@/config/locale/vi-VN";
+import trTR from "@/config/locale/tr-TR";
+import ruRU from "@/config/locale/ru-RU";
+import frFR from "@/config/locale/fr-FR";
+import deDE from "@/config/locale/de-DE";
+import ptBR from "@/config/locale/pt-BR";
+import esES from "@/config/locale/es-ES";
+import itIT from "@/config/locale/it-IT";
+import hiIN from "@/config/locale/hi-IN";
 
 // import type { TelegramType } from "@/type";
 import i18n from "i18next";
@@ -67,7 +80,7 @@ export const telegram = {
 
 /**
  * API 配置
- * 包含API相���的配置项
+ * 包含API相关的配置项
  */
 export const api = {
   /**
@@ -87,8 +100,21 @@ export const api = {
 export const locale = {
   "en-US": enUS,
   "ko-KR": koKR,
-  "zh-HK": zhHK,
+  "ms-MY": msMY,
   "ja-JP": jaJP,
+  "zh-CN": zhCN,
+  "zh-HK": zhHK,
+  "hi-IN": hiIN,
+  "id-ID": idID,
+  "th-TH": thTH,
+  "vi-VN": viVN,
+  "tr-TR": trTR,
+  "ru-RU": ruRU,
+  "fr-FR": frFR,
+  "de-DE": deDE,
+  "pt-BR": ptBR,
+  "es-ES": esES,
+  "it-IT": itIT,
 } as Resource;
 
 i18n
@@ -96,7 +122,7 @@ i18n
   .init({
     resources: locale,
     fallbackLng: "en-US",
-    supportedLngs: ["en-US","ko-KR","zh-HK","ja-JP"],
+    supportedLngs: ["en-US", "ko-KR", "ms-MY", "ja-JP", "zh-CN", "zh-HK", "hi-IN", "id-ID", "th-TH", "vi-VN", "tr-TR", "ru-RU", "fr-FR", "de-DE", "pt-BR", "es-ES", "it-IT"],
     interpolation: {
       escapeValue: false
     },
