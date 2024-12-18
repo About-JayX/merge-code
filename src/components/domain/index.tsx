@@ -9,22 +9,8 @@ import Tgs from "../tgs";
 import { images } from "@/assets/images";
 import { copy } from "@/util";
 import { locale } from "@/config";
-
-const memesSize =
-  "min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
-
-export const memesTitleSize =
-  "text-2xl sm:text-4xl xl:text-6xl font-bold orbitron";
-export const memesSubTitleSize =
-  "text-2xl sm:text-3xl xl:text-4xl font-normal orbitron";
-export const memesTextSize =
-  " text-sm sm:text-sm xl:text-base font-normal opacity-100";
-export const memesBntColor =
-  "bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] text-black";
-export const memesTextColor =
-  "bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] bg-clip-text text-transparent";
-export const memesHover =
-  "transition-all ease-in-out duration-300 hover:opacity-80 hover:scale-105 hover:shadow-lg";
+import FoundationBalance from "./FoundationBalance";
+import { memesSize, memesTitleSize, memesSubTitleSize, memesTextSize, memesBntColor, memesTextColor, memesHover } from './styles';
 
 export const Section = ({
   children,
@@ -579,37 +565,40 @@ export const About = () => {
   const { t } = useTranslation();
   const about: any = t("about", { returnObjects: true });
   return (
-    <MemesCard
-      className={`bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-black ${memesHover}`}
-    >
-      <div className="w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-gradient-to-l from-[#FFAE04]/15 to-[#FFC30C]/15 -mt-[calc(96px+32px)] sm:-mt-[calc(114px+48px)] p-6 flex justify-center items-center">
-        <picture>
-          <source srcSet={images.logo} type="image/webp" />
-          <img
-            src={images.logo}
-            className="aspect-square rounded-full object-cover w-full h-full"
-            loading="lazy"
-            alt="logo"
-          />
-        </picture>
-      </div>
-      <span
-        className={`${memesTitleSize} text-3xl sm:text-3xl md:text-3xl xl:text-4xl mt-4 sm:mt-5`}
+    <>
+      <MemesCard
+        className={`bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-black ${memesHover}`}
       >
-        {about?.title}
-      </span>
-      <div
-        className={`${memesTextSize} mt-3 sm:mt-6 max-w-3xl mx-auto leading-relaxed space-y-4 font-medium about-text`}
-        dangerouslySetInnerHTML={{ __html: about?.text }}
-      />
-      {about?.bntText && (
-        <a href={about?.bntUrl} className={memesHover} target="_blank">
-          <MemesBtn className="mt-6 xl:mt-12 !bg-white from-transparent to-transparent !border-transparent !text-black">
-            {about?.bntText}
-          </MemesBtn>
-        </a>
-      )}
-    </MemesCard>
+        <div className="w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-gradient-to-l from-[#FFAE04]/15 to-[#FFC30C]/15 -mt-[calc(96px+32px)] sm:-mt-[calc(114px+48px)] p-6 flex justify-center items-center">
+          <picture>
+            <source srcSet={images.logo} type="image/webp" />
+            <img
+              src={images.logo}
+              className="aspect-square rounded-full object-cover w-full h-full"
+              loading="lazy"
+              alt="logo"
+            />
+          </picture>
+        </div>
+        <span
+          className={`${memesTitleSize} text-3xl sm:text-3xl md:text-3xl xl:text-4xl mt-4 sm:mt-5`}
+        >
+          {about?.title}
+        </span>
+        <div
+          className={`${memesTextSize} mt-3 sm:mt-6 max-w-3xl mx-auto leading-relaxed space-y-4 font-medium about-text`}
+          dangerouslySetInnerHTML={{ __html: about?.text }}
+        />
+        {about?.bntText && (
+          <a href={about?.bntUrl} className={memesHover} target="_blank">
+            <MemesBtn className="mt-6 xl:mt-12 !bg-white from-transparent to-transparent !border-transparent !text-black">
+              {about?.bntText}
+            </MemesBtn>
+          </a>
+        )}
+      </MemesCard>
+      <FoundationBalance />
+    </>
   );
 };
 
