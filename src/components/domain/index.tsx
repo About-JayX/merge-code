@@ -1,12 +1,13 @@
 import { Ellipsis } from "antd-mobile";
 import { motion, useInView } from "motion/react";
 import Icon from "../icon";
-import { Fragment, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import contractAddress from "@/config/contractAddress";
 import { Modal } from "antd";
 import Tgs from "../tgs";
-import { images } from '@/assets/images';
+import { images } from "@/assets/images";
+import { copy } from "@/util";
 
 const memesSize =
   "min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
@@ -63,15 +64,18 @@ export const MemesIcon = ({
   className = "",
   style = {},
   name = "",
+  ...props
 }: {
   className?: string;
   style?: React.CSSProperties;
   name?: string;
+  onClick?: () => void;
 }) => {
   return (
     <div
       className={`${memesSize} bg-white/10 border border-white/10 rounded-full flex items-center justify-center ${className}`}
       style={style}
+      {...props}
     >
       <Icon name={name} className="text-lg sm:text-xl" />
     </div>
@@ -125,7 +129,12 @@ export const MemesCard = ({
 };
 
 export const ImageLink = ({ children }: { children: React.ReactNode }) => (
-  <a href="https://t.me/MINIDOGE_MEMES_RAIDS" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+  <a
+    href="https://t.me/MINIDOGE_MEMES_RAIDS"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="cursor-pointer"
+  >
     {children}
   </a>
 );
@@ -136,14 +145,21 @@ export const MemesHome = ({ ...props }) => {
 
   const home: any = t("home", { returnObjects: true });
   const publics: any = t("public", { returnObjects: true });
+
   return (
-    <Fragment>
-      <Modal open={isModalOpen} centered footer={null} closable={false} width="auto">
+    <>
+      <Modal
+        open={isModalOpen}
+        centered
+        footer={null}
+        closable={false}
+        width="auto"
+      >
         <div className="flex flex-col items-center px-8 py-4">
           {isModalOpen && (
             <Tgs
               name="success"
-              className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"
+              className="!w-24 !h-24 sm:!w-32 sm:!h-32 md:!w-40 md:!h-40"
               onChange={(value) => isModalOpen && setIsModalOpen(!value)}
             />
           )}
@@ -154,61 +170,54 @@ export const MemesHome = ({ ...props }) => {
       </Modal>
       <div className="grid  md:grid-cols-[1fr,250px] lg:grid-cols-[1fr,380px]  gap-12 sm:gap-16 md:gap-6 xl:gap-12 items-center justify-items-center sm:justify-between">
         <div className="flex flex-col w-full">
-          {home.title.length >= 0 && (
-            <Section type="left">
-              <p
-                className={`${memesTitleSize} text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all`}
-              >
-                {home.title.map((text: any, index: number) => (
-                  <span
-                    key={index}
-                    style={
-                      text.status ? { fontSize: '50%', opacity: 0.8 } : undefined
-                    }
-                    className={
-                      text.status ? memesTextColor : ""
-                    }
-                  >
-                    {text.content}
-                  </span>
-                ))}
-              </p>
-            </Section>
-          )}
-          {home.text && (
-            <Section type="left">
-              <p className="text-base sm:text-lg md:text-base xl:text-xl mt-4 sm:mt-4 xl:mt-8">
-                {home.text.map((text: any, index: number) => (
-                  <span
-                    key={index}
-                    className={`${
-                      text.highlight
-                        ? memesTextColor + " font-bold"
-                        : text.special
-                        ? "text-[#FFC10B] font-semibold"
-                        : ""
-                    }`}
-                  >
-                    {text.content}
-                  </span>
-                ))}
-              </p>
-            </Section>
-          )}
+          <Section type="left">
+            <p
+              className={`${memesTitleSize} text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all`}
+            >
+              {home.title.map((text: any, index: number) => (
+                <span
+                  key={index}
+                  style={
+                    text.status ? { fontSize: "50%", opacity: 0.8 } : undefined
+                  }
+                  className={text.status ? memesTextColor : ""}
+                >
+                  {text.content}
+                </span>
+              ))}
+            </p>
+          </Section>
+          <Section type="left">
+            <p
+              className={`text-base sm:text-lg md:text-base xl:text-xl mt-4 sm:mt-4 xl:mt-8`}
+            >
+              {home.text.map((text: any, index: number) => (
+                <span
+                  key={index}
+                  className={`${
+                    text.highlight
+                      ? memesTextColor + " font-bold"
+                      : text.special
+                      ? "text-[#FFC10B] font-semibold"
+                      : ""
+                  }`}
+                >
+                  {text.content}
+                </span>
+              ))}
+            </p>
+          </Section>
 
           <Section type="bottom">
-            <div className="grid grid-cols-[auto,1fr] gap-4 sm:gap-8 md:gap-4 xl:gap-5 items-center mt-4 sm:mt-8 md:mt-8 xl:mt-16">
+            <div className="grid grid-cols-[auto,1fr] gap-3 sm:gap-8 md:gap-4 xl:gap-5 items-center mt-4 sm:mt-8 md:mt-8 xl:mt-16">
               <a href={home.buyUrl} target="_blank">
-                <MemesBtn>
-                  {publics.buy}
-                </MemesBtn>
+                <MemesBtn>{publics.buy}</MemesBtn>
               </a>
-              <div className="grid grid-cols-[auto,1fr] gap-4 items-center w-full">
+              <div className="grid grid-cols-[auto,1fr] gap-3 items-center w-full">
                 <div
                   className={`p-[6px] relative rounded-full cursor-pointer ${memesHover}`}
                   onClick={async () => {
-                    await navigator.clipboard.writeText(contractAddress);
-                    setIsModalOpen(true);
+                    await copy(contractAddress, () => setIsModalOpen(true));
                   }}
                 >
                   <div
@@ -219,7 +228,10 @@ export const MemesHome = ({ ...props }) => {
                   />
                   <MemesIcon
                     name="copy"
-                    className=" shadow-[0px_0px_8px_4px_rgba(0,0,0,0.25)_inset]  min-w-[calc(56px-6px)] min-h-[calc(56px-6px)]"
+                    className=" shadow-[0px_0px_8px_4px_rgba(0,0,0,0.25)_inset] min-w-[calc(48px-6px)] min-h-[calc(48px-6px)]  sm:min-w-[calc(56px-6px)] sm:min-h-[calc(56px-6px)]"
+                    onClick={async () =>
+                      await copy(contractAddress, () => setIsModalOpen(true))
+                    }
                     style={{
                       background: props.button?.background,
                       color: props.button?.text,
@@ -229,13 +241,12 @@ export const MemesHome = ({ ...props }) => {
                 <div className="flex flex-col break-all">
                   <div
                     className={`cursor-pointer ${memesHover}`}
-                    onClick={async () => {
-                      await navigator.clipboard.writeText(contractAddress);
-                      setIsModalOpen(true);
-                    }}
+                    onClick={async () =>
+                      await copy(contractAddress, () => setIsModalOpen(true))
+                    }
                   >
                     <Ellipsis
-                      className="text-base md:text-2xl font-normal text-white"
+                      className={`text-base md:text-2xl font-normal text-white notranslate`}
                       direction="middle"
                       content={contractAddress}
                     />
@@ -245,7 +256,11 @@ export const MemesHome = ({ ...props }) => {
                     target="_blank"
                     className={`text-sm text-white/60 ${memesHover}`}
                   >
-                    $MINIDOGE<span style={{ fontSize: '50%', opacity: 0.8 }}>(CTO)</span> from pump.fun
+                    $MINIDOGE
+                    <span style={{ fontSize: "50%", opacity: 0.8 }}>
+                      (CTO)
+                    </span>{" "}
+                    from pump.fun
                   </a>
                 </div>
               </div>
@@ -266,16 +281,28 @@ export const MemesHome = ({ ...props }) => {
           </Section>
         )}
       </div>
-    </Fragment>
+    </>
   );
 };
 
 export const Section1 = ({ ...props }) => {
   const { t } = useTranslation();
   const section1: any = t("section1", { returnObjects: true });
-  const Tweets = ({ id, className = "", imageUrl = "" }: { id: string; className?: string; imageUrl: string }) => {
+  const Tweets = ({
+    id,
+    className = "",
+    imageUrl = "",
+  }: {
+    id: string;
+    className?: string;
+    imageUrl: string;
+  }) => {
     return (
-      <a href={`https://x.com/elonmusk/status/${id}`} target="_blank" rel="noopener noreferrer">
+      <a
+        href={`https://x.com/elonmusk/status/${id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <div className={`${memesHover}`}>
           <img src={imageUrl} className={className} />
         </div>
@@ -283,7 +310,7 @@ export const Section1 = ({ ...props }) => {
     );
   };
   return (
-    <Fragment>
+    <>
       <div className="flex flex-col gap-10">
         <div className="text-center flex flex-col gap-4 xl:gap-5">
           <Section type="top">
@@ -295,9 +322,7 @@ export const Section1 = ({ ...props }) => {
                 <span
                   key={index}
                   className={`${
-                    text.highlight
-                      ? memesTextColor + " font-bold"
-                      : ""
+                    text.highlight ? memesTextColor + " font-bold" : ""
                   }`}
                 >
                   {text.content}
@@ -310,7 +335,11 @@ export const Section1 = ({ ...props }) => {
           <MemesCard {...props} className={`${memesHover}`}>
             <div className="grid  sm:grid-cols-[1fr,1fr] xl:grid-cols-[527px,1fr] gap-4 sm:gap-8 xl:gap-12">
               <Section type="left">
-                <Tweets id="1865304483070169440" imageUrl={section1?.box.left.image} className="w-full xl:w-[527px]  xl:h-[695px] rounded-xl object-cover"/>
+                <Tweets
+                  id="1865304483070169440"
+                  imageUrl={section1?.box.left.image}
+                  className="w-full xl:w-[527px]  xl:h-[695px] rounded-xl object-cover"
+                />
               </Section>
 
               <Section type="right">
@@ -319,21 +348,27 @@ export const Section1 = ({ ...props }) => {
                     {section1?.box.right.title}
                   </span>
                   <p className="text-base sm:text-lg md:text-base xl:text-xl mt-4 sm:mt-4 xl:mt-8 opacity-60 leading-relaxed">
-                    {section1?.box.right.text.map((text: any, index: number) => (
-                      <span
-                        key={index}
-                        className={`${
-                          text.highlight
-                            ? memesTextColor + " font-bold opacity-100"
-                            : ""
-                        }`}
-                      >
-                        {text.content}
-                      </span>
-                    ))}
+                    {section1?.box.right.text.map(
+                      (text: any, index: number) => (
+                        <span
+                          key={index}
+                          className={`${
+                            text.highlight
+                              ? memesTextColor + " font-bold opacity-100"
+                              : ""
+                          }`}
+                        >
+                          {text.content}
+                        </span>
+                      )
+                    )}
                   </p>
                   {section1?.box.right.image && (
-                    <Tweets id="1865305060307009884" imageUrl={section1?.box.right.image} className="w-full  mt-4 sm:mt-4 xl:mt-11 rounded-xl object-cover"/>
+                    <Tweets
+                      id="1865305060307009884"
+                      imageUrl={section1?.box.right.image}
+                      className="w-full  mt-4 sm:mt-4 xl:mt-11 rounded-xl object-cover"
+                    />
                   )}
                   {section1?.box.right.bntText && (
                     <a href={section1?.box.right.bntUrl} target="_blank">
@@ -352,7 +387,7 @@ export const Section1 = ({ ...props }) => {
           </MemesCard>
         </Section>
       </div>
-    </Fragment>
+    </>
   );
 };
 
@@ -369,8 +404,7 @@ export const Section2 = ({ ...props }) => {
           <span
             className={`${memesTextSize} mt-4 sm:mt-4 xl:mt-8 max-w-xl`}
             dangerouslySetInnerHTML={{ __html: section2?.text }}
-          >
-          </span>
+          ></span>
           {section2.bntText && (
             <a
               href={section2?.bntUrl}
@@ -427,7 +461,7 @@ export const Section3 = () => {
       <Section type="top">
         <div className="w-full flex flex-col">
           {section3.data && (
-            <Fragment>
+            <>
               {/* 第一排：最多显示3个 */}
               <div className="grid grid-cols-3 gap-3 sm:gap-4 justify-center">
                 {section3.data.slice(0, 3).map((item: any, index: number) => (
@@ -459,7 +493,7 @@ export const Section3 = () => {
                   ))}
                 </div>
               )}
-            </Fragment>
+            </>
           )}
         </div>
       </Section>
@@ -479,98 +513,44 @@ export const HowToBuy = ({ ...props }) => {
     text?: string;
     index?: number;
   }) => {
-    // 第三个卡片添加链接
-    if (index === 2) {
-      return (
-        <a 
-          href="https://raydium.io/swap/?inputMint=sol&outputMint=8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu" 
-          target="_blank" 
-          rel="noopener noreferrer"
-        >
-          <MemesCard {...props} className={`${memesHover}`}>
-            <div className="flex flex-col gap-4 sm:gap-6 xl:gap-7">
-              <div className="grid grid-cols-[70px,1fr] xl:grid-cols-[83px,1fr] gap-4 sm:gap-6 xl:gap-8 items-center">
-                <div className="aspect-square p-[6px] bg-white/20 rounded-2xl">
-                  <Icon
-                    name={`howToBuy/${3 - index}`}
-                    className="aspect-square rounded-xl w-full h-full object-cover"
-                  />
-                </div>
-                <span
-                  className={`text-2xl xl:text-3xl font-normal ${memesTextColor}`}
-                  dangerouslySetInnerHTML={{ __html: title }}
-                ></span>
-              </div>
-              <span
-                className={`${memesTextSize} !text-base xl:!text-2xl font-normal`}
-                dangerouslySetInnerHTML={{ __html: text }}
-              ></span>
-            </div>
-          </MemesCard>
-        </a>
-      );
-    }
-
-    // 第二个卡片添加链接
-    if (index === 1) {
-      return (
-        <a 
-          href="https://phantom.com/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-        >
-          <MemesCard {...props} className={`${memesHover}`}>
-            <div className="flex flex-col gap-4 sm:gap-6 xl:gap-7">
-              <div className="grid grid-cols-[70px,1fr] xl:grid-cols-[83px,1fr] gap-4 sm:gap-6 xl:gap-8 items-center">
-                <div className="aspect-square p-[6px] bg-white/20 rounded-2xl">
-                  <Icon
-                    name={`howToBuy/${3 - index}`}
-                    className="aspect-square rounded-xl w-full h-full object-cover"
-                  />
-                </div>
-                <span
-                  className={`text-2xl xl:text-3xl font-normal ${memesTextColor}`}
-                  dangerouslySetInnerHTML={{ __html: title }}
-                ></span>
-              </div>
-              <span
-                className={`${memesTextSize} !text-base xl:!text-2xl font-normal`}
-                dangerouslySetInnerHTML={{ __html: text }}
-              ></span>
-            </div>
-          </MemesCard>
-        </a>
-      );
-    }
-
-    // 第一个卡片不可点击
     return (
-      <MemesCard {...props} className={`${memesHover}`}>
-        <div className="flex flex-col gap-4 sm:gap-6 xl:gap-7">
-          <div className="grid grid-cols-[70px,1fr] xl:grid-cols-[83px,1fr] gap-4 sm:gap-6 xl:gap-8 items-center">
-            <div className="aspect-square p-[6px] bg-white/20 rounded-2xl">
-              <Icon
-                name={`howToBuy/${3 - index}`}
-                className="aspect-square rounded-xl w-full h-full object-cover"
-              />
+      <a
+        className={`${howToBuy?.data?.[index].url ? "" : "text-current"}`}
+        onClick={() =>
+          howToBuy?.data?.[index].url &&
+          window.open(howToBuy?.data?.[index].url, "_blank")
+        }
+      >
+        <MemesCard {...props} className={`${memesHover}`}>
+          <div className="flex flex-col gap-4 sm:gap-6 xl:gap-7">
+            <div className="grid grid-cols-[70px,1fr] xl:grid-cols-[83px,1fr] gap-4 sm:gap-6 xl:gap-8 items-center">
+              <div className="aspect-square p-[6px] bg-white/20 rounded-2xl w-[70px] h-[70px] xl:w-[83px] xl:h-[83px]">
+                <Icon
+                  name={`howToBuy/${3 - index}`}
+                  className="aspect-square rounded-xl w-full h-full object-cover"
+                />
+              </div>
+              <span
+                className={`text-2xl xl:text-3xl font-normal ${memesTextColor}`}
+                dangerouslySetInnerHTML={{ __html: title }}
+              ></span>
             </div>
             <span
-              className={`text-2xl xl:text-3xl font-normal ${memesTextColor}`}
-              dangerouslySetInnerHTML={{ __html: title }}
+              className={`${memesTextSize} !text-base xl:!text-2xl font-normal`}
+              dangerouslySetInnerHTML={{ __html: text }}
             ></span>
           </div>
-          <span
-            className={`${memesTextSize} !text-base xl:!text-2xl font-normal`}
-            dangerouslySetInnerHTML={{ __html: text }}
-          ></span>
-        </div>
-      </MemesCard>
+        </MemesCard>
+      </a>
     );
   };
   return (
     <div className="flex flex-col items-center gap-14">
       <Section type="top">
-        <span className={`${memesTitleSize}`} dangerouslySetInnerHTML={{ __html: howToBuy.title }}></span>
+        <span
+          className={`${memesTitleSize}`}
+          dangerouslySetInnerHTML={{ __html: howToBuy.title }}
+        ></span>
       </Section>
       {howToBuy.data?.length && (
         <Section type="top" className="w-full">
@@ -613,8 +593,8 @@ export const About = () => {
       >
         {about?.title}
       </span>
-      <div 
-        className={`${memesTextSize} mt-3 sm:mt-6 max-w-3xl mx-auto leading-relaxed space-y-4 font-medium`}
+      <div
+        className={`${memesTextSize} mt-3 sm:mt-6 max-w-3xl mx-auto leading-relaxed space-y-4 font-medium about-text`}
         dangerouslySetInnerHTML={{ __html: about?.text }}
       />
       {about?.bntText && (
@@ -631,10 +611,10 @@ export const About = () => {
 export const Footer = () => {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col gap-6 w-full py-8 px-4 mt-8">
-      <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-        <p 
-          className={`${memesTextSize} text-center block leading-relaxed opacity-80`}
+    <div className="flex flex-col gap-6 w-full py-4">
+      <div className="max-w-4xl mx-auto w-full bg-white/5 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+        <p
+          className={`${memesTextSize} text-center leading-normal opacity-80 `}
           dangerouslySetInnerHTML={{ __html: t("footer") }}
         />
       </div>
@@ -643,13 +623,12 @@ export const Footer = () => {
 };
 export default function Domain({ ...props }) {
   if (Object.keys(props).length === 0) return null;
-  
+
   const { nav = {} } = props;
-  
+
   return (
     <div
-      className={`min-h-screen w-full flex flex-col pb-12 gap-8 sm:gap-8 xl:gap-0 items-center overflow-hidden relative text-content ${props.background?.pattern}`}
-      style={{ color: props.text?.color }}
+      className={`min-h-screen w-full flex flex-col pb-12 gap-8 sm:gap-8 xl:gap-0 items-center overflow-hidden relative text-content text-white ${props.background?.pattern}`}
     >
       <div className="w-full h-screen fixed top-0 left-0 ">
         <div

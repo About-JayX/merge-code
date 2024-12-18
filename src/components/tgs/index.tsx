@@ -42,7 +42,10 @@ export default memo(function Tgs({
       });
       tgsRef.current.addEventListener("complete", () => {
         onChange && onChange(true);
-        tgsRef.current?.goToAndPlay(0, true);
+        setTimeout(() => {
+          tgsRef.current?.goToAndPlay(0, true);
+        },100)
+       
       })
     }
   }, [data]);

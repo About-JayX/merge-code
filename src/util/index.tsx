@@ -7,7 +7,7 @@ export const copy = async (url: string,onSuccess?: () => void) => {
     const textArea = document.createElement("textarea");
     textArea.value = inviteLink;
     document.body.appendChild(textArea);
-    textArea.select();
+    // textArea.select();
     try {
       document.execCommand("copy");
       onSuccess && onSuccess()

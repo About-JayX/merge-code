@@ -2,7 +2,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind variants;
 
 
 :root {
@@ -395,4 +394,12 @@ svg {
 .dark {
   --skeleton-bg-color: #1d212868;
   --skeleton-bg-colors: #282d37;
+}
+
+a{
+  @apply text-current
+}
+
+.notranslate{
+  translate: no;
 }
