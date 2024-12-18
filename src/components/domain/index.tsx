@@ -724,7 +724,7 @@ export default function Domain({ ...props }) {
             </a>
           )}
           <Dropdown
-            placement="bottomCenter"
+            placement="bottomRight"
             menu={{
               items: Object.entries(locale).map(([key, value]: any) => ({
                 key,

@@ -3,6 +3,7 @@ export const copy = async (url: string,onSuccess?: () => void) => {
 
   try {
     await navigator.clipboard.writeText(inviteLink);
+    onSuccess && onSuccess()
   } catch (_) {
     const textArea = document.createElement("textarea");
     textArea.value = inviteLink;
