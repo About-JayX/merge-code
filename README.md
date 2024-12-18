@@ -1,181 +1,91 @@
-# Memes Web V2
+# MINIDOGE 多语言网站
 
-这是一个使用 React + TypeScript + Vite 构建的现代化 Web 应用项目。
+## 项目介绍
 
-## 技术栈
+这是一个基于 React + TypeScript + i18n 的多语言网站项目，支持 20 种语言。
 
-- **核心框架**: React 18
-- **开发语言**: TypeScript
-- **构建工具**: Vite
-- **UI 框架**: 
-  - Ant Design (antd)
-  - Ant Design Mobile
-  - Ant Design Web3
-- **状态管理**: 
-  - Redux Toolkit
-  - React Query
-- **路由**: React Router v6
-- **样式解决方案**: 
-  - Tailwind CSS
-  - SASS
-  - Styled Components
-- **Web3 集成**:
-  - Wagmi
-  - Viem
-  - Solana Wallet Adapter
-- **国际化**: i18next
-- **HTTP 客户端**: Axios
+## 支持的语言
+
+- 英语 (en-US)
+- 简体中文 (zh-CN)
+- 繁体中文 (zh-HK)
+- 日语 (ja-JP)
+- 韩语 (ko-KR)
+- 马来语 (ms-MY)
+- 印尼语 (id-ID)
+- 菲律宾语 (fil-PH)
+- 泰语 (th-TH)
+- 越南语 (vi-VN)
+- 阿拉伯语 (ar-SA)
+- 波斯语 (fa-IR)
+- 印地语 (hi-IN)
+- 土耳其语 (tr-TR)
+- 俄语 (ru-RU)
+- 法语 (fr-FR)
+- 德语 (de-DE)
+- 葡萄牙语 (pt-BR)
+- 西班牙语 (es-ES)
+- 意大利语 (it-IT)
 
 ## 项目结构
 
 ```
-src/
-├── api/          # API 接口定义
-├── assets/       # 静态资源文件
-├── axios/        # Axios 配置和拦截器
-├── components/   # 可复用组件
-├── config/       # 项目配置文件
-├── hook/         # 自定义 React Hooks
-├── i18n/         # 国际化配置
-├── provider/     # React Context Providers
-├── router/       # 路由配置
-├── store/        # Redux 状态管理
-├── style/        # 全局样式文件
-├── type/         # TypeScript 类型定义
-├── util/         # 工具函数
-└── view/         # 页面组件
+src/config/
+├── index.ts          # 主配置文件
+├── links.ts          # 外部链接配置
+├── nav.ts            # 导航菜单配置
+├── shared/           # 共享配置
+└── locale/           # 多语言翻译文件
 ```
 
-## 开发环境配置
-
-### 系统要求
-
-- Node.js >= 16.0.0
-- npm >= 7.0.0 或 yarn >= 1.22.0
+## 开发指南
 
 ### 安装依赖
 
 ```bash
-npm install
-# 或
-yarn
+yarn install
 ```
 
-### 开发命令
+### 开发模式
 
 ```bash
-# 启动开发服务器
-npm run dev
-# 或
 yarn dev
+```
 
-# 构建生产版本
-npm run build
-# 或
+### 构建项目
+
+```bash
 yarn build
-
-# 代码检查
-npm run lint
-# 或
-yarn lint
-
-# 预览生产构建
-npm run preview
-# 或
-yarn preview
 ```
 
-## ESLint 配置
+### 添加新语言
 
-项目使用了严格的 TypeScript ESLint 配置。如果你正在开发生产应用，建议启用类型感知的 lint 规则：
+1. 在 `src/config/locale` 目录下创建新的语言目录
+2. 复制完整的翻译文件结构
+3. 在 `src/config/index.ts` 中添加语言支持配置
 
-1. 配置顶级 `parserOptions`：
+### 修改翻译
 
-```js
-export default {
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+直接修改对应语言目录下的翻译文件，注意保持以下规范：
 
-2. 使用更严格的 TypeScript ESLint 规则：
-   - 将 `plugin:@typescript-eslint/recommended` 替换为 `plugin:@typescript-eslint/recommended-type-checked` 或 `plugin:@typescript-eslint/strict-type-checked`
-   - 可选添加 `plugin:@typescript-eslint/stylistic-type-checked`
+- 保持 HTML 标签的完整性
+- 使用直接导出字符串的格式
+- 特殊标记（如 $MINIDOGE）保持原样不翻译
 
-## 环境变量
+## 技术栈
 
-项目使用了不同的环境配置文件：
-- `.env.development`: 开发环境配置
-- `.env.production`: 生产环境配置
+- React
+- TypeScript
+- i18next
+- Vite
+- Tailwind CSS
 
-## Web3 功能
+## 注意事项
 
-项目集成了多链钱包支持：
-- 以太坊生态: 通过 wagmi 支持
-- Solana: 通过 Solana Wallet Adapter 支持
+1. 所有翻译文件必须使用直接导出字符串的格式
+2. HTML 标签必须保持完整和一致性
+3. 确保所有语言都有完整的翻译文件结构
 
-## 移动端适配
+## 许可证
 
-项目使用了以下方案实现移动端适配：
-- postcss-pxtorem 用于单位转换
-- antd-mobile 提供移动端 UI 组件
-- 响应式设计通过 Tailwind CSS 实现
-
-## 支付功能
-
-### 概述
-
-本项目使用 Solana 区块链网络处理域名注册支付。用户需要连接 Solana 钱包并支付少量 SOL 来完成域名注册。
-
-### 技术实现
-
-- **区块链网络**: Solana Mainnet
-- **钱包集成**: @solana/wallet-adapter-react
-- **区块链交互**: @solana/web3.js
-- **数值计算**: BigNumber.js
-
-### 支付流程
-
-1. **连接钱包**
-   - 用户需要安装并连接支持 Solana 的钱包（如 Phantom）
-   - 钱包需要有足够的 SOL 余额
-
-2. **域名注册**
-   - 填写项目基本信息（图片、名称、描述等）
-   - 系统会创建包含以下内容的交易：
-     - 转账指令：支付 0.00001 SOL
-     - 备注指令：记录注册信息
-
-3. **交易确认**
-   - 交易发送到 Solana 网络
-   - 等待区块确认（'confirmed' 级别）
-   - 成功后自动跳转到用户页面
-
-### 技术细节
-
-```typescript
-// 支付金额
-const fixedAmount = 0.00001 // SOL
-const lamports = new BigNumber(fixedAmount)
-  .multipliedBy(LAMPORTS_PER_SOL)
-  .integerValue(BigNumber.ROUND_DOWN)
-  .toNumber()
-
-// 接收地址
-const recipientPubKey = new PublicKey(
-  '74A2G5b6oPK3PS3yX5rAtFwnYvxtbAuhckoWG125KMcP'
-)
-```
-
-### 注意事项
-
-1. 确保钱包中有足够的 SOL（支付金额 + 交易费用）
-2. 交易可能因网络拥堵而延迟
-3. 如遇交易失败，请检查：
-   - 钱包余额
-   - 网络连接
-   - 区块链网络状态
+MIT License

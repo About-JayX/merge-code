@@ -11,6 +11,7 @@ import jaJP from "@/config/locale/ja-JP";
 import msMY from "@/config/locale/ms-MY";
 import zhCN from "@/config/locale/zh-CN";
 import idID from "@/config/locale/id-ID";
+import filPH from "@/config/locale/fil-PH";
 import thTH from "@/config/locale/th-TH";
 import viVN from "@/config/locale/vi-VN";
 import trTR from "@/config/locale/tr-TR";
@@ -101,15 +102,13 @@ export const api = {
  */
 export const locale = {
   "en-US": enUS,
-  "ko-KR": koKR,
-  "ms-MY": msMY,
-  "ja-JP": jaJP,
   "zh-CN": zhCN,
   "zh-HK": zhHK,
-  "ar-SA": arSA,
-  "hi-IN": hiIN,
-  "fa-IR": faIR,
+  "ja-JP": jaJP,
+  "ko-KR": koKR,
+  "ms-MY": msMY,
   "id-ID": idID,
+  "fil-PH": filPH,
   "th-TH": thTH,
   "vi-VN": viVN,
   "tr-TR": trTR,
@@ -119,6 +118,9 @@ export const locale = {
   "pt-BR": ptBR,
   "es-ES": esES,
   "it-IT": itIT,
+  "ar-SA": arSA,
+  "hi-IN": hiIN,
+  "fa-IR": faIR,
 } as Resource;
 
 i18n
@@ -126,7 +128,28 @@ i18n
   .init({
     resources: locale,
     fallbackLng: "en-US",
-    supportedLngs: ["en-US", "ko-KR", "ms-MY", "ja-JP", "zh-CN", "zh-HK", "ar-SA", "hi-IN", "fa-IR", "id-ID", "th-TH", "vi-VN", "tr-TR", "ru-RU", "fr-FR", "de-DE", "pt-BR", "es-ES", "it-IT"],
+    supportedLngs: [
+      "en-US", 
+      "zh-CN",
+      "zh-HK",
+      "ja-JP",
+      "ko-KR",
+      "ms-MY",
+      "id-ID",
+      "fil-PH",
+      "th-TH",
+      "vi-VN",
+      "tr-TR",
+      "ru-RU",
+      "fr-FR",
+      "de-DE",
+      "pt-BR",
+      "es-ES",
+      "it-IT",
+      "ar-SA",
+      "hi-IN",
+      "fa-IR"
+    ],
     interpolation: {
       escapeValue: false
     },
