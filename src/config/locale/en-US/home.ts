@@ -1,3 +1,5 @@
+import { LINKS } from "@/config/links";
+
 export default {
   title: [
     { content: "$MINIDOGE" },
@@ -12,7 +14,7 @@ export default {
     { content: "Elon Musk", highlight: true },
     { content: " (the DogeFather) guides his successor (DogeSon)." }
   ],
-  buyUrl:"https://raydium.io/swap/?inputMint=sol&outputMint=8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu",
+  buyUrl: LINKS.BUY.RAYDIUM,
   contractAddressPrefix: "$MINIDOGE",
   contractAddressSuffix: "from pump.fun",
   contractAddressCTO: "(CTO)"

@@ -1,5 +1,6 @@
 import s1Left from "@/assets/image/section1/left.png";
 import s1Right from "@/assets/image/section1/right.png";
+import { LINKS } from "@/config/links";
 
 export default {
   title: "Doge & Minidoge",
@@ -39,7 +40,7 @@ export default {
       ],
       image: s1Right,
       bntText: "$MINIDOGE X",
-      bntUrl: "https://x.com/MINIDOGE_X",
+      bntUrl: LINKS.SOCIAL.TWITTER,
     },
   },
 };

@@ -1,19 +1,20 @@
 import s1Left from "@/assets/image/section1/left.png";
 import s1Right from "@/assets/image/section1/right.png";
+import { LINKS } from "@/config/links";
 
 export default {
-  title: "도지 & 미니도지",
+  title: "Doge & Minidoge",
   text: [
     { content: "" },
     { content: "2024년 12월 7일", highlight: true },
     { content: ", " },
     { content: "일론 머스크", highlight: true },
     { content: "는 " },
-    { content: '"도지파더"' },
+    { content: '"DogeFather"' },
     { content: "가 " },
-    { content: '"도지손"' },
+    { content: '"DogeSon"' },
     { content: "을 어깨에 태우고 있는 이미지와 함께 " },
-    { content: '"도지 & 미니도지"', highlight: true },
+    { content: '"Doge & Minidoge"', highlight: true },
     { content: "라는 글을 게시했습니다." }
   ],
   box: {
@@ -39,7 +40,7 @@ export default {
       ],
       image: s1Right,
       bntText: "$MINIDOGE X",
-      bntUrl: "https://x.com/MINIDOGE_X",
+      bntUrl: LINKS.SOCIAL.TWITTER,
     },
   },
 };

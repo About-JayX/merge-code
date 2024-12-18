@@ -1,3 +1,5 @@
+import { LINKS } from "@/config/links";
+
 export default {
   title: "どのように<b>$MINIDOGE</b>を購入しますか？",
   data: [
@@ -11,13 +13,13 @@ export default {
       title:
         "<div class='flex'><b class='text-[#FFAC03]'>2.</b><div class='ml-2'><i>Phantom</i>をインストール</div></div>",
       text: "ブラウザまたはモバイルデバイスに<b>Phantomウォレット</b>をダウンロードしてインストールしてください。",
-      url: "https://phantom.com/",
+      url: LINKS.BUY.PHANTOM,
     },
     {
       title:
         "<div class='flex'><b class='text-[#FFAC03]'>3.</b><div class='ml-2'><i>Raydium</i>で<i>$MINIDOGE</i>をスワップ</div></div>",
       text: "<b>Raydium.io</b>にアクセスし、Phantomウォレットを接続して<b>SOL</b>を<b>$MINIDOGE</b>にスワップしてください。",
-      url: "https://raydium.io/swap/?inputMint=sol&outputMint=8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu",
+      url: LINKS.BUY.RAYDIUM,
     },
   ],
 }; 

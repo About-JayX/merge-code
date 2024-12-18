@@ -1,19 +1,20 @@
 import s1Left from "@/assets/image/section1/left.png";
 import s1Right from "@/assets/image/section1/right.png";
+import { LINKS } from "@/config/links";
 
 export default {
-  title: "Doge 與 Minidoge",
+  title: "Doge & Minidoge",
   text: [
     { content: "在 " },
     { content: "2024 年 12 月 7 日", highlight: true },
     { content: "，" },
     { content: "Elon Musk", highlight: true },
     { content: " 發佈了一條推文，其中包含一張 " },
-    { content: "「DogeFather」" },
+    { content: '"DogeFather"' },
     { content: " 將他的 " },
-    { content: "「DogeSon」" },
+    { content: '"DogeSon"' },
     { content: " 扛在肩上的圖片，並附上標題 " },
-    { content: "「Doge 與 Minidoge」", highlight: true },
+    { content: '"Doge & Minidoge"', highlight: true },
     { content: "。" }
   ],
   box: {
@@ -39,7 +40,7 @@ export default {
       ],
       image: s1Right,
       bntText: "$MINIDOGE X",
-      bntUrl: "https://x.com/MINIDOGE_X",
+      bntUrl: LINKS.SOCIAL.TWITTER,
     },
   },
 };

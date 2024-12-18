@@ -1,5 +1,7 @@
+import { LINKS } from "@/config/links";
+
 export default {
-  title: "$MINIDOGE 建設",
+  title: "$MINIDOGE BUILD",
   text: `
     <b>$MINIDOGE CTO 基金會</b> 致力於通過以下方式推動 <i>#Minidoge IP</i> 的全球擴展：<br/>
     <div class="flex justify-center">
@@ -18,5 +20,5 @@ export default {
       <i>支持全球兒童和流浪動物</i>
     </div>`,
   bntText: "CTO 基金會",
-  bntUrl: "https://minidoge-cto-foundation.gitbook.io/minidoge",
+  bntUrl: LINKS.DOCS.CTO_FOUNDATION,
 };

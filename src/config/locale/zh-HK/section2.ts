@@ -1,4 +1,5 @@
 import s2Image from "@/assets/image/section2/index.png";
+import { LINKS } from "@/config/links";
 
 export default {
   title: "我是 $MINIDOGE 的 CEO",
@@ -23,6 +24,6 @@ export default {
       },
     ],
   },
-  bntText: "TG 群組",
-  bntUrl: "https://t.me/MINIDOGE_PORTAL",
+  bntText: "電報群組",
+  bntUrl: LINKS.SOCIAL.TELEGRAM,
 };
