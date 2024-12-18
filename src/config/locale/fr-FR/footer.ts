@@ -1,3 +1,1 @@
-export default {
-  minidoge: "<i>$MINIDOGE</i> est un <b>token meme communautaire</b> qui célèbre la culture crypto.<br/>Ce site web est développé par <i>l'Équipe CTO</i> uniquement à des fins d'information et <b>ne doit pas être interprété comme un conseil en investissement</b>."
-}; 
+export default "<i>$MINIDOGE</i> est un <b>jeton mème géré par la communauté</b> célébrant la culture crypto.<br/>Ce site web est développé par <i>l'équipe CTO</i> uniquement à titre informatif et <b>ne doit pas être considéré comme un conseil en investissement</b>."; 
