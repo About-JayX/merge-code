@@ -24,7 +24,10 @@ const GoogleAnalytics = () => {
 
     // 清理脚本
     return () => {
-      document.head.removeChild(script)
+      const script = document.querySelector(
+        `script[src="https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"]`
+      )
+      script && document.head.removeChild(script)
     }
   }, [GA_MEASUREMENT_ID])
 
