@@ -1,4 +1,3 @@
-
 export interface TgsProps {
   name: string;
   className?: string;

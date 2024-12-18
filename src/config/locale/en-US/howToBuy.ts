@@ -1,17 +1,17 @@
 export default {
-  title: "How To Buy $MINIDOGE?",
+  title: "How To Buy <b>$MINIDOGE</b>?",
   data: [
     {
-      title: "Step 1",
-      text: "Download the Phantom app for mobile users, and download the Phantom Chrome extension for desktop users.",
+      title: "<div class='flex items-center'><b class='text-[#FFAC03]'>1.</b><div class='ml-2'>Buy <i>SOL</i></div></div>",
+      text: "You can buy <b>SOL</b> from any major exchange and transfer it to your <i>Phantom wallet</i>.",
     },
     {
-      title: "Step 2",
-      text: "Fund your wallet with Solana, you can buy Solana from an exchange or cross chain swap and send it to your wallet.",
+      title: "<div class='flex items-center'><b class='text-[#FFAC03]'>2.</b><div class='ml-2'>Install <i>Phantom</i></div></div>",
+      text: "Download and install <b>Phantom wallet</b> for your browser or mobile device.",
     },
     {
-      title: "Step 3",
-      text: "Go to Jupiter and swap your Solana for $BITCAT. (We recommend using Jupiter to avoid MEV bots.)",
+      title: "<div class='flex items-center'><b class='text-[#FFAC03]'>3.</b><div class='ml-2'>Swap <i>$MINIDOGE</i> on <i>Raydium</i></div></div>",
+      text: "Visit <b>Raydium.io</b>, connect your Phantom wallet, and swap <b>SOL</b> for <b>$MINIDOGE</b>.",
     },
   ],
 };
