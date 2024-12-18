@@ -4,10 +4,11 @@ import Icon from "../icon";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import contractAddress from "@/config/contractAddress";
-import { Modal } from "antd";
+import { Dropdown, Modal } from "antd";
 import Tgs from "../tgs";
 import { images } from "@/assets/images";
 import { copy } from "@/util";
+import { locale } from "@/config";
 
 const memesSize =
   "min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
@@ -128,12 +129,18 @@ export const MemesCard = ({
   );
 };
 
-export const ImageLink = ({ children }: { children: React.ReactNode }) => (
+export const ImageLink = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
   <a
     href="https://t.me/MINIDOGE_MEMES_RAIDS"
     target="_blank"
     rel="noopener noreferrer"
-    className="cursor-pointer"
+    className={`cursor-pointer ${className}`}
   >
     {children}
   </a>
@@ -257,10 +264,8 @@ export const MemesHome = ({ ...props }) => {
                     className={`text-sm text-white/60 ${memesHover}`}
                   >
                     $MINIDOGE
-                    <span style={{ fontSize: "50%", opacity: 0.8 }}>
-                      {" "}
-                    </span>{" "}
-                    - pump.fun
+                    <span style={{ fontSize: "50%", opacity: 0.8 }}> </span> -
+                    pump.fun
                   </a>
                 </div>
               </div>
@@ -270,7 +275,7 @@ export const MemesHome = ({ ...props }) => {
         {props.banner_url && (
           <Section type="right">
             <div className="sm:w-[22rem] sm:h-[22rem] xl:w-[26rem] xl:h-[26rem] md:w-full md:h-full transition-transform duration-300 hover:scale-105">
-              <ImageLink>
+              <ImageLink className="">
                 <img
                   src={props.banner_url}
                   alt="Token Image"
@@ -621,7 +626,32 @@ export const Footer = () => {
     </div>
   );
 };
+
+export const StarrySky = () => {
+  return (
+    <div className="starry-background">
+      <div className="stars">
+        <div className="star" />
+        <div className="star" />
+        <div className="star" />
+        <div className="star" />
+        <div className="star" />
+        <div className="star" />
+        <div className="star" />
+        <div className="star" />
+        <div className="star" />
+        <div className="star" />
+        <div className="star" />
+        <div className="star" />
+        <div className="star" />
+        <div className="star" />
+        <div className="star" />
+      </div>
+    </div>
+  );
+};
 export default function Domain({ ...props }) {
+  const { t, i18n } = useTranslation();
   if (Object.keys(props).length === 0) return null;
 
   const { nav = {} } = props;
@@ -647,6 +677,7 @@ export default function Domain({ ...props }) {
           background: props.background?.color,
         }}
       />
+      <StarrySky />
       <Section className="w-full flex justify-center z-10">
         <header className="p-3 sm:p-8 md:pt-8 md:px-16 flex gap-1 sm:gap-4 items-center w-full max-w-screen-xl">
           <div className="grid grid-cols-[48px,auto] sm:grid-cols-[56px,auto] md:grid-cols-[64px,auto] items-center gap-3">
@@ -692,6 +723,22 @@ export default function Domain({ ...props }) {
               <MemesIcon className="text-white" name="instagram" />
             </a>
           )}
+          <Dropdown
+            placement="bottomCenter"
+            menu={{
+              items: Object.entries(locale).map(([key, value]: any) => ({
+                key,
+                label: value.translation.language,
+                onClick: () => {
+                  i18n.changeLanguage(key);
+                },
+              })),
+            }}
+          >
+            <a className="bg-white/10 border font-bold border-white/10 px-4 sm:px-5 rounded flex items-center justify-center min-w-[36px] min-h-[36px] sm:min-w-[48px] sm:min-h-[48px] text-current">
+              <span>{t("lang")}</span>
+            </a>
+          </Dropdown>
         </header>
       </Section>
       <main className="px-3 sm:p-8 md:px-16 w-full max-w-screen-xl flex flex-col gap-12 sm:gap-24 md:gap-28 xl:gap-28 z-10">

@@ -5,6 +5,7 @@
 
 import type { Resource } from "i18next";
 import enUS from "@/config/locale/en-US";
+import zhHK from "@/config/locale/zh-HK";
 // import type { TelegramType } from "@/type";
 
 /**
@@ -82,4 +83,5 @@ export const api = {
  */
 export const locale = {
   "en-US": enUS,
+  "zh-HK": zhHK,
 } as Resource;

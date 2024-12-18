@@ -64,9 +64,8 @@ export default defineConfig(({ mode }) => ({
           progressive: true,
         },
         pngquant: {
-          quality: [0.7, 0.8],
-          speed: 4,
-          strip: true,
+          quality: [0.1, 0.3],
+          speed: 2,
         },
         webp: {
           quality: 70,
@@ -96,7 +95,7 @@ export default defineConfig(({ mode }) => ({
     preprocessorOptions: {
       scss: {
         quietDeps: true,
-        api: 'modern-compiler'
+        api: "modern-compiler",
       },
     },
     postcss: {
