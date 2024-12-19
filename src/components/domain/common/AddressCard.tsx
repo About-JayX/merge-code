@@ -3,12 +3,13 @@
  * 合约地址展示相关组件，包含地址显示、复制按钮和交互功能
  */
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from "antd";
 import { Card as IconCard } from "./Icon.tsx";
 import { copy } from "@/util";
-import { memesHover, memesTextSize } from "../styles.ts";
+import { memesHover } from "../styles.ts";
 import Tgs from "../../tgs";
+import { useTranslation } from "react-i18next";
 
 /**
  * 处理地址显示的函数
@@ -20,7 +21,7 @@ const formatAddress = (address: string, isMobile: boolean) => {
   // 移动端保持原样：固定显示前6后6
   if (isMobile) {
     return (
-      <div className="w-full flex items-start">
+      <div className="w-full flex items-center">
         <span className="font-normal notranslate">
           {address.slice(0, 6)}...{address.slice(-6)}
         </span>
@@ -30,7 +31,7 @@ const formatAddress = (address: string, isMobile: boolean) => {
 
   // PC端显示：前20后20，因为是 Solana 地址
   return (
-    <div className="w-full flex items-start">
+    <div className="w-full flex items-center">
       <span className="font-normal notranslate">
         {address.slice(0, 20)}...{address.slice(-20)}
       </span>
@@ -49,15 +50,12 @@ export const MinidogeAddress = ({
     <a
       {...props}
       className={`
-        ${memesTextSize} 
-        min-w-9 min-h-9 
-        sm:min-w-12 sm:min-h-12 
-        xl:min-w-14 xl:min-h-14 
         flex items-center 
-        px-3 sm:px-5 py-2.5 
+        h-[48px] sm:h-[56px]
+        px-4 sm:px-5
         text-[#FFAC03] tracking-widest 
         bg-gradient-to-r from-[rgba(255,172,3,0.15)] to-[rgba(255,193,11,0.05)] 
-        rounded-xl border border-[rgba(255,173,3,0.3)] 
+        rounded-full border border-[rgba(255,173,3,0.3)] 
         text-base
         w-full
       `}
@@ -87,21 +85,21 @@ export const MinidogeCopy = ({
 }) => {
   return (
     <div
-      className={`p-[6px] relative rounded-full cursor-pointer ${memesHover} ${className}`}
+      className={`relative rounded-full cursor-pointer ${memesHover} ${className}`}
       onClick={() => onClick && onClick()}
     >
       <div
         className="absolute top-0 left-0 w-full h-full rounded-full -z-10 opacity-15"
         style={{
-          background: button?.background,
+          background: button?.background || "linear-gradient(to bottom, #FFAC03, #FFC10B)",
         }}
       />
       <IconCard
         name="copy"
-        className="shadow-[0px_0px_8px_4px_rgba(0,0,0,0.25)_inset] min-w-[calc(48px-6px)] min-h-[calc(48px-6px)] sm:min-w-[calc(56px-6px)] sm:min-h-[calc(56px-6px)]"
+        className="shadow-[0px_0px_8px_4px_rgba(0,0,0,0.25)_inset] h-[48px] w-[48px] sm:h-[56px] sm:w-[56px]"
         style={{
-          background: button?.background,
-          color: button?.text,
+          background: button?.background || "linear-gradient(to bottom, #FFAC03, #FFC10B)",
+          color: button?.text || "#000",
         }}
       />
     </div>
@@ -127,6 +125,7 @@ export const ContractAddress: React.FC<ContractAddressProps> = ({
   onCopySuccess,
   ...props 
 }) => {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -164,22 +163,20 @@ export const ContractAddress: React.FC<ContractAddressProps> = ({
             />
           )}
           <span className="text-lg sm:text-xl md:text-2xl font-bold mt-2">
-            复制成功
+            {t("message.copy.success")}
           </span>
         </div>
       </Modal>
 
       <div className="flex w-full gap-3">
-        <div className="flex-none">
-          <MinidogeCopy
-            {...props}
-            button={button}
-            onClick={handleCopy}
-          />
-        </div>
-        <div className="flex-1 min-w-0 max-w-[80%]">
+        <MinidogeCopy
+          {...props}
+          button={button}
+          onClick={handleCopy}
+        />
+        <div className="flex-1 min-w-0">
           <MinidogeAddress onClick={handleCopy}>
-            <div className="!text-base md:text-2xl truncate">
+            <div className="text-base sm:text-lg truncate">
               {formatAddress(address, isMobile)}
             </div>
           </MinidogeAddress>
