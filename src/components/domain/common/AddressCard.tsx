@@ -33,38 +33,62 @@ const getCharWidth = (fontSize: number) => {
  * 2. 如果空间不足，在保证最少显示前后各6个字符的情况下，尽可能多显示
  * 3. 使用省略号(...)表示中间省略的部分
  */
+interface AddressDisplayProps {
+  address?: string;
+  isMobile: boolean;
+  containerWidth: number;
+  config?: {
+    fontSize?: {
+      mobile: number;
+      tablet: number;
+      desktop: number;
+    };
+    padding?: {
+      mobile: number;
+      desktop: number;
+    };
+    minChars?: number;
+  };
+}
+
 const AddressDisplay = ({ 
   address = '', 
   isMobile, 
-  containerWidth 
-}: { 
-  address?: string; 
-  isMobile: boolean; 
-  containerWidth: number;
-}) => {
+  containerWidth,
+  config = {
+    fontSize: {
+      mobile: 12,
+      tablet: 14,
+      desktop: 20
+    },
+    padding: {
+      mobile: 32,
+      desktop: 40
+    },
+    minChars: 6
+  }
+}: AddressDisplayProps) => {
   if (!address || !containerWidth) {
     return <span className="font-normal notranslate">-</span>;
   }
 
   // 根据屏幕宽度确定字体大小
-  // 移动端默认12px(xs)，平板14px(sm)，桌面端20px(xl)
-  let fontSize = isMobile ? 12 : 12;
+  let fontSize = isMobile ? config.fontSize.mobile : config.fontSize.mobile;
   if (window.innerWidth >= 1280) {
-    fontSize = 20;
+    fontSize = config.fontSize.desktop;
   } else if (window.innerWidth >= 640) {
-    fontSize = 14;
+    fontSize = config.fontSize.tablet;
   }
 
   // 计算实际可用宽度
   const charWidth = getCharWidth(fontSize);
-  const padding = isMobile ? 32 : 40; // 移动端使用更小的内边距
-  const ellipsisWidth = fontSize * 1.5; // 省略号宽度
+  const padding = isMobile ? config.padding.mobile : config.padding.desktop;
+  const ellipsisWidth = fontSize * 1.5;
   const availableWidth = Math.max(containerWidth - padding - ellipsisWidth, 0);
   
   // 计算可显示的总字符数
   const totalChars = Math.floor(availableWidth / charWidth);
   
-  // 如果空间足够显示完整地址
   if (totalChars >= address.length) {
     return (
       <span className="font-normal notranslate">
@@ -73,12 +97,9 @@ const AddressDisplay = ({
     );
   }
 
-  // 计算每侧最多可显示的字符数
-  const minChars = 6; // 最少显示6个字符
-  const maxSideChars = Math.floor((totalChars - 3) / 2); // 减去省略号占用的3个字符宽度
+  const maxSideChars = Math.floor((totalChars - 3) / 2);
   
-  // 从最大可能的字符数开始尝试，直到找到合适的显示长度
-  for (let chars = maxSideChars; chars >= minChars; chars--) {
+  for (let chars = maxSideChars; chars >= (config.minChars || 6); chars--) {
     const totalWidth = (chars * 2 + 3) * charWidth;
     if (totalWidth <= availableWidth) {
       const displayText = `${address.slice(0, chars)}...${address.slice(-chars)}`;
@@ -90,8 +111,7 @@ const AddressDisplay = ({
     }
   }
 
-  // 使用最小显示长度（前后各6个字符）
-  const displayText = `${address.slice(0, minChars)}...${address.slice(-minChars)}`;
+  const displayText = `${address.slice(0, config.minChars || 6)}...${address.slice(-(config.minChars || 6))}`;
   return (
     <span className="font-normal notranslate">
       {displayText}
@@ -106,37 +126,67 @@ const AddressDisplay = ({
  * 2. 提供点击交互
  * 3. 设置基础样式（高度、内边距、边框等）
  */
+interface MinidogeAddressProps {
+  address?: string;
+  isMobile: boolean;
+  onClick?: () => void;
+  className?: string;
+  style?: React.CSSProperties;
+  href?: string;
+  target?: string;
+  config?: {
+    fontSize?: {
+      mobile: number;
+      tablet: number;
+      desktop: number;
+    };
+    padding?: {
+      mobile: number;
+      desktop: number;
+    };
+    minChars?: number;
+  };
+}
+
 export const MinidogeAddress = ({
   address = '',
   isMobile,
   onClick,
+  className = '',
+  style = {},
+  href,
+  target,
+  config = {
+    fontSize: {
+      mobile: 12,
+      tablet: 14,
+      desktop: 20
+    },
+    padding: {
+      mobile: 32,
+      desktop: 40
+    },
+    minChars: 6
+  },
   ...props
-}: {
-  address?: string;
-  isMobile: boolean;
-  onClick?: () => void;
-}) => {
-  const containerRef = useRef<HTMLAnchorElement>(null);
+}: MinidogeAddressProps) => {
+  const containerRef = useRef<HTMLElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
 
   useEffect(() => {
-    // 更新容器宽度的函数
     const updateWidth = () => {
       if (containerRef.current) {
         setContainerWidth(containerRef.current.offsetWidth);
       }
     };
 
-    // 初始化时更新一次宽度
     updateWidth();
     
-    // 使用 ResizeObserver 监听容器大小变化
     const resizeObserver = new ResizeObserver(updateWidth);
     if (containerRef.current) {
       resizeObserver.observe(containerRef.current);
     }
 
-    // 监听窗口大小变化
     window.addEventListener('resize', updateWidth);
     
     return () => {
@@ -145,30 +195,73 @@ export const MinidogeAddress = ({
     };
   }, []);
 
+  const baseClassName = `
+    flex items-center justify-center
+    h-[40px] sm:h-[56px]
+    px-4 sm:px-5
+    text-[#FFAC03] tracking-widest 
+    bg-gradient-to-r from-[rgba(255,172,3,0.15)] to-[rgba(255,193,11,0.05)] 
+    rounded-full border border-[rgba(255,173,3,0.3)] 
+    text-xs sm:text-sm xl:text-xl
+    w-full
+    overflow-hidden
+    transition-all duration-300 ease-in-out
+    hover:bg-gradient-to-r hover:from-[rgba(255,172,3,0.25)] hover:to-[rgba(255,193,11,0.15)]
+    hover:border-[rgba(255,173,3,0.5)]
+    hover:shadow-[0_6px_16px_rgba(255,172,3,0.2)]
+    active:shadow-[0_2px_8px_rgba(255,172,3,0.1)]
+    active:transform active:translateY(0)
+    ${className}
+  `;
+
+  const baseStyle = {
+    fontFamily: "'Roboto Mono', monospace",
+    letterSpacing: '1px',
+    boxShadow: '0 4px 12px rgba(255, 172, 3, 0.1)',
+    backdropFilter: 'blur(4px)',
+    ...style
+  };
+
+  if (href) {
+    return (
+      <a
+        ref={containerRef as React.RefObject<HTMLAnchorElement>}
+        href={href}
+        target={target}
+        onClick={onClick}
+        className={baseClassName}
+        style={baseStyle}
+        {...props}
+      >
+        <div className="w-full text-center whitespace-nowrap overflow-hidden">
+          <AddressDisplay
+            address={address}
+            isMobile={isMobile}
+            containerWidth={containerWidth}
+            config={config}
+          />
+        </div>
+      </a>
+    );
+  }
+
   return (
-    <a
-      ref={containerRef}
+    <div
+      ref={containerRef as React.RefObject<HTMLDivElement>}
       onClick={onClick}
-      className={`
-        flex items-center justify-center
-        h-[40px] sm:h-[56px]
-        px-4 sm:px-5
-        text-[#FFAC03] tracking-widest 
-        bg-gradient-to-r from-[rgba(255,172,3,0.15)] to-[rgba(255,193,11,0.05)] 
-        rounded-full border border-[rgba(255,173,3,0.3)] 
-        text-xs sm:text-sm xl:text-xl
-        w-full
-        overflow-hidden
-      `}
+      className={baseClassName}
+      style={baseStyle}
+      {...props}
     >
       <div className="w-full text-center whitespace-nowrap overflow-hidden">
         <AddressDisplay
           address={address}
           isMobile={isMobile}
           containerWidth={containerWidth}
+          config={config}
         />
       </div>
-    </a>
+    </div>
   );
 };
 

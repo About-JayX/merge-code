@@ -73,6 +73,18 @@ const Funds: React.FC = ({...props}) => {
   }>({ sol: 0, usdt: 0, usdc: 0, minidoge: 0 });
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  // 监听窗口大小变化，更新移动端状态
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchBalances = async () => {
@@ -114,7 +126,7 @@ const Funds: React.FC = ({...props}) => {
         });
 
         setBalances({
-          sol: solBalance / 1e9, // 转换为 SOL
+          sol: solBalance / 1e9,
           usdt: usdtBalance,
           usdc: usdcBalance,
           minidoge: minidogeBalance,
@@ -127,7 +139,7 @@ const Funds: React.FC = ({...props}) => {
     };
 
     fetchBalances();
-    const interval = setInterval(fetchBalances, 60000); // 每分钟更新一次
+    const interval = setInterval(fetchBalances, 60000);
     return () => clearInterval(interval);
   }, []);
 
@@ -158,32 +170,76 @@ const Funds: React.FC = ({...props}) => {
         </div>
       </Modal>
       <LayoutCard className="bg-transparent !p-0 border border-white/10 overflow-hidden !opacity-100">
-        <header className="p-6 sm:p-8 border-b border-white/10 flex flex-wrap items-center gap-3 sm:gap-4 justify-between bg-white/5">
-          <div className="flex items-center gap-4 justify-between w-full sm:w-auto">
-            <div className="flex items-center gap-4">
-              <span
-                className={`${memesTitleSize} !text-xl md:!text-3xl lg:!text-4xl`}
-              >
-                {t("public.foundationAddr")}
-              </span>
-              <Link to="/dao">
-                <Button type="default" className="!min-w-0 !px-4">
-                  DAO
-                </Button>
-              </Link>
+        <header className="p-6 sm:p-8 border-b border-white/10 bg-[rgba(20,20,20,0.9)]">
+          {isMobile ? (
+            // 移动端布局
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center justify-between w-full">
+                <span className={`${memesTitleSize} !text-xl md:!text-3xl lg:!text-4xl`}>
+                  {t("public.foundationAddr")}
+                </span>
+                <div className="flex items-center gap-4">
+                  <Link to="/dao">
+                    <Button type="default" className="!min-w-0 !px-4 h-[40px] flex items-center">
+                      DAO
+                    </Button>
+                  </Link>
+                  <MinidogeCopy 
+                    onClick={handleCopy} 
+                    className="!p-[6px]" 
+                    {...props}
+                  />
+                </div>
+              </div>
+              <MinidogeAddress
+                address={FOUNDATION_CONFIG.address}
+                isMobile={isMobile}
+                onClick={handleCopy}
+                href={FOUNDATION_CONFIG.solscanUrl}
+                target="_blank"
+                className="w-full"
+                style={{
+                  boxShadow: '0 4px 12px rgba(255, 172, 3, 0.1)',
+                  backdropFilter: 'blur(4px)',
+                }}
+              />
             </div>
-            <MinidogeCopy onClick={handleCopy} className="sm:hidden" {...props}/>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <MinidogeAddress
-              href={FOUNDATION_CONFIG.solscanUrl}
-              target="_blank"
-            >
-              {FOUNDATION_CONFIG.address}
-            </MinidogeAddress>
-            <MinidogeCopy onClick={handleCopy} className="hidden sm:flex" {...props}/>
-          </div>
+          ) : (
+            // PC端布局
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <span className={`${memesTitleSize} !text-xl md:!text-3xl lg:!text-4xl`}>
+                  {t("public.foundationAddr")}
+                </span>
+                <Link to="/dao">
+                  <Button type="default" className="!min-w-0 !px-4">
+                    DAO
+                  </Button>
+                </Link>
+              </div>
+              <div className="flex items-center gap-4 min-w-[300px] flex-1 justify-end">
+                <div className="flex-1">
+                  <MinidogeAddress
+                    address={FOUNDATION_CONFIG.address}
+                    isMobile={isMobile}
+                    onClick={handleCopy}
+                    href={FOUNDATION_CONFIG.solscanUrl}
+                    target="_blank"
+                    className="w-full"
+                    style={{
+                      boxShadow: '0 4px 12px rgba(255, 172, 3, 0.1)',
+                      backdropFilter: 'blur(4px)',
+                    }}
+                  />
+                </div>
+                <MinidogeCopy 
+                  onClick={handleCopy} 
+                  className="!p-[6px]" 
+                  {...props}
+                />
+              </div>
+            </div>
+          )}
         </header>
         <main
           className={`p-6 sm:p-8 grid ${
