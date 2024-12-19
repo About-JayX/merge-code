@@ -24,7 +24,7 @@ const GovernanceContent: React.FC = () => (
 
     {/* 提案规则 */}
     <div>
-      <div className="text-base font-medium mb-2">提案规则：</div>
+      <div className="text-base font-medium mb-2">提案规则���</div>
       <div className="grid gap-2 text-base opacity-80">
         <div>• 持有4个投票权可发起提案</div>
         <div>• 提案需3个不同投票权持有者联名</div>
@@ -67,7 +67,7 @@ const RulesContent: React.FC = () => (
       <div className="text-base font-medium mb-2">投票权规则：</div>
       <div className="grid gap-2 text-base opacity-80">
         <div>• 基础投票权：完成任意数量捐赠即获得1个基础投票权</div>
-        <div>• ��外投票权：每捐赠5个NFT额度可获得1个额外投票权</div>
+        <div>• 额外投票权：每捐赠5个NFT额度可获得1个额外投票权</div>
         <div>• 单个钱包地址最高可获得4票（1个基础 + 3个额外）</div>
       </div>
     </div>
@@ -131,13 +131,13 @@ const DaoPage: React.FC = () => {
             DAO
           </span>
           <span className="text-2xl sm:text-3xl md:text-4xl text-[#FFAC03] font-['Striker']">
-            治理
+            治���
           </span>
         </h1>
       </div>
       
       <div className="flex items-center justify-between">
-        <Title level={2} className="!mb-0 !text-white">
+        <Title level={4} className="!mb-0 !text-white">
           {t("dao.title")}
         </Title>
         <div className="flex gap-4">
