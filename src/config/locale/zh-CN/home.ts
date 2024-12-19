@@ -16,6 +16,5 @@ export default {
   ],
   buyUrl: LINKS.BUY.RAYDIUM,
   contractAddressPrefix: "$MINIDOGE",
-  contractAddressSuffix: "来自 pump.fun",
   contractAddressCTO: "(CTO)"
 }; 

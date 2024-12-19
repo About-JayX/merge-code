@@ -12,10 +12,9 @@ export default {
     { content: "$DOGE", highlight: true },
     { content: "，就如同 " },
     { content: "Elon Musk", highlight: true },
-    { content: "（狗狗幣之父）引領他的繼任者（狗狗幣之子）。" }
+    { content: "（狗狗幣之父）引領他的繼任者（狗狗幣之子）。" },
   ],
   buyUrl: LINKS.BUY.RAYDIUM,
   contractAddressPrefix: "$MINIDOGE",
-  contractAddressSuffix: "來自 pump.fun",
-  contractAddressCTO: "(CTO)"
+  contractAddressCTO: "(CTO)",
 };

@@ -9,16 +9,20 @@ import Tgs from "../tgs";
 import { images } from "@/assets/images";
 import { copy } from "@/util";
 import { locale } from "@/config";
-import FoundationBalance from "./FoundationBalance";
+import FoundationBalance, {
+  MinidogeAddress,
+  MinidogeCopy,
+} from "./FoundationBalance";
 import {
   memesSize,
   memesTitleSize,
-  memesSubTitleSize,
   memesTextSize,
   memesBntColor,
   memesTextColor,
   memesHover,
 } from "./styles";
+import Exchange from "./exchange";
+import { pageSwitch } from "@/config/pageSwitch";
 
 export const Section = ({
   children,
@@ -215,52 +219,25 @@ export const MemesHome = ({ ...props }) => {
                 <MemesBtn>{publics.buy}</MemesBtn>
               </a>
               <div className="grid grid-cols-[auto,1fr] gap-3 items-center w-full">
-                <div
-                  className={`p-[6px] relative rounded-full cursor-pointer ${memesHover}`}
-                  onClick={async () => {
-                    await copy(contractAddress, () => setIsModalOpen(true));
-                  }}
-                >
-                  <div
-                    className="absolute top-0 left-0 w-full h-full rounded-full -z-10 opacity-15"
-                    style={{
-                      background: props.button?.background,
-                    }}
-                  />
-                  <MemesIcon
-                    name="copy"
-                    className=" shadow-[0px_0px_8px_4px_rgba(0,0,0,0.25)_inset] min-w-[calc(48px-6px)] min-h-[calc(48px-6px)]  sm:min-w-[calc(56px-6px)] sm:min-h-[calc(56px-6px)]"
-                    onClick={async () =>
-                      await copy(contractAddress, () => setIsModalOpen(true))
-                    }
-                    style={{
-                      background: props.button?.background,
-                      color: props.button?.text,
-                    }}
-                  />
-                </div>
+                <MinidogeCopy
+                  {...props}
+                  onClick={async () =>
+                    await copy(contractAddress, () => setIsModalOpen(true))
+                  }
+                />
                 <div className="flex flex-col break-all">
-                  <div
-                    className={`cursor-pointer ${memesHover}`}
+                  <MinidogeAddress
+                    className="w-full"
                     onClick={async () =>
                       await copy(contractAddress, () => setIsModalOpen(true))
                     }
                   >
                     <Ellipsis
-                      className={`text-base md:text-2xl font-normal text-white notranslate`}
+                      className={`!text-base md:text-2xl font-normal  notranslate`}
                       direction="middle"
                       content={contractAddress}
                     />
-                  </div>
-                  <a
-                    href="https://pump.fun/coin/8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu"
-                    target="_blank"
-                    className={`text-sm text-white/60 ${memesHover}`}
-                  >
-                    $MINIDOGE
-                    <span style={{ fontSize: "50%", opacity: 0.8 }}> </span> -
-                    pump.fun
-                  </a>
+                  </MinidogeAddress>
                 </div>
               </div>
             </div>
@@ -739,6 +716,10 @@ export default function Domain({ ...props }) {
       </Section>
       <main className="px-3 sm:p-8 md:px-16 w-full max-w-screen-xl flex flex-col gap-12 sm:gap-24 md:gap-28 xl:gap-28 z-10">
         <MemesHome {...props} />
+        <Section type="bottom">
+          <Exchange />
+        </Section>
+
         <Section1 {...props} />
         <Section2 {...props} />
         <Section3 {...props} />
@@ -746,9 +727,11 @@ export default function Domain({ ...props }) {
         <Section type="top">
           <About {...props} />
         </Section>
-        <Section type="top">
-          <FoundationBalance />
-        </Section>
+        {pageSwitch.foundationAddr && (
+          <Section type="top">
+            <FoundationBalance {...props} />
+          </Section>
+        )}
 
         <Section type="bottom">
           <Footer {...props} />

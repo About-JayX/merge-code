@@ -5,7 +5,12 @@ import { Spin, Modal } from "antd";
 import { images } from "@/assets/images";
 import { copy } from "@/util";
 import Tgs from "../tgs";
-import { memesTextColor, memesTitleSize } from "./styles";
+import {
+  memesHover,
+  memesTextColor,
+  memesTextSize,
+  memesTitleSize,
+} from "./styles";
 import { MemesCard, MemesIcon } from "./index";
 import { useTranslation } from "react-i18next";
 
@@ -34,6 +39,51 @@ const TokenLogo: React.FC<{ symbol: string; className?: string }> = ({
   );
 };
 
+export const MinidogeAddress = ({
+  ...props
+}: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+  return (
+    <a
+      {...props}
+      className={`${memesTextSize} min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14 break-all flex items-center  px-3 sm:px-5 py-2.5 text-[#FFAC03] tracking-widest bg-gradient-to-r from-[rgba(255,172,3,0.15)] to-[rgba(255,193,11,0.05)] rounded-xl border border-[rgba(255,173,3,0.3)] text-base`}
+    >
+      {props.children}
+    </a>
+  );
+};
+
+export const MinidogeCopy = ({
+  onClick,
+  className = "",
+  ...props
+}: {
+  [key: string]: any;
+  className?: string;
+  onClick?: () => void;
+}) => {
+  return (
+    <div
+      className={`p-[6px] relative rounded-full cursor-pointer ${memesHover} ${className}`}
+      onClick={() => onClick && onClick()}
+    >
+      <div
+        className="absolute top-0 left-0 w-full h-full rounded-full -z-10 opacity-15"
+        style={{
+          background: props.button?.background,
+        }}
+      />
+      <MemesIcon
+        name="copy"
+        className=" shadow-[0px_0px_8px_4px_rgba(0,0,0,0.25)_inset] min-w-[calc(48px-6px)] min-h-[calc(48px-6px)]  sm:min-w-[calc(56px-6px)] sm:min-h-[calc(56px-6px)]"
+        style={{
+          background: props.button?.background,
+          color: props.button?.text,
+        }}
+      />
+    </div>
+  );
+};
+
 export const FoundationBalanceItem = ({
   tokenIcon = "",
   tokenName = "",
@@ -44,7 +94,9 @@ export const FoundationBalanceItem = ({
   toeknBalances?: any;
 }) => {
   return (
-    <div className="bg-white/5 p-4 sm:p-5 lg:p-8 rounded-xl flex items-center justify-between w-full">
+    <div
+      className={`bg-white/5 p-4 sm:p-5 lg:p-8 rounded-xl flex items-center justify-between w-full ${memesHover}`}
+    >
       <div className="grid grid-cols-[auto,1fr] gap-4 items-center">
         <TokenLogo
           symbol={tokenIcon}
@@ -65,7 +117,7 @@ export const FoundationBalanceItem = ({
   );
 };
 
-export default function FoundationBalance() {
+export default function FoundationBalance({ ...props }) {
   const { t } = useTranslation();
   const [balances, setBalances] = useState<{
     sol: number;
@@ -163,42 +215,33 @@ export default function FoundationBalance() {
             <span
               className={`${memesTitleSize}  !text-xl md:!text-3xl lg:!text-4xl`}
             >
-              Foundation Addr
+              {t("public.foundationAddr")}
             </span>
-            <MemesIcon
-              name="copy"
-              className="!min-h-9 !min-w-9 !w-9 !h-9 sm:hidden"
+            <MinidogeCopy
+              {...props}
               onClick={handleCopy}
-              style={{
-                background: "linear-gradient(to bottom, #FFAC03, #FFC10B)",
-                color: "#000",
-              }}
+              className="sm:hidden"
             />
           </div>
 
           <div className="flex items-center gap-4">
-            <a
+            <MinidogeAddress
               href={`https://solscan.io/account/${FOUNDATION_ADDRESS}`}
               target="_blank"
-              className="break-all flex items-center roboto-mono px-3 sm:px-5 py-2.5 text-[#FFAC03] tracking-widest bg-gradient-to-r from-[rgba(255,172,3,0.15)] to-[rgba(255,193,11,0.05)] rounded-xl border border-[rgba(255,173,3,0.3)] text-base"
             >
               {FOUNDATION_ADDRESS}
-            </a>
-            <MemesIcon
-              name="copy"
-              className="!min-h-11 !min-w-11 !w-11 !h-11 hidden sm:flex"
+            </MinidogeAddress>
+            <MinidogeCopy
+              {...props}
               onClick={handleCopy}
-              style={{
-                background: "linear-gradient(to bottom, #FFAC03, #FFC10B)",
-                color: "#000",
-              }}
+              className="hidden sm:flex"
             />
           </div>
         </header>
         <main
           className={`p-6 sm:p-8 grid ${
             loading ? "" : "sm:grid-cols-2"
-          } gap-4 justify-items-center`}
+          } gap-4 sm:gap-8 justify-items-center`}
         >
           {loading ? (
             <div className="p-16">
