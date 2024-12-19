@@ -727,7 +727,7 @@ export default function Domain({ ...props }) {
         <Section type="top">
           <About {...props} />
         </Section>
-        {pageSwitch.foundationAddr && (
+        {pageSwitch.home.foundationAddr && (
           <Section type="top">
             <FoundationBalance {...props} />
           </Section>
