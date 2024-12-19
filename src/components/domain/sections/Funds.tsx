@@ -217,7 +217,7 @@ const Funds: React.FC = ({...props}) => {
                   </Button>
                 </Link>
               </div>
-              <div className="flex items-center gap-4 min-w-[300px] flex-1 justify-end">
+              <div className="flex items-center gap-4 flex-1 max-w-[500px] justify-end">
                 <div className="flex-1">
                   <MinidogeAddress
                     address={FOUNDATION_CONFIG.address}
