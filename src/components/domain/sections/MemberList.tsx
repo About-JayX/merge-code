@@ -83,7 +83,43 @@ const generateTestData = (count: number): MemberData[] => {
   return data.sort((a, b) => new Date(b.lastDonation).getTime() - new Date(a.lastDonation).getTime());
 };
 
+// 添加统计组件
+const StatsDisplay: React.FC<{ members: MemberData[] }> = ({ members }) => {
+  // 计算统计数据
+  const stats = members.reduce((acc, member) => {
+    return {
+      totalNftRights: acc.totalNftRights + member.totalNftRights,
+      totalVotingRights: acc.totalVotingRights + member.votingRights,
+    };
+  }, { totalNftRights: 0, totalVotingRights: 0 });
+
+  return (
+    <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="bg-white/5 rounded-xl p-4 text-center">
+        <div className="text-[#FFAC03] text-2xl font-bold mb-2">{members.length}</div>
+        <div className="text-white/80 text-sm">总人数</div>
+      </div>
+      <div className="bg-white/5 rounded-xl p-4 text-center">
+        <div className="text-[#FFAC03] text-2xl font-bold mb-2">{stats.totalNftRights}</div>
+        <div className="text-white/80 text-sm">NFT空投总数</div>
+      </div>
+      <div className="bg-white/5 rounded-xl p-4 text-center">
+        <div className="text-[#FFAC03] text-2xl font-bold mb-2">{stats.totalVotingRights}</div>
+        <div className="text-white/80 text-sm">投票总数</div>
+      </div>
+    </div>
+  );
+};
+
 export const MemberList: React.FC<MemberListProps> = ({ members = generateTestData(500), loading = false }) => {
+  // 添加分页状态
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const pageSize = 50;
+
+  // 计算当前页的数据
+  const startIndex = (currentPage - 1) * pageSize;
+  const currentPageData = members.slice(startIndex, startIndex + pageSize);
+
   const memberColumns = [
     {
       title: '编号',
@@ -217,25 +253,56 @@ export const MemberList: React.FC<MemberListProps> = ({ members = generateTestDa
     },
   ];
 
+  const paginationConfig = {
+    current: currentPage,
+    pageSize: pageSize,
+    total: members.length,
+    showSizeChanger: false,
+    className: "!text-white",
+    size: 'small' as "default" | "small",
+    onChange: (page: number) => setCurrentPage(page),
+  };
+
   return (
-    <div className="overflow-hidden">
-      <Table
-        columns={memberColumns}
-        dataSource={members}
-        loading={loading}
-        rowKey="address"
-        pagination={{
-          pageSize: 50,
-          showSizeChanger: false,
-        }}
-        className="custom-table no-hover-effect"
-        rowClassName={() => "bg-transparent"}
-        style={{ 
-          background: 'transparent',
-        }}
-        scroll={{ x: false, y: false }}
-        tableLayout="fixed"
-      />
+    <div className="relative">
+      <StatsDisplay members={members} />
+      {/* 上方分页器 */}
+      <div className="flex justify-center mb-4">
+        <Table
+          columns={[]}
+          dataSource={[]}
+          pagination={paginationConfig}
+          className="pagination-only"
+        />
+      </div>
+      {/* 表格内容 - 添加固定高度容器 */}
+      <div className="h-[calc(100vh-300px)] min-h-[400px] overflow-hidden">
+        <div className="h-full overflow-x-auto overflow-y-auto">
+          <Table
+            columns={memberColumns}
+            dataSource={currentPageData}
+            loading={loading}
+            rowKey="address"
+            pagination={false}
+            className="custom-table no-hover-effect min-w-[900px]"
+            rowClassName={() => "bg-transparent"}
+            style={{ 
+              background: 'transparent',
+            }}
+            scroll={{ x: 'max-content' }}
+            tableLayout="fixed"
+          />
+        </div>
+      </div>
+      {/* 下方分页器 */}
+      <div className="flex justify-center mt-4">
+        <Table
+          columns={[]}
+          dataSource={[]}
+          pagination={paginationConfig}
+          className="pagination-only"
+        />
+      </div>
     </div>
   );
 }; 

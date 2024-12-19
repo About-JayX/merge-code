@@ -212,3 +212,64 @@ a{
     }
   }
 }
+
+/* 分页器样式 */
+.ant-pagination {
+  @apply mb-4;
+  
+  .ant-pagination-item,
+  .ant-pagination-prev .ant-pagination-item-link,
+  .ant-pagination-next .ant-pagination-item-link {
+    @apply bg-white/5 border-white/10 text-white/80;
+    
+    &:hover {
+      @apply border-[#FFAC03] text-[#FFAC03] bg-white/10;
+    }
+  }
+
+  .ant-pagination-item-active {
+    @apply border-[#FFAC03] text-[#FFAC03] bg-white/10;
+    
+    a {
+      @apply text-[#FFAC03];
+    }
+  }
+
+  .ant-pagination-item-link {
+    .anticon {
+      @apply text-white/80;
+    }
+    
+    &:hover .anticon {
+      @apply text-[#FFAC03];
+    }
+  }
+}
+
+/* 固定分页器样式 */
+.pagination-only {
+  @apply w-auto;
+  
+  .ant-table-container {
+    @apply hidden;
+  }
+  
+  .ant-pagination {
+    @apply m-0 bg-[#1A1D24] py-2 px-4 rounded-lg;
+    
+    .ant-pagination-item,
+    .ant-pagination-prev .ant-pagination-item-link,
+    .ant-pagination-next .ant-pagination-item-link {
+      @apply min-w-[32px] h-8 leading-8;
+    }
+  }
+}
+
+/* 移动端样式优化 */
+@media (max-width: 640px) {
+  .pagination-only {
+    .ant-pagination {
+      @apply flex flex-wrap justify-center gap-1;
+    }
+  }
+}
