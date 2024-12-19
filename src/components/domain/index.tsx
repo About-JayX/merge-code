@@ -10,7 +10,15 @@ import { images } from "@/assets/images";
 import { copy } from "@/util";
 import { locale } from "@/config";
 import FoundationBalance from "./FoundationBalance";
-import { memesSize, memesTitleSize, memesSubTitleSize, memesTextSize, memesBntColor, memesTextColor, memesHover } from './styles';
+import {
+  memesSize,
+  memesTitleSize,
+  memesSubTitleSize,
+  memesTextSize,
+  memesBntColor,
+  memesTextColor,
+  memesHover,
+} from "./styles";
 
 export const Section = ({
   children,
@@ -597,7 +605,6 @@ export const About = () => {
           </a>
         )}
       </MemesCard>
-      <FoundationBalance />
     </>
   );
 };
@@ -739,6 +746,10 @@ export default function Domain({ ...props }) {
         <Section type="top">
           <About {...props} />
         </Section>
+        <Section type="top">
+          <FoundationBalance />
+        </Section>
+
         <Section type="bottom">
           <Footer {...props} />
         </Section>
