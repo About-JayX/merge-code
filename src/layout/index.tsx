@@ -12,7 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
     <>
       <Space />
       <Header />
-      <main className="px-3 sm:p-8 md:px-16 w-full max-w-screen-xl mx-auto z-10">
+      <main className="px-3 py-4 sm:px-8 md:px-16 w-full max-w-[100vw] overflow-x-hidden mx-auto z-10">
         {children}
       </main>
     </>

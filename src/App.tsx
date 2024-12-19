@@ -31,9 +31,9 @@ export default function App() {
 
   return (
     <div 
-      className={`min-h-screen w-full flex flex-col relative text-content text-white transition-opacity duration-300 ${data.background?.pattern} ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      className={`min-h-screen w-full max-w-[100vw] overflow-x-hidden flex flex-col relative text-content text-white transition-opacity duration-300 ${data.background?.pattern} ${isVisible ? 'opacity-100' : 'opacity-0'}`}
     >
-      <div className="w-full h-screen fixed top-0 left-0 -z-20">
+      <div className="w-full h-screen fixed top-0 left-0 -z-20 max-w-[100vw] overflow-x-hidden">
         <div
           className="w-full h-full"
           style={{
@@ -41,6 +41,8 @@ export default function App() {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
+            maxWidth: '100vw',
+            overflowX: 'hidden'
           }}
         />
       </div>

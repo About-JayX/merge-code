@@ -1,5 +1,5 @@
 export default {
   buy: "Buy $MINIDOGE",
-  loadMore: "load more",
+  loadMore: "More",
   foundationAddr: "Foundation Addr",
 };

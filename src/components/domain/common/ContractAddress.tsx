@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from "antd";
 import { Ellipsis } from "antd-mobile";
 import { copy } from "@/util";
@@ -15,9 +15,35 @@ interface ContractAddressProps {
 
 export const ContractAddress: React.FC<ContractAddressProps> = ({ address, button, ...props }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   const handleCopy = async () => {
     await copy(address, () => setIsModalOpen(true));
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const renderAddress = () => {
+    if (isMobile) {
+      return (
+        <span className="!text-base font-normal notranslate">
+          {`${address.slice(0, 6)}...${address.slice(-4)}`}
+        </span>
+      );
+    }
+    return (
+      <Ellipsis
+        className="!text-base md:text-2xl font-normal notranslate"
+        direction="middle"
+        content={address}
+      />
+    );
   };
 
   return (
@@ -54,11 +80,7 @@ export const ContractAddress: React.FC<ContractAddressProps> = ({ address, butto
             className="w-full"
             onClick={handleCopy}
           >
-            <Ellipsis
-              className="!text-base md:text-2xl font-normal notranslate"
-              direction="middle"
-              content={address}
-            />
+            {renderAddress()}
           </MinidogeAddress>
         </div>
       </div>
