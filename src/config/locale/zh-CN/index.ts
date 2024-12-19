@@ -7,6 +7,7 @@ import { section3 } from "@/config/shared/section3";
 import howToBuy from "./howToBuy";
 import about from "./about";
 import footer from "./footer";
+import dao from "./dao";
 
 export default {
   translation: {
@@ -21,5 +22,6 @@ export default {
     footer,
     public: _public,
     message,
+    dao,
   },
 }; 
