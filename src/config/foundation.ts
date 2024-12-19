@@ -1,7 +1,7 @@
 import { IMAGES } from './resources';
 
 // 基金会钱包地址
-export const FOUNDATION_ADDRESS = "31svWAq2Z7ng6rcKQV2ZkT3bY1bHqgo2XptoiRyxKra9";
+export const FOUNDATION_ADDRESS = "";
 
 // RPC 节点地址
 export const RPC_ENDPOINT = "https://boldest-broken-gas.solana-mainnet.quiknode.pro/95cb652a0dbf38d8ec52bfbe02e99a941ab51a67/";

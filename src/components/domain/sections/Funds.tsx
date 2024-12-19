@@ -132,7 +132,7 @@ const Funds: React.FC = ({...props}) => {
           minidoge: minidogeBalance,
         });
       } catch (error) {
-        console.error("获取余额失败:", error);
+        console.error("Get balance failed:", error);
       } finally {
         setLoading(false);
       }

@@ -273,3 +273,38 @@ a{
     }
   }
 }
+
+/* DAO Modal Styles */
+.dao-modal {
+  .ant-modal-content {
+    @apply bg-[#1A1D24] border border-white/10 rounded-2xl;
+
+    .ant-modal-header {
+      @apply bg-transparent border-b border-white/10 rounded-t-2xl mb-0;
+    }
+  
+    .ant-modal-body {
+      @apply p-6;
+    }
+  
+    .ant-modal-close {
+      @apply text-white/60 hover:text-[#FFAC03] transition-colors;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      
+      .ant-modal-close-x {
+        @apply flex items-center justify-center;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        
+        .anticon {
+          @apply flex items-center justify-center;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

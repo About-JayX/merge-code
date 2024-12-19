@@ -13,7 +13,7 @@ export default i18next
   .use(initReactI18next)
   .init({
     resources: locale,
-    fallbackLng: "en",
+    fallbackLng: "en-US",
     react: {
       useSuspense: true,
     },

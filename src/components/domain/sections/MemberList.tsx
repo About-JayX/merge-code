@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Tooltip } from 'antd';
 import useFoundationMembers from '@/hooks/useFoundationMembers';
+import { useTranslation } from 'react-i18next';
 
 interface DonationAmount {
   USDT: number;
@@ -39,6 +40,8 @@ const getTokenColor = (type: string) => {
 
 // 添加统计组件
 const StatsDisplay: React.FC<{ members: MemberData[] }> = ({ members }) => {
+  const { t } = useTranslation();
+  
   // 计算统计数据
   const stats = members.reduce((acc, member) => {
     return {
@@ -51,22 +54,22 @@ const StatsDisplay: React.FC<{ members: MemberData[] }> = ({ members }) => {
     <div className="grid grid-cols-3 gap-4 mb-6">
       <div className="bg-white/5 rounded-xl p-4 text-center">
         <div className="text-[#FFAC03] text-2xl font-bold mb-2">{members.length}</div>
-        <div className="text-white/80 text-sm">总人数</div>
+        <div className="text-white/80 text-sm">{t('dao.totalMembers')}</div>
       </div>
       <div className="bg-white/5 rounded-xl p-4 text-center">
         <div className="text-[#FFAC03] text-2xl font-bold mb-2">{stats.totalNftRights}</div>
-        <div className="text-white/80 text-sm">NFT空投总数</div>
+        <div className="text-white/80 text-sm">{t('dao.totalNftAirdrops')}</div>
       </div>
       <div className="bg-white/5 rounded-xl p-4 text-center">
         <div className="text-[#FFAC03] text-2xl font-bold mb-2">{stats.totalVotingRights}</div>
-        <div className="text-white/80 text-sm">投票总数</div>
+        <div className="text-white/80 text-sm">{t('dao.totalVotes')}</div>
       </div>
     </div>
   );
 };
 
 export const MemberList: React.FC = () => {
-  // 使用 hook 获取成员数据
+  const { t } = useTranslation();
   const { members, loading, error } = useFoundationMembers();
 
   // 添加分页状态
@@ -79,7 +82,7 @@ export const MemberList: React.FC = () => {
 
   const memberColumns = [
     {
-      title: '编号',
+      title: t('dao.numberHeader'),
       key: 'index',
       width: 60,
       align: 'center' as const,
@@ -88,7 +91,7 @@ export const MemberList: React.FC = () => {
       ),
     },
     {
-      title: 'NFT权益',
+      title: t('dao.nftRightsHeader'),
       dataIndex: 'totalNftRights',
       key: 'totalNftRights',
       width: 80,
@@ -98,7 +101,7 @@ export const MemberList: React.FC = () => {
       ),
     },
     {
-      title: '投票权',
+      title: t('dao.votingRightsHeader'),
       dataIndex: 'votingRights',
       key: 'votingRights',
       width: 80,
@@ -108,7 +111,7 @@ export const MemberList: React.FC = () => {
       ),
     },
     {
-      title: '钱包地址',
+      title: t('dao.walletAddressHeader'),
       dataIndex: 'address',
       key: 'address',
       align: 'center' as const,
@@ -125,7 +128,7 @@ export const MemberList: React.FC = () => {
       ),
     },
     {
-      title: '最后捐赠',
+      title: t('dao.lastDonationHeader'),
       dataIndex: 'lastDonation',
       key: 'lastDonation',
       width: 140,
@@ -153,7 +156,7 @@ export const MemberList: React.FC = () => {
       },
     },
     {
-      title: '总捐赠额',
+      title: t('dao.totalDonationHeader'),
       dataIndex: 'totalDonation',
       key: 'totalDonation',
       width: 180,
@@ -223,7 +226,7 @@ export const MemberList: React.FC = () => {
   if (error) {
     return (
       <div className="text-center text-red-500 py-8">
-        加载失败: {error}
+        {t('dao.loadError')}: {error.includes('Invalid public key input') ? t('dao.invalidPublicKey') : error}
       </div>
     );
   }

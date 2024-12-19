@@ -13,52 +13,52 @@ import CoinmarketcapPng from "@/assets/exchange/coinmarketcap.png";
 import GatePng from "@/assets/exchange/gate.png";
 export default [
   {
-    image: HibtSvg,
-    url: "https://m.hibt.com/register?promotionCode=0KHF",
-  },
-  {
-    image: BinanceSvg,
-    url: "https://accounts.suitechsui.io/register?ref=T3TL808F",
-  },
-  {
-    image: BitgetSvg,
-    url: "https://partner.bitget.fit/bg/LHJ4WK",
-  },
-  {
-    image: LbankSvg,
-    url: "https://www.lbank.com/en-US/login/?icode=3MTHD",
-  },
-  {
-    image: MexcSvg,
-    url: "https://www.mexc.com/login?inviteCode=mexc-12AFgt",
-  },
-  {
-    image: XtSvg,
-    url: "https://www.xt.com/en/accounts/register?ref=HAJQCH",
-  },
-  {
     image: DexscreenerPng,
-    url: "",
-  },
-  {
-    image: CoingeckoPng,
-    url: "",
-  },
-  {
-    image: OkxPng,
-    url: "",
+    url: "https://dexscreener.com/solana/cfwwtfeyr4ai9tmpbte21jsewhum3pmytaluf9x2b5ej",
   },
   {
     image: CoinmarketcapPng,
-    url: "",
+    url: "https://coinmarketcap.com/dexscan/solana/GEV2dBkXx4X5Xy8FFX7eR1TNhWyj6m1bp66tyTUGicBB/",
+  },
+  {
+    image: CoingeckoPng,
+    url: "https://www.coingecko.com/en/coins/minidoge-2",
+  },
+  {
+    image: OkxPng,
+    url: "https://www.okx.com/web3/detail/501/8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu",
   },
   {
     image: GatePng,
-    url: "",
+    url: "https://www.gate.io/pilot/solana/minidoge-minidog",
   },
   {
     image: PumpSvg,
-    url: "",
+    url: "https://pump.fun/coin/8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu",
   },
+  // {
+  //   image: HibtSvg,
+  //   url: "",
+  // },
+  // {
+  //   image: BinanceSvg,
+  //   url: "",
+  // },
+  // {
+  //   image: BitgetSvg,
+  //   url: "",
+  // },
+  // {
+  //   image: LbankSvg,
+  //   url: "",
+  // },
+  // {
+  //   image: MexcSvg,
+  //   url: "",
+  // },
+  // {
+  //   image: XtSvg,
+  //   url: "",
+  // },
 
 ];
