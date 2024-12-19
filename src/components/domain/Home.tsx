@@ -8,11 +8,11 @@ import { copy } from "@/util";
 import { Section } from "./Section";
 import { Button } from "./Button.tsx";
 import { Link } from "./Link.tsx";
-import { MinidogeAddress, MinidogeCopy } from "./Funds.tsx";
+import { MinidogeAddress, MinidogeCopy } from "./AddressCard.tsx";
 import Tgs from "../tgs";
 import { memesTextColor, memesTitleSize } from "./styles";
 
-export const Hero = ({ ...props }) => {
+export const Home = ({ ...props }) => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 

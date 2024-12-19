@@ -13,10 +13,6 @@ import CoinmarketcapPng from "@/assets/exchange/coinmarketcap.png";
 import GatePng from "@/assets/exchange/gate.png";
 export default [
   {
-    image: SpacePiSolPng,
-    url: "https://space-pi.com",
-  },
-  {
     image: HibtSvg,
     url: "https://m.hibt.com/register?promotionCode=0KHF",
   },
@@ -64,5 +60,5 @@ export default [
     image: PumpSvg,
     url: "",
   },
-  
+
 ];

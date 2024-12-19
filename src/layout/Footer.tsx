@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { memesTextSize } from './domain/styles';
+import { memesTextSize } from '../components/domain/styles.ts';
 
 export const Footer = () => {
   const { t } = useTranslation();

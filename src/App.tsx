@@ -1,7 +1,7 @@
 import Router from '@/router'
 import GoogleAnalytics from './util/GoogleAnalytics'
 import Layout from '@/layout'
-import { Footer } from '@/components/Footer'
+import { Footer } from '@/layout/Footer.tsx'
 import { useEffect, useState } from 'react'
 import dataHook from '@/config/data'
 
