@@ -156,3 +156,59 @@ a{
 .notranslate{
   translate: no;
 }
+
+/* 禁用表格悬浮效果和滚动条 */
+.no-hover-effect {
+  .ant-table-tbody > tr:hover > td {
+    background: transparent !important;
+  }
+  
+  .ant-table-tbody > tr > td {
+    background: transparent !important;
+  }
+
+  .ant-table-cell {
+    &:hover {
+      background: transparent !important;
+    }
+  }
+
+  /* 隐藏滚动条 */
+  .ant-table-body {
+    overflow: hidden !important;
+    &::-webkit-scrollbar {
+      width: 0 !important;
+      height: 0 !important;
+      display: none !important;
+    }
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  /* 确保表格内容不会溢出 */
+  .ant-table {
+    overflow: hidden !important;
+  }
+
+  .ant-table-container {
+    overflow: hidden !important;
+  }
+
+  .ant-table-content {
+    overflow: hidden !important;
+  }
+
+  .ant-table-wrapper {
+    overflow: hidden !important;
+  }
+
+  /* 禁用所有可能的滚动 */
+  * {
+    overflow: visible !important;
+    &::-webkit-scrollbar {
+      width: 0 !important;
+      height: 0 !important;
+      display: none !important;
+    }
+  }
+}
