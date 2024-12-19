@@ -1,10 +1,9 @@
-import s2Image from "@/assets/image/section2/index.png";
-import { LINKS } from "@/config/links";
+import { IMAGES, LINKS } from '@/config/resources';
 
 export default {
   title: "我是 $MINIDOGE 的 CEO",
   text: "<div>正如加密社群 <i>自豪地認可</i> <b>Elon Musk</b> 為 <b>$DOGE</b> 的 CEO，他們也 <i>榮譽加冕</i> <b>Lil X</b> 為 <b>$MINIDOGE</b> 的 CEO。</div><div class='mt-4'>在由風險投資和巨鯨主導的世界中，我們的社群 <i>團結而強大</i>，追隨他們的 <i>年輕遠見</i> 領袖，共同構建 <i>真正去中心化</i> 的未來。</div>",
-  image: s2Image,
+  image: IMAGES.SECTIONS.SECTION2,
   box: {
     list: [
       {

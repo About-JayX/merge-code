@@ -1,6 +1,4 @@
-import s1Left from "@/assets/image/section1/left.png";
-import s1Right from "@/assets/image/section1/right.png";
-import { LINKS } from "@/config/links";
+import { IMAGES, LINKS } from '@/config/resources';
 
 export default {
   title: "Doge & Minidoge",  // 保持英文
@@ -18,7 +16,7 @@ export default {
     { content: "." }
   ],
   box: {
-    left: { image: s1Left },
+    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
     right: {
       title: "Warisan $DOGE",
       text: [
@@ -38,7 +36,7 @@ export default {
         { content: "$1 bilion", highlight: true },
         { content: " nilai pasaran." }
       ],
-      image: s1Right,
+      image: IMAGES.SECTIONS.SECTION1.RIGHT,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

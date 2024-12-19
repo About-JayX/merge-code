@@ -3,13 +3,13 @@ import { motion, useInView } from "motion/react";
 import Icon from "../icon";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import contractAddress from "@/config/contractAddress";
+import { FOUNDATION_CONFIG } from "@/config/foundation";
 import { Dropdown, Modal } from "antd";
 import Tgs from "../tgs";
-import { images } from "@/assets/images";
 import { copy } from "@/util";
 import { locale } from "@/config";
 import FoundationBalance from "./FoundationBalance";
+import { IMAGES } from "@/config/resources";
 import {
   memesSize,
   memesTitleSize,
@@ -218,7 +218,7 @@ export const MemesHome = ({ ...props }) => {
                 <div
                   className={`p-[6px] relative rounded-full cursor-pointer ${memesHover}`}
                   onClick={async () => {
-                    await copy(contractAddress, () => setIsModalOpen(true));
+                    await copy(FOUNDATION_CONFIG.address, () => setIsModalOpen(true));
                   }}
                 >
                   <div
@@ -231,7 +231,7 @@ export const MemesHome = ({ ...props }) => {
                     name="copy"
                     className=" shadow-[0px_0px_8px_4px_rgba(0,0,0,0.25)_inset] min-w-[calc(48px-6px)] min-h-[calc(48px-6px)]  sm:min-w-[calc(56px-6px)] sm:min-h-[calc(56px-6px)]"
                     onClick={async () =>
-                      await copy(contractAddress, () => setIsModalOpen(true))
+                      await copy(FOUNDATION_CONFIG.address, () => setIsModalOpen(true))
                     }
                     style={{
                       background: props.button?.background,
@@ -243,13 +243,13 @@ export const MemesHome = ({ ...props }) => {
                   <div
                     className={`cursor-pointer ${memesHover}`}
                     onClick={async () =>
-                      await copy(contractAddress, () => setIsModalOpen(true))
+                      await copy(FOUNDATION_CONFIG.address, () => setIsModalOpen(true))
                     }
                   >
                     <Ellipsis
                       className={`text-base md:text-2xl font-normal text-white notranslate`}
                       direction="middle"
-                      content={contractAddress}
+                      content={FOUNDATION_CONFIG.address}
                     />
                   </div>
                   <a
@@ -271,7 +271,7 @@ export const MemesHome = ({ ...props }) => {
             <div className="sm:w-[22rem] sm:h-[22rem] xl:w-[26rem] xl:h-[26rem] md:w-full md:h-full transition-transform duration-300 hover:scale-105">
               <ImageLink className="">
                 <img
-                  src={props.banner_url}
+                  src={IMAGES.SECTIONS.BANNER}
                   alt="Token Image"
                   className="object-contain aspect-square w-full h-full z-10"
                 />
@@ -290,11 +290,11 @@ export const Section1 = ({ ...props }) => {
   const Tweets = ({
     id,
     className = "",
-    imageUrl = "",
+    image,
   }: {
     id: string;
     className?: string;
-    imageUrl: string;
+    image: string;
   }) => {
     return (
       <a
@@ -303,7 +303,7 @@ export const Section1 = ({ ...props }) => {
         rel="noopener noreferrer"
       >
         <div className={`${memesHover}`}>
-          <img src={imageUrl} className={className} />
+          <img src={image} className={className} />
         </div>
       </a>
     );
@@ -336,8 +336,8 @@ export const Section1 = ({ ...props }) => {
               <Section type="left">
                 <Tweets
                   id="1865304483070169440"
-                  imageUrl={section1?.box.left.image}
-                  className="w-full xl:w-[527px]  xl:h-[695px] rounded-xl object-cover"
+                  image={IMAGES.SECTIONS.SECTION1.left}
+                  className="w-full xl:w-[527px] xl:h-[695px] rounded-xl object-cover"
                 />
               </Section>
 
@@ -365,8 +365,8 @@ export const Section1 = ({ ...props }) => {
                   {section1?.box.right.image && (
                     <Tweets
                       id="1865305060307009884"
-                      imageUrl={section1?.box.right.image}
-                      className="w-full  mt-4 sm:mt-4 xl:mt-11 rounded-xl object-cover"
+                      image={IMAGES.SECTIONS.SECTION1.right}
+                      className="w-full mt-4 sm:mt-4 xl:mt-11 rounded-xl object-cover"
                     />
                   )}
                   {section1?.box.right.bntText && (
@@ -424,7 +424,7 @@ export const Section2 = ({ ...props }) => {
         >
           <ImageLink>
             <img
-              src={section2?.image}
+              src={IMAGES.SECTIONS.SECTION2}
               className="aspect-square rounded-xl object-cover"
             />
           </ImageLink>
@@ -440,35 +440,17 @@ export const Section3 = () => {
   return (
     <div className="flex flex-col gap-4 sm:gap-4 md:gap-8 xl:gap-16 items-center">
       <Section type="top">
-        <div className={`${memesTitleSize}`}>
-          {section3.title.length >= 0 && (
-            <Section type="left">
-              <div className="text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all">
-                {section3.title.map((text: any, index: number) => (
-                  <span
-                    key={index}
-                    className={text.status ? `${memesTextColor}` : ""}
-                  >
-                    {text.content}
-                  </span>
-                ))}
-              </div>
-            </Section>
-          )}
-        </div>
-      </Section>
-      <Section type="top">
         <div className="w-full flex flex-col">
-          {section3.data && (
+          {IMAGES.SECTIONS.SECTION3 && (
             <>
               {/* 第一排：最多显示3个 */}
               <div className="grid grid-cols-3 gap-3 sm:gap-4 justify-center">
-                {section3.data.slice(0, 3).map((item: any, index: number) => (
+                {IMAGES.SECTIONS.SECTION3.slice(0, 3).map((item, index) => (
                   <ImageLink key={index}>
                     <div className={`aspect-square ${memesHover}`}>
                       <img
                         src={item}
-                        alt={item}
+                        alt={`Section 3 Image ${index}`}
                         className="h-full w-full object-cover aspect-square rounded-xl"
                       />
                     </div>
@@ -477,14 +459,14 @@ export const Section3 = () => {
               </div>
 
               {/* 第二排：从第4个开始，显示最多4个 */}
-              {section3.data.length > 3 && (
+              {IMAGES.SECTIONS.SECTION3.length > 3 && (
                 <div className="grid grid-cols-4 gap-3 sm:gap-4 justify-items-center mt-4">
-                  {section3.data.slice(3).map((item: any, index: number) => (
+                  {IMAGES.SECTIONS.SECTION3.slice(3).map((item, index) => (
                     <ImageLink key={index}>
                       <div className={`aspect-square ${memesHover}`}>
                         <img
                           src={item}
-                          alt={item}
+                          alt={`Section 3 Image ${index + 3}`}
                           className="h-full w-full object-cover aspect-square rounded-xl"
                         />
                       </div>
@@ -578,15 +560,12 @@ export const About = () => {
         className={`bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-black ${memesHover}`}
       >
         <div className="w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-gradient-to-l from-[#FFAE04]/15 to-[#FFC30C]/15 -mt-[calc(96px+32px)] sm:-mt-[calc(114px+48px)] p-6 flex justify-center items-center">
-          <picture>
-            <source srcSet={images.logo} type="image/webp" />
-            <img
-              src={images.logo}
-              className="aspect-square rounded-full object-cover w-full h-full"
-              loading="lazy"
-              alt="logo"
-            />
-          </picture>
+          <img
+            src={IMAGES.LOGO}
+            className="aspect-square rounded-full object-cover w-full h-full"
+            loading="lazy"
+            alt="logo"
+          />
         </div>
         <span
           className={`${memesTitleSize} text-3xl sm:text-3xl md:text-3xl xl:text-4xl mt-4 sm:mt-5`}

@@ -1,44 +1,42 @@
-import s1Left from "@/assets/image/section1/left.png";
-import s1Right from "@/assets/image/section1/right.png";
-import { LINKS } from "@/config/links";
+import { IMAGES, LINKS } from '@/config/resources';
 
 export default {
-  title: "Doge & Minidoge",  // 保持英文
+  title: "Doge و Minidoge",
   text: [
     { content: "در " },
     { content: "7 دسامبر 2024", highlight: true },
     { content: "، " },
-    { content: "Elon Musk", highlight: true },
-    { content: " توییتی با تصویری از " },
-    { content: '"DogeFather"' },  // 保持英文
+    { content: "ایلان ماسک", highlight: true },
+    { content: " توییتی را با تصویری از " },
+    { content: '"DogeFather"' },
     { content: " که " },
-    { content: '"DogeSon"' },  // 保持英文
-    { content: " را روی شانه‌های خود حمل می‌کند منتشر کرد، با عنوان " },
-    { content: '"Doge & Minidoge"', highlight: true },  // 保持英文
-    { content: "." }
+    { content: '"DogeSon"' },
+    { content: " را روی شانه‌های خود حمل می‌کرد، همراه با عنوان " },
+    { content: '"Doge & Minidoge"', highlight: true },
+    { content: " منتشر کرد." }
   ],
   box: {
-    left: { image: s1Left },
+    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
     right: {
       title: "میراث $DOGE",
       text: [
-        { content: "این نماد " },
+        { content: "این نمادی از " },
         { content: "میراث", highlight: true },
         { content: " و " },
         { content: "آینده", highlight: true },
-        { content: " " },
+        { content: " است که " },
         { content: "$DOGE", highlight: true },
-        { content: " است که از طریق " },
+        { content: " از طریق " },
         { content: "$MINIDOGE", highlight: true },
-        { content: " منتقل می‌شود. با تلاش جمعی جامعه " },
+        { content: " به پیش می‌برد. با تلاش‌های جمعی جامعه " },
         { content: "$MINIDOGE", highlight: true },
-        { content: "، ما مصمم هستیم " },
+        { content: "، ما کاملاً متعهد به هدایت " },
         { content: "$MINIDOGE", highlight: true },
-        { content: " را به " },
+        { content: " به سمت نقطه عطف " },
         { content: "1 میلیارد دلار", highlight: true },
-        { content: " ارزش بازار برسانیم." }
+        { content: " ارزش بازار هستیم." }
       ],
-      image: s1Right,
+      image: IMAGES.SECTIONS.SECTION1.RIGHT,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

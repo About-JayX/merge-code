@@ -1,24 +1,22 @@
-import s1Left from "@/assets/image/section1/left.png";
-import s1Right from "@/assets/image/section1/right.png";
-import { LINKS } from "@/config/links";
+import { IMAGES, LINKS } from '@/config/resources';
 
 export default {
-  title: "Doge & Minidoge",  // 保持英文
+  title: "Doge и Minidoge",
   text: [
     { content: "" },
-    { content: "7 декабря 2024", highlight: true },
-    { content: " года " },
+    { content: "7 декабря 2024 года", highlight: true },
+    { content: " " },
     { content: "Илон Маск", highlight: true },
     { content: " опубликовал твит с изображением " },
-    { content: '"DogeFather"' },  // 保持英文
-    { content: ", несущего " },
-    { content: '"DogeSon"' },  // 保持英文
-    { content: " на плечах, с подписью " },
-    { content: '"Doge & Minidoge"', highlight: true },  // 保持英文
+    { content: '"DogeFather"' },
+    { content: ", несущего на плечах своего " },
+    { content: '"DogeSon"' },
+    { content: ", с подписью " },
+    { content: '"Doge & Minidoge"', highlight: true },
     { content: "." }
   ],
   box: {
-    left: { image: s1Left },
+    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
     right: {
       title: "Наследие $DOGE",
       text: [
@@ -28,17 +26,17 @@ export default {
         { content: "будущее", highlight: true },
         { content: " " },
         { content: "$DOGE", highlight: true },
-        { content: ", передаваемое через " },
+        { content: ", которое продолжается через " },
         { content: "$MINIDOGE", highlight: true },
-        { content: ". Совместными усилиями сообщества " },
+        { content: ". Благодаря коллективным усилиям сообщества " },
         { content: "$MINIDOGE", highlight: true },
-        { content: ", мы намерены привести " },
+        { content: ", мы полностью привержены тому, чтобы привести " },
         { content: "$MINIDOGE", highlight: true },
-        { content: " к " },
-        { content: "1 миллиарду долларов", highlight: true },
+        { content: " к вехе в " },
+        { content: "1 миллиард долларов", highlight: true },
         { content: " рыночной капитализации." }
       ],
-      image: s1Right,
+      image: IMAGES.SECTIONS.SECTION1.RIGHT,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

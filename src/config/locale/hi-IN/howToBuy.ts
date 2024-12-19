@@ -1,4 +1,4 @@
-import { LINKS } from "@/config/links";
+import { LINKS } from "@/config/resources";
 
 export default {
   title: "<b>$MINIDOGE</b> कैसे खरीदें?",
@@ -18,7 +18,7 @@ export default {
     {
       title:
         "<div class='flex'><b class='text-[#FFAC03]'>3.</b><div class='ml-2'><i>Raydium</i> पर <i>$MINIDOGE</i> एक्सचेंज करें</div></div>",
-      text: "<b>Raydium.io</b> पर जाएं, अपना Phantom वॉलेट कनेक्ट करें और <b>SOL</b> को <b>$MINIDOGE</b> में एक्सचेंज करें।",
+      text: "<b>Raydium.io</b> पर जाएं, अपना Phantom वॉलेट कनेक्ट करें और <b>SOL</b> को <b>$MINIDOGE</b> में ए���्सचेंज करें।",
       url: LINKS.BUY.RAYDIUM,
     },
   ],

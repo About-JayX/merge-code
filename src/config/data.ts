@@ -1,23 +1,34 @@
-import banner from "@/assets/image/banner/banner.png";
-import nav from "./nav";
+import { IMAGES } from './resources';
 
 const data = async () => {
   return {
     background: {
-      color: "#000",
+      custom: "",
     },
-    card: {
-      background: "#0F0F0F",
-    },
-    banner: {
-      image: banner,
-    },
-    banner_url: banner,
     button: {
-      background: "#FFC10B",
-      text: "#242904",
+      background: "linear-gradient(to bottom, #FFAC03, #FFC10B)",
+      text: "#000",
     },
-    nav,
+    banner_url: IMAGES.SECTIONS.BANNER,
+    banner: {
+      url: "https://t.me/MINIDOGE_MEMES_RAIDS",
+    },
+    section1: {
+      box: {
+        left: {
+          image: IMAGES.SECTIONS.SECTION1.left,
+        },
+        right: {
+          image: IMAGES.SECTIONS.SECTION1.right,
+        },
+      },
+    },
+    section2: {
+      image: IMAGES.SECTIONS.SECTION2,
+    },
+    section3: {
+      data: IMAGES.SECTIONS.SECTION3,
+    },
   };
 };
 

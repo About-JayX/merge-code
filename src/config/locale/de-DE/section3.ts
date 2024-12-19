@@ -1,4 +1,4 @@
-import { LINKS } from "@/config/links";
+import { LINKS } from "@/config/resources";
 import s3Image0 from "@/assets/image/section3/0.png";
 import s3Image1 from "@/assets/image/section3/1.png";
 import s3Image2 from "@/assets/image/section3/2.png";

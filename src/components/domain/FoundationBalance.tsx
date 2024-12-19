@@ -9,40 +9,25 @@ import { memesTextColor, memesTitleSize } from "./styles";
 import { MemesCard, MemesIcon, MemesBtn } from "./index";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-
-const FOUNDATION_ADDRESS = "31svWAq2Z7ng6rcKQV2ZkT3bY1bHqgo2XptoiRyxKra9";
-const USDT_MINT = "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB";
-const USDC_MINT = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
-const MINIDOGE_MINT = "8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu";
-const RPC_ENDPOINT =
-  "https://boldest-broken-gas.solana-mainnet.quiknode.pro/95cb652a0dbf38d8ec52bfbe02e99a941ab51a67/";
+import { FOUNDATION_CONFIG, RPC_ENDPOINT } from '@/config/foundation';
 
 const TokenLogo: React.FC<{ symbol: string; className?: string }> = ({
   symbol,
   className = "",
-}) => {
-  const logoMap: { [key: string]: string } = {
-    MINIDOGE: images.logo,
-    SOL: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png",
-    USDT: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB/logo.svg",
-    USDC: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png",
-  };
-
-  return (
-    <div className={`token-logo ${className}`}>
-      <img src={logoMap[symbol]} alt={symbol} className="rounded-full" />
-    </div>
-  );
-};
+}) => (
+  <div className={`token-logo ${className}`}>
+    <img src={FOUNDATION_CONFIG.tokenLogos[symbol]} alt={symbol} className="rounded-full" />
+  </div>
+);
 
 export const FoundationBalanceItem = ({
   tokenIcon = "",
   tokenName = "",
-  toeknBalances,
+  tokenBalance = "",
 }: {
   tokenIcon?: string;
   tokenName?: string;
-  toeknBalances?: any;
+  tokenBalance?: string;
 }) => {
   return (
     <div className="bg-white/5 p-4 sm:p-5 lg:p-8 rounded-xl flex items-center justify-between w-full">
@@ -51,22 +36,18 @@ export const FoundationBalanceItem = ({
           symbol={tokenIcon}
           className="w-10 h-10 rounded-full p-[3px] bg-white/10"
         />
-        <span
-          className={`${memesTextColor} text-lg !opacity-90 font-medium text-white uppercase hidden lg:block`}
-        >
+        <span className={`${memesTextColor} text-lg !opacity-90 font-medium text-white uppercase hidden lg:block`}>
           {tokenName}
         </span>
       </div>
-      <span
-        className={`${memesTextColor} text-lg !opacity-90 font-medium text-white uppercase`}
-      >
-        {toeknBalances}
+      <span className={`${memesTextColor} text-lg !opacity-90 font-medium text-white uppercase`}>
+        {tokenBalance}
       </span>
     </div>
   );
 };
 
-export default function FoundationBalance() {
+const FoundationBalance: React.FC = () => {
   const { t } = useTranslation();
   const [balances, setBalances] = useState<{
     sol: number;
@@ -76,15 +57,14 @@ export default function FoundationBalance() {
   }>({ sol: 0, usdt: 0, usdc: 0, minidoge: 0 });
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  
   useEffect(() => {
     const fetchBalances = async () => {
       try {
         const connection = new Connection(RPC_ENDPOINT, {
           commitment: "confirmed",
-          wsEndpoint: RPC_ENDPOINT.replace("https", "wss"),
         });
-        const publicKey = new PublicKey(FOUNDATION_ADDRESS);
+        const publicKey = new PublicKey(FOUNDATION_CONFIG.address);
 
         // 获取 SOL 余额
         const solBalance = await connection.getBalance(publicKey);
@@ -101,15 +81,18 @@ export default function FoundationBalance() {
 
         tokenAccounts.value.forEach((tokenAccount) => {
           const tokenMint = tokenAccount.account.data.parsed.info.mint;
-          const amount =
-            tokenAccount.account.data.parsed.info.tokenAmount.uiAmount;
+          const amount = tokenAccount.account.data.parsed.info.tokenAmount.uiAmount;
 
-          if (tokenMint === USDT_MINT) {
-            usdtBalance = amount;
-          } else if (tokenMint === USDC_MINT) {
-            usdcBalance = amount;
-          } else if (tokenMint === MINIDOGE_MINT) {
-            minidogeBalance = amount;
+          switch (tokenMint) {
+            case FOUNDATION_CONFIG.tokens.USDT:
+              usdtBalance = amount;
+              break;
+            case FOUNDATION_CONFIG.tokens.USDC:
+              usdcBalance = amount;
+              break;
+            case FOUNDATION_CONFIG.tokens.MINIDOGE:
+              minidogeBalance = amount;
+              break;
           }
         });
 
@@ -125,15 +108,14 @@ export default function FoundationBalance() {
         setLoading(false);
       }
     };
-
+    
     fetchBalances();
     const interval = setInterval(fetchBalances, 60000); // 每分钟更新一次
-
     return () => clearInterval(interval);
   }, []);
 
   const handleCopy = async () => {
-    await copy(FOUNDATION_ADDRESS, () => setIsModalOpen(true));
+    await copy(FOUNDATION_CONFIG.address, () => setIsModalOpen(true));
   };
 
   return (
@@ -162,9 +144,7 @@ export default function FoundationBalance() {
         <header className="p-6 sm:p-8 border-b border-white/10 flex flex-wrap items-center gap-3 sm:gap-4 justify-between bg-white/5">
           <div className="flex items-center gap-4 justify-between w-full sm:w-auto">
             <div className="flex items-center gap-4">
-              <span
-                className={`${memesTitleSize}  !text-xl md:!text-3xl lg:!text-4xl`}
-              >
+              <span className={`${memesTitleSize} !text-xl md:!text-3xl lg:!text-4xl`}>
                 Foundation Addr
               </span>
               <Link to="/dao">
@@ -185,12 +165,13 @@ export default function FoundationBalance() {
           </div>
 
           <div className="flex items-center gap-4">
-            <a
-              href={`https://solscan.io/account/${FOUNDATION_ADDRESS}`}
-              target="_blank"
+            <a 
+              href={FOUNDATION_CONFIG.solscanUrl}
+              target="_blank" 
               className="break-all flex items-center roboto-mono px-3 sm:px-5 py-2.5 text-[#FFAC03] tracking-widest bg-gradient-to-r from-[rgba(255,172,3,0.15)] to-[rgba(255,193,11,0.05)] rounded-xl border border-[rgba(255,173,3,0.3)] text-base"
+              rel="noopener noreferrer"
             >
-              {FOUNDATION_ADDRESS}
+              {FOUNDATION_CONFIG.address}
             </a>
             <MemesIcon
               name="copy"
@@ -203,11 +184,7 @@ export default function FoundationBalance() {
             />
           </div>
         </header>
-        <main
-          className={`p-6 sm:p-8 grid ${
-            loading ? "" : "sm:grid-cols-2"
-          } gap-4 justify-items-center`}
-        >
+        <main className={`p-6 sm:p-8 grid ${loading ? "" : "sm:grid-cols-2"} gap-4 justify-items-center`}>
           {loading ? (
             <div className="p-16">
               <Spin size="large" />
@@ -217,28 +194,28 @@ export default function FoundationBalance() {
               <FoundationBalanceItem
                 tokenIcon="MINIDOGE"
                 tokenName="MINIDOGE"
-                toeknBalances={balances.minidoge.toLocaleString(undefined, {
+                tokenBalance={balances.minidoge.toLocaleString(undefined, {
                   maximumFractionDigits: 2,
                 })}
               />
               <FoundationBalanceItem
                 tokenIcon="SOL"
                 tokenName="SOL"
-                toeknBalances={balances.sol.toLocaleString(undefined, {
+                tokenBalance={balances.sol.toLocaleString(undefined, {
                   maximumFractionDigits: 4,
                 })}
               />
               <FoundationBalanceItem
                 tokenIcon="USDT"
                 tokenName="USDT"
-                toeknBalances={balances.usdt.toLocaleString(undefined, {
+                tokenBalance={balances.usdt.toLocaleString(undefined, {
                   maximumFractionDigits: 2,
                 })}
               />
               <FoundationBalanceItem
                 tokenIcon="USDC"
                 tokenName="USDC"
-                toeknBalances={balances.usdc.toLocaleString(undefined, {
+                tokenBalance={balances.usdc.toLocaleString(undefined, {
                   maximumFractionDigits: 2,
                 })}
               />
@@ -248,4 +225,6 @@ export default function FoundationBalance() {
       </MemesCard>
     </Fragment>
   );
-}
+};
+
+export default FoundationBalance;

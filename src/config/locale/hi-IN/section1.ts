@@ -1,44 +1,42 @@
-import s1Left from "@/assets/image/section1/left.png";
-import s1Right from "@/assets/image/section1/right.png";
-import { LINKS } from "@/config/links";
+import { IMAGES, LINKS } from '@/config/resources';
 
 export default {
-  title: "Doge & Minidoge",  // 保持英文
+  title: "Doge और Minidoge",
   text: [
     { content: "" },
     { content: "7 दिसंबर 2024", highlight: true },
-    { content: " को, " },
-    { content: "Elon Musk", highlight: true },
-    { content: " ने " },
-    { content: '"DogeFather"' },  // 保持英文
     { content: " को " },
-    { content: '"DogeSon"' },  // 保持英文
-    { content: " को अपने कंधों पर ले जाते हुए एक तस्वीर के साथ एक ट्वीट किया, जिसमें कैप्शन था " },
-    { content: '"Doge & Minidoge"', highlight: true },  // 保持英文
-    { content: "।" }
+    { content: "एलन मस्क", highlight: true },
+    { content: " ने " },
+    { content: '"DogeFather"' },
+    { content: " को अपने " },
+    { content: '"DogeSon"' },
+    { content: " को कंधों पर लिए हुए एक तस्वीर के साथ " },
+    { content: '"Doge & Minidoge"', highlight: true },
+    { content: " कैप्शन के साथ एक ट्वीट पोस्ट किया।" }
   ],
   box: {
-    left: { image: s1Left },
+    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
     right: {
       title: "$DOGE की विरासत",
       text: [
         { content: "यह " },
+        { content: "$DOGE", highlight: true },
+        { content: " की " },
         { content: "विरासत", highlight: true },
         { content: " और " },
         { content: "भविष्य", highlight: true },
-        { content: " का प्रतीक है " },
-        { content: "$DOGE", highlight: true },
-        { content: " का, जो " },
+        { content: " को " },
         { content: "$MINIDOGE", highlight: true },
-        { content: " के माध्यम से आगे बढ़ रहा है। " },
+        { content: " के माध्यम से आगे बढ़ाने का प्रतीक है। " },
         { content: "$MINIDOGE", highlight: true },
-        { content: " समुदाय के सामूहिक प्रयास से, हम " },
+        { content: " समुदाय के सामूहिक प्रयासों से, हम " },
         { content: "$MINIDOGE", highlight: true },
         { content: " को " },
         { content: "1 बिलियन डॉलर", highlight: true },
-        { content: " के मार्केट कैप तक ले जाने के लिए दृढ़ संकल्पित हैं।" }
+        { content: " के मार्केट कैप के मील के पत्थर तक ले जाने के लिए पूरी तरह से प्रतिबद्ध हैं।" }
       ],
-      image: s1Right,
+      image: IMAGES.SECTIONS.SECTION1.RIGHT,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

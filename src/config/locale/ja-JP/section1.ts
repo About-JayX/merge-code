@@ -1,6 +1,4 @@
-import s1Left from "@/assets/image/section1/left.png";
-import s1Right from "@/assets/image/section1/right.png";
-import { LINKS } from "@/config/links";
+import { IMAGES, LINKS } from '@/config/resources';
 
 export default {
   title: "Doge & Minidoge",
@@ -18,7 +16,7 @@ export default {
     { content: "というツイートを投稿しました。" }
   ],
   box: {
-    left: { image: s1Left },
+    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
     right: {
       title: "$DOGEの継承",
       text: [
@@ -38,7 +36,7 @@ export default {
         { content: "10億ドル", highlight: true },
         { content: "の時価総額という目標に向かって進んでいます。" }
       ],
-      image: s1Right,
+      image: IMAGES.SECTIONS.SECTION1.RIGHT,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

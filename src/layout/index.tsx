@@ -6,7 +6,7 @@ import { locale } from '@/config';
 import { Dropdown } from 'antd';
 import { memesTextColor, memesHover } from '@/components/domain/styles';
 import { Link } from 'react-router-dom';
-import { nav } from '@/config/nav';
+import { NAV } from '@/config/resources';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -49,18 +49,18 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
             </Link>
           </Section>
           <div className="flex-1" />
-          {nav.twitter && (
-            <a href={nav.twitter} target="_blank" className={memesHover}>
+          {NAV.TWITTER && (
+            <a href={NAV.TWITTER} target="_blank" className={memesHover}>
               <MemesIcon className="text-white" name="twitter" />
             </a>
           )}
-          {nav.telegram && (
-            <a href={nav.telegram} target="_blank" className={memesHover}>
+          {NAV.TELEGRAM && (
+            <a href={NAV.TELEGRAM} target="_blank" className={memesHover}>
               <MemesIcon className="text-white" name="telegram" />
             </a>
           )}
-          {nav.tiktok && (
-            <a href={nav.tiktok} target="_blank" className={memesHover}>
+          {NAV.TIKTOK && (
+            <a href={NAV.TIKTOK} target="_blank" className={memesHover}>
               <MemesIcon className="text-white" name="tiktok" />
             </a>
           )}
