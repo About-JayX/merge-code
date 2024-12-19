@@ -1,24 +1,75 @@
+/**
+ * AddressCard.tsx
+ * 合约地址展示相关组件，包含地址显示、复制按钮和交互功能
+ */
+
 import React, { useState, useEffect } from "react";
 import { Modal } from "antd";
-import { Ellipsis } from "antd-mobile";
 import { Card as IconCard } from "./Icon.tsx";
 import { copy } from "@/util";
 import { memesHover, memesTextSize } from "../styles.ts";
 import Tgs from "../../tgs";
 
+/**
+ * 处理地址显示的函数
+ * @param address 完整地址
+ * @param isMobile 是否为移动端
+ * @returns 处理后的地址显示组件
+ */
+const formatAddress = (address: string, isMobile: boolean) => {
+  if (isMobile) {
+    return (
+      <div className="w-full flex items-center justify-center">
+        <span className="font-normal notranslate">
+          {address.slice(0, 6)}...{address.slice(-6)}
+        </span>
+      </div>
+    );
+  }
+
+  // PC端显示：前10位 + ... + 后10位
+  return (
+    <div className="w-full flex items-center justify-center">
+      <span className="font-normal notranslate">
+        {address.slice(0, 10)}...{address.slice(-10)}
+      </span>
+    </div>
+  );
+};
+
+/**
+ * MinidogeAddress 组件
+ * 用于显���合约地址的容器组件
+ */
 export const MinidogeAddress = ({
   ...props
 }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
   return (
     <a
       {...props}
-      className={`${memesTextSize} min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14 break-all flex items-center px-3 sm:px-5 py-2.5 text-[#FFAC03] tracking-widest bg-gradient-to-r from-[rgba(255,172,3,0.15)] to-[rgba(255,193,11,0.05)] rounded-xl border border-[rgba(255,173,3,0.3)] text-base`}
+      className={`
+        ${memesTextSize} 
+        min-w-9 min-h-9 
+        sm:min-w-12 sm:min-h-12 
+        xl:min-w-14 xl:min-h-14 
+        flex items-center 
+        px-3 sm:px-5 py-2.5 
+        text-[#FFAC03] tracking-widest 
+        bg-gradient-to-r from-[rgba(255,172,3,0.15)] to-[rgba(255,193,11,0.05)] 
+        rounded-xl border border-[rgba(255,173,3,0.3)] 
+        text-base
+        w-full
+      `}
     >
       {props.children}
     </a>
   );
 };
 
+/**
+ * MinidogeCopy 组件
+ * 复制按钮组
+ */
 export const MinidogeCopy = ({
   onClick,
   className = "",
@@ -62,39 +113,33 @@ interface ContractAddressProps {
     background?: string;
     text?: string;
   };
+  onCopySuccess?: () => void;
 }
 
-export const ContractAddress: React.FC<ContractAddressProps> = ({ address, button, ...props }) => {
+/**
+ * ContractAddress 组件
+ * 完整的合约地址展示组件，包含地址显示和复制功能
+ */
+export const ContractAddress: React.FC<ContractAddressProps> = ({ 
+  address, 
+  button, 
+  onCopySuccess,
+  ...props 
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  const handleCopy = async () => {
-    await copy(address, () => setIsModalOpen(true));
-  };
-
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const renderAddress = () => {
-    if (isMobile) {
-      return (
-        <span className="!text-base font-normal notranslate">
-          {`${address.slice(0, 6)}...${address.slice(-4)}`}
-        </span>
-      );
-    }
-    return (
-      <Ellipsis
-        className="!text-base md:text-2xl font-normal notranslate"
-        direction="middle"
-        content={address}
-      />
-    );
+  const handleCopy = async () => {
+    await copy(address, () => {
+      setIsModalOpen(true);
+      onCopySuccess?.();
+    });
   };
 
   return (
@@ -126,12 +171,11 @@ export const ContractAddress: React.FC<ContractAddressProps> = ({ address, butto
           button={button}
           onClick={handleCopy}
         />
-        <div className="flex flex-col break-all">
-          <MinidogeAddress
-            className="w-full"
-            onClick={handleCopy}
-          >
-            {renderAddress()}
+        <div className="w-full">
+          <MinidogeAddress onClick={handleCopy}>
+            <div className="!text-base md:text-2xl">
+              {formatAddress(address, isMobile)}
+            </div>
           </MinidogeAddress>
         </div>
       </div>

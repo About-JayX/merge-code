@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Ellipsis } from "antd-mobile";
 import { Modal } from "antd";
 import { FOUNDATION_CONFIG } from "@/config/foundation.ts";
 import { IMAGES } from "@/config/resources.ts";
-import { copy } from "@/util";
 import { Section } from "../common/Section.tsx";
 import { Button } from "../common/Button.tsx";
 import { Link } from "../common/Link.tsx";
-import { MinidogeAddress, MinidogeCopy } from "../common/AddressCard.tsx";
+import { ContractAddress } from "../common/AddressCard.tsx";
 import Tgs from "../../tgs";
 import { memesTextColor, memesTitleSize } from "../styles.ts";
 
@@ -86,32 +84,10 @@ export const Home = ({ ...props }) => {
               <a href={home.buyUrl} target="_blank">
                 <Button>{publics.buy}</Button>
               </a>
-              <div className="grid grid-cols-[auto,1fr] gap-3 items-center w-full">
-                <MinidogeCopy
-                  {...props}
-                  onClick={async () =>
-                    await copy(FOUNDATION_CONFIG.tokens.MINIDOGE, () =>
-                      setIsModalOpen(true)
-                    )
-                  }
-                />
-                <div className="flex flex-col break-all">
-                  <MinidogeAddress
-                    className="w-full"
-                    onClick={async () =>
-                      await copy(FOUNDATION_CONFIG.tokens.MINIDOGE, () =>
-                        setIsModalOpen(true)
-                      )
-                    }
-                  >
-                    <Ellipsis
-                      className={`!text-base md:text-2xl font-normal  notranslate`}
-                      direction="middle"
-                      content={FOUNDATION_CONFIG.tokens.MINIDOGE}
-                    />
-                  </MinidogeAddress>
-                </div>
-              </div>
+              <ContractAddress
+                address={FOUNDATION_CONFIG.tokens.MINIDOGE}
+                onCopySuccess={() => setIsModalOpen(true)}
+              />
             </div>
           </Section>
         </div>
