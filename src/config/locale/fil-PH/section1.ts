@@ -17,7 +17,7 @@ export default {
     { content: "." }
   ],
   box: {
-    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
+    left: { image: IMAGES.SECTIONS.SECTION1.left },
     right: {
       title: "Pamana ng $DOGE",
       text: [
@@ -37,7 +37,7 @@ export default {
         { content: "$1 billion", highlight: true },
         { content: " market cap." }
       ],
-      image: IMAGES.SECTIONS.SECTION1.RIGHT,
+      image: IMAGES.SECTIONS.SECTION1.right,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

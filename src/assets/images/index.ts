@@ -27,8 +27,8 @@ export const images = {
 
   // 各个部分的图片
   section1: {
-    left: section1LeftImage,
-    right: section1RightImage,
+    LEFT: section1LeftImage,
+    RIGHT: section1RightImage,
   },
   section2: section2Image,
   section3: [

@@ -16,7 +16,7 @@ export default {
     { content: " कैप्शन के साथ एक ट्वीट पोस्ट किया।" }
   ],
   box: {
-    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
+    left: { image: IMAGES.SECTIONS.SECTION1.left },
     right: {
       title: "$DOGE की विरासत",
       text: [
@@ -36,7 +36,7 @@ export default {
         { content: "1 बिलियन डॉलर", highlight: true },
         { content: " के मार्केट कैप के मील के पत्थर तक ले जाने के लिए पूरी तरह से प्रतिबद्ध हैं।" }
       ],
-      image: IMAGES.SECTIONS.SECTION1.RIGHT,
+      image: IMAGES.SECTIONS.SECTION1.right,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

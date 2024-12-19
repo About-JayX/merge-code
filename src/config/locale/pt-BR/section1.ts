@@ -16,7 +16,7 @@ export default {
     { content: "." }
   ],
   box: {
-    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
+    left: { image: IMAGES.SECTIONS.SECTION1.left },
     right: {
       title: "O Legado do $DOGE",
       text: [
@@ -36,7 +36,7 @@ export default {
         { content: "1 bilhão de dólares", highlight: true },
         { content: " em capitalização de mercado." }
       ],
-      image: IMAGES.SECTIONS.SECTION1.RIGHT,
+      image: IMAGES.SECTIONS.SECTION1.right,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

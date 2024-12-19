@@ -16,7 +16,7 @@ export default {
     { content: "というツイートを投稿しました。" }
   ],
   box: {
-    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
+    left: { image: IMAGES.SECTIONS.SECTION1.left },
     right: {
       title: "$DOGEの継承",
       text: [
@@ -36,7 +36,7 @@ export default {
         { content: "10億ドル", highlight: true },
         { content: "の時価総額という目標に向かって進んでいます。" }
       ],
-      image: IMAGES.SECTIONS.SECTION1.RIGHT,
+      image: IMAGES.SECTIONS.SECTION1.right,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

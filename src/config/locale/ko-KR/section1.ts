@@ -16,7 +16,7 @@ export default {
     { content: "라는 글을 게시했습니다." }
   ],
   box: {
-    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
+    left: { image: IMAGES.SECTIONS.SECTION1.left },
     right: {
       title: "$DOGE의 계승",
       text: [
@@ -36,7 +36,7 @@ export default {
         { content: "10억 달러", highlight: true },
         { content: " 시가총액이라는 이정표를 향해 나아가고 있습니다." }
       ],
-      image: IMAGES.SECTIONS.SECTION1.RIGHT,
+      image: IMAGES.SECTIONS.SECTION1.right,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

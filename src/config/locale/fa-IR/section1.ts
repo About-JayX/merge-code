@@ -16,7 +16,7 @@ export default {
     { content: " منتشر کرد." }
   ],
   box: {
-    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
+    left: { image: IMAGES.SECTIONS.SECTION1.left },
     right: {
       title: "میراث $DOGE",
       text: [
@@ -36,7 +36,7 @@ export default {
         { content: "1 میلیارد دلار", highlight: true },
         { content: " ارزش بازار هستیم." }
       ],
-      image: IMAGES.SECTIONS.SECTION1.RIGHT,
+      image: IMAGES.SECTIONS.SECTION1.right,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

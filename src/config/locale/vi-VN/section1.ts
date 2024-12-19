@@ -16,7 +16,7 @@ export default {
     { content: "." }
   ],
   box: {
-    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
+    left: { image: IMAGES.SECTIONS.SECTION1.left },
     right: {
       title: "Di sản của $DOGE",
       text: [
@@ -36,7 +36,7 @@ export default {
         { content: "1 tỷ đô la", highlight: true },
         { content: " vốn hóa thị trường." }
       ],
-      image: IMAGES.SECTIONS.SECTION1.RIGHT,
+      image: IMAGES.SECTIONS.SECTION1.right,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

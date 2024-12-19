@@ -48,7 +48,10 @@ export const IMAGES = {
   // 各个部分的图片
   SECTIONS: {
     BANNER: images.banner,
-    SECTION1: images.section1,
+    SECTION1: {
+      left: images.section1.LEFT,
+      right: images.section1.RIGHT,
+    },
     SECTION2: images.section2,
     SECTION3: images.section3,
   }

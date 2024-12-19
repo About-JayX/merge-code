@@ -16,7 +16,7 @@ export default {
     { content: " başlıklı bir tweet paylaştı." }
   ],
   box: {
-    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
+    left: { image: IMAGES.SECTIONS.SECTION1.left },
     right: {
       title: "$DOGE'un Mirası",
       text: [
@@ -36,7 +36,7 @@ export default {
         { content: "1 milyar dolar", highlight: true },
         { content: " piyasa değerine ulaştırmak için kararlıyız." }
       ],
-      image: IMAGES.SECTIONS.SECTION1.RIGHT,
+      image: IMAGES.SECTIONS.SECTION1.right,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

@@ -16,7 +16,7 @@ export default {
     { content: "。" }
   ],
   box: {
-    left: { image: IMAGES.SECTIONS.SECTION1.LEFT },
+    left: { image: IMAGES.SECTIONS.SECTION1.left },
     right: {
       title: "$DOGE 的傳承",
       text: [
@@ -36,7 +36,7 @@ export default {
         { content: "$10 億美元", highlight: true },
         { content: " 的市值里程碑。" }
       ],
-      image: IMAGES.SECTIONS.SECTION1.RIGHT,
+      image: IMAGES.SECTIONS.SECTION1.right,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },
