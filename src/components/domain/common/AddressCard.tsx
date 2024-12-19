@@ -3,7 +3,7 @@
  * 合约地址展示相关组件，包含地址显示、复制按钮和交互功能
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Modal } from "antd";
 import { Card as IconCard } from "./Icon.tsx";
 import { copy } from "@/util";
@@ -12,14 +12,15 @@ import Tgs from "../../tgs";
 
 /**
  * 处理地址显示的函数
- * @param address 完整地址
+ * @param address Solana 地址
  * @param isMobile 是否为移动端
  * @returns 处理后的地址显示组件
  */
 const formatAddress = (address: string, isMobile: boolean) => {
+  // 移动端保持原样：固定显示前6后6
   if (isMobile) {
     return (
-      <div className="w-full flex items-center justify-center">
+      <div className="w-full flex items-start">
         <span className="font-normal notranslate">
           {address.slice(0, 6)}...{address.slice(-6)}
         </span>
@@ -27,11 +28,11 @@ const formatAddress = (address: string, isMobile: boolean) => {
     );
   }
 
-  // PC端显示：前10位 + ... + 后10位
+  // PC端显示：前20后20，因为是 Solana 地址
   return (
-    <div className="w-full flex items-center justify-center">
+    <div className="w-full flex items-start">
       <span className="font-normal notranslate">
-        {address.slice(0, 10)}...{address.slice(-10)}
+        {address.slice(0, 20)}...{address.slice(-20)}
       </span>
     </div>
   );
@@ -39,7 +40,7 @@ const formatAddress = (address: string, isMobile: boolean) => {
 
 /**
  * MinidogeAddress 组件
- * 用于显���合约地址的容器组件
+ * 用于显示合约地址的容器组件
  */
 export const MinidogeAddress = ({
   ...props
@@ -130,7 +131,10 @@ export const ContractAddress: React.FC<ContractAddressProps> = ({
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -165,15 +169,17 @@ export const ContractAddress: React.FC<ContractAddressProps> = ({
         </div>
       </Modal>
 
-      <div className="grid grid-cols-[auto,1fr] gap-3 items-center w-full">
-        <MinidogeCopy
-          {...props}
-          button={button}
-          onClick={handleCopy}
-        />
-        <div className="w-full">
+      <div className="flex w-full gap-3">
+        <div className="flex-none">
+          <MinidogeCopy
+            {...props}
+            button={button}
+            onClick={handleCopy}
+          />
+        </div>
+        <div className="flex-1 min-w-0 max-w-[80%]">
           <MinidogeAddress onClick={handleCopy}>
-            <div className="!text-base md:text-2xl">
+            <div className="!text-base md:text-2xl truncate">
               {formatAddress(address, isMobile)}
             </div>
           </MinidogeAddress>
