@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Tooltip } from 'antd';
-import { format } from 'date-fns';
+import useFoundationMembers from '@/hooks/useFoundationMembers';
 
 interface DonationAmount {
   USDT: number;
@@ -12,15 +12,10 @@ interface DonationAmount {
 interface MemberData {
   address: string;
   totalDonation: DonationAmount;
-  lastDonation: Date | string;
+  lastDonation: string;
   donationCount: number;
   totalNftRights: number;
   votingRights: number;
-}
-
-interface MemberListProps {
-  members: MemberData[];
-  loading?: boolean;
 }
 
 const formatNumber = (num: number) => {
@@ -40,47 +35,6 @@ const getTokenColor = (type: string) => {
     default:
       return '#FFAC03';
   }
-};
-
-const generateTestData = (count: number): MemberData[] => {
-  const data: MemberData[] = [];
-  const now = new Date();
-  
-  for (let i = 0; i < count; i++) {
-    // 生成随机钱包地址
-    const address = Array.from({ length: 44 }, () => 
-      '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'[
-        Math.floor(Math.random() * 62)
-      ]
-    ).join('');
-    
-    // 生成随机捐赠金额
-    const totalDonation: DonationAmount = {
-      USDT: Math.random() < 0.7 ? Math.floor(Math.random() * 100000) : 0,
-      USDC: Math.random() < 0.6 ? Math.floor(Math.random() * 80000) : 0,
-      SOL: Math.random() < 0.5 ? Math.floor(Math.random() * 1000) / 100 : 0,
-      MINIDOGE: Math.random() < 0.8 ? Math.floor(Math.random() * 10000000) : 0,
-    };
-    
-    // 生成随机时间（过去90天内）
-    const lastDonation = new Date(now.getTime() - Math.random() * 90 * 24 * 60 * 60 * 1000);
-    
-    // 生成随机权益
-    const totalNftRights = Math.floor(Math.random() * 10);
-    const votingRights = Math.floor(Math.random() * 100);
-    
-    data.push({
-      address,
-      totalDonation,
-      lastDonation: lastDonation.toISOString(),
-      donationCount: Math.floor(Math.random() * 20) + 1,
-      totalNftRights,
-      votingRights,
-    });
-  }
-  
-  // 按最后捐赠时间排序
-  return data.sort((a, b) => new Date(b.lastDonation).getTime() - new Date(a.lastDonation).getTime());
 };
 
 // 添加统计组件
@@ -111,7 +65,10 @@ const StatsDisplay: React.FC<{ members: MemberData[] }> = ({ members }) => {
   );
 };
 
-export const MemberList: React.FC<MemberListProps> = ({ members = generateTestData(500), loading = false }) => {
+export const MemberList: React.FC = () => {
+  // 使用 hook 获取成员数据
+  const { members, loading, error } = useFoundationMembers();
+
   // 添加分页状态
   const [currentPage, setCurrentPage] = React.useState(1);
   const pageSize = 50;
@@ -262,6 +219,14 @@ export const MemberList: React.FC<MemberListProps> = ({ members = generateTestDa
     size: 'small' as "default" | "small",
     onChange: (page: number) => setCurrentPage(page),
   };
+
+  if (error) {
+    return (
+      <div className="text-center text-red-500 py-8">
+        加载失败: {error}
+      </div>
+    );
+  }
 
   return (
     <div className="relative">

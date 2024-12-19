@@ -11,7 +11,7 @@ export const FOUNDATION_CONFIG = {
   // 基金会钱包地址
   address: FOUNDATION_ADDRESS,
   
-  // 基金会 Solscan 链接
+  // Solscan 链接
   solscanUrl: `https://solscan.io/account/${FOUNDATION_ADDRESS}`,
   
   // 基金会电报管理员
