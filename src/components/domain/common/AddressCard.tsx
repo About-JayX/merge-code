@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Modal } from "antd";
+import { Ellipsis } from "antd-mobile";
 import { Card as IconCard } from "./Icon.tsx";
-import {
-  memesHover,
-  memesTextSize,
-} from "../styles.ts";
+import { copy } from "@/util";
+import { memesHover, memesTextSize } from "../styles.ts";
+import Tgs from "../../tgs";
 
 export const MinidogeAddress = ({
   ...props
@@ -11,7 +12,7 @@ export const MinidogeAddress = ({
   return (
     <a
       {...props}
-      className={`${memesTextSize} min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14 break-all flex items-center  px-3 sm:px-5 py-2.5 text-[#FFAC03] tracking-widest bg-gradient-to-r from-[rgba(255,172,3,0.15)] to-[rgba(255,193,11,0.05)] rounded-xl border border-[rgba(255,173,3,0.3)] text-base`}
+      className={`${memesTextSize} min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14 break-all flex items-center px-3 sm:px-5 py-2.5 text-[#FFAC03] tracking-widest bg-gradient-to-r from-[rgba(255,172,3,0.15)] to-[rgba(255,193,11,0.05)] rounded-xl border border-[rgba(255,173,3,0.3)] text-base`}
     >
       {props.children}
     </a>
@@ -52,5 +53,88 @@ export const MinidogeCopy = ({
         }}
       />
     </div>
+  );
+};
+
+interface ContractAddressProps {
+  address: string;
+  button?: {
+    background?: string;
+    text?: string;
+  };
+}
+
+export const ContractAddress: React.FC<ContractAddressProps> = ({ address, button, ...props }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  const handleCopy = async () => {
+    await copy(address, () => setIsModalOpen(true));
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const renderAddress = () => {
+    if (isMobile) {
+      return (
+        <span className="!text-base font-normal notranslate">
+          {`${address.slice(0, 6)}...${address.slice(-4)}`}
+        </span>
+      );
+    }
+    return (
+      <Ellipsis
+        className="!text-base md:text-2xl font-normal notranslate"
+        direction="middle"
+        content={address}
+      />
+    );
+  };
+
+  return (
+    <>
+      <Modal
+        open={isModalOpen}
+        centered
+        footer={null}
+        closable={false}
+        width="auto"
+      >
+        <div className="flex flex-col items-center px-8 py-4">
+          {isModalOpen && (
+            <Tgs
+              name="success"
+              className="!w-24 !h-24 sm:!w-32 sm:!h-32 md:!w-40 md:!h-40"
+              onChange={(value) => isModalOpen && setIsModalOpen(!value)}
+            />
+          )}
+          <span className="text-lg sm:text-xl md:text-2xl font-bold mt-2">
+            复制成功
+          </span>
+        </div>
+      </Modal>
+
+      <div className="grid grid-cols-[auto,1fr] gap-3 items-center w-full">
+        <MinidogeCopy
+          {...props}
+          button={button}
+          onClick={handleCopy}
+        />
+        <div className="flex flex-col break-all">
+          <MinidogeAddress
+            className="w-full"
+            onClick={handleCopy}
+          >
+            {renderAddress()}
+          </MinidogeAddress>
+        </div>
+      </div>
+    </>
   );
 }; 
