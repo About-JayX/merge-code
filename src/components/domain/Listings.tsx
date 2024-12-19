@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import exchange from "@/config/shared/exchange";
 import { useTranslation } from "react-i18next";
-import { MemesBtn } from ".";
+import { Button } from ".";
 
-export default function Exchange() {
+export default function Listings() {
   const { t } = useTranslation();
   const [itemsToShow, setItemsToShow] = useState(5); // 初始显示5个
   const [isMobile, setIsMobile] = useState(false);
@@ -43,9 +43,9 @@ export default function Exchange() {
       </div>
       {/* 手机端显示“加载更多”按钮 */}
       {isMobile && itemsToShow < exchange.length && (
-        <MemesBtn className="!min-w-32 !min-h-10 sm:!min-h-12 from-transparent to-transparent bg-white/5 text-white" onClick={loadMore}>
+        <Button className="!min-w-32 !min-h-10 sm:!min-h-12 from-transparent to-transparent bg-white/5 text-white" onClick={loadMore}>
           {t("public.loadMore")}
-        </MemesBtn>
+        </Button>
       )}
     </div>
   );

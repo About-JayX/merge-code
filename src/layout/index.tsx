@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { StarrySky, MemesIcon, Section } from '@/components/domain';
+import { StarrySky, Section } from '@/components/domain';
+import { Card } from '@/components/domain/Icon';
 import { images } from '@/assets/images';
 import { locale } from '@/config';
 import { Dropdown } from 'antd';
@@ -51,17 +52,17 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
           <div className="flex-1" />
           {NAV.TWITTER && (
             <a href={NAV.TWITTER} target="_blank" className={memesHover}>
-              <MemesIcon className="text-white" name="twitter" />
+              <Card className="text-white" name="twitter" />
             </a>
           )}
           {NAV.TELEGRAM && (
             <a href={NAV.TELEGRAM} target="_blank" className={memesHover}>
-              <MemesIcon className="text-white" name="telegram" />
+              <Card className="text-white" name="telegram" />
             </a>
           )}
           {NAV.TIKTOK && (
             <a href={NAV.TIKTOK} target="_blank" className={memesHover}>
-              <MemesIcon className="text-white" name="tiktok" />
+              <Card className="text-white" name="tiktok" />
             </a>
           )}
           <Dropdown

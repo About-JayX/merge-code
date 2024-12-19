@@ -3,14 +3,14 @@ import logoImage from './logo.png';
 // Banner
 import bannerImage from './banner/banner.png';
 
-// Section1
+// Tweet
 import section1LeftImage from './section1/left.png';
 import section1RightImage from './section1/right.png';
 
-// Section2
+// Intro
 import section2Image from './section2/index.png';
 
-// Section3
+// Gallery
 import section3Image0 from './section3/0.png';
 import section3Image1 from './section3/1.png';
 import section3Image2 from './section3/2.png';
