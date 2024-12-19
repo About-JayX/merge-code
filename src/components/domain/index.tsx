@@ -218,7 +218,7 @@ export const MemesHome = ({ ...props }) => {
                 <div
                   className={`p-[6px] relative rounded-full cursor-pointer ${memesHover}`}
                   onClick={async () => {
-                    await copy(FOUNDATION_CONFIG.address, () => setIsModalOpen(true));
+                    await copy(FOUNDATION_CONFIG.tokens.MINIDOGE, () => setIsModalOpen(true));
                   }}
                 >
                   <div
@@ -231,7 +231,7 @@ export const MemesHome = ({ ...props }) => {
                     name="copy"
                     className=" shadow-[0px_0px_8px_4px_rgba(0,0,0,0.25)_inset] min-w-[calc(48px-6px)] min-h-[calc(48px-6px)]  sm:min-w-[calc(56px-6px)] sm:min-h-[calc(56px-6px)]"
                     onClick={async () =>
-                      await copy(FOUNDATION_CONFIG.address, () => setIsModalOpen(true))
+                      await copy(FOUNDATION_CONFIG.tokens.MINIDOGE, () => setIsModalOpen(true))
                     }
                     style={{
                       background: props.button?.background,
@@ -243,13 +243,13 @@ export const MemesHome = ({ ...props }) => {
                   <div
                     className={`cursor-pointer ${memesHover}`}
                     onClick={async () =>
-                      await copy(FOUNDATION_CONFIG.address, () => setIsModalOpen(true))
+                      await copy(FOUNDATION_CONFIG.tokens.MINIDOGE, () => setIsModalOpen(true))
                     }
                   >
                     <Ellipsis
                       className={`text-base md:text-2xl font-normal text-white notranslate`}
                       direction="middle"
-                      content={FOUNDATION_CONFIG.address}
+                      content={FOUNDATION_CONFIG.tokens.MINIDOGE}
                     />
                   </div>
                   <a
