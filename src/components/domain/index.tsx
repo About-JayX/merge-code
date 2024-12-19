@@ -3,16 +3,15 @@ import { motion, useInView } from "motion/react";
 import Icon from "../icon";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import contractAddress from "@/config/contractAddress";
-import { Dropdown, Modal } from "antd";
+import { FOUNDATION_CONFIG } from "@/config/foundation";
+import { Modal } from "antd";
 import Tgs from "../tgs";
-import { images } from "@/assets/images";
 import { copy } from "@/util";
-import { locale } from "@/config";
 import FoundationBalance, {
   MinidogeAddress,
   MinidogeCopy,
 } from "./FoundationBalance";
+import { IMAGES } from "@/config/resources";
 import {
   memesSize,
   memesTitleSize,
@@ -21,7 +20,6 @@ import {
   memesTextColor,
   memesHover,
 } from "./styles";
-import Exchange from "./exchange";
 import { pageSwitch } from "@/config/pageSwitch";
 
 export const Section = ({
@@ -222,20 +220,24 @@ export const MemesHome = ({ ...props }) => {
                 <MinidogeCopy
                   {...props}
                   onClick={async () =>
-                    await copy(contractAddress, () => setIsModalOpen(true))
+                    await copy(FOUNDATION_CONFIG.tokens.MINIDOGE, () =>
+                      setIsModalOpen(true)
+                    )
                   }
                 />
                 <div className="flex flex-col break-all">
                   <MinidogeAddress
                     className="w-full"
                     onClick={async () =>
-                      await copy(contractAddress, () => setIsModalOpen(true))
+                      await copy(FOUNDATION_CONFIG.tokens.MINIDOGE, () =>
+                        setIsModalOpen(true)
+                      )
                     }
                   >
                     <Ellipsis
                       className={`!text-base md:text-2xl font-normal  notranslate`}
                       direction="middle"
-                      content={contractAddress}
+                      content={FOUNDATION_CONFIG.tokens.MINIDOGE}
                     />
                   </MinidogeAddress>
                 </div>
@@ -248,7 +250,7 @@ export const MemesHome = ({ ...props }) => {
             <div className="sm:w-[22rem] sm:h-[22rem] xl:w-[26rem] xl:h-[26rem] md:w-full md:h-full transition-transform duration-300 hover:scale-105">
               <ImageLink className="">
                 <img
-                  src={props.banner_url}
+                  src={IMAGES.SECTIONS.BANNER}
                   alt="Token Image"
                   className="object-contain aspect-square w-full h-full z-10"
                 />
@@ -267,11 +269,11 @@ export const Section1 = ({ ...props }) => {
   const Tweets = ({
     id,
     className = "",
-    imageUrl = "",
+    image,
   }: {
     id: string;
     className?: string;
-    imageUrl: string;
+    image: string;
   }) => {
     return (
       <a
@@ -280,7 +282,7 @@ export const Section1 = ({ ...props }) => {
         rel="noopener noreferrer"
       >
         <div className={`${memesHover}`}>
-          <img src={imageUrl} className={className} />
+          <img src={image} className={className} />
         </div>
       </a>
     );
@@ -313,8 +315,8 @@ export const Section1 = ({ ...props }) => {
               <Section type="left">
                 <Tweets
                   id="1865304483070169440"
-                  imageUrl={section1?.box.left.image}
-                  className="w-full xl:w-[527px]  xl:h-[695px] rounded-xl object-cover"
+                  image={IMAGES.SECTIONS.SECTION1.left}
+                  className="w-full xl:w-[527px] xl:h-[695px] rounded-xl object-cover"
                 />
               </Section>
 
@@ -342,8 +344,8 @@ export const Section1 = ({ ...props }) => {
                   {section1?.box.right.image && (
                     <Tweets
                       id="1865305060307009884"
-                      imageUrl={section1?.box.right.image}
-                      className="w-full  mt-4 sm:mt-4 xl:mt-11 rounded-xl object-cover"
+                      image={IMAGES.SECTIONS.SECTION1.right}
+                      className="w-full mt-4 sm:mt-4 xl:mt-11 rounded-xl object-cover"
                     />
                   )}
                   {section1?.box.right.bntText && (
@@ -401,7 +403,7 @@ export const Section2 = ({ ...props }) => {
         >
           <ImageLink>
             <img
-              src={section2?.image}
+              src={IMAGES.SECTIONS.SECTION2}
               className="aspect-square rounded-xl object-cover"
             />
           </ImageLink>
@@ -417,35 +419,17 @@ export const Section3 = () => {
   return (
     <div className="flex flex-col gap-4 sm:gap-4 md:gap-8 xl:gap-16 items-center">
       <Section type="top">
-        <div className={`${memesTitleSize}`}>
-          {section3.title.length >= 0 && (
-            <Section type="left">
-              <div className="text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all">
-                {section3.title.map((text: any, index: number) => (
-                  <span
-                    key={index}
-                    className={text.status ? `${memesTextColor}` : ""}
-                  >
-                    {text.content}
-                  </span>
-                ))}
-              </div>
-            </Section>
-          )}
-        </div>
-      </Section>
-      <Section type="top">
         <div className="w-full flex flex-col">
-          {section3.data && (
+          {IMAGES.SECTIONS.SECTION3 && (
             <>
               {/* 第一排：最多显示3个 */}
               <div className="grid grid-cols-3 gap-3 sm:gap-4 justify-center">
-                {section3.data.slice(0, 3).map((item: any, index: number) => (
+                {IMAGES.SECTIONS.SECTION3.slice(0, 3).map((item, index) => (
                   <ImageLink key={index}>
                     <div className={`aspect-square ${memesHover}`}>
                       <img
                         src={item}
-                        alt={item}
+                        alt={`Section 3 Image ${index}`}
                         className="h-full w-full object-cover aspect-square rounded-xl"
                       />
                     </div>
@@ -454,14 +438,14 @@ export const Section3 = () => {
               </div>
 
               {/* 第二排：从第4个开始，显示最多4个 */}
-              {section3.data.length > 3 && (
+              {IMAGES.SECTIONS.SECTION3.length > 3 && (
                 <div className="grid grid-cols-4 gap-3 sm:gap-4 justify-items-center mt-4">
-                  {section3.data.slice(3).map((item: any, index: number) => (
+                  {IMAGES.SECTIONS.SECTION3.slice(3).map((item, index) => (
                     <ImageLink key={index}>
                       <div className={`aspect-square ${memesHover}`}>
                         <img
                           src={item}
-                          alt={item}
+                          alt={`Section 3 Image ${index + 3}`}
                           className="h-full w-full object-cover aspect-square rounded-xl"
                         />
                       </div>
@@ -555,15 +539,12 @@ export const About = () => {
         className={`bg-gradient-to-r from-[#FFAF03] to-[#FF5900] shadow-[0px_0px_71px_2px_rgba(255,255,255,0.5)_inset] flex flex-col items-center text-center mt-24 xl:mt-28 text-black ${memesHover}`}
       >
         <div className="w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-gradient-to-l from-[#FFAE04]/15 to-[#FFC30C]/15 -mt-[calc(96px+32px)] sm:-mt-[calc(114px+48px)] p-6 flex justify-center items-center">
-          <picture>
-            <source srcSet={images.logo} type="image/webp" />
-            <img
-              src={images.logo}
-              className="aspect-square rounded-full object-cover w-full h-full"
-              loading="lazy"
-              alt="logo"
-            />
-          </picture>
+          <img
+            src={IMAGES.LOGO}
+            className="aspect-square rounded-full object-cover w-full h-full"
+            loading="lazy"
+            alt="logo"
+          />
         </div>
         <span
           className={`${memesTitleSize} text-3xl sm:text-3xl md:text-3xl xl:text-4xl mt-4 sm:mt-5`}
@@ -583,20 +564,6 @@ export const About = () => {
         )}
       </MemesCard>
     </>
-  );
-};
-
-export const Footer = () => {
-  const { t } = useTranslation();
-  return (
-    <div className="flex flex-col gap-6 w-full py-4">
-      <div className="max-w-4xl mx-auto w-full bg-white/5 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-        <p
-          className={`${memesTextSize} text-center leading-normal opacity-80 `}
-          dangerouslySetInnerHTML={{ __html: t("footer") }}
-        />
-      </div>
-    </div>
   );
 };
 
@@ -623,120 +590,25 @@ export const StarrySky = () => {
     </div>
   );
 };
+
 export default function Domain({ ...props }) {
-  const { t, i18n } = useTranslation();
   if (Object.keys(props).length === 0) return null;
 
-  const { nav = {} } = props;
-
   return (
-    <div
-      className={`min-h-screen w-full flex flex-col pb-12 gap-8 sm:gap-8 xl:gap-0 items-center overflow-hidden relative text-content text-white ${props.background?.pattern}`}
-    >
-      <div className="w-full h-screen fixed top-0 left-0 ">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage: `url(${props.background?.custom})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        />
-      </div>
-      <div
-        className="absolute top-0 left-0 w-full h-full"
-        style={{
-          background: props.background?.color,
-        }}
-      />
-      <StarrySky />
-      <Section className="w-full flex justify-center z-10">
-        <header className="p-3 sm:p-8 md:pt-8 md:px-16 flex gap-1 sm:gap-4 items-center w-full max-w-screen-xl">
-          <div className="grid grid-cols-[48px,auto] sm:grid-cols-[56px,auto] md:grid-cols-[64px,auto] items-center gap-3">
-            <picture>
-              <source srcSet={images.logo} type="image/webp" />
-              <img
-                src={images.logo}
-                className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full"
-                loading="eager"
-                alt="logo"
-              />
-            </picture>
-            <span
-              className={`${memesTextColor} sm:text-3xl md:text-4xl font-bold hidden sm:block orbitron`}
-            >
-              MINIDOGE
-            </span>
-          </div>
-
-          <div className="flex-1" />
-          {nav.twitter_url && (
-            <a href={nav.twitter_url} target="_blank" className={memesHover}>
-              <MemesIcon className="text-white" name="twitter" />
-            </a>
-          )}
-          {nav.telegram_url && (
-            <a href={nav.telegram_url} target="_blank" className={memesHover}>
-              <MemesIcon className="text-white" name="telegram" />
-            </a>
-          )}
-          {nav.tiktok_url && (
-            <a href={nav.tiktok_url} target="_blank" className={memesHover}>
-              <MemesIcon className="text-white" name="tiktok" />
-            </a>
-          )}
-          {nav.youtube_url && (
-            <a href={nav.youtube_url} target="_blank" className={memesHover}>
-              <MemesIcon className="text-white" name="youtube" />
-            </a>
-          )}
-          {nav.instagram_url && (
-            <a href={nav.instagram_url} target="_blank" className={memesHover}>
-              <MemesIcon className="text-white" name="instagram" />
-            </a>
-          )}
-          <Dropdown
-            placement="bottomRight"
-            menu={{
-              items: Object.entries(locale).map(([key, value]: any) => ({
-                key,
-                label: value.translation.language,
-                onClick: () => {
-                  i18n.changeLanguage(key);
-                },
-              })),
-            }}
-          >
-            <a className="bg-white/10 border font-bold border-white/10 px-4 sm:px-5 rounded flex items-center justify-center min-w-[36px] min-h-[36px] sm:min-w-[48px] sm:min-h-[48px] text-current">
-              <span>{t("lang")}</span>
-            </a>
-          </Dropdown>
-        </header>
+    <div className="flex flex-col gap-12 sm:gap-24 md:gap-28 xl:gap-28">
+      <MemesHome {...props} />
+      <Section1 {...props} />
+      <Section2 {...props} />
+      <Section3 {...props} />
+      <HowToBuy {...props} />
+      <Section type="top">
+        <About {...props} />
       </Section>
-      <main className="px-3 sm:p-8 md:px-16 w-full max-w-screen-xl flex flex-col gap-12 sm:gap-24 md:gap-28 xl:gap-28 z-10">
-        <MemesHome {...props} />
-        <Section type="bottom">
-          <Exchange />
-        </Section>
-
-        <Section1 {...props} />
-        <Section2 {...props} />
-        <Section3 {...props} />
-        <HowToBuy {...props} />
+      {pageSwitch.home.foundationAddr && (
         <Section type="top">
-          <About {...props} />
+          <FoundationBalance />
         </Section>
-        {pageSwitch.home.foundationAddr && (
-          <Section type="top">
-            <FoundationBalance {...props} />
-          </Section>
-        )}
-
-        <Section type="bottom">
-          <Footer {...props} />
-        </Section>
-      </main>
+      )}
     </div>
   );
 }

@@ -1,24 +1,22 @@
-import s1Left from "@/assets/image/section1/left.png";
-import s1Right from "@/assets/image/section1/right.png";
-import { LINKS } from "@/config/links";
+import { IMAGES, LINKS } from '@/config/resources';
 
 export default {
-  title: "Doge & Minidoge",  // 保持英文
+  title: "Doge & Minidoge",
   text: [
     { content: "เมื่อวันที่ " },
     { content: "7 ธันวาคม 2024", highlight: true },
-    { content: " " },
+    { content: ", " },
     { content: "Elon Musk", highlight: true },
     { content: " ได้โพสต์ทวีตพร้อมภาพของ " },
-    { content: '"DogeFather"' },  // 保持英文
+    { content: '"DogeFather"' },
     { content: " อุ้ม " },
-    { content: '"DogeSon"' },  // 保持英文
+    { content: '"DogeSon"' },
     { content: " ไว้บนบ่า พร้อมข้อความ " },
-    { content: '"Doge & Minidoge"', highlight: true },  // 保持英文
-    { content: "" }
+    { content: '"Doge & Minidoge"', highlight: true },
+    { content: "." }
   ],
   box: {
-    left: { image: s1Left },
+    left: { image: IMAGES.SECTIONS.SECTION1.left },
     right: {
       title: "มรดกของ $DOGE",
       text: [
@@ -38,7 +36,7 @@ export default {
         { content: "1 พันล้านดอลลาร์", highlight: true },
         { content: " มูลค่าตลาด" }
       ],
-      image: s1Right,
+      image: IMAGES.SECTIONS.SECTION1.right,
       bntText: "$MINIDOGE X",
       bntUrl: LINKS.SOCIAL.TWITTER,
     },

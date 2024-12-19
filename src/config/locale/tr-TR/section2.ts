@@ -1,10 +1,9 @@
-import s2Image from "@/assets/image/section2/index.png";
-import { LINKS } from "@/config/links";
+import { IMAGES, LINKS } from '@/config/resources';
 
 export default {
   title: "Ben $MINIDOGE'un CEO'suyum",
   text: "<div>Kripto topluluğu <i>gururla</i> <b>Elon Musk</b>'ı <b>$DOGE</b>'un CEO'su olarak kabul ettiği gibi, <i>onurla</i> <b>Lil X</b>'i <b>$MINIDOGE</b>'un CEO'su olarak taçlandırdılar.</div><div class='mt-4'>VC'ler ve balinaların hâkim olduğu bir dünyada, topluluğumuz <i>birlik ve güç içinde</i> duruyor, <i>gerçek merkeziyetsizliği</i> inşa etmek için <i>genç vizyoner</i> liderlerini takip ediyor.</div>",
-  image: s2Image,
+  image: IMAGES.SECTIONS.SECTION2,
   box: {
     list: [
       {

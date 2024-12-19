@@ -25,7 +25,6 @@ import hiIN from "@/config/locale/hi-IN";
 import faIR from "@/config/locale/fa-IR";
 import arSA from "@/config/locale/ar-SA";
 
-// import type { TelegramType } from "@/type";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
@@ -65,10 +64,7 @@ export const router = {
    * key: 路由路径
    * value: 该路由所需的参数数组
    */
-  param: { 
-    // "/": ["domain"],    // 首页需要 domain 参数
-    // "/edit": ["domain"] // 编辑页需要 domain 参数
-  },
+  param: {},
 };
 
 /**

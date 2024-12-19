@@ -7,7 +7,7 @@
  * 4. 路由参数的处理
  */
 
-import React, { lazy, Suspense, useEffect, useMemo } from 'react'
+import React, { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { locale } from '@/config'
@@ -58,6 +58,10 @@ const generateRoutes = (
   })
 }
 
+interface RouterProps {
+  data: any;
+}
+
 /**
  * 路由组件
  * 实现功能：
@@ -65,22 +69,19 @@ const generateRoutes = (
  * 2. 处理国际化路由
  * 3. 渲染路由组件
  */
-export default function Router() {
+export default function Router({ data }: RouterProps) {
   const { i18n } = useTranslation()
 
-  // 根据当前语言更新路由配置
-  useEffect(() => {
+  React.useEffect(() => {
     const supportedLangs = Object.keys(locale)
     if (!supportedLangs.includes(i18n.language)) {
       i18n.changeLanguage(supportedLangs[0])
     }
   }, [i18n.language])
 
-  // 使用 useMemo 缓存路由配置，避免不必要的重复计算
-  const routes = useMemo(() => generateRoutes(Object.entries(view)), [])
+  const routes = React.useMemo(() => generateRoutes(Object.entries(view)), [])
 
-  // 生成多语言路由
-  const langRoutes = useMemo(() => {
+  const langRoutes = React.useMemo(() => {
     const supportedLangs = Object.keys(locale)
 
     return supportedLangs.flatMap(langKey => {
@@ -91,18 +92,17 @@ export default function Router() {
             : ''
 
         return [
-          { ...route, path: `/${langKey}${route.path}` }, // 语言前缀路由
-          { ...route, path: `${route.path}${params}` }, // 原始路由
-          { ...route, path: `/${langKey}${route.path}${params}` }, // 语言前缀和参数
+          { ...route, path: `/${langKey}${route.path}`, element: React.cloneElement(route.element, { data }) },
+          { ...route, path: `${route.path}${params}`, element: React.cloneElement(route.element, { data }) },
+          { ...route, path: `/${langKey}${route.path}${params}`, element: React.cloneElement(route.element, { data }) },
         ]
       })
     })
-  }, [routes])
+  }, [routes, data])
 
-  // 汇总所有路由
-  const allRoutes = useMemo(
-    () => [...routes, ...langRoutes],
-    [routes, langRoutes]
+  const allRoutes = React.useMemo(
+    () => [...routes.map(route => ({ ...route, element: React.cloneElement(route.element, { data }) })), ...langRoutes],
+    [routes, langRoutes, data]
   )
 
   return (

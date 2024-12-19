@@ -1,10 +1,9 @@
-import s2Image from "@/assets/image/section2/index.png";
-import { LINKS } from "@/config/links";
+import { IMAGES, LINKS } from '@/config/resources';
 
 export default {
   title: "私は$MINIDOGE CEOです",
   text: "<div>暗号通貨コミュニティが<b>イーロン・マスク</b>を<b>$DOGE</b>のCEOとして<i>誇りを持って認めている</i>ように、彼らは<b>リル X</b>を<b>$MINIDOGE</b>のCEOとして<i>栄誉を持って選出</i>しました。</div><div class='mt-4'>VCとクジラたちが支配する世界で、私たちのコミュニティは<i>真の分散化</i>の未来を築くため、<i>若きビジョナリー</i>リーダーに従い<i>団結して強くなっています</i>。</div>",
-  image: s2Image,
+  image: IMAGES.SECTIONS.SECTION2,
   box: {
     list: [
       {

@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { Spin, Modal } from "antd";
-import { images } from "@/assets/images";
 import { copy } from "@/util";
 import Tgs from "../tgs";
 import {
@@ -11,33 +10,23 @@ import {
   memesTextSize,
   memesTitleSize,
 } from "./styles";
-import { MemesCard, MemesIcon } from "./index";
+import { MemesBtn, MemesCard, MemesIcon } from "./index";
 import { useTranslation } from "react-i18next";
-
-const FOUNDATION_ADDRESS = "31svWAq2Z7ng6rcKQV2ZkT3bY1bHqgo2XptoiRyxKra9";
-const USDT_MINT = "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB";
-const USDC_MINT = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
-const MINIDOGE_MINT = "8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu";
-const RPC_ENDPOINT =
-  "https://boldest-broken-gas.solana-mainnet.quiknode.pro/95cb652a0dbf38d8ec52bfbe02e99a941ab51a67/";
+import { Link } from "react-router-dom";
+import { FOUNDATION_CONFIG, RPC_ENDPOINT } from "@/config/foundation";
 
 const TokenLogo: React.FC<{ symbol: string; className?: string }> = ({
   symbol,
   className = "",
-}) => {
-  const logoMap: { [key: string]: string } = {
-    MINIDOGE: images.logo,
-    SOL: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png",
-    USDT: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB/logo.svg",
-    USDC: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png",
-  };
-
-  return (
-    <div className={`token-logo ${className}`}>
-      <img src={logoMap[symbol]} alt={symbol} className="rounded-full" />
-    </div>
-  );
-};
+}) => (
+  <div className={`token-logo ${className}`}>
+    <img
+      src={FOUNDATION_CONFIG.tokenLogos[symbol]}
+      alt={symbol}
+      className="rounded-full"
+    />
+  </div>
+);
 
 export const MinidogeAddress = ({
   ...props
@@ -87,11 +76,11 @@ export const MinidogeCopy = ({
 export const FoundationBalanceItem = ({
   tokenIcon = "",
   tokenName = "",
-  toeknBalances,
+  tokenBalance = "",
 }: {
   tokenIcon?: string;
   tokenName?: string;
-  toeknBalances?: any;
+  tokenBalance?: string;
 }) => {
   return (
     <div
@@ -111,13 +100,13 @@ export const FoundationBalanceItem = ({
       <span
         className={`${memesTextColor} text-lg !opacity-90 font-medium text-white uppercase`}
       >
-        {toeknBalances}
+        {tokenBalance}
       </span>
     </div>
   );
 };
 
-export default function FoundationBalance({ ...props }) {
+const FoundationBalance: React.FC = ({...props}) => {
   const { t } = useTranslation();
   const [balances, setBalances] = useState<{
     sol: number;
@@ -133,9 +122,8 @@ export default function FoundationBalance({ ...props }) {
       try {
         const connection = new Connection(RPC_ENDPOINT, {
           commitment: "confirmed",
-          wsEndpoint: RPC_ENDPOINT.replace("https", "wss"),
         });
-        const publicKey = new PublicKey(FOUNDATION_ADDRESS);
+        const publicKey = new PublicKey(FOUNDATION_CONFIG.address);
 
         // 获取 SOL 余额
         const solBalance = await connection.getBalance(publicKey);
@@ -155,12 +143,16 @@ export default function FoundationBalance({ ...props }) {
           const amount =
             tokenAccount.account.data.parsed.info.tokenAmount.uiAmount;
 
-          if (tokenMint === USDT_MINT) {
-            usdtBalance = amount;
-          } else if (tokenMint === USDC_MINT) {
-            usdcBalance = amount;
-          } else if (tokenMint === MINIDOGE_MINT) {
-            minidogeBalance = amount;
+          switch (tokenMint) {
+            case FOUNDATION_CONFIG.tokens.USDT:
+              usdtBalance = amount;
+              break;
+            case FOUNDATION_CONFIG.tokens.USDC:
+              usdcBalance = amount;
+              break;
+            case FOUNDATION_CONFIG.tokens.MINIDOGE:
+              minidogeBalance = amount;
+              break;
           }
         });
 
@@ -179,12 +171,11 @@ export default function FoundationBalance({ ...props }) {
 
     fetchBalances();
     const interval = setInterval(fetchBalances, 60000); // 每分钟更新一次
-
     return () => clearInterval(interval);
   }, []);
 
   const handleCopy = async () => {
-    await copy(FOUNDATION_ADDRESS, () => setIsModalOpen(true));
+    await copy(FOUNDATION_CONFIG.address, () => setIsModalOpen(true));
   };
 
   return (
@@ -212,36 +203,35 @@ export default function FoundationBalance({ ...props }) {
       <MemesCard className="bg-transparent !p-0 border border-white/10 overflow-hidden !opacity-100">
         <header className="p-6 sm:p-8 border-b border-white/10 flex flex-wrap items-center gap-3 sm:gap-4 justify-between bg-white/5">
           <div className="flex items-center gap-4 justify-between w-full sm:w-auto">
-            <span
-              className={`${memesTitleSize}  !text-xl md:!text-3xl lg:!text-4xl`}
-            >
-              {t("public.foundationAddr")}
-            </span>
-            <MinidogeCopy
-              {...props}
-              onClick={handleCopy}
-              className="sm:hidden"
-            />
+            <div className="flex items-center gap-4">
+              <span
+                className={`${memesTitleSize} !text-xl md:!text-3xl lg:!text-4xl`}
+              >
+                {t("public.foundationAddr")}
+              </span>
+              <Link to="/dao">
+                <MemesBtn type="default" className="!min-w-0 !px-4">
+                  DAO
+                </MemesBtn>
+              </Link>
+            </div>
+            <MinidogeCopy onClick={handleCopy} className="sm:hidden" {...props}/>
           </div>
 
           <div className="flex items-center gap-4">
             <MinidogeAddress
-              href={`https://solscan.io/account/${FOUNDATION_ADDRESS}`}
+              href={FOUNDATION_CONFIG.solscanUrl}
               target="_blank"
             >
-              {FOUNDATION_ADDRESS}
+              {FOUNDATION_CONFIG.address}
             </MinidogeAddress>
-            <MinidogeCopy
-              {...props}
-              onClick={handleCopy}
-              className="hidden sm:flex"
-            />
+            <MinidogeCopy onClick={handleCopy} className="hidden sm:flex" {...props}/>
           </div>
         </header>
         <main
           className={`p-6 sm:p-8 grid ${
             loading ? "" : "sm:grid-cols-2"
-          } gap-4 sm:gap-8 justify-items-center`}
+          } gap-4 justify-items-center`}
         >
           {loading ? (
             <div className="p-16">
@@ -252,28 +242,28 @@ export default function FoundationBalance({ ...props }) {
               <FoundationBalanceItem
                 tokenIcon="MINIDOGE"
                 tokenName="MINIDOGE"
-                toeknBalances={balances.minidoge.toLocaleString(undefined, {
+                tokenBalance={balances.minidoge.toLocaleString(undefined, {
                   maximumFractionDigits: 2,
                 })}
               />
               <FoundationBalanceItem
                 tokenIcon="SOL"
                 tokenName="SOL"
-                toeknBalances={balances.sol.toLocaleString(undefined, {
+                tokenBalance={balances.sol.toLocaleString(undefined, {
                   maximumFractionDigits: 4,
                 })}
               />
               <FoundationBalanceItem
                 tokenIcon="USDT"
                 tokenName="USDT"
-                toeknBalances={balances.usdt.toLocaleString(undefined, {
+                tokenBalance={balances.usdt.toLocaleString(undefined, {
                   maximumFractionDigits: 2,
                 })}
               />
               <FoundationBalanceItem
                 tokenIcon="USDC"
                 tokenName="USDC"
-                toeknBalances={balances.usdc.toLocaleString(undefined, {
+                tokenBalance={balances.usdc.toLocaleString(undefined, {
                   maximumFractionDigits: 2,
                 })}
               />
@@ -283,4 +273,6 @@ export default function FoundationBalance({ ...props }) {
       </MemesCard>
     </Fragment>
   );
-}
+};
+
+export default FoundationBalance;

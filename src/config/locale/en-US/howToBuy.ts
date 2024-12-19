@@ -1,4 +1,4 @@
-import { LINKS } from "@/config/links";
+import { LINKS } from '@/config/resources';
 
 export default {
   title: "How To Buy <b>$MINIDOGE</b>?",
