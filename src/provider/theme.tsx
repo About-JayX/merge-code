@@ -14,7 +14,7 @@ export default function Theme({ children }: { children?: React.ReactNode }) {
           }
         },
         token: {
-          
+          colorPrimary:"#FFC10B"
         },
       }}
     >
