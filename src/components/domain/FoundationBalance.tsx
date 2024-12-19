@@ -6,8 +6,9 @@ import { images } from "@/assets/images";
 import { copy } from "@/util";
 import Tgs from "../tgs";
 import { memesTextColor, memesTitleSize } from "./styles";
-import { MemesCard, MemesIcon } from "./index";
+import { MemesCard, MemesIcon, MemesBtn } from "./index";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const FOUNDATION_ADDRESS = "31svWAq2Z7ng6rcKQV2ZkT3bY1bHqgo2XptoiRyxKra9";
 const USDT_MINT = "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB";
@@ -160,11 +161,18 @@ export default function FoundationBalance() {
       <MemesCard className="bg-transparent !p-0 border border-white/10 overflow-hidden !opacity-100">
         <header className="p-6 sm:p-8 border-b border-white/10 flex flex-wrap items-center gap-3 sm:gap-4 justify-between bg-white/5">
           <div className="flex items-center gap-4 justify-between w-full sm:w-auto">
-            <span
-              className={`${memesTitleSize}  !text-xl md:!text-3xl lg:!text-4xl`}
-            >
-              Foundation Addr
-            </span>
+            <div className="flex items-center gap-4">
+              <span
+                className={`${memesTitleSize}  !text-xl md:!text-3xl lg:!text-4xl`}
+              >
+                Foundation Addr
+              </span>
+              <Link to="/dao">
+                <MemesBtn type="default" className="!min-w-0 !px-4">
+                  DAO
+                </MemesBtn>
+              </Link>
+            </div>
             <MemesIcon
               name="copy"
               className="!min-h-9 !min-w-9 !w-9 !h-9 sm:hidden"

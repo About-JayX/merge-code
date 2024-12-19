@@ -6,6 +6,7 @@ import { locale } from '@/config';
 import { Dropdown } from 'antd';
 import { memesTextColor, memesHover } from '@/components/domain/styles';
 import { Link } from 'react-router-dom';
+import { nav } from '@/config/nav';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -25,12 +26,6 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const nav = {
-    twitter_url: 'https://twitter.com/MiniDOGEtoken',
-    telegram_url: 'https://t.me/OfficialMiniDOGE',
-    tiktok_url: 'https://www.tiktok.com/@minidoge_official'
-  };
 
   return (
     <>
@@ -54,18 +49,18 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
             </Link>
           </Section>
           <div className="flex-1" />
-          {nav.twitter_url && (
-            <a href={nav.twitter_url} target="_blank" className={memesHover}>
+          {nav.twitter && (
+            <a href={nav.twitter} target="_blank" className={memesHover}>
               <MemesIcon className="text-white" name="twitter" />
             </a>
           )}
-          {nav.telegram_url && (
-            <a href={nav.telegram_url} target="_blank" className={memesHover}>
+          {nav.telegram && (
+            <a href={nav.telegram} target="_blank" className={memesHover}>
               <MemesIcon className="text-white" name="telegram" />
             </a>
           )}
-          {nav.tiktok_url && (
-            <a href={nav.tiktok_url} target="_blank" className={memesHover}>
+          {nav.tiktok && (
+            <a href={nav.tiktok} target="_blank" className={memesHover}>
               <MemesIcon className="text-white" name="tiktok" />
             </a>
           )}
