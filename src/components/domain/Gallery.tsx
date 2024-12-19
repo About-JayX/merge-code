@@ -3,7 +3,7 @@ import { IMAGES } from "@/config/resources";
 import { Section } from "./Section";
 import { Link } from "./Link.tsx";
 import { memesHover, memesTitleSize } from "./styles";
-import { section3 } from "@/config/shared/section3";
+import { gallery } from "@/config/shared/gallery.ts";
 
 export const Gallery = () => {
   const { t } = useTranslation();
@@ -11,9 +11,9 @@ export const Gallery = () => {
     <div className="flex flex-col gap-4 sm:gap-4 md:gap-8 xl:gap-16 items-center">
       <Section type="top">
         <div className="w-full flex flex-col">
-          {section3.title && (
+          {gallery.title && (
             <span className={`${memesTitleSize} text-center mb-8`}>
-              {section3.title.map((item, index) => (
+              {gallery.title.map((item, index) => (
                 <span
                   key={index}
                   className={item.status ? "text-[#FFAC03]" : ""}

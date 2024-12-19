@@ -1,6 +1,6 @@
 import { Section } from './Section';
 import { Button } from './Button.tsx';
-import { Card } from './Card.tsx';
+import { Card as LayoutCard } from './Card.tsx';
 import { Link } from './Link.tsx';
 import { Hero } from './Hero.tsx';
 import { Tweet } from './Tweet.tsx';
@@ -15,7 +15,7 @@ import Funds from "./Funds.tsx";
 
 export { Section };
 export { Button };
-export { Card };
+export { LayoutCard as Card };
 export { Link };
 export { Hero };
 export { Tweet };
@@ -43,7 +43,7 @@ export default function Domain({ ...props }) {
       </Section>
       {pageSwitch.home.foundationAddr && (
         <Section type="top">
-          <Funds {...props}/>
+          <Funds {...props} />
         </Section>
       )}
     </div>

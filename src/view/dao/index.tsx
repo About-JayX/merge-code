@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Table, Modal, Button, Card, Tabs } from 'antd';
+import { Typography, Table, Modal, Button, Tabs } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { Card } from '@/components/domain';
+import { Card as LayoutCard } from '@/components/domain';
 import { QuestionCircleOutlined, FileProtectOutlined } from '@ant-design/icons';
 import { FOUNDATION_CONFIG } from '@/config/foundation';
 import { Connection, PublicKey } from '@solana/web3.js';
@@ -349,7 +349,7 @@ const DaoPage: React.FC = () => {
       {/* 表格内容 */}
       <Tabs defaultActiveKey="1">
         <Tabs.TabPane tab="捐赠记录" key="1">
-          <Card>
+          <LayoutCard>
             <Table 
               dataSource={donations} 
               columns={donationColumns} 
@@ -362,11 +362,11 @@ const DaoPage: React.FC = () => {
               }}
               scroll={{ x: 'max-content' }}
             />
-          </Card>
+          </LayoutCard>
         </Tabs.TabPane>
         
         <Tabs.TabPane tab="基金会成员" key="2">
-          <Card>
+          <LayoutCard>
             <Table 
               dataSource={members} 
               columns={memberColumns} 
@@ -379,7 +379,7 @@ const DaoPage: React.FC = () => {
               }}
               scroll={{ x: 'max-content' }}
             />
-          </Card>
+          </LayoutCard>
         </Tabs.TabPane>
       </Tabs>
 

@@ -11,7 +11,8 @@ import {
   memesTitleSize,
 } from "./styles";
 import { Button } from "./index";
-import { Card } from "./Icon";
+import { Card as IconCard } from "./Icon";
+import { Card as LayoutCard } from "./Card";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { FOUNDATION_CONFIG, RPC_ENDPOINT } from "@/config/foundation";
@@ -62,7 +63,7 @@ export const MinidogeCopy = ({
           background: props.button?.background,
         }}
       />
-      <Card
+      <IconCard
         name="copy"
         className=" shadow-[0px_0px_8px_4px_rgba(0,0,0,0.25)_inset] min-w-[calc(48px-6px)] min-h-[calc(48px-6px)]  sm:min-w-[calc(56px-6px)] sm:min-h-[calc(56px-6px)]"
         style={{
@@ -201,7 +202,7 @@ const Funds: React.FC = ({...props}) => {
           </span>
         </div>
       </Modal>
-      <Card className="bg-transparent !p-0 border border-white/10 overflow-hidden !opacity-100">
+      <LayoutCard className="bg-transparent !p-0 border border-white/10 overflow-hidden !opacity-100">
         <header className="p-6 sm:p-8 border-b border-white/10 flex flex-wrap items-center gap-3 sm:gap-4 justify-between bg-white/5">
           <div className="flex items-center gap-4 justify-between w-full sm:w-auto">
             <div className="flex items-center gap-4">
@@ -271,7 +272,7 @@ const Funds: React.FC = ({...props}) => {
             </>
           )}
         </main>
-      </Card>
+      </LayoutCard>
     </Fragment>
   );
 };
