@@ -21,6 +21,7 @@ import {
   memesHover,
 } from "./styles";
 import { pageSwitch } from "@/config/pageSwitch";
+import Exchange from "./exchange";
 
 export const Section = ({
   children,
@@ -597,6 +598,9 @@ export default function Domain({ ...props }) {
   return (
     <div className="flex flex-col gap-12 sm:gap-24 md:gap-28 xl:gap-28">
       <MemesHome {...props} />
+      <Section type="bottom">
+        <Exchange {...props} />
+      </Section>
       <Section1 {...props} />
       <Section2 {...props} />
       <Section3 {...props} />
@@ -606,7 +610,7 @@ export default function Domain({ ...props }) {
       </Section>
       {pageSwitch.home.foundationAddr && (
         <Section type="top">
-          <FoundationBalance />
+          <FoundationBalance {...props}/>
         </Section>
       )}
     </div>
