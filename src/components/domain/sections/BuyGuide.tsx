@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { Section } from "./Section";
-import { Card } from "./Card.tsx";
-import Icon from "../icon";
-import { memesTextColor, memesTextSize, memesTitleSize } from "./styles";
+import { Section } from "../common/Section.tsx";
+import { Card } from "../common/Card.tsx";
+import Icon from "../../icon.tsx";
+import { memesTextColor, memesTextSize, memesTitleSize } from "../styles.ts";
 
 export const BuyGuide = ({ ...props }) => {
   const { t } = useTranslation();

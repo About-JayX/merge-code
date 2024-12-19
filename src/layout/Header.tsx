@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Section } from '@/components/domain';
-import { Card as IconCard } from '@/components/domain/Icon';
+import { Card as IconCard } from '@/components/domain/common/Icon.tsx';
 import { images } from '@/assets/images';
 import { locale } from '@/config';
 import { Dropdown } from 'antd';

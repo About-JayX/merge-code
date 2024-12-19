@@ -3,19 +3,19 @@ import { Connection, PublicKey } from "@solana/web3.js";
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { Spin, Modal } from "antd";
 import { copy } from "@/util";
-import Tgs from "../tgs";
+import Tgs from "../../tgs";
 import {
   memesHover,
   memesTextColor,
   memesTextSize,
   memesTitleSize,
-} from "./styles";
-import { Button } from "./index";
-import { Card as LayoutCard } from "./Card";
-import { MinidogeAddress, MinidogeCopy } from "./AddressCard";
+} from "../styles.ts";
+import { Button } from "../index.tsx";
+import { Card as LayoutCard } from "../common/Card.tsx";
+import { MinidogeAddress, MinidogeCopy } from "../common/AddressCard.tsx";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { FOUNDATION_CONFIG, RPC_ENDPOINT } from "@/config/foundation";
+import { FOUNDATION_CONFIG, RPC_ENDPOINT } from "@/config/foundation.ts";
 
 const TokenLogo: React.FC<{ symbol: string; className?: string }> = ({
   symbol,

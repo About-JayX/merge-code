@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { IMAGES } from "@/config/resources";
-import { Card } from "./Card.tsx";
-import { Button } from "./Button.tsx";
-import { memesHover, memesTextSize, memesTitleSize } from "./styles";
+import { IMAGES } from "@/config/resources.ts";
+import { Card } from "../common/Card.tsx";
+import { Button } from "../common/Button.tsx";
+import { memesHover, memesTextSize, memesTitleSize } from "../styles.ts";
 
 export const About = () => {
   const { t } = useTranslation();

@@ -1,17 +1,17 @@
-import { Section } from './Section';
-import { Button } from './Button.tsx';
-import { Card as LayoutCard } from './Card.tsx';
-import { Link } from './Link.tsx';
-import { Home } from './Home.tsx';
-import { Tweet } from './Tweet.tsx';
-import { Intro } from './Intro.tsx';
-import { Gallery } from './Gallery.tsx';
-import { BuyGuide } from './BuyGuide.tsx';
-import { About } from './About';
-import { StarrySky } from './StarrySky';
+import { Section } from './common/Section.tsx';
+import { Button } from './common/Button.tsx';
+import { Card as LayoutCard } from './common/Card.tsx';
+import { Link } from './common/Link.tsx';
+import { Home } from './sections/Home.tsx';
+import { Tweet } from './sections/Tweet.tsx';
+import { Intro } from './sections/Intro.tsx';
+import { Gallery } from './sections/Gallery.tsx';
+import { BuyGuide } from './sections/BuyGuide.tsx';
+import { About } from './sections/About.tsx';
+import { Space } from './common/Space.tsx';
 import { pageSwitch } from "@/config/pageSwitch";
-import Listings from "./Listings.tsx";
-import Funds from "./Funds.tsx";
+import Listings from "./sections/Listings.tsx";
+import Funds from "./sections/Funds.tsx";
 
 export { Section };
 export { Button };
@@ -23,7 +23,7 @@ export { Intro };
 export { Gallery };
 export { BuyGuide };
 export { About };
-export { StarrySky };
+export { Space };
 
 export default function Domain({ ...props }) {
   if (Object.keys(props).length === 0) return null;

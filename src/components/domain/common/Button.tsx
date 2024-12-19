@@ -1,4 +1,4 @@
-import { memesSize, memesBntColor, memesHover } from "./styles";
+import { memesSize, memesBntColor, memesHover } from "../styles.ts";
 
 export const Button = ({
   children,

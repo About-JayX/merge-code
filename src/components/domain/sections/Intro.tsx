@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { IMAGES } from "@/config/resources";
-import { Section } from "./Section";
-import { Button } from "./Button.tsx";
-import { Link } from "./Link.tsx";
-import { memesHover, memesTextSize, memesTitleSize } from "./styles";
+import { IMAGES } from "@/config/resources.ts";
+import { Section } from "../common/Section.tsx";
+import { Button } from "../common/Button.tsx";
+import { Link } from "../common/Link.tsx";
+import { memesHover, memesTextSize, memesTitleSize } from "../styles.ts";
 
 export const Intro = ({ ...props }) => {
   const { t } = useTranslation();

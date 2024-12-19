@@ -1,5 +1,5 @@
-import Icon from "../icon";
-import { memesSize } from "./styles";
+import Icon from "../../icon.tsx";
+import { memesSize } from "../styles.ts";
 
 export const Card = ({
   className = "",

@@ -1,4 +1,4 @@
-export const StarrySky = () => {
+export const Space = () => {
   return (
     <div className="starry-background">
       <div className="stars">

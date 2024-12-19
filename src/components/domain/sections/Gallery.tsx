@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { IMAGES } from "@/config/resources";
-import { Section } from "./Section";
-import { Link } from "./Link.tsx";
-import { memesHover, memesTitleSize } from "./styles";
+import { IMAGES } from "@/config/resources.ts";
+import { Section } from "../common/Section.tsx";
+import { Link } from "../common/Link.tsx";
+import { memesHover, memesTitleSize } from "../styles.ts";
 import { gallery } from "@/config/shared/gallery.ts";
 
 export const Gallery = () => {

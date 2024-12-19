@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import exchange from "@/config/shared/listings.ts";
 import { useTranslation } from "react-i18next";
-import { Button } from ".";
+import { Button } from "../index.tsx";
 
 export default function Listings() {
   const { t } = useTranslation();

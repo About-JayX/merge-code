@@ -1,9 +1,9 @@
 import React from "react";
-import { Card as IconCard } from "./Icon";
+import { Card as IconCard } from "./Icon.tsx";
 import {
   memesHover,
   memesTextSize,
-} from "./styles";
+} from "../styles.ts";
 
 export const MinidogeAddress = ({
   ...props

@@ -2,15 +2,15 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Ellipsis } from "antd-mobile";
 import { Modal } from "antd";
-import { FOUNDATION_CONFIG } from "@/config/foundation";
-import { IMAGES } from "@/config/resources";
+import { FOUNDATION_CONFIG } from "@/config/foundation.ts";
+import { IMAGES } from "@/config/resources.ts";
 import { copy } from "@/util";
-import { Section } from "./Section";
-import { Button } from "./Button.tsx";
-import { Link } from "./Link.tsx";
-import { MinidogeAddress, MinidogeCopy } from "./AddressCard.tsx";
-import Tgs from "../tgs";
-import { memesTextColor, memesTitleSize } from "./styles";
+import { Section } from "../common/Section.tsx";
+import { Button } from "../common/Button.tsx";
+import { Link } from "../common/Link.tsx";
+import { MinidogeAddress, MinidogeCopy } from "../common/AddressCard.tsx";
+import Tgs from "../../tgs";
+import { memesTextColor, memesTitleSize } from "../styles.ts";
 
 export const Home = ({ ...props }) => {
   const { t } = useTranslation();

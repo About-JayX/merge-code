@@ -1,4 +1,4 @@
-import { memesHover } from "./styles";
+import { memesHover } from "../styles.ts";
 
 export const Card = ({
   className = "",
