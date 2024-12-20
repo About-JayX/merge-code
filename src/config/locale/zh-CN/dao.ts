@@ -41,7 +41,7 @@ export default {
   votingRightsExamples: '投票权示例',
   votingExample1: '捐赠2个NFT名额 = 1票（基础票）',
   votingExample2: '捐赠6个NFT名额 = 2票（1个基础票 + 1个额外票）',
-  votingExample3: '捐赠16个NFT名额 = 4票（1个基础票 + 3个���外票，达到上限）',
+  votingExample3: '捐赠16个NFT名额 = 4票（1个基础票 + 3个额外票，达到上限）',
 
   // Participation Process
   participationProcess: '参与流程',

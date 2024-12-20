@@ -7,7 +7,7 @@ export const TableCard = ({
   [key: string]: any;
 }) => {
   return (
-    <div className={`rounded-2xl bg-[#0F0F0F] p-6 ${className}`}>
+    <div className={`rounded-2xl ${className}`}>
       {children}
     </div>
   );

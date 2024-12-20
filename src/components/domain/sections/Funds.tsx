@@ -17,19 +17,6 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { FOUNDATION_CONFIG, RPC_ENDPOINT } from "@/config/foundation.ts";
 
-const TokenLogo: React.FC<{ symbol: string; className?: string }> = ({
-  symbol,
-  className = "",
-}) => (
-  <div className={`token-logo ${className}`}>
-    <img
-      src={FOUNDATION_CONFIG.tokenLogos[symbol]}
-      alt={symbol}
-      className="rounded-full"
-    />
-  </div>
-);
-
 export const FoundationBalanceItem = ({
   tokenIcon = "",
   tokenName = "",
@@ -44,10 +31,13 @@ export const FoundationBalanceItem = ({
       className={`bg-white/5 p-4 sm:p-5 lg:p-8 rounded-xl flex items-center justify-between w-full ${memesHover}`}
     >
       <div className="grid grid-cols-[auto,1fr] gap-4 items-center">
-        <TokenLogo
-          symbol={tokenIcon}
-          className="w-10 h-10 rounded-full p-[3px] bg-white/10"
-        />
+        <div className="w-10 h-10 rounded-full p-[3px] bg-white/10">
+          <img
+            src={FOUNDATION_CONFIG.tokenLogos[tokenIcon]}
+            alt={tokenIcon}
+            className="rounded-full"
+          />
+        </div>
         <span
           className={`${memesTextColor} text-lg !opacity-90 font-medium text-white uppercase hidden lg:block`}
         >
@@ -63,7 +53,7 @@ export const FoundationBalanceItem = ({
   );
 };
 
-const Funds: React.FC = ({...props}) => {
+const Funds: React.FC = ({ ...props }) => {
   const { t } = useTranslation();
   const [balances, setBalances] = useState<{
     sol: number;
@@ -82,8 +72,8 @@ const Funds: React.FC = ({...props}) => {
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -175,18 +165,23 @@ const Funds: React.FC = ({...props}) => {
             // 移动端布局
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between w-full">
-                <span className={`${memesTitleSize} !text-xl md:!text-3xl lg:!text-4xl`}>
+                <span
+                  className={`${memesTitleSize} !text-xl md:!text-3xl lg:!text-4xl`}
+                >
                   {t("public.foundationAddr")}
                 </span>
                 <div className="flex items-center gap-4">
                   <Link to="/dao">
-                    <Button type="default" className="!min-w-0 !px-4 h-[40px] flex items-center">
+                    <Button
+                      type="default"
+                      className="!min-w-0 !px-4 h-[40px] flex items-center"
+                    >
                       DAO
                     </Button>
                   </Link>
-                  <MinidogeCopy 
-                    onClick={handleCopy} 
-                    className="!p-[6px]" 
+                  <MinidogeCopy
+                    onClick={handleCopy}
+                    className="!p-[6px]"
                     {...props}
                   />
                 </div>
@@ -199,8 +194,8 @@ const Funds: React.FC = ({...props}) => {
                 target="_blank"
                 className="w-full"
                 style={{
-                  boxShadow: '0 4px 12px rgba(255, 172, 3, 0.1)',
-                  backdropFilter: 'blur(4px)',
+                  boxShadow: "0 4px 12px rgba(255, 172, 3, 0.1)",
+                  backdropFilter: "blur(4px)",
                 }}
               />
             </div>
@@ -208,7 +203,9 @@ const Funds: React.FC = ({...props}) => {
             // PC端布局
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-4">
-                <span className={`${memesTitleSize} !text-xl md:!text-3xl lg:!text-4xl`}>
+                <span
+                  className={`${memesTitleSize} !text-xl md:!text-3xl lg:!text-4xl`}
+                >
                   {t("public.foundationAddr")}
                 </span>
                 <Link to="/dao">
@@ -227,14 +224,14 @@ const Funds: React.FC = ({...props}) => {
                     target="_blank"
                     className="w-full"
                     style={{
-                      boxShadow: '0 4px 12px rgba(255, 172, 3, 0.1)',
-                      backdropFilter: 'blur(4px)',
+                      boxShadow: "0 4px 12px rgba(255, 172, 3, 0.1)",
+                      backdropFilter: "blur(4px)",
                     }}
                   />
                 </div>
-                <MinidogeCopy 
-                  onClick={handleCopy} 
-                  className="!p-[6px]" 
+                <MinidogeCopy
+                  onClick={handleCopy}
+                  className="!p-[6px]"
                   {...props}
                 />
               </div>

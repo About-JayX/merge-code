@@ -39,15 +39,22 @@ export const Home = ({ ...props }) => {
           </span>
         </div>
       </Modal>
-      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr),auto] gap-12 sm:gap-16 md:gap-6 xl:gap-12 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr),auto] gap-12 sm:gap-16 md:gap-6 xl:gap-12 items-center justify-items-center">
         <div className="flex flex-col w-full">
           <Section type="left">
-            <p className={`${memesTitleSize} text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all`}>
+            <p
+              className={`${memesTitleSize} text-4xl sm:text-6xl md:text-4xl xl:text-7xl font-bold whitespace-pre-wrap break-all !leading-none`}
+            >
               {home.title.map((text: any, index: number) => (
                 <span
                   key={index}
-                  style={text.status ? { fontSize: "50%", opacity: 0.8 } : undefined}
-                  className={text.status ? memesTextColor : ""}
+                  className={
+                    text.status
+                      ? `${memesTextColor} ${
+                          text.status ? "text-[0.5em] opacity-80" : ""
+                        }`
+                      : ""
+                  }
                 >
                   {text.content}
                 </span>
@@ -87,7 +94,7 @@ export const Home = ({ ...props }) => {
         </div>
         {props.banner_url && (
           <Section type="right">
-            <div className="sm:w-[22rem] sm:h-[22rem] xl:w-[26rem] xl:h-[26rem] transition-transform duration-300 hover:scale-105">
+            <div className="md:w-[17rem] md:h-[17rem] lg:w-[22rem] lg:h-[22rem] xl:w-[26rem] xl:h-[26rem] transition-transform duration-300 hover:scale-105">
               <Link>
                 <img
                   src={IMAGES.SECTIONS.BANNER}
@@ -101,4 +108,4 @@ export const Home = ({ ...props }) => {
       </div>
     </>
   );
-}; 
+};

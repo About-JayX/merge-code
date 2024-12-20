@@ -26,7 +26,7 @@ const Header: React.FC = () => {
   return (
     <>
       <header className={`fixed top-0 left-0 w-full z-50 ${isScrolled ? 'bg-black/10 backdrop-blur-sm' : ''}`}>
-        <div className="p-3 sm:p-8 md:pt-8 md:px-16 flex gap-1 sm:gap-4 items-center w-full max-w-screen-xl mx-auto">
+        <div className="p-3 sm:p-8 md:pt-8 md:px-8 flex gap-1 sm:gap-4 items-center w-full max-w-screen-xl mx-auto">
           <Section type="left" className={`${memesHover}`}>
             <Link to="/" className="grid grid-cols-[48px,auto] sm:grid-cols-[56px,auto] md:grid-cols-[64px,auto] items-center gap-3">
               <picture>
@@ -79,7 +79,6 @@ const Header: React.FC = () => {
           </div>
         </div>
       </header>
-      <div className="w-full h-[120px] sm:h-[160px] md:h-[180px]" />
     </>
   );
 };
