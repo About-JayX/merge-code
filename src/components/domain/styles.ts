@@ -2,7 +2,7 @@ export const memesSize =
   "min-w-9 min-h-9 sm:min-w-12 sm:min-h-12 xl:min-w-14 xl:min-h-14";
 
 export const memesTitleSize =
-  "text-2xl sm:text-4xl xl:text-6xl font-bold orbitron";
+  "text-2xl sm:text-4xl xl:text-5xl font-bold orbitron";
 
 export const memesSubTitleSize =
   "text-2xl sm:text-3xl xl:text-4xl font-normal orbitron";

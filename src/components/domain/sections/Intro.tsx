@@ -9,21 +9,21 @@ export const Intro = ({ ...props }) => {
   const { t } = useTranslation();
   const section2: any = t("section2", { returnObjects: true });
   return (
-    <div className="grid sm:grid-cols-[1fr,1fr] xl:grid-cols-[1fr,493px] items-center gap-6 sm:gap-6 xl:gap-16">
+    <div className="grid sm:grid-cols-[1fr,1fr] xl:grid-cols-[1fr,493px] items-center gap-5 sm:gap-6 xl:gap-16">
       <Section type="left">
         <div className="flex flex-col">
-          <span className={`${memesTitleSize} max-w-md`}>
+          <span className={`${memesTitleSize} sm:!text-2xl  md:!text-3xl lg:!text-4xl`}>
             {section2?.title}
           </span>
           <span
-            className={`${memesTextSize} mt-4 sm:mt-4 xl:mt-8 max-w-xl`}
+            className={`${memesTextSize} mt-3 sm:mt-6 xl:mt-7 max-w-xl`}
             dangerouslySetInnerHTML={{ __html: section2?.text }}
           ></span>
           {section2.bntText && (
             <a
               href={section2?.bntUrl}
               target="_blank"
-              className={`mt-4 sm:mt-4 xl:mt-16 ${memesHover}`}
+              className={`mt-3 sm:mt-5 xl:mt-14 ${memesHover}`}
             >
               <Button {...props}>{section2?.bntText}</Button>
             </a>

@@ -7,6 +7,7 @@ import { gallery } from "@/config/shared/gallery.ts";
 import howToBuy from "./buyGuide.ts";
 import about from "./about";
 import footer from "./footer";
+import dao from "./dao";
 
 export default {
   translation: {
@@ -21,5 +22,6 @@ export default {
     footer,
     public: _public,
     message,
+    dao
   },
 }; 
