@@ -1,5 +1,5 @@
 export default {
   buy: "Beli $MINIDOGE", // Buy $MINIDOGE
   loadMore: "muat lebih banyak", // More
-  foundationAddr: "Alamat Yayasan", // Foundation Addr
+  foundationAddr: "Dompet FDN", // FDN Wallet
 };
