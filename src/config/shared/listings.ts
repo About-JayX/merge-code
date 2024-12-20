@@ -11,6 +11,7 @@ import CoingeckoPng from "@/assets/exchange/coingecko.png";
 import OkxPng from "@/assets/exchange/okx.png";
 import CoinmarketcapPng from "@/assets/exchange/coinmarketcap.png";
 import GatePng from "@/assets/exchange/gate.png";
+import DextoolsPng from "@/assets/exchange/dextools.png";
 export default [
   {
     image: DexscreenerPng,
@@ -35,6 +36,10 @@ export default [
   {
     image: PumpSvg,
     url: "https://pump.fun/coin/8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu",
+  },
+  {
+    image: DextoolsPng,
+    url: "https://www.dextools.io/app/en/solana/pair-explorer/CFWwTFEyr4ai9tMPBtE21JSewhum3PMyTALUF9x2B5eJ?t=1734661824100",
   },
   // {
   //   image: HibtSvg,
