@@ -1,21 +1,21 @@
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Modal } from "antd";
-import { FOUNDATION_CONFIG } from "@/config/foundation.ts";
-import { IMAGES } from "@/config/resources.ts";
-import { Section } from "../common/Section.tsx";
-import { Button } from "../common/Button.tsx";
-import { Link } from "../common/Link.tsx";
-import { AddressCard } from "../common/AddressCard.tsx";
-import Tgs from "../../tgs";
-import { memesTextColor, memesTitleSize } from "../styles.ts";
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Modal } from 'antd'
+import { FOUNDATION_CONFIG } from '@/config/foundation.ts'
+import { IMAGES } from '@/config/resources.ts'
+import { Section } from '../common/Section.tsx'
+import { Button } from '../common/Button.tsx'
+import { Link } from '../common/Link.tsx'
+import { AddressCard } from '../common/AddressCard.tsx'
+import Tgs from '../../tgs'
+import { memesTextColor, memesTitleSize } from '../styles.ts'
 
 export const Home = ({ ...props }) => {
-  const { t } = useTranslation();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { t } = useTranslation()
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const home: any = t("home", { returnObjects: true });
-  const publics: any = t("public", { returnObjects: true });
+  const home: any = t('home', { returnObjects: true })
+  const publics: any = t('public', { returnObjects: true })
 
   return (
     <>
@@ -31,11 +31,11 @@ export const Home = ({ ...props }) => {
             <Tgs
               name="success"
               className="!w-24 !h-24 sm:!w-32 sm:!h-32 md:!w-40 md:!h-40"
-              onChange={(value) => isModalOpen && setIsModalOpen(!value)}
+              onChange={value => isModalOpen && setIsModalOpen(!value)}
             />
           )}
           <span className="text-lg sm:text-xl md:text-2xl font-bold mt-2">
-            {t("message.copy.success")}
+            {t('message.copy.success')}
           </span>
         </div>
       </Modal>
@@ -51,9 +51,9 @@ export const Home = ({ ...props }) => {
                   className={
                     text.status
                       ? `${memesTextColor} ${
-                          text.status ? "text-[0.5em] opacity-80" : ""
+                          text.status ? 'text-[0.5em] opacity-80' : ''
                         }`
-                      : ""
+                      : ''
                   }
                 >
                   {text.content}
@@ -68,10 +68,10 @@ export const Home = ({ ...props }) => {
                   key={index}
                   className={`${
                     text.highlight
-                      ? memesTextColor + " font-bold"
+                      ? memesTextColor + ' font-bold'
                       : text.special
-                      ? "text-[#FFC10B] font-semibold"
-                      : ""
+                      ? 'text-[#FFC10B] font-semibold'
+                      : ''
                   }`}
                 >
                   {text.content}
@@ -107,5 +107,5 @@ export const Home = ({ ...props }) => {
         )}
       </div>
     </>
-  );
-};
+  )
+}

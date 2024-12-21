@@ -8,6 +8,7 @@ import {
 } from '@/config/foundation'
 import { parseTransaction, getTokenType } from '@/utils/transactionParser'
 import { getList } from '@/api'
+import { calc_VOTE_NFT } from '@/util'
 
 export interface TokenBalance {
   mint: string
@@ -155,8 +156,15 @@ const useFoundationMembers = (): UseFoundationMembersResult => {
             const key = ADDRESS_TOKEN[k] ? ADDRESS_TOKEN[k] : 'MINIDOGE'
             data[key] = o[k]
           }
+          const { votes, nftCount } = calc_VOTE_NFT(data)
+
           item.donationSummary = data
+          item.votes = votes
+          item.nftCount = nftCount
         }
+
+        console.log(item, 'item')
+
         return item
       })
       setMembers(memberList)
