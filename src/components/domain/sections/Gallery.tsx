@@ -5,8 +5,8 @@ import { memesHover, memesTitleSize } from "../styles.ts";
 import { gallery } from "@/config/shared/gallery.ts";
 
 export const GalleryItem = ({ data = [], ...props }: { data?: any[] }) =>
-  data.map((item) => (
-    <Link {...props}>
+  data.map((item, index) => (
+    <Link key={`gallery-item-${index}`} {...props}>
       <div className={`aspect-square ${memesHover}`}>
         <img
           src={item}

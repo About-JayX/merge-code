@@ -1,7 +1,7 @@
 export default {
   buy: "$MINIDOGE kaufen",
   loadMore: "Mehr",
-  foundationAddr: "<span class='text-[#FFAC03]'>Multi-Signatur-Wallet der Stiftung</span>",
+  foundationAddr: "<span class='text-[#FFAC03]'>Stiftungs-Wallet</span>",
   foundationAddrTitle: "<span class='text-[#FFAC03]'>$MINIDOGE CTO Stiftung - <i>Spendenrichtlinien</i></span>",
   pleaseNote: "<span class='notice-text'>Bitte beachten</span>",
   nftAirdrops: "<span class='feature-text'>NFT-Airdrop Details</span>",

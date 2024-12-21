@@ -1,7 +1,7 @@
 export default {
   buy: "$MINIDOGE を購入",
   loadMore: "もっと見る",
-  foundationAddr: "<span class='text-[#FFAC03]'>財団マルチシグウォレット</span>",
+  foundationAddr: "<span class='text-[#FFAC03]'>財団ウォレット</span>",
   foundationAddrTitle: "<span class='text-[#FFAC03]'>$MINIDOGE CTO 財団 - <i>寄付ガイドライン</i></span>",
   pleaseNote: "<span class='notice-text'>ご注意</span>",
   nftAirdrops: "<span class='feature-text'>NFTエアドロップ詳細</span>",

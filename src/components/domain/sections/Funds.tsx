@@ -13,7 +13,7 @@ import {
 } from "../styles.ts";
 import { Button } from "../index.tsx";
 import { Card as LayoutCard } from "../common/Card.tsx";
-import { MinidogeAddress, MinidogeCopy } from "../common/AddressCard.tsx";
+import { AddressDisplay, CopyButton } from "../common/AddressCard.tsx";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { FOUNDATION_CONFIG, RPC_ENDPOINT } from "@/config/foundation.ts";
@@ -203,14 +203,14 @@ const Funds: React.FC = ({ ...props }) => {
                       DAO
                     </Button>
                   </Link>
-                  <MinidogeCopy
+                  <CopyButton
                     onClick={handleCopy}
                     className="!p-[6px]"
                     {...props}
                   />
                 </div>
               </div>
-              <MinidogeAddress
+              <AddressDisplay
                 address={FOUNDATION_CONFIG.address}
                 isMobile={isMobile}
                 onClick={handleCopy}
@@ -241,7 +241,7 @@ const Funds: React.FC = ({ ...props }) => {
               </div>
               <div className="flex items-center gap-4 flex-1 max-w-[500px] justify-end">
                 <div className="flex-1">
-                  <MinidogeAddress
+                  <AddressDisplay
                     address={FOUNDATION_CONFIG.address}
                     isMobile={isMobile}
                     onClick={handleCopy}
@@ -254,7 +254,7 @@ const Funds: React.FC = ({ ...props }) => {
                     }}
                   />
                 </div>
-                <MinidogeCopy
+                <CopyButton
                   onClick={handleCopy}
                   className="!p-[6px]"
                   {...props}

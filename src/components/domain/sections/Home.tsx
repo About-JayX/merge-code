@@ -6,7 +6,7 @@ import { IMAGES } from "@/config/resources.ts";
 import { Section } from "../common/Section.tsx";
 import { Button } from "../common/Button.tsx";
 import { Link } from "../common/Link.tsx";
-import { ContractAddress } from "../common/AddressCard.tsx";
+import { AddressCard } from "../common/AddressCard.tsx";
 import Tgs from "../../tgs";
 import { memesTextColor, memesTitleSize } from "../styles.ts";
 
@@ -85,7 +85,7 @@ export const Home = ({ ...props }) => {
               <a href={home.buyUrl} target="_blank">
                 <Button>{publics.buy}</Button>
               </a>
-              <ContractAddress
+              <AddressCard
                 address={FOUNDATION_CONFIG.tokens.MINIDOGE}
                 onCopySuccess={() => setIsModalOpen(true)}
               />

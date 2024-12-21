@@ -1,44 +1,63 @@
-# MINIDOGE 多语言网站
+# MINIDOGE Web Frontend
 
-## 项目介绍
+MINIDOGE Web Frontend 是一个基于 React + Vite + TypeScript 构建的现代化 Web 应用程序。
 
-这是一个基于 React + TypeScript + i18n 的多语言网站项目，支持 20 种语言。
+## 技术栈
 
-## 支持的语言
-
-- 英语 (en-US)
-- 简体中文 (zh-CN)
-- 繁体中文 (zh-HK)
-- 日语 (ja-JP)
-- 韩语 (ko-KR)
-- 马来语 (ms-MY)
-- 印尼语 (id-ID)
-- 菲律宾语 (fil-PH)
-- 泰语 (th-TH)
-- 越南语 (vi-VN)
-- 阿拉伯语 (ar-SA)
-- 波斯语 (fa-IR)
-- 印地语 (hi-IN)
-- 土耳其语 (tr-TR)
-- 俄语 (ru-RU)
-- 法语 (fr-FR)
-- 德语 (de-DE)
-- 葡萄牙语 (pt-BR)
-- 西班牙语 (es-ES)
-- 意大利语 (it-IT)
+- **框架**: React 18
+- **构建工具**: Vite 5
+- **语言**: TypeScript 5
+- **样式**: TailwindCSS + PostCSS
+- **UI 组件**: Ant Design + Ant Design Mobile
+- **状态管理**: React Hooks
+- **国际化**: i18next
+- **Web3**: @solana/web3.js + @solana/spl-token
 
 ## 项目结构
 
 ```
-src/config/
-├── index.ts          # 主配置文件
-├── links.ts          # 外部链接配置
-├── nav.ts            # 导航菜单配置
-├── shared/           # 共享配置
-└── locale/           # 多语言翻译文件
+minidoge-web-frontend/
+├── src/                    # 源代码目录
+│   ├── assets/            # 静态资源
+│   ├── components/        # 组件
+│   ├── config/           # 配置文件
+│   ├── hooks/            # 自定义 Hooks
+│   ├── i18n/             # 国际化
+│   ├── layout/           # 布局组件
+│   ├── provider/         # Context Providers
+│   ├── router/           # 路由配置
+│   ├── store/            # 状态管理
+│   ├── styles/           # 全局样式
+│   ├── types/            # TypeScript 类型定义
+│   ├── utils/            # 工具函数
+│   ├── view/             # 页面视图
+│   ├── App.tsx           # 应用入口组件
+│   └── main.tsx          # 应用入口文件
+├── public/               # 公共资源
+├── scripts/              # 构建脚本
+├── docs/                 # 项目文档
+├── index.html           # HTML 模板
+├── package.json         # 项目依赖
+├── tsconfig.json        # TypeScript 配置
+├── vite.config.ts       # Vite 配置
+└── tailwind.config.js   # TailwindCSS 配置
 ```
 
+## 主要功能
+
+- 多语言支持 (20+ 种语言)
+- 暗色/亮色主题切换
+- 响应式设计
+- Web3 钱包集成
+- 基金会多签钱包管理
+- DAO 治理系统
+
 ## 开发指南
+
+### 环境要求
+
+- Node.js >= 18.19.0
+- Yarn >= 1.22.19
 
 ### 安装依赖
 
@@ -46,46 +65,92 @@ src/config/
 yarn install
 ```
 
-### 开发模式
+### 开发服务器
 
 ```bash
 yarn dev
 ```
 
-### 构建项目
+### 构建生产版本
 
 ```bash
 yarn build
 ```
 
+### 代码检查
+
+```bash
+yarn lint
+```
+
+## 部署
+
+项目使用 Cloudflare Pages 进行部署。每次推送到主分支时会自动触发部署流程。
+
+### 部署配置
+
+- 构建命令: `yarn build`
+- 输出目录: `dist`
+- 环境变量: 参考 `.env.example`
+
+## 国际化
+
+项目使用 i18next 进行国际化管理，支持以下语言：
+
+- 英语 (en-US)
+- 简体中文 (zh-CN)
+- 繁体中文 (zh-HK)
+- 日语 (ja-JP)
+- 韩语 (ko-KR)
+- 俄语 (ru-RU)
+- 等 20+ 种语言
+
 ### 添加新语言
 
-1. 在 `src/config/locale` 目录下创建新的语言目录
-2. 复制完整的翻译文件结构
-3. 在 `src/config/index.ts` 中添加语言支持配置
+1. 在 `src/config/locale` 创建新的语言目录
+2. 复制现有语言文件并翻译
+3. 在 `src/config/index.ts` 中注册新语言
 
-### 修改翻译
+## 主题定制
 
-直接修改对应语言目录下的翻译文件，注意保持以下规范：
+项目支持暗色和亮色主题，主题配置在 `index.html` 的 CSS 变量中定义：
 
-- 保持 HTML 标签的完整性
-- 使用直接导出字符串的格式
-- 特殊标记（如 $MINIDOGE）保持原样不翻译
+```css
+:root[class="light"] {
+  --bg-color: white;
+  --title-color: #000000;
+  --text-color: rgba(0, 0, 0, 0.5);
+  --card-color: #e9eaeb;
+  --border-color: #5f5f5f24;
+}
 
-## 技术栈
+:root[class="dark"] {
+  --bg-color: #181a20;
+  --title-color: white;
+  --text-color: rgba(255, 255, 255, 0.5);
+  --card-color: #282d37;
+  --success-color: #16a34a;
+  --border-color: #5f5f5f71;
+}
+```
 
-- React
-- TypeScript
-- i18next
-- Vite
-- Tailwind CSS
+## Web3 集成
 
-## 注意事项
+项目使用 Solana Web3.js 和 SPL Token 进行区块链交互：
 
-1. 所有翻译文件必须使用直接导出字符串的格式
-2. HTML 标签必须保持完整和一致性
-3. 确保所有语言都有完整的翻译文件结构
+- 钱包连接
+- 代币余额查询
+- 多签钱包管理
+- 交易处理
+
+## 贡献指南
+
+1. Fork 项目
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 开启 Pull Request
 
 ## 许可证
 
-MIT License
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情

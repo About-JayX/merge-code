@@ -1,10 +1,6 @@
 /**
  * AddressCard.tsx
  * 合约地址展示相关组件，包含地址显示、复制按钮和交互功能
- * 主要功能：
- * 1. 动态计算并显示合约地址，根据容器宽度自适应显示长度
- * 2. 提供复制功能，复制成功后显示动画反馈
- * 3. 响应式设计，适配移动端和PC端不同显示效果
  */
 
 import React, { useState, useEffect, useRef } from "react";
@@ -17,57 +13,51 @@ import { useTranslation } from "react-i18next";
 
 /**
  * 计算字符宽度的工具函数
- * @param fontSize - 当前字体大小（像素）
- * @returns 单个字符的估算宽度
- * 说明：由于使用等宽字体，每个字符宽度约为字体大小的0.7倍
  */
 const getCharWidth = (fontSize: number) => {
   return fontSize * 0.7;
 };
 
 /**
- * 地址显示组件
- * 根据容器宽度动态计算并显示合约地址
- * 显示规则：
- * 1. 如果空间足够，显示完整地址
- * 2. 如果空间不足，在保证最少显示前后各6个字符的情况下，尽可能多显示
- * 3. 使用省略号(...)表示中间省略的部分
+ * 地址显示组件的配置接口
+ */
+interface AddressConfig {
+  fontSize: {
+    mobile: number;
+    tablet: number;
+    desktop: number;
+  };
+  padding: {
+    mobile: number;
+    desktop: number;
+  };
+  minChars: number;
+}
+
+/**
+ * 地址显示组件的属性接口
  */
 interface AddressDisplayProps {
   address?: string;
   isMobile: boolean;
   containerWidth: number;
-  config?: {
-    fontSize?: {
-      mobile: number;
-      tablet: number;
-      desktop: number;
-    };
-    padding?: {
-      mobile: number;
-      desktop: number;
-    };
-    minChars?: number;
-  };
+  onClick?: () => void;
+  className?: string;
+  style?: React.CSSProperties;
+  href?: string;
+  target?: string;
+  config: AddressConfig;
 }
 
-const AddressDisplay = ({ 
+/**
+ * 地址显示内部组件
+ */
+const AddressDisplayInner: React.FC<AddressDisplayProps> = ({ 
   address = '', 
   isMobile, 
   containerWidth,
-  config = {
-    fontSize: {
-      mobile: 12,
-      tablet: 14,
-      desktop: 20
-    },
-    padding: {
-      mobile: 32,
-      desktop: 40
-    },
-    minChars: 6
-  }
-}: AddressDisplayProps) => {
+  config
+}) => {
   if (!address || !containerWidth) {
     return <span className="font-normal notranslate">-</span>;
   }
@@ -99,7 +89,7 @@ const AddressDisplay = ({
 
   const maxSideChars = Math.floor((totalChars - 3) / 2);
   
-  for (let chars = maxSideChars; chars >= (config.minChars || 6); chars--) {
+  for (let chars = maxSideChars; chars >= config.minChars; chars--) {
     const totalWidth = (chars * 2 + 3) * charWidth;
     if (totalWidth <= availableWidth) {
       const displayText = `${address.slice(0, chars)}...${address.slice(-chars)}`;
@@ -111,7 +101,7 @@ const AddressDisplay = ({
     }
   }
 
-  const displayText = `${address.slice(0, config.minChars || 6)}...${address.slice(-(config.minChars || 6))}`;
+  const displayText = `${address.slice(0, config.minChars)}...${address.slice(-config.minChars)}`;
   return (
     <span className="font-normal notranslate">
       {displayText}
@@ -121,34 +111,8 @@ const AddressDisplay = ({
 
 /**
  * 地址显示容器组件
- * 负责：
- * 1. 监听容器尺寸变化
- * 2. 提供点击交互
- * 3. 设置基础样式（高度、内边距、边框等）
  */
-interface MinidogeAddressProps {
-  address?: string;
-  isMobile: boolean;
-  onClick?: () => void;
-  className?: string;
-  style?: React.CSSProperties;
-  href?: string;
-  target?: string;
-  config?: {
-    fontSize?: {
-      mobile: number;
-      tablet: number;
-      desktop: number;
-    };
-    padding?: {
-      mobile: number;
-      desktop: number;
-    };
-    minChars?: number;
-  };
-}
-
-export const MinidogeAddress = ({
+export const AddressDisplay: React.FC<Omit<AddressDisplayProps, 'containerWidth'>> = ({
   address = '',
   isMobile,
   onClick,
@@ -169,7 +133,7 @@ export const MinidogeAddress = ({
     minChars: 6
   },
   ...props
-}: MinidogeAddressProps) => {
+}) => {
   const containerRef = useRef<HTMLElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
 
@@ -222,6 +186,17 @@ export const MinidogeAddress = ({
     ...style
   };
 
+  const content = (
+    <div className="w-full text-center whitespace-nowrap overflow-hidden">
+      <AddressDisplayInner
+        address={address}
+        isMobile={isMobile}
+        containerWidth={containerWidth}
+        config={config}
+      />
+    </div>
+  );
+
   if (href) {
     return (
       <a
@@ -233,14 +208,7 @@ export const MinidogeAddress = ({
         style={baseStyle}
         {...props}
       >
-        <div className="w-full text-center whitespace-nowrap overflow-hidden">
-          <AddressDisplay
-            address={address}
-            isMobile={isMobile}
-            containerWidth={containerWidth}
-            config={config}
-          />
-        </div>
+        {content}
       </a>
     );
   }
@@ -253,31 +221,15 @@ export const MinidogeAddress = ({
       style={baseStyle}
       {...props}
     >
-      <div className="w-full text-center whitespace-nowrap overflow-hidden">
-        <AddressDisplay
-          address={address}
-          isMobile={isMobile}
-          containerWidth={containerWidth}
-          config={config}
-        />
-      </div>
+      {content}
     </div>
   );
 };
 
 /**
  * 复制按钮组件
- * 特点：
- * 1. 支持自定义背景色和文字颜色
- * 2. 内置悬停效果
- * 3. 响应式尺寸
  */
-export const MinidogeCopy = ({
-  onClick,
-  className = "",
-  button,
-  ...props
-}: {
+interface CopyButtonProps {
   [key: string]: any;
   className?: string;
   onClick?: () => void;
@@ -285,7 +237,14 @@ export const MinidogeCopy = ({
     background?: string;
     text?: string;
   };
-}) => {
+}
+
+export const CopyButton = ({
+  onClick,
+  className = "",
+  button,
+  ...props
+}: CopyButtonProps) => {
   return (
     <div
       className={`relative rounded-full cursor-pointer ${memesHover} ${className}`}
@@ -309,7 +268,10 @@ export const MinidogeCopy = ({
   );
 };
 
-interface ContractAddressProps {
+/**
+ * 地址卡片组件的属性接口
+ */
+interface AddressCardProps {
   address: string;
   button?: {
     background?: string;
@@ -319,14 +281,9 @@ interface ContractAddressProps {
 }
 
 /**
- * 合约地址完整组件
- * 包含：
- * 1. 地址显示区域
- * 2. 复制按钮
- * 3. 复制成功的模态框动画
- * 4. 响应式布局适配
+ * 地址卡片组件
  */
-export const ContractAddress: React.FC<ContractAddressProps> = ({ 
+export const AddressCard: React.FC<AddressCardProps> = ({ 
   address = '', 
   button, 
   onCopySuccess,
@@ -336,7 +293,6 @@ export const ContractAddress: React.FC<ContractAddressProps> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  // 监听窗口大小变化，更新移动端状态
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -347,7 +303,6 @@ export const ContractAddress: React.FC<ContractAddressProps> = ({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // 处理复制操作
   const handleCopy = async () => {
     if (!address) return;
     
@@ -359,7 +314,6 @@ export const ContractAddress: React.FC<ContractAddressProps> = ({
 
   return (
     <>
-      {/* 复制成功提示模态框 */}
       <Modal
         open={isModalOpen}
         centered
@@ -381,15 +335,14 @@ export const ContractAddress: React.FC<ContractAddressProps> = ({
         </div>
       </Modal>
 
-      {/* 主体内容 */}
       <div className="flex w-full gap-3">
-        <MinidogeCopy
+        <CopyButton
           {...props}
           button={button}
           onClick={handleCopy}
         />
         <div className="flex-1 min-w-0">
-          <MinidogeAddress
+          <AddressDisplay
             address={address}
             isMobile={isMobile}
             onClick={handleCopy}

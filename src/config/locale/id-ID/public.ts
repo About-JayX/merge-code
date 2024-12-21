@@ -1,7 +1,7 @@
 export default {
   buy: "Beli $MINIDOGE",
   loadMore: "Lebih Banyak",
-  foundationAddr: "<span class='text-[#FFAC03]'>Dompet Multi-Tanda Tangan Yayasan</span>",
+  foundationAddr: "<span class='text-[#FFAC03]'>Wallet Yayasan</span>",
   foundationAddrTitle: "<span class='text-[#FFAC03]'>Yayasan $MINIDOGE CTO - <i>Pedoman Donasi</i></span>",
   pleaseNote: "<span class='notice-text'>Harap Perhatikan</span>",
   nftAirdrops: "<span class='feature-text'>Detail Airdrop NFT</span>",
