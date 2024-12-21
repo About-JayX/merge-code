@@ -1,5 +1,5 @@
 export default {
-  title: 'DAO 治理',
+  title: '基金会成员',
   date: '日期',
   amount: '金额',
   donor: '捐赠者',
@@ -79,7 +79,7 @@ export default {
 
   // Table Headers
   numberHeader: '序号',
-  nftRightsHeader: 'NFT名额',
+  nftRightsHeader: 'NFT空投数',
   votingRightsHeader: '投票权',
   walletAddressHeader: '钱包地址',
   lastDonationHeader: '最后捐赠',

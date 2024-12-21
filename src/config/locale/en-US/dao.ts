@@ -79,7 +79,7 @@ export default {
 
   // Table Headers
   numberHeader: 'No.',
-  nftRightsHeader: 'NFT Rights',
+  nftRightsHeader: 'NFT Airdrops',
   votingRightsHeader: 'Voting Rights',
   walletAddressHeader: 'Wallet Address',
   lastDonationHeader: 'Last Donation',
