@@ -1,4 +1,6 @@
-const baseURL = '/api'
+const baseURL = import.meta.env.DEV
+  ? '/api'
+  : 'https://minidoge.memesweb3.workers.dev'
 
 export const getList = async (params?: { page: number; limit: number }) => {
   try {
