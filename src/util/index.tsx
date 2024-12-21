@@ -49,6 +49,7 @@ interface IdonationSummary {
   USDT: number | string
   [key: string]: number | string
 }
+
 export const calc_VOTE_NFT = (
   object: IdonationSummary
 ): { votes: number; nftCount: number } => {
@@ -68,5 +69,6 @@ export const calc_VOTE_NFT = (
     nftCount += count
   }
   votes = votes + nftCount / NFT_VOTE > 4 ? 4 : votes
+  
   return { votes, nftCount }
 }
