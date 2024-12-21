@@ -4,7 +4,7 @@ import useFoundationMembers from '@/hooks/useFoundationMembers'
 import { useTranslation } from 'react-i18next'
 import { SolanaCircleColorful } from '@ant-design/web3-icons'
 import Icon from '@/components/icon'
-
+import dayjs from 'dayjs'
 interface DonationAmount {
   USDT: number
   USDC: number
@@ -98,7 +98,9 @@ export const MemberList: React.FC = () => {
       width: 60,
       align: 'center' as const,
       render: (_: any, __: any, index: number) => (
-        <span className="text-[#FFAC03] text-lg font-bold">{index + 1}</span>
+        <span className="text-[#FFAC03] text-lg font-bold">
+          {(currentPage - 1) * pageSize + index + 1}
+        </span>
       ),
     },
     {
@@ -144,24 +146,23 @@ export const MemberList: React.FC = () => {
       key: 'lastDonation',
       width: 160,
       align: 'center' as const,
-      render: (dateStr: string) => {
-        if (!dateStr) return <span className="text-white/80">-</span>
+      render: (dateStr: number) => {
+        let dataTime = dateStr * 1000
 
-        // 解析 ISO 格式的时间字符串
-        const date = new Date(dateStr)
-        if (isNaN(date.getTime())) {
-          return <span className="text-white/80">Invalid Date</span>
-        }
-
-        const year = date.getUTCFullYear()
-        const month = String(date.getUTCMonth() + 1).padStart(2, '0')
-        const day = String(date.getUTCDate()).padStart(2, '0')
-        const hours = String(date.getUTCHours()).padStart(2, '0')
-        const minutes = String(date.getUTCMinutes()).padStart(2, '0')
-
+        // if (!dateStr) return <span className="text-white/80">-</span>
+        // // 解析 ISO 格式的时间字符串
+        // const date = new Date(dateStr)
+        // if (isNaN(date.getTime())) {
+        //   return <span className="text-white/80">Invalid Date</span>
+        // }
+        // const year = date.getUTCFullYear()
+        // const month = String(date.getUTCMonth() + 1).padStart(2, '0')
+        // const day = String(date.getUTCDate()).padStart(2, '0')
+        // const hours = String(date.getUTCHours()).padStart(2, '0')
+        // const minutes = String(date.getUTCMinutes()).padStart(2, '0')
         return (
           <span className="text-white/80">
-            {`${year}-${month}-${day} ${hours}:${minutes}`}
+            {dayjs(dataTime).format('YYYY-MM-DD hh:mm')}
           </span>
         )
       },
@@ -264,15 +265,15 @@ export const MemberList: React.FC = () => {
         />
       </div>
       {/* 表格内容 - 添加固定高度容器 */}
-      <div className="h-auto max-h-[400px]  overflow-hidden mt-3 sm:mt-0 rounded-xl">
-        <div className="h-full overflow-x-auto overflow-y-auto">
+      <div className="h-auto  overflow-hidden mt-3 sm:mt-0 rounded-xl">
+        <div className="h-full overflow-x-auto overflow-y-auto ">
           <Table
             columns={memberColumns}
             dataSource={currentPageData}
             loading={loading}
             rowKey="address"
             pagination={false}
-            className="custom-table no-hover-effect"
+            className="custom-table max-h-[400px] no-hover-effect"
             rowClassName={() => 'bg-transparent'}
             style={{
               background: 'transparent',

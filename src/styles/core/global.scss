@@ -1,9 +1,8 @@
-@use "./transition.scss" as *;
-@use "@/styles/effects/starry.scss" as *;
+@use './transition.scss' as *;
+@use '@/styles/effects/starry.scss' as *;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 :root {
   --bg-color: #ffffff;
@@ -33,14 +32,14 @@
   font-family: 'Orbitron', sans-serif !important;
 }
 
-.striker{
+.striker {
   font-family: 'Striker', sans-serif !important;
 }
 
-.roboto-mono{
+.roboto-mono {
   font-family: 'Roboto Mono', monospace !important;
 }
-._root_98iqw_1{
+._root_98iqw_1 {
   margin: 0 !important;
 }
 
@@ -94,7 +93,15 @@
 }
 
 .text-content {
-  p, span, h1, h2, h3, h4, h5, h6, a {
+  p,
+  span,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  a {
     @apply transition-all duration-300 ease-in-out hover:opacity-80 hover:-translate-y-0.5 cursor-pointer;
   }
 }
@@ -149,11 +156,11 @@ svg {
   --skeleton-bg-colors: #282d37;
 }
 
-a{
-  @apply text-current
+a {
+  @apply text-current;
 }
 
-.notranslate{
+.notranslate {
   translate: no;
 }
 
@@ -162,7 +169,7 @@ a{
   .ant-table-tbody > tr:hover > td {
     background: transparent !important;
   }
-  
+
   .ant-table-tbody > tr > td {
     background: transparent !important;
   }
@@ -195,7 +202,15 @@ a{
   }
 
   .ant-table-content {
-    overflow: hidden !important;
+    overflow: hidden;
+    overflow-y: scroll !important;
+    max-height: 400px;
+    thead {
+      background-color: black;
+      position: sticky !important;
+      top: 0;
+      z-index: 1;
+    }
   }
 
   .ant-table-wrapper {
@@ -216,12 +231,12 @@ a{
 /* 分页器样式 */
 .ant-pagination {
   @apply mb-4;
-  
+
   .ant-pagination-item,
   .ant-pagination-prev .ant-pagination-item-link,
   .ant-pagination-next .ant-pagination-item-link {
     @apply bg-white/5 border-white/10 text-white/80;
-    
+
     &:hover {
       @apply border-[#FFAC03] text-[#FFAC03] bg-white/10;
     }
@@ -229,7 +244,7 @@ a{
 
   .ant-pagination-item-active {
     @apply border-[#FFAC03] text-[#FFAC03] bg-white/10;
-    
+
     a {
       @apply text-[#FFAC03];
     }
@@ -239,7 +254,7 @@ a{
     .anticon {
       @apply text-white/80;
     }
-    
+
     &:hover .anticon {
       @apply text-[#FFAC03];
     }
@@ -249,14 +264,14 @@ a{
 /* 固定分页器样式 */
 .pagination-only {
   @apply w-auto;
-  
+
   .ant-table-container {
     @apply hidden;
   }
-  
+
   .ant-pagination {
     @apply m-0 bg-[#1A1D24] py-2 px-4 rounded-lg;
-    
+
     .ant-pagination-item,
     .ant-pagination-prev .ant-pagination-item-link,
     .ant-pagination-next .ant-pagination-item-link {
@@ -282,24 +297,24 @@ a{
     .ant-modal-header {
       @apply bg-transparent border-b border-white/10 rounded-t-2xl mb-0;
     }
-  
+
     .ant-modal-body {
       @apply p-4 px-2 max-h-[65vh] overflow-hidden overflow-y-auto;
     }
-  
+
     .ant-modal-close {
       @apply text-white/60 hover:text-[#FFAC03] transition-colors;
       top: 16px;
       right: 16px;
       width: 32px;
       height: 32px;
-      
+
       .ant-modal-close-x {
         @apply flex items-center justify-center;
         width: 32px;
         height: 32px;
         line-height: 32px;
-        
+
         .anticon {
           @apply flex items-center justify-center;
           font-size: 16px;
@@ -309,23 +324,24 @@ a{
   }
 }
 
-.ant-empty-image{
-  svg{
-    @apply w-12 h-12
+.ant-empty-image {
+  svg {
+    @apply w-12 h-12;
   }
 }
 
-.ant-pagination{
+.ant-pagination {
   @apply m-0 !bg-white/5;
-  .ant-pagination-prev,.ant-pagination-next{
-    @apply m-0 !mx-1
+  .ant-pagination-prev,
+  .ant-pagination-next {
+    @apply m-0 !mx-1;
   }
 }
-.ant-tooltip{
+.ant-tooltip {
   @apply w-[120px];
-  .ant-tooltip-content{
-    .ant-tooltip-inner{
-      @apply px-4
+  .ant-tooltip-content {
+    .ant-tooltip-inner {
+      @apply px-4;
     }
   }
 }
