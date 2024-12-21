@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { Spin, Modal } from "antd";
+import { SafetyCertificateOutlined, WarningOutlined } from "@ant-design/icons";
 import { copy } from "@/util";
 import Tgs from "../../tgs";
 import {
@@ -17,6 +18,10 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { FOUNDATION_CONFIG, RPC_ENDPOINT } from "@/config/foundation.ts";
 
+type TokenLogos = {
+  [key: string]: string;
+};
+
 export const FoundationBalanceItem = ({
   tokenIcon = "",
   tokenName = "",
@@ -26,6 +31,8 @@ export const FoundationBalanceItem = ({
   tokenName?: string;
   tokenBalance?: string;
 }) => {
+  const tokenLogos = FOUNDATION_CONFIG.tokenLogos as TokenLogos;
+  
   return (
     <div
       className={`bg-white/5 p-4 sm:p-5 lg:p-8 rounded-xl flex items-center justify-between w-full ${memesHover}`}
@@ -33,7 +40,7 @@ export const FoundationBalanceItem = ({
       <div className="grid grid-cols-[auto,1fr] gap-4 items-center">
         <div className="w-10 h-10 rounded-full p-[3px] bg-white/10">
           <img
-            src={FOUNDATION_CONFIG.tokenLogos[tokenIcon]}
+            src={tokenLogos[tokenIcon]}
             alt={tokenIcon}
             className="rounded-full"
           />
@@ -79,10 +86,22 @@ const Funds: React.FC = ({ ...props }) => {
   useEffect(() => {
     const fetchBalances = async () => {
       try {
+        if (!FOUNDATION_CONFIG.address) {
+          console.error("Foundation address is not defined");
+          return;
+        }
+
         const connection = new Connection(RPC_ENDPOINT, {
           commitment: "confirmed",
         });
-        const publicKey = new PublicKey(FOUNDATION_CONFIG.address);
+        
+        let publicKey: PublicKey;
+        try {
+          publicKey = new PublicKey(FOUNDATION_CONFIG.address);
+        } catch (error) {
+          console.error("Invalid public key:", error);
+          return;
+        }
 
         // 获取 SOL 余额
         const solBalance = await connection.getBalance(publicKey);
@@ -137,6 +156,10 @@ const Funds: React.FC = ({ ...props }) => {
     await copy(FOUNDATION_CONFIG.address, () => setIsModalOpen(true));
   };
 
+  const renderHTML = (html: string) => {
+    return <span dangerouslySetInnerHTML={{ __html: html }} />;
+  };
+
   return (
     <Fragment>
       <Modal
@@ -165,11 +188,12 @@ const Funds: React.FC = ({ ...props }) => {
             // 移动端布局
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between w-full">
-                <span
-                  className={`${memesTitleSize} !text-xl md:!text-3xl lg:!text-4xl`}
-                >
-                  {t("public.foundationAddr")}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`${memesTitleSize} !text-xl md:!text-3xl lg:!text-4xl`}
+                    dangerouslySetInnerHTML={{ __html: t("public.foundationAddr") }}
+                  />
+                </div>
                 <div className="flex items-center gap-4">
                   <Link to="/dao">
                     <Button
@@ -203,11 +227,12 @@ const Funds: React.FC = ({ ...props }) => {
             // PC端布局
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-4">
-                <span
-                  className={`${memesTitleSize} !text-xl md:!text-3xl lg:!text-4xl`}
-                >
-                  {t("public.foundationAddr")}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`${memesTitleSize} !text-xl md:!text-3xl lg:!text-4xl`}
+                    dangerouslySetInnerHTML={{ __html: t("public.foundationAddr") }}
+                  />
+                </div>
                 <Link to="/dao">
                   <Button type="default" className="!min-w-0 !px-4">
                     DAO
@@ -280,9 +305,67 @@ const Funds: React.FC = ({ ...props }) => {
             </>
           )}
         </main>
+        <footer className="p-6 sm:p-8 border-t border-white/10 bg-[rgba(20,20,20,0.5)]">
+          <div className="flex flex-col gap-6">
+            <div className="bg-white/5 rounded-xl p-4 sm:p-6">
+              <div className="flex items-start gap-3">
+                <SafetyCertificateOutlined className="text-[#FFAC03] text-xl mt-1" />
+                <div>
+                  <div
+                    className="text-[#FFAC03] font-medium text-base sm:text-lg mb-2"
+                    dangerouslySetInnerHTML={{ __html: t("public.foundationAddrTitle") }}
+                  />
+                  <div className="text-white/80 text-sm sm:text-base leading-relaxed">
+                    <p>
+                      <span
+                        className="text-white font-medium"
+                        dangerouslySetInnerHTML={{ __html: t("public.pleaseNote") }}
+                      />
+                      :{" "}
+                      <span dangerouslySetInnerHTML={{ __html: t("public.fullNotice") }} />
+                    </p>
+                    <p className="mt-2">
+                      <span
+                        className="text-white font-medium"
+                        dangerouslySetInnerHTML={{ __html: t("public.nftAirdrops") }}
+                      />
+                      :{" "}
+                      <span dangerouslySetInnerHTML={{ __html: t("public.fullNftNotice") }} />
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white/5 rounded-xl p-4 sm:p-6">
+              <div className="flex items-start gap-3">
+                <WarningOutlined className="text-[#ef4444] text-xl mt-1" />
+                <div>
+                  <div
+                    className="text-[#ef4444] font-medium text-base sm:text-lg mb-2"
+                    dangerouslySetInnerHTML={{ __html: t("public.disclaimer") }}
+                  />
+                  <div className="text-white/80 text-sm sm:text-base leading-relaxed">
+                    <p dangerouslySetInnerHTML={{ __html: t("public.fullDisclaimer") }} />
+                    <p className="mt-2">
+                      <span className="text-white font-medium">
+                        <span dangerouslySetInnerHTML={{ __html: t("public.beforeTransferring") }} />{" "}
+                        <span dangerouslySetInnerHTML={{ __html: t("public.makeSureThat") }} />:
+                      </span>
+                    </p>
+                    <ul className="list-disc list-inside mt-1 ml-2">
+                      <li dangerouslySetInnerHTML={{ __html: t("public.checkAddress") }} />
+                      <li dangerouslySetInnerHTML={{ __html: t("public.checkAwareness") }} />
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
       </LayoutCard>
     </Fragment>
   );
 };
 
 export default Funds;
+

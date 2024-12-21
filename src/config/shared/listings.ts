@@ -18,6 +18,10 @@ export default [
     url: "https://dexscreener.com/solana/cfwwtfeyr4ai9tmpbte21jsewhum3pmytaluf9x2b5ej",
   },
   {
+    image: DextoolsPng,
+    url: "https://www.dextools.io/app/en/solana/pair-explorer/CFWwTFEyr4ai9tMPBtE21JSewhum3PMyTALUF9x2B5eJ?t=1734698856428",
+  },
+  {
     image: CoinmarketcapPng,
     url: "https://coinmarketcap.com/dexscan/solana/GEV2dBkXx4X5Xy8FFX7eR1TNhWyj6m1bp66tyTUGicBB/",
   },
@@ -36,10 +40,6 @@ export default [
   {
     image: PumpSvg,
     url: "https://pump.fun/coin/8J6CexwfJ8CSzn2DgWhzQe1NHd2hK9DKX59FCNNMo2hu",
-  },
-  {
-    image: DextoolsPng,
-    url: "https://www.dextools.io/app/en/solana/pair-explorer/CFWwTFEyr4ai9tMPBtE21JSewhum3PMyTALUF9x2B5eJ?t=1734661824100",
   },
   // {
   //   image: HibtSvg,
