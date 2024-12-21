@@ -1,5 +1,5 @@
 export default {
-  title: 'DAO 治理',
+  title: '基金会成员',
   date: '日期',
   amount: '金額',
   donor: '捐贈者',
