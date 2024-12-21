@@ -48,8 +48,8 @@ const StatsDisplay: React.FC<{ members: any }> = ({ members }) => {
   const stats = members.reduce(
     (acc: any, member: any) => {
       return {
-        totalNftRights: acc.totalNftRights + member.votes,
-        totalVotingRights: acc.totalVotingRights + member.nftCount,
+        totalNftRights: acc.totalNftRights + member.nftCount,
+        totalVotingRights: acc.totalVotingRights + member.votes,
       }
     },
     { totalNftRights: 0, totalVotingRights: 0 }
@@ -149,17 +149,6 @@ export const MemberList: React.FC = () => {
       render: (dateStr: number) => {
         let dataTime = dateStr * 1000
 
-        // if (!dateStr) return <span className="text-white/80">-</span>
-        // // 解析 ISO 格式的时间字符串
-        // const date = new Date(dateStr)
-        // if (isNaN(date.getTime())) {
-        //   return <span className="text-white/80">Invalid Date</span>
-        // }
-        // const year = date.getUTCFullYear()
-        // const month = String(date.getUTCMonth() + 1).padStart(2, '0')
-        // const day = String(date.getUTCDate()).padStart(2, '0')
-        // const hours = String(date.getUTCHours()).padStart(2, '0')
-        // const minutes = String(date.getUTCMinutes()).padStart(2, '0')
         return (
           <span className="text-white/80">
             {dayjs(dataTime).format('YYYY-MM-DD hh:mm')}
@@ -169,31 +158,31 @@ export const MemberList: React.FC = () => {
     },
     {
       title: t('dao.totalDonationHeader'),
-      dataIndex: 'totalDonation',
+      dataIndex: 'donationSummary',
       key: 'totalDonation',
       width: 180,
       align: 'center' as const,
       render: (donations: DonationAmount) => {
         // 计算显示的捐赠项
         const donationItems: any[] = []
-        if (donations?.USDT > 0)
+        if (donations?.USDT >= 0)
           donationItems.push({ type: 'USDT', amount: donations.USDT })
-        if (donations?.USDC > 0)
+        if (donations?.USDC >= 0)
           donationItems.push({ type: 'USDC', amount: donations.USDC })
-        if (donations?.SOL > 0)
+        if (donations?.SOL >= 0)
           donationItems.push({ type: 'SOL', amount: donations.SOL })
-        if (donations?.MINIDOGE > 0)
+        if (donations?.MINIDOGE >= 0)
           donationItems.push({ type: 'MINIDOGE', amount: donations.MINIDOGE })
 
         const TokemBox = () => (
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 ">
             {donationItems.map(item => (
               <div
                 key={item.type}
                 className="grid grid-cols-[auto,1fr] items-center justify-start gap-1 text-left"
               >
                 <span
-                  className="text-sm"
+                  className="text-sm flex items-center"
                   style={{ color: getTokenColor(item.type) }}
                 >
                   {item.type === 'USDT' && <Icon name="usdt" />}
@@ -207,7 +196,7 @@ export const MemberList: React.FC = () => {
                 </span>
                 <span className="text-white font-medium break-all">
                   {item.type === 'SOL'
-                    ? item.amount.toFixed(3)
+                    ? Number(item.amount).toFixed(3)
                     : item.type === 'MINIDOGE'
                     ? formatNumber(item.amount)
                     : item.amount.toLocaleString()}
