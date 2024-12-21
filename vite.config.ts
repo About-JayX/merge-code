@@ -1,19 +1,19 @@
-import react from "@vitejs/plugin-react-swc";
-import autoprefixer from "autoprefixer";
-import cssnano from "cssnano";
-import path from "path";
-import postcssPxtoRem from "postcss-pxtorem";
-import tailwindcss from "tailwindcss";
-import { defineConfig, loadEnv } from "vite";
-import { createHtmlPlugin } from "vite-plugin-html";
-import viteImagemin from "vite-plugin-imagemin";
-import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
-import { nodePolyfills } from "vite-plugin-node-polyfills";
-import copy from "rollup-plugin-copy";
+import react from '@vitejs/plugin-react-swc'
+import autoprefixer from 'autoprefixer'
+import cssnano from 'cssnano'
+import path from 'path'
+import postcssPxtoRem from 'postcss-pxtorem'
+import tailwindcss from 'tailwindcss'
+import { defineConfig, loadEnv } from 'vite'
+import { createHtmlPlugin } from 'vite-plugin-html'
+import viteImagemin from 'vite-plugin-imagemin'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
+import copy from 'rollup-plugin-copy'
 
 export default defineConfig(({ mode }) => ({
   define: {
-    "process.env": loadEnv(mode, process.cwd()),
+    'process.env': loadEnv(mode, process.cwd()),
     global: {},
   },
   plugins: [
@@ -23,26 +23,26 @@ export default defineConfig(({ mode }) => ({
     }),
     createHtmlPlugin({ minify: true }),
     createSvgIconsPlugin({
-      iconDirs: [path.resolve(process.cwd(), "./src/assets/icon")],
-      symbolId: "icon-[name]",
-      customDomId: "__svg__icon__[name]__",
+      iconDirs: [path.resolve(process.cwd(), './src/assets/icon')],
+      symbolId: 'icon-[name]',
+      customDomId: '__svg__icon__[name]__',
       svgoOptions: {
         plugins: [
           {
-            name: "removeViewBox",
+            name: 'removeViewBox',
             active: false,
           },
           {
-            name: "removeDimensions",
+            name: 'removeDimensions',
             active: true,
           },
           {
-            name: "addAttributesToSVGElement",
+            name: 'addAttributesToSVGElement',
             params: {
               attributes: [
-                { fill: "currentColor" },
-                { "fill-rule": "evenodd" },
-                { "clip-rule": "evenodd" },
+                { fill: 'currentColor' },
+                { 'fill-rule': 'evenodd' },
+                { 'clip-rule': 'evenodd' },
               ],
             },
           },
@@ -50,7 +50,7 @@ export default defineConfig(({ mode }) => ({
       },
     }),
     react(),
-    process.env.NODE_ENV === "production" &&
+    process.env.NODE_ENV === 'production' &&
       viteImagemin({
         gifsicle: {
           optimizationLevel: 7,
@@ -76,11 +76,11 @@ export default defineConfig(({ mode }) => ({
         svgo: {
           plugins: [
             {
-              name: "removeViewBox",
+              name: 'removeViewBox',
               active: false,
             },
             {
-              name: "removeEmptyAttrs",
+              name: 'removeEmptyAttrs',
               active: true,
             },
           ],
@@ -88,72 +88,79 @@ export default defineConfig(({ mode }) => ({
       }),
   ],
   esbuild: {
-    target: "esnext",
+    target: 'esnext',
   },
-  base: "/",
+  base: '/',
   css: {
     preprocessorOptions: {
       scss: {
         quietDeps: true,
-        api: "modern-compiler",
+        api: 'modern-compiler',
       },
     },
     postcss: {
       plugins: [
         tailwindcss,
         autoprefixer,
-        postcssPxtoRem({ rootValue: 16, propList: ["*"] }),
-        cssnano({ preset: "default" }),
+        postcssPxtoRem({ rootValue: 16, propList: ['*'] }),
+        cssnano({ preset: 'default' }),
       ],
     },
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
   },
   build: {
-    outDir: "dist", // 确保输出目录为 dist
-    minify: "terser",
+    outDir: 'dist', // 确保输出目录为 dist
+    minify: 'terser',
     rollupOptions: {
       output: {
-        entryFileNames: "assets/[name].[hash].js",
-        chunkFileNames: "assets/[name].[hash].js",
-        assetFileNames: "assets/[name].[hash].[ext]",
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]',
         manualChunks: {
-          antd: ["antd"],
-          "antd-mobile": ["antd-mobile"],
-          vendor: ["react", "react-dom", "react-router-dom"],
+          antd: ['antd'],
+          'antd-mobile': ['antd-mobile'],
+          vendor: ['react', 'react-dom', 'react-router-dom'],
         },
       },
       plugins: [
         copy({
           targets: [
             {
-              src: "src/assets/**/*.tgs",
-              dest: "dist/assets",
+              src: 'src/assets/**/*.tgs',
+              dest: 'dist/assets',
             }, // 忽略 .tgs 文件
-            { src: "src/assets/**/*.json", dest: "dist/assets" }, // 包含 .json 文件
+            { src: 'src/assets/**/*.json', dest: 'dist/assets' }, // 包含 .json 文件
           ],
-          hook: "writeBundle", // 在写入包时执行
+          hook: 'writeBundle', // 在写入包时执行
         }),
       ],
       onwarn(warning, warn) {
-        if (warning.code === "EVAL" && warning.id?.includes("lottie-web")) {
+        if (warning.code === 'EVAL' && warning.id?.includes('lottie-web')) {
           // 忽略 lottie-web 的 eval 警告
-          return;
+          return
         }
-        warn(warning); // 其他警告继续输出
+        warn(warning) // 其他警告继续输出
       },
     },
     chunkSizeWarningLimit: 2000,
   },
   optimizeDeps: {
-    include: ["react", "react-dom", "antd", "antd-mobile"],
+    include: ['react', 'react-dom', 'antd', 'antd-mobile'],
   },
   server: {
     host: true,
     hmr: true,
+    proxy: {
+      '/api': {
+        target: 'https://minidoge.memesweb3.workers.dev',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, ''),
+      },
+    },
     watch: {
       usePolling: true,
     },
@@ -161,4 +168,4 @@ export default defineConfig(({ mode }) => ({
       strict: true,
     },
   },
-}));
+}))

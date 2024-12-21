@@ -1,3 +1,3 @@
-import Icon from "@/components/icon";
+import Icon from '@/components/icon'
 
-export { Icon };
+export { Icon }
