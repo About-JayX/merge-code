@@ -1,6 +1,6 @@
 const baseURL = import.meta.env.DEV
   ? '/api'
-  : 'https://minidoge.memesweb3.workers.dev'
+  : 'https://donate.mini-doge.com'
 
 export const getList = async (params?: { page: number; limit: number }) => {
   try {

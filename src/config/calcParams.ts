@@ -1,4 +1,6 @@
 export const NFT_VOTE = 5
+
+
 export const donaMap = {
   USDT: 50,
   USDC: 50,

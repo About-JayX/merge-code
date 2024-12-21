@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
-import { Connection, PublicKey } from '@solana/web3.js'
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token'
-import {
-  FOUNDATION_ADDRESS,
-  RPC_ENDPOINT,
-  FOUNDATION_CONFIG,
-} from '@/config/foundation'
-import { parseTransaction, getTokenType } from '@/utils/transactionParser'
+// import { Connection, PublicKey } from '@solana/web3.js'
+// import { TOKEN_PROGRAM_ID } from '@solana/spl-token'
+// import {
+//   FOUNDATION_ADDRESS,
+//   RPC_ENDPOINT,
+//   FOUNDATION_CONFIG,
+// } from '@/config/foundation'
+// import { parseTransaction, getTokenType } from '@/utils/transactionParser'
 import { getList } from '@/api'
 import { calc_VOTE_NFT } from '@/util'
 
