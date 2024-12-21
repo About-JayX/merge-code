@@ -202,15 +202,14 @@ a {
   }
 
   .ant-table-content {
-    overflow: hidden;
-    overflow-y: scroll !important;
-    max-height: 400px;
-    thead {
-      background-color: black;
-      position: sticky !important;
-      top: 0;
-      z-index: 1;
-    }
+    overflow: hidden !important;
+
+    // thead {
+    //   background-color: black;
+    //   position: sticky !important;
+    //   top: 0;
+    //   z-index: 1;
+    // }
   }
 
   .ant-table-wrapper {
@@ -280,6 +279,13 @@ a {
   }
 }
 
+.ant-pagination-item {
+  margin-left: 0.5rem !important;
+}
+
+.ant-pagination-item:first-child {
+  margin-left: 0 !important;
+}
 /* 移动端样式优化 */
 @media (max-width: 640px) {
   .pagination-only {

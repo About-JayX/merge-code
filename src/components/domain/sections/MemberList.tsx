@@ -262,7 +262,7 @@ export const MemberList: React.FC = () => {
             loading={loading}
             rowKey="address"
             pagination={false}
-            className="custom-table max-h-[400px] no-hover-effect"
+            className="custom-table no-hover-effect"
             rowClassName={() => 'bg-transparent'}
             style={{
               background: 'transparent',
