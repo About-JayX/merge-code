@@ -19,7 +19,7 @@ export default [
   },
   {
     image: DextoolsPng,
-    url: "https://www.dextools.io/app/en/solana/pair-explorer/CFWwTFEyr4ai9tMPBtE21JSewhum3PMyTALUF9x2B5eJ?t=1734698856428",
+    url: "https://www.dextools.io/app/en/solana/pair-explorer/CFWwTFEyr4ai9tMPBtE21JSewhum3PMyTALUF9x2B5eJ",
   },
   {
     image: CoinmarketcapPng,
