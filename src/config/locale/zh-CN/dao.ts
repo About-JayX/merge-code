@@ -78,10 +78,10 @@ export default {
   governanceButton: '治理机制',
 
   // Table Headers
-  numberHeader: '序号',
-  nftRightsHeader: 'NFT空投数',
-  votingRightsHeader: '投票权',
-  walletAddressHeader: '钱包地址',
+  numberHeader: '编号',
+  nftRightsHeader: 'NFT空投',
+  votingRightsHeader: '投票',
+  walletAddressHeader: '钱包地址  (不支持交易所地址)',
   lastDonationHeader: '最后捐赠',
   totalDonationHeader: '总捐赠额'
 }; 

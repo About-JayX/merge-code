@@ -80,8 +80,8 @@ export default {
   // Table Headers
   numberHeader: 'No.',
   nftRightsHeader: 'NFT Airdrops',
-  votingRightsHeader: 'Voting Rights',
-  walletAddressHeader: 'Wallet Address',
+  votingRightsHeader: 'Votes',
+  walletAddressHeader: 'Wallet Address  (NOT SUPPORT EXCHANGE ADDRESS)',
   lastDonationHeader: 'Last Donation',
   totalDonationHeader: 'Total Donation'
 }; 

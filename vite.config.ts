@@ -159,9 +159,9 @@ export default defineConfig(({ mode }) => ({
     hmr: true,
     proxy: {
       '/api': {
-        target: 'https://minidoge.memesweb3.workers.dev',
+        target: 'https://donate.mini-doge.com',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
     watch: {

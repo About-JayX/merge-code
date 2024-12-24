@@ -1,14 +1,22 @@
-const baseURL = import.meta.env.DEV ? 'https://minidoge.memesweb3.workers.dev' : 'https://donate.mini-doge.com'
+const baseURL = import.meta.env.DEV ? '/api' : 'https://donate.mini-doge.com'
 
-export const getList = async (params?: { page: number; limit: number }) => {
+export const getList = async (params?: { page: number; pageSize: number }) => {
   try {
+    const queryParams = new URLSearchParams()
+    if (params) {
+      queryParams.append('page', params.page.toString())
+      queryParams.append('pageSize', params.pageSize.toString())
+    } else {
+      queryParams.append('page', '1')
+      queryParams.append('pageSize', '10')
+    }
+
     const response = await fetch(
-      `${baseURL}/get-users${
-        params ? `?page=${params.page}&limit=${params.limit}` : ''
-      }`,
+      `${baseURL}/members?${queryParams.toString()}`,
       {
         method: 'GET',
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
       }
@@ -18,8 +26,10 @@ export const getList = async (params?: { page: number; limit: number }) => {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
 
-    return await response.json()
+    const data = await response.json()
+    return data
   } catch (error) {
-    throw new Error('request list error...')
+    console.error('API Error:', error)
+    throw error
   }
 }

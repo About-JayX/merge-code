@@ -8,6 +8,7 @@ import { Dropdown } from 'antd';
 import { memesTextColor, memesHover } from '@/components/domain/styles';
 import { Link } from 'react-router-dom';
 import { NAV } from '@/config/resources';
+import MusicPlayer from '@/components/MusicPlayer';
 
 const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -45,6 +46,9 @@ const Header: React.FC = () => {
           </Section>
           <div className="flex-1" />
           <div className="flex items-center gap-1 sm:gap-4">
+            <div className={memesHover}>
+              <MusicPlayer />
+            </div>
             {NAV.TWITTER && (
               <a href={NAV.TWITTER} target="_blank" className={memesHover}>
                 <IconCard className="text-white" name="twitter" />

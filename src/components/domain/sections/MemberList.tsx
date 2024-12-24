@@ -1,10 +1,17 @@
 import React from 'react'
-import { Table, Tooltip } from 'antd'
+import { Table, Tooltip, Tag, ConfigProvider } from 'antd'
+import type { SortOrder } from 'antd/es/table/interface'
 import useFoundationMembers from '@/hooks/useFoundationMembers'
 import { useTranslation } from 'react-i18next'
 import { SolanaCircleColorful } from '@ant-design/web3-icons'
 import Icon from '@/components/icon'
 import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import { getAddressTag } from '@/config/specialAddresses'
+
+// 配置 dayjs 使用 UTC 插件
+dayjs.extend(utc)
+
 interface DonationAmount {
   USDT: number
   USDC: number
@@ -21,8 +28,24 @@ interface MemberData {
   votingRights: number
 }
 
-const formatNumber = (num: number) => {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+const formatNumber = (num: number, type: string) => {
+  const formattedNum = Number(num).toFixed(3)
+  const [integerPart, decimalPart] = formattedNum.split('.')
+  
+  if (type === 'SOL') {
+    return formattedNum
+  }
+  
+  const formattedInteger = type === 'MINIDOGE' 
+    ? integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    : integerPart
+    
+  return (
+    <>
+      {formattedInteger}
+      <span className="opacity-50">.{decimalPart}</span>
+    </>
+  )
 }
 
 const getTokenColor = (type: string) => {
@@ -40,16 +63,36 @@ const getTokenColor = (type: string) => {
   }
 }
 
+// 计算额外 NFT 数量的函数
+const calculateExtraNft = (rank: number, baseNft: number) => {
+  if (rank <= 100) {
+    return baseNft * 2  // 前100名额外2倍
+  } else if (rank <= 500) {
+    return baseNft      // 前500名额外1倍
+  }
+  return 0
+}
+
 // 添加统计组件
-const StatsDisplay: React.FC<{ members: any }> = ({ members }) => {
+const StatsDisplay: React.FC<{ members: any[]; allMembers: any[]; total: number }> = ({ 
+  members, 
+  allMembers,
+  total
+}) => {
   const { t } = useTranslation()
 
   // 计算统计数据
-  const stats = members.reduce(
+  const stats = allMembers.reduce(
     (acc: any, member: any) => {
+      const rank = member.timeBasedRank || 0
+      const baseNft = Number(member.nftCount || 0)
+      const extraNft = calculateExtraNft(rank, baseNft)
+      const totalNft = baseNft + extraNft
+      const votes = Number(member.votes || 0)
+
       return {
-        totalNftRights: acc.totalNftRights + member.nftCount,
-        totalVotingRights: acc.totalVotingRights + member.votes,
+        totalNftRights: (acc.totalNftRights || 0) + totalNft,
+        totalVotingRights: (acc.totalVotingRights || 0) + votes,
       }
     },
     { totalNftRights: 0, totalVotingRights: 0 }
@@ -59,19 +102,19 @@ const StatsDisplay: React.FC<{ members: any }> = ({ members }) => {
     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-0 sm:mb-6">
       <div className="bg-white/10 rounded-xl p-3 px-2 sm:p-4 text-center">
         <div className="text-[#FFAC03] text-2xl font-bold mb-1">
-          {members.length}
+          {allMembers.length || 0}
         </div>
         <div className="text-white/80 text-sm">{t('dao.totalMembers')}</div>
       </div>
       <div className="bg-white/10 rounded-xl p-3 px-2 sm:p-4 text-center">
         <div className="text-[#FFAC03] text-2xl font-bold mb-1">
-          {stats.totalNftRights}
+          {stats.totalNftRights || 0}
         </div>
         <div className="text-white/80 text-sm">{t('dao.totalNftAirdrops')}</div>
       </div>
       <div className="bg-white/10 rounded-xl p-3 px-2 sm:p-4 text-center col-span-2 sm:col-span-1">
         <div className="text-[#FFAC03] text-2xl font-bold mb-1">
-          {stats.totalVotingRights}
+          {stats.totalVotingRights || 0}
         </div>
         <div className="text-white/80 text-sm">{t('dao.totalVotes')}</div>
       </div>
@@ -81,15 +124,26 @@ const StatsDisplay: React.FC<{ members: any }> = ({ members }) => {
 
 export const MemberList: React.FC = () => {
   const { t } = useTranslation()
-  const { members, loading, error } = useFoundationMembers()
+  const { 
+    members, 
+    allMembers,  // 使用完整数据进行排序
+    loading, 
+    error, 
+    total, 
+    currentPage, 
+    pageSize, 
+    totalPages, 
+    setCurrentPage 
+  } = useFoundationMembers()
 
-  // 添加分页状态
-  const [currentPage, setCurrentPage] = React.useState(1)
-  const pageSize = 50
-
-  // 计算当前页的数据
-  const startIndex = (currentPage - 1) * pageSize
-  const currentPageData = members.slice(startIndex, startIndex + pageSize)
+  const calculateExtraNft = (rank: number, baseNft: number) => {
+    if (rank <= 100) {
+      return baseNft * 2  // 前100名额外2倍
+    } else if (rank <= 500) {
+      return baseNft      // 前500名额外1倍
+    }
+    return 0
+  }
 
   const memberColumns = [
     {
@@ -97,11 +151,13 @@ export const MemberList: React.FC = () => {
       key: 'index',
       width: 60,
       align: 'center' as const,
-      render: (_: any, __: any, index: number) => (
-        <span className="text-[#FFAC03] text-lg font-bold">
-          {(currentPage - 1) * pageSize + index + 1}
-        </span>
-      ),
+      render: (_: any, record: any) => {
+        return (
+          <span className="text-[#FFAC03] text-lg font-bold">
+            {record.timeBasedRank}
+          </span>
+        )
+      },
     },
     {
       title: t('dao.nftRightsHeader'),
@@ -109,18 +165,28 @@ export const MemberList: React.FC = () => {
       key: 'totalNftRights',
       width: 120,
       align: 'center' as const,
-      render: (rights: number) => (
-        <span className="text-white font-medium">{rights}</span>
-      ),
+      render: (rights: number, record: any) => {
+        const rank = allMembers.findIndex(member => member.address === record.address) + 1
+        const extraNft = calculateExtraNft(rank, rights)
+
+        return (
+          <span className="text-lg">
+            <span className="text-white font-bold">{rights}</span>
+            {extraNft > 0 && (
+              <span className="text-[#FFAC03]"> (+{extraNft})</span>
+            )}
+          </span>
+        )
+      },
     },
     {
       title: t('dao.votingRightsHeader'),
       dataIndex: 'votes',
       key: 'votingRights',
-      width: 160,
+      width: 80,
       align: 'center' as const,
       render: (rights: number) => (
-        <span className="text-white font-medium">{rights}</span>
+        <span className="text-white text-lg font-bold">{rights}</span>
       ),
     },
     {
@@ -129,16 +195,33 @@ export const MemberList: React.FC = () => {
       key: 'address',
       align: 'center' as const,
       width: 360,
-      render: (address: string) => (
-        <a
-          href={`https://solscan.io/account/${address}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white hover:text-white/80 font-medium"
-        >
-          {address}
-        </a>
-      ),
+      render: (address: string) => {
+        const tag = getAddressTag(address)
+        
+        return (
+          <div className="flex items-center justify-center gap-2">
+            <a
+              href={`https://solscan.io/account/${address}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`font-medium ${
+                tag 
+                  ? 'text-white/30 hover:text-white/40 line-through decoration-2' 
+                  : 'text-white/75 hover:text-white/80'
+              }`}
+            >
+              {address}
+            </a>
+            {tag && (
+              <span
+                className="px-2 py-0.5 rounded text-xs font-medium bg-white/10 text-white/50"
+              >
+                {tag.name}
+              </span>
+            )}
+          </div>
+        )
+      },
     },
     {
       title: t('dao.lastDonationHeader'),
@@ -146,39 +229,44 @@ export const MemberList: React.FC = () => {
       key: 'lastDonation',
       width: 160,
       align: 'center' as const,
-      render: (dateStr: number) => {
+      render: (dateStr: number, record: any) => {
         let dataTime = dateStr * 1000
 
         return (
-          <span className="text-white/80">
-            {dayjs(dataTime).format('YYYY-MM-DD hh:mm')}
-          </span>
+          <a
+            href={`https://solscan.io/tx/${record.lastSignature}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/75 hover:text-white/80 font-medium"
+          >
+            <div className="flex flex-col">
+              <span>{dayjs(dataTime).utc().format('YYYY-MM-DD')}</span>
+              <span>{dayjs(dataTime).utc().format('HH:mm')} (UTC)</span>
+            </div>
+          </a>
         )
       },
     },
     {
       title: t('dao.totalDonationHeader'),
-      dataIndex: 'donationSummary',
+      dataIndex: 'tokenAmounts',
       key: 'totalDonation',
       width: 180,
       align: 'center' as const,
-      render: (donations: DonationAmount) => {
+      render: (tokenAmounts: Record<string, number>) => {
         // 计算显示的捐赠项
-        const donationItems: any[] = []
-        if (donations?.USDT >= 0)
-          donationItems.push({ type: 'USDT', amount: donations.USDT })
-        if (donations?.USDC >= 0)
-          donationItems.push({ type: 'USDC', amount: donations.USDC })
-        if (donations?.SOL >= 0)
-          donationItems.push({ type: 'SOL', amount: donations.SOL })
-        if (donations?.MINIDOGE >= 0)
-          donationItems.push({ type: 'MINIDOGE', amount: donations.MINIDOGE })
+        const donationItems = Object.entries(tokenAmounts)
+          .filter(([_, amount]) => amount > 0)  // 只显示有数量的代币
+          .map(([type, amount]) => ({
+            type,
+            amount
+          }))
 
         const TokemBox = () => (
-          <div className="flex flex-col gap-2 ">
-            {donationItems.map(item => (
+          <div className="flex flex-col gap-2">
+            {donationItems.map((item, index) => (
               <div
-                key={item.type}
+                key={`${item.type}-${index}`}
                 className="grid grid-cols-[auto,1fr] items-center justify-start gap-1 text-left"
               >
                 <span
@@ -189,25 +277,21 @@ export const MemberList: React.FC = () => {
                   {item.type === 'USDC' && <Icon name="usdc" />}
                   {item.type === 'SOL' && <SolanaCircleColorful />}
                   {item.type === 'MINIDOGE' && (
-                    <span className="anticon ant-web3-icon-solana-circle-colorful">
-                      <img src="/logo.png" className="w-[1em] h-[1em]" />
+                    <span className="anticon">
+                      <img src="/logo.png" className="w-[1em] h-[1em]" alt="MINIDOGE" />
                     </span>
                   )}
                 </span>
-                <span className="text-white font-medium break-all">
-                  {item.type === 'SOL'
-                    ? Number(item.amount).toFixed(3)
-                    : item.type === 'MINIDOGE'
-                    ? formatNumber(item.amount)
-                    : item.amount.toLocaleString()}
-                </span>
+                <div className="text-white font-medium break-all">
+                  {formatNumber(item.amount, item.type)}
+                </div>
               </div>
             ))}
           </div>
         )
 
         return (
-          <Tooltip title={<TokemBox />}>
+          <Tooltip title={<TokemBox />} key={tokenAmounts.toString()}>
             <TokemBox />
           </Tooltip>
         )
@@ -223,7 +307,7 @@ export const MemberList: React.FC = () => {
   const paginationConfig = {
     current: currentPage,
     pageSize: pageSize,
-    total: members.length,
+    total: total,
     showSizeChanger: false,
     className: '!text-white',
     size: 'small' as 'default' | 'small',
@@ -242,46 +326,55 @@ export const MemberList: React.FC = () => {
   }
 
   return (
-    <div className="relative">
-      <StatsDisplay members={members} />
-      {/* 上方分页器 */}
-      <div className="flex justify-center mb-0">
-        <Table
-          columns={[]}
-          dataSource={[]}
-          pagination={paginationConfig}
-          className="pagination-only"
+    <ConfigProvider theme={{ components: { Table: { filterDropdownBg: 'transparent' } } }}>
+      <div className="relative">
+        <StatsDisplay 
+          members={members} 
+          allMembers={allMembers}
+          total={total}
         />
-      </div>
-      {/* 表格内容 - 添加固定高度容器 */}
-      <div className="h-auto  overflow-hidden mt-3 sm:mt-0 rounded-xl">
-        <div className="h-full overflow-x-auto overflow-y-auto ">
+        {/* 上方分页器 */}
+        <div className="flex justify-center mb-0">
           <Table
-            columns={memberColumns}
-            dataSource={currentPageData}
-            loading={loading}
-            rowKey="address"
-            pagination={false}
-            className="custom-table no-hover-effect"
-            rowClassName={() => 'bg-transparent'}
-            style={{
-              background: 'transparent',
-              minWidth: totalWidth,
-            }}
-            scroll={{ x: 'auto' }}
-            tableLayout="fixed"
+            key="top-pagination"
+            columns={[]}
+            dataSource={[]}
+            pagination={paginationConfig}
+            className="pagination-only"
+          />
+        </div>
+        {/* 表格内容 */}
+        <div className="h-auto overflow-hidden mt-3 sm:mt-0 rounded-xl">
+          <div className="h-full overflow-x-auto overflow-y-auto">
+            <Table
+              key="main-table"
+              columns={memberColumns}
+              dataSource={members}
+              loading={loading}
+              rowKey="address"
+              pagination={false}
+              className="custom-table no-hover-effect"
+              rowClassName={() => 'bg-transparent'}
+              style={{
+                background: 'transparent',
+                minWidth: totalWidth,
+              }}
+              scroll={{ x: 'auto' }}
+              tableLayout="fixed"
+            />
+          </div>
+        </div>
+        {/* 下方分页器 */}
+        <div className="flex justify-center mt-0">
+          <Table
+            key="bottom-pagination"
+            columns={[]}
+            dataSource={[]}
+            pagination={paginationConfig}
+            className="pagination-only"
           />
         </div>
       </div>
-      {/* 下方分页器 */}
-      <div className="flex justify-center mt-0">
-        <Table
-          columns={[]}
-          dataSource={[]}
-          pagination={paginationConfig}
-          className="pagination-only"
-        />
-      </div>
-    </div>
+    </ConfigProvider>
   )
 }
