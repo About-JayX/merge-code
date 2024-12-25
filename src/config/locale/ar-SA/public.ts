@@ -14,4 +14,8 @@ export default {
   fullDisclaimer: "تبرعك لـ <span class='highlight'>مؤسسة $MINIDOGE CTO</span> يمثل دعمك لـ <span class='project-highlight'><i>مشروع $MINIDOGE</i></span>. <span class='warning-text'>مؤسسة $MINIDOGE CTO لا تعد بأي عوائد</span>",
   checkAddress: "<span class='warning-text'><i>تحقق بعناية</i></span> من <span class='wallet-highlight'>عنوان المحفظة متعددة التوقيعات</span> للمؤسسة وتأكد من أنه <span class='warning-text'><i>صحيح تماماً</i></span>",
   checkAwareness: "لقد <span class='warning-text'><i>فهمت تماماً</i></span> محتوى <span class='project-highlight'>مشروع $MINIDOGE</span> و<span class='warning-text'><i>تشارك طواعية</i></span>",
+
+  // مسؤولو المحفظة متعددة التوقيعات
+  multisigAdminTitle: "<span class='text-[#FFAC03] font-medium text-base sm:text-lg'>مسؤولو المحفظة متعددة التوقيعات <i>- فريق إدارة المؤسسة</i></span>",
+  multisigAdminDesc: "<span class='text-white/80 text-sm sm:text-base leading-relaxed'>تتم إدارة محفظة المؤسسة متعددة التوقيعات بشكل مشترك من قبل <span class='text-[#FFAC03]'><i>المسؤولين</i></span> التاليين:</span>",
 };

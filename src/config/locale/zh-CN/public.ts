@@ -8,6 +8,10 @@ export default {
   beforeTransferring: "<span class='action-text'>转账前</span>",
   makeSureThat: "<span class='prompt-text'>请确认以下事项</span>",
   disclaimer: "<strong class='disclaimer-title'>$MINIDOGE CTO 基金会 - <i>免责声明</i></strong>",
+  
+  // 多签钱包管理员
+  multisigAdminTitle: "<span class='text-[#FFAC03] font-medium text-base sm:text-lg'>多签钱包管理员 <i>- 基金会管理团队</i></span>",
+  multisigAdminDesc: "<span class='text-white/80 text-sm sm:text-base leading-relaxed'>基金会多签钱包由以下<span class='text-[#FFAC03]'><i>管理员</i></span>共同管理:</span>",
 
   fullNotice: "仅支持<span class='highlight'><i>个人钱包地址</i></span>，<span class='text-[#FFAC03]'><i>禁止使用交易所地址</i></span>",
   fullNftNotice: "NFT空投将<span class='warning-text'><i>永久绑定</i></span>于捐赠的<span class='highlight'>SOL钱包地址</span>，<span class='warning-text'><i>后续不可更改</i></span>",

@@ -196,21 +196,35 @@ export const MemberList: React.FC = () => {
       width: 360,
       render: (address: string) => {
         const tag = getAddressTag(address)
+        // 处理地址显示格式
+        const displayAddress = `${address.slice(0, 11)}...${address.slice(-11)} (DEMO)`
         
         return (
           <div className="flex items-center justify-center gap-2">
-            <a
-              href={`https://solscan.io/account/${address}`}
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* 
+              // 2024-01-08: 临时注释掉钱包地址的点击链接功能
+              // 后续恢复时取消注释即可
+              <a
+                href={`https://solscan.io/account/${address}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`font-medium ${
+                  tag 
+                    ? 'text-white/30 hover:text-white/40 line-through decoration-2' 
+                    : 'text-white/75 hover:text-white/80'
+                }`}
+              >
+            */}
+            <span
               className={`font-medium ${
                 tag 
-                  ? 'text-white/30 hover:text-white/40 line-through decoration-2' 
-                  : 'text-white/75 hover:text-white/80'
+                  ? 'text-white/30 line-through decoration-2' 
+                  : 'text-white/75'
               }`}
             >
-              {address}
-            </a>
+              {displayAddress}
+            </span>
+            {/* </a> */}
             {tag && (
               <span
                 className="px-2 py-0.5 rounded text-xs font-medium bg-white/10 text-white/50"
@@ -232,17 +246,23 @@ export const MemberList: React.FC = () => {
         let dataTime = dateStr * 1000
 
         return (
-          <a
-            href={`https://solscan.io/tx/${record.lastSignature}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/75 hover:text-white/80 font-medium"
-          >
+          /* 
+            // 2024-01-08: 临时注释掉最后捐赠时间的点击链接功能
+            // 后续恢复时取消注释即可
+            <a
+              href={`https://solscan.io/tx/${record.lastSignature}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/75 hover:text-white/80 font-medium"
+            >
+          */
+          <div className="text-white/75 font-medium">
             <div className="flex flex-col">
               <span>{dayjs(dataTime).utc().format('YYYY-MM-DD')}</span>
               <span>{dayjs(dataTime).utc().format('HH:mm')} (UTC)</span>
             </div>
-          </a>
+          </div>
+          /* </a> */
         )
       },
     },
@@ -327,6 +347,13 @@ export const MemberList: React.FC = () => {
   return (
     <ConfigProvider theme={{ components: { Table: { filterDropdownBg: 'transparent' } } }}>
       <div className="relative">
+        {/* 移动端加载动画 */}
+        {loading && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm z-50 sm:hidden">
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#FFAC03] border-t-transparent"></div>
+          </div>
+        )}
+        
         <StatsDisplay 
           members={members} 
           allMembers={allMembers}
@@ -349,7 +376,14 @@ export const MemberList: React.FC = () => {
               key="main-table"
               columns={memberColumns}
               dataSource={members}
-              loading={loading}
+              loading={{
+                spinning: loading,
+                indicator: (
+                  <div className="hidden sm:block">
+                    <div className="animate-spin rounded-full h-8 w-8 border-4 border-[#FFAC03] border-t-transparent"></div>
+                  </div>
+                ),
+              }}
               rowKey="address"
               pagination={false}
               className="custom-table no-hover-effect"

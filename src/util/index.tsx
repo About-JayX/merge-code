@@ -73,7 +73,7 @@ export const calc_VOTE_NFT = (
   const solAmount = string_number(object.SOL || 0)
   nftCount += Math.floor(solAmount / donaMap.SOL)
 
-  // MINIDOGE: 20,000 MINIDOGE = 1 NFT
+  // MINIDOGE: 10,000 MINIDOGE = 1 NFT
   const minidogeAmount = string_number(object.MINIDOGE || 0)
   nftCount += Math.floor(minidogeAmount / donaMap.MINIDOGE)
 

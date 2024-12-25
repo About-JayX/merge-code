@@ -14,4 +14,6 @@ export default {
   fullDisclaimer: "<span class='highlight'>$MINIDOGE CTO 재단</span>에 대한 기부는 <span class='project-highlight'><i>$MINIDOGE 프로젝트</i></span>에 대한 지지를 의미합니다. <span class='warning-text'>$MINIDOGE CTO 재단은 어떠한 보상도 약속하지 않습니다</span>",
   checkAddress: "재단의 <span class='wallet-highlight'>멀티시그 지갑 주소</span>를 <span class='warning-text'><i>신중히 확인</i></span>하고 주소가 <span class='warning-text'><i>완전히 정확</i></span>한지 확인하세요",
   checkAwareness: "<span class='project-highlight'>$MINIDOGE 프로젝트</span> 내용을 <span class='warning-text'><i>충분히 이해</i></span>하고 <span class='warning-text'><i>자발적으로 참여</i></span>함을 확인합니다",
+  multisigAdminTitle: "<span class='text-[#FFAC03] font-medium text-base sm:text-lg'>멀티시그 지갑 관리자 <i>- 재단 관리 팀</i></span>",
+  multisigAdminDesc: "<span class='text-white/80 text-sm sm:text-base leading-relaxed'>재단의 멀티시그 지갑은 다음 <span class='text-[#FFAC03]'><i>관리자</i></span>들이 공동으로 관리합니다:</span>",
 };

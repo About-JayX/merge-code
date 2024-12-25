@@ -27,7 +27,7 @@ export default {
   // NFT Airdrop Rules
   nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">NFTエアドロップ規則</span>',
   recommended: '',
-  nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">50 USD</span>または<span class="text-[#9945FF] font-medium">0.2 SOL</span>または<span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span>の寄付 = 1 NFTエアドロップ</div>',
+  nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">50 USD</span>または<span class="text-[#9945FF] font-medium">0.2 SOL</span>または<span class="text-[#FFAC03] font-medium">10,000 MINIDOGE</span>の寄付 = 1 NFTエアドロップ</div>',
   nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>最初の<span class="text-[#FFAC03] font-medium">100</span>アドレスは追加で<span class="text-[#FFAC03] font-medium">2</span>NFTエアドロップを受け取ります</div>',
   nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">101-500</span>位のアドレスは追加で<span class="text-[#FFAC03] font-medium">1</span>NFTエアドロップを受け取ります</div>',
 

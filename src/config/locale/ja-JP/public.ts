@@ -14,4 +14,6 @@ export default {
   fullDisclaimer: "<span class='highlight'>$MINIDOGE CTO 財団</span>への寄付は、<span class='project-highlight'><i>$MINIDOGEプロジェクト</i></span>への支持を表明するものです。<span class='warning-text'>$MINIDOGE CTO財団はいかなる見返りも約束しません</span>",
   checkAddress: "財団の<span class='wallet-highlight'>マルチシグウォレットアドレス</span>を<span class='warning-text'><i>慎重に確認</i></span>し、アドレスが<span class='warning-text'><i>完全に正しい</i></span>ことを確認してください",
   checkAwareness: "<span class='project-highlight'>$MINIDOGEプロジェクト</span>の内容を<span class='warning-text'><i>十分に理解</i></span>し、<span class='warning-text'><i>自主的に参加</i></span>することを確認します",
+  multisigAdminTitle: "<span class='text-[#FFAC03] font-medium text-base sm:text-lg'>マルチシグウォレット管理者 <i>- 財団管理チーム</i></span>",
+  multisigAdminDesc: "<span class='text-white/80 text-sm sm:text-base leading-relaxed'>財団のマルチシグウォレットは以下の<span class='text-[#FFAC03]'><i>管理者</i></span>によって共同管理されています：</span>",
 };

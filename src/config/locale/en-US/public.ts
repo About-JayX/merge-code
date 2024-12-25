@@ -8,6 +8,10 @@ export default {
   beforeTransferring: "<span class='action-text'>Before Transfer</span>",
   makeSureThat: "<span class='prompt-text'>Please Confirm</span>",
   disclaimer: "<strong class='disclaimer-title'>$MINIDOGE CTO Foundation - <i>Disclaimer</i></strong>",
+  
+  // Multi-signature Wallet Administrators
+  multisigAdminTitle: "<span class='text-[#FFAC03] font-medium text-base sm:text-lg'>Multi-signature Wallet Administrators <i>- Foundation Management Team</i></span>",
+  multisigAdminDesc: "<span class='text-white/80 text-sm sm:text-base leading-relaxed'>The foundation's multi-signature wallet is jointly managed by the following <span class='text-[#FFAC03]'><i>administrators</i></span>:</span>",
 
   fullNotice: "Only <span class='highlight'><i>personal wallet addresses</i></span> are supported, <span class='text-[#FFAC03]'><i>exchange addresses are prohibited</i></span>",
   fullNftNotice: "NFT airdrops will be <span class='warning-text'><i>permanently bound</i></span> to the <span class='highlight'>SOL wallet address</span> used for donation and <span class='warning-text'><i>cannot be changed later</i></span>",

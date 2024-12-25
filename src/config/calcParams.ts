@@ -5,5 +5,5 @@ export const donaMap = {
   USDT: 50,
   USDC: 50,
   SOL: 0.2,
-  MINIDOGE: 20000,
+  MINIDOGE: 10000,
 } as any

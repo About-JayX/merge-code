@@ -27,7 +27,7 @@ export default {
   // NFT Airdrop Rules
   nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">قوانین ایردراپ NFT</span>',
   recommended: '',
-  nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>اهدای <span class="text-[#FFAC03] font-medium">50 USD</span> یا <span class="text-[#9945FF] font-medium">0.2 SOL</span> یا <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> = 1 ایردراپ NFT</div>',
+  nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>اهدای <span class="text-[#FFAC03] font-medium">50 USD</span> یا <span class="text-[#9945FF] font-medium">0.2 SOL</span> یا <span class="text-[#FFAC03] font-medium">10,000 MINIDOGE</span> = 1 ایردراپ NFT</div>',
   nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">100</span> آدرس اول <span class="text-[#FFAC03] font-medium">2</span> ایردراپ NFT اضافی دریافت می‌کنند</div>',
   nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>آدرس‌های <span class="text-[#FFAC03] font-medium">101-500</span> <span class="text-[#FFAC03] font-medium">1</span> ایردراپ NFT اضافی دریافت می‌کنند</div>',
 

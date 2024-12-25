@@ -14,4 +14,7 @@ export default {
   fullDisclaimer: "<span class='highlight'>$MINIDOGE CTO Vakfı</span>'na yapılan bağışınız, <span class='project-highlight'><i>$MINIDOGE projesine</i></span> desteğinizi temsil eder. <span class='warning-text'>$MINIDOGE CTO Vakfı herhangi bir getiri vaat etmez</span>",
   checkAddress: "Vakfın <span class='wallet-highlight'>çoklu imza cüzdan adresini</span> <span class='warning-text'><i>dikkatlice doğrulayın</i></span> ve <span class='warning-text'><i>tamamen doğru</i></span> olduğundan emin olun",
   checkAwareness: "<span class='project-highlight'>$MINIDOGE projesi</span> içeriğini <span class='warning-text'><i>tamamen anladığınızı</i></span> ve <span class='warning-text'><i>gönüllü olarak katıldığınızı</i></span> onaylıyorsunuz",
+
+  multisigAdminTitle: "<span class='text-[#FFAC03] font-medium text-base sm:text-lg'>Çoklu İmza Cüzdan Yöneticileri <i>- Vakıf Yönetim Ekibi</i></span>",
+  multisigAdminDesc: "<span class='text-white/80 text-sm sm:text-base leading-relaxed'>Vakfın çoklu imza cüzdanı aşağıdaki <span class='text-[#FFAC03]'><i>yöneticiler</i></span> tarafından ortaklaşa yönetilmektedir:</span>",
 };

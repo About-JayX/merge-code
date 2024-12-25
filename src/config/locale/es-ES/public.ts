@@ -14,4 +14,7 @@ export default {
   fullDisclaimer: "Su donación a la <span class='highlight'>Fundación $MINIDOGE CTO</span> representa su respaldo al <span class='project-highlight'><i>proyecto $MINIDOGE</i></span>. <span class='warning-text'>La Fundación $MINIDOGE CTO no promete ningún retorno</span>",
   checkAddress: "<span class='warning-text'><i>Verifique cuidadosamente</i></span> la <span class='wallet-highlight'>dirección de la billetera multifirma</span> de la fundación y asegúrese de que sea <span class='warning-text'><i>completamente correcta</i></span>",
   checkAwareness: "Usted ha <span class='warning-text'><i>comprendido completamente</i></span> el contenido del <span class='project-highlight'>proyecto $MINIDOGE</span> y <span class='warning-text'><i>participa voluntariamente</i></span>",
+
+  multisigAdminTitle: "<span class='text-[#FFAC03] font-medium text-base sm:text-lg'>Administradores de la Cartera Multifirma <i>- Equipo de Gestión de la Fundación</i></span>",
+  multisigAdminDesc: "<span class='text-white/80 text-sm sm:text-base leading-relaxed'>La cartera multifirma de la fundación es gestionada conjuntamente por los siguientes <span class='text-[#FFAC03]'><i>administradores</i></span>:</span>",
 };
