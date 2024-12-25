@@ -14,4 +14,6 @@ export default {
   fullDisclaimer: "Khoản quyên góp của bạn cho <span class='highlight'>Quỹ $MINIDOGE CTO</span> thể hiện sự ủng hộ của bạn đối với <span class='project-highlight'><i>dự án $MINIDOGE</i></span>. <span class='warning-text'>Quỹ $MINIDOGE CTO không hứa hẹn bất kỳ khoản lợi nhuận nào</span>",
   checkAddress: "<span class='warning-text'><i>Kiểm tra cẩn thận</i></span> <span class='wallet-highlight'>địa chỉ ví đa chữ ký</span> của quỹ và đảm bảo rằng nó <span class='warning-text'><i>hoàn toàn chính xác</i></span>",
   checkAwareness: "Bạn đã <span class='warning-text'><i>hiểu đầy đủ</i></span> nội dung của <span class='project-highlight'>dự án $MINIDOGE</span> và <span class='warning-text'><i>tự nguyện tham gia</i></span>",
+  multisigAdminTitle: "<span class='text-[#FFAC03] font-medium text-base sm:text-lg'>Quản trị viên Ví Đa chữ ký <i>- Đội ngũ Quản lý Quỹ</i></span>",
+  multisigAdminDesc: "<span class='text-white/80 text-sm sm:text-base leading-relaxed'>Ví đa chữ ký của quỹ được quản lý chung bởi các <span class='text-[#FFAC03]'><i>quản trị viên</i></span> sau:</span>",
 };

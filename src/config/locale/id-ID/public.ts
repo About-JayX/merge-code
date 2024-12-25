@@ -14,4 +14,7 @@ export default {
   fullDisclaimer: "Donasi Anda kepada <span class='highlight'>Yayasan $MINIDOGE CTO</span> mewakili dukungan Anda terhadap <span class='project-highlight'><i>proyek $MINIDOGE</i></span>. <span class='warning-text'>Yayasan $MINIDOGE CTO tidak menjanjikan pengembalian apa pun</span>",
   checkAddress: "<span class='warning-text'><i>Periksa dengan teliti</i></span> <span class='wallet-highlight'>alamat dompet multi-tanda tangan</span> yayasan dan pastikan itu <span class='warning-text'><i>benar-benar tepat</i></span>",
   checkAwareness: "Anda telah <span class='warning-text'><i>memahami sepenuhnya</i></span> isi <span class='project-highlight'>proyek $MINIDOGE</span> dan <span class='warning-text'><i>berpartisipasi secara sukarela</i></span>",
+
+  multisigAdminTitle: "<span class='text-[#FFAC03] font-medium text-base sm:text-lg'>Administrator Dompet Multi-tanda tangan <i>- Tim Manajemen Yayasan</i></span>",
+  multisigAdminDesc: "<span class='text-white/80 text-sm sm:text-base leading-relaxed'>Dompet multi-tanda tangan yayasan dikelola bersama oleh <span class='text-[#FFAC03]'><i>administrator</i></span> berikut:</span>",
 };

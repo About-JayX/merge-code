@@ -14,4 +14,7 @@ export default {
   fullDisclaimer: "Ihre Spende an die <span class='highlight'>$MINIDOGE CTO Stiftung</span> stellt Ihre Unterstützung für das <span class='project-highlight'><i>$MINIDOGE-Projekt</i></span> dar. <span class='warning-text'>Die $MINIDOGE CTO Stiftung verspricht keine Rendite</span>",
   checkAddress: "<span class='warning-text'><i>Überprüfen Sie sorgfältig</i></span> die <span class='wallet-highlight'>Multi-Signatur-Wallet-Adresse</span> der Stiftung und stellen Sie sicher, dass sie <span class='warning-text'><i>vollständig korrekt</i></span> ist",
   checkAwareness: "Sie haben den Inhalt des <span class='project-highlight'>$MINIDOGE-Projekts</span> <span class='warning-text'><i>vollständig verstanden</i></span> und <span class='warning-text'><i>nehmen freiwillig teil</i></span>",
+
+  multisigAdminTitle: "<span class='text-[#FFAC03] font-medium text-base sm:text-lg'>Multi-Signatur-Wallet-Administratoren <i>- Stiftungs-Management-Team</i></span>",
+  multisigAdminDesc: "<span class='text-white/80 text-sm sm:text-base leading-relaxed'>Die Multi-Signatur-Wallet der Stiftung wird gemeinsam von den folgenden <span class='text-[#FFAC03]'><i>Administratoren</i></span> verwaltet:</span>",
 };

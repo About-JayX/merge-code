@@ -1,25 +1,28 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import { Connection, PublicKey } from '@solana/web3.js'
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token'
-import { Spin, Modal } from 'antd'
-import { SafetyCertificateOutlined, WarningOutlined } from '@ant-design/icons'
-import { copy } from '@/util'
-import Tgs from '../../tgs'
-import {
-  memesHover,
-  memesTextColor,
-  memesTextSize,
-  memesTitleSize,
-} from '../styles.ts'
-import { Button } from '../index.tsx'
-import { Card as LayoutCard } from '../common/Card.tsx'
-import { AddressDisplay, CopyButton } from '../common/AddressCard.tsx'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { FOUNDATION_CONFIG, RPC_ENDPOINT } from '@/config/foundation.ts'
+import { Connection, PublicKey } from '@solana/web3.js'
+import { TOKEN_PROGRAM_ID } from '@solana/spl-token'
+import { message, Modal, Spin } from 'antd'
+import { SafetyCertificateOutlined, WarningOutlined } from '@ant-design/icons'
+import { AddressDisplay, CopyButton } from '../common/AddressCard'
+import { FOUNDATION_CONFIG, RPC_ENDPOINT } from '@/config/foundation'
+import { memesHover, memesTextColor, memesTextSize, memesTitleSize } from '../styles'
+import { Card as LayoutCard } from '../common/Card'
+import { Button } from '../common/Button'
+import { copy } from '@/util'
+import Tgs from '../../tgs'
+import MultisigAdmins from './MultisigAdmins'
 
 type TokenLogos = {
   [key: string]: string
+}
+
+interface TokenBalances {
+  sol: number
+  usdt: number
+  usdc: number
+  minidoge: number
 }
 
 export const FoundationBalanceItem = ({
@@ -62,12 +65,7 @@ export const FoundationBalanceItem = ({
 
 const Funds: React.FC = ({ ...props }) => {
   const { t } = useTranslation()
-  const [balances, setBalances] = useState<{
-    sol: number
-    usdt: number
-    usdc: number
-    minidoge: number
-  }>({ sol: 0, usdt: 0, usdc: 0, minidoge: 0 })
+  const [balances, setBalances] = useState<TokenBalances>({ sol: 0, usdt: 0, usdc: 0, minidoge: 0 })
   const [loading, setLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
@@ -182,7 +180,7 @@ const Funds: React.FC = ({ ...props }) => {
           </span>
         </div>
       </Modal>
-      <LayoutCard className="bg-transparent !p-0 border border-white/10 overflow-hidden !opacity-100">
+      <LayoutCard className="bg-transparent !p-0 border border-white/10 overflow-hidden !opacity-100 mb-32">
         <header className="p-6 sm:p-8 border-b border-white/10 bg-[rgba(20,20,20,0.9)]">
           {isMobile ? (
             // 移动端布局
@@ -198,10 +196,7 @@ const Funds: React.FC = ({ ...props }) => {
                 </div>
                 <div className="flex items-center gap-4">
                   <Link to="/dao">
-                    <Button
-                      type="default"
-                      className="!min-w-0 !px-4 h-[40px] flex items-center"
-                    >
+                    <Button type="primary" className="!min-w-0 !px-4">
                       DAO
                     </Button>
                   </Link>
@@ -238,7 +233,7 @@ const Funds: React.FC = ({ ...props }) => {
                   />
                 </div>
                 <Link to="/dao">
-                  <Button type="default" className="!min-w-0 !px-4">
+                  <Button type="primary" className="!min-w-0 !px-4">
                     DAO
                   </Button>
                 </Link>
@@ -399,6 +394,9 @@ const Funds: React.FC = ({ ...props }) => {
                 </div>
               </div>
             </div>
+            
+            <MultisigAdmins />
+            
           </div>
         </footer>
       </LayoutCard>

@@ -14,4 +14,7 @@ export default {
   fullDisclaimer: "Votre don à la <span class='highlight'>Fondation $MINIDOGE CTO</span> représente votre soutien au <span class='project-highlight'><i>projet $MINIDOGE</i></span>. <span class='warning-text'>La Fondation $MINIDOGE CTO ne promet aucun retour</span>",
   checkAddress: "<span class='warning-text'><i>Vérifiez attentivement</i></span> <span class='wallet-highlight'>l'adresse du portefeuille multi-signatures</span> de la fondation et assurez-vous qu'elle est <span class='warning-text'><i>parfaitement correcte</i></span>",
   checkAwareness: "Vous avez <span class='warning-text'><i>pleinement compris</i></span> le contenu du <span class='project-highlight'>projet $MINIDOGE</span> et <span class='warning-text'><i>participez volontairement</i></span>",
+
+  multisigAdminTitle: "<span class='text-[#FFAC03] font-medium text-base sm:text-lg'>Administrateurs du Portefeuille Multi-Signatures <i>- Équipe de Gestion de la Fondation</i></span>",
+  multisigAdminDesc: "<span class='text-white/80 text-sm sm:text-base leading-relaxed'>Le portefeuille multi-signatures de la fondation est géré conjointement par les <span class='text-[#FFAC03]'><i>administrateurs</i></span> suivants :</span>",
 };

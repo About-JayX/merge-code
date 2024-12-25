@@ -14,4 +14,6 @@ export default {
   fullDisclaimer: "<span class='highlight'>$MINIDOGE CTO फाउंडेशन</span> को आपका दान <span class='project-highlight'><i>$MINIDOGE प्रोजेक्ट</i></span> के लिए आपके समर्थन को दर्शाता है। <span class='warning-text'>$MINIDOGE CTO फाउंडेशन किसी रिटर्न का वादा नहीं करता</span>",
   checkAddress: "फाउंडेशन के <span class='wallet-highlight'>मल्टी-सिग वॉलेट पते</span> की <span class='warning-text'><i>सावधानीपूर्वक जांच करें</i></span> और सुनिश्चित करें कि यह <span class='warning-text'><i>पूरी तरह सही</i></span> है",
   checkAwareness: "आपने <span class='project-highlight'>$MINIDOGE प्रोजेक्ट</span> की सामग्री को <span class='warning-text'><i>पूरी तरह से समझ लिया</i></span> है और <span class='warning-text'><i>स्वेच्छा से भाग ले रहे</i></span> हैं",
+  multisigAdminTitle: "<span class='text-[#FFAC03] font-medium text-base sm:text-lg'>मल्टी-सिग्नेचर वॉलेट प्रशासक <i>- फाउंडेशन प्रबंधन टीम</i></span>",
+  multisigAdminDesc: "<span class='text-white/80 text-sm sm:text-base leading-relaxed'>फाउंडेशन का मल्टी-सिग्नेचर वॉलेट निम्नलिखित <span class='text-[#FFAC03]'><i>प्रशासकों</i></span> द्वारा संयुक्त रूप से प्रबंधित किया जाता है:</span>",
 };
