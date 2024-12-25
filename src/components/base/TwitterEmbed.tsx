@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 interface TwitterEmbedProps {
   username: string;
@@ -18,19 +18,17 @@ const TwitterEmbed: React.FC<TwitterEmbedProps> = ({ username }) => {
   }, [username]);
 
   return (
-    <div className="twitter-embed flex justify-center items-center w-full">
-      <a 
-        href={`https://twitter.com/${username}`}
-        className="twitter-follow-button hover:opacity-80 transition-opacity duration-200"
-        data-show-screen-name="true"
-        data-show-count="false"
-        data-size="large"
-        data-dnt="true"
-      >
-        @{username}
-      </a>
-    </div>
+    <a
+      href={`https://twitter.com/${username}`}
+      className="twitter-follow-button hover:opacity-80 transition-opacity duration-200"
+      data-show-screen-name="true"
+      data-show-count="false"
+      data-size="large"
+      data-dnt="true"
+    >
+      @{username}
+    </a>
   );
 };
 
-export default TwitterEmbed; 
+export default TwitterEmbed;
