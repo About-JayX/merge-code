@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Typography, Modal, Button } from 'antd'
+import React, { useState } from 'react'
+import { Typography, Modal } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { QuestionCircleOutlined, FileProtectOutlined } from '@ant-design/icons'
 import { MemberList } from '@/components/domain/sections/MemberList'
 import { TableCard } from '@/components/domain/common/TableCard'
-import { getList } from '@/api'
 const { Title } = Typography
 
 // 治理规则说明内容组件
@@ -15,7 +14,10 @@ const GovernanceContent: React.FC = () => {
     <div className="space-y-6">
       {/* 治理机制 */}
       <div>
-        <div className="text-base font-medium mb-2" dangerouslySetInnerHTML={{ __html: t('dao.governanceMechanism') }} />
+        <div
+          className="text-base font-medium mb-2"
+          dangerouslySetInnerHTML={{ __html: t('dao.governanceMechanism') }}
+        />
         <div className="grid gap-2 text-base opacity-80">
           <div dangerouslySetInnerHTML={{ __html: t('dao.governanceRule1') }} />
           <div dangerouslySetInnerHTML={{ __html: t('dao.governanceRule2') }} />
@@ -26,7 +28,10 @@ const GovernanceContent: React.FC = () => {
 
       {/* 提案规则 */}
       <div>
-        <div className="text-base font-medium mb-2" dangerouslySetInnerHTML={{ __html: t('dao.proposalRules') }} />
+        <div
+          className="text-base font-medium mb-2"
+          dangerouslySetInnerHTML={{ __html: t('dao.proposalRules') }}
+        />
         <div className="grid gap-2 text-base opacity-80">
           <div dangerouslySetInnerHTML={{ __html: t('dao.proposalRule1') }} />
           <div dangerouslySetInnerHTML={{ __html: t('dao.proposalRule2') }} />
@@ -45,16 +50,21 @@ const RulesContent: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* 重要提醒 */}
-      <div className="text-[#FFC10B] text-sm sm:text-base font-medium p-3 bg-[#FFC10B]/10 rounded-lg border border-[#FFC10B]/20" dangerouslySetInnerHTML={{ __html: t('dao.importantNotice') }} />
+      <div
+        className="text-[#FFC10B] text-sm sm:text-base font-medium p-3 bg-[#FFC10B]/10 rounded-lg border border-[#FFC10B]/20"
+        dangerouslySetInnerHTML={{ __html: t('dao.importantNotice') }}
+      />
 
       {/* NFT空投规则 */}
       <div>
-        <div className="text-base font-medium mb-1" dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRules') }} />
+        <div
+          className="text-base font-medium mb-1"
+          dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRules') }}
+        />
         <div className="grid gap-2 text-base opacity-80">
+          {/* 隐藏推荐提示 */}
 
-     {/* 隐藏推荐提示 */}
-
-        {/* <div className="grid grid-cols-[1fr,auto] gap-4 items-center">
+          {/* <div className="grid grid-cols-[1fr,auto] gap-4 items-center">
             <div dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRule1') }} />
             <div className="text-[#FFC10B] font-medium whitespace-nowrap">
               【<span dangerouslySetInnerHTML={{ __html: t('dao.recommended') }} />】
@@ -77,17 +87,29 @@ const RulesContent: React.FC = () => {
 
       {/* 投票权规则 */}
       <div>
-        <div className="text-base font-medium mb-1" dangerouslySetInnerHTML={{ __html: t('dao.votingRightsRules') }} />
+        <div
+          className="text-base font-medium mb-1"
+          dangerouslySetInnerHTML={{ __html: t('dao.votingRightsRules') }}
+        />
         <div className="grid gap-2 text-base opacity-80">
-          <div dangerouslySetInnerHTML={{ __html: t('dao.votingRightsRule1') }} />
-          <div dangerouslySetInnerHTML={{ __html: t('dao.votingRightsRule2') }} />
-          <div dangerouslySetInnerHTML={{ __html: t('dao.votingRightsRule3') }} />
+          <div
+            dangerouslySetInnerHTML={{ __html: t('dao.votingRightsRule1') }}
+          />
+          <div
+            dangerouslySetInnerHTML={{ __html: t('dao.votingRightsRule2') }}
+          />
+          <div
+            dangerouslySetInnerHTML={{ __html: t('dao.votingRightsRule3') }}
+          />
         </div>
       </div>
 
       {/* 投票权示例 */}
       <div>
-        <div className="text-base font-medium mb-1" dangerouslySetInnerHTML={{ __html: t('dao.votingRightsExamples') }} />
+        <div
+          className="text-base font-medium mb-1"
+          dangerouslySetInnerHTML={{ __html: t('dao.votingRightsExamples') }}
+        />
         <div className="grid gap-2 text-sm opacity-80">
           <div dangerouslySetInnerHTML={{ __html: t('dao.votingExample1') }} />
           <div dangerouslySetInnerHTML={{ __html: t('dao.votingExample2') }} />
@@ -97,7 +119,10 @@ const RulesContent: React.FC = () => {
 
       {/* 参与流程 */}
       <div>
-        <div className="text-base font-medium mb-2" dangerouslySetInnerHTML={{ __html: t('dao.participationProcess') }} />
+        <div
+          className="text-base font-medium mb-2"
+          dangerouslySetInnerHTML={{ __html: t('dao.participationProcess') }}
+        />
         <div className="grid gap-2 text-base opacity-80">
           <div dangerouslySetInnerHTML={{ __html: t('dao.processStep1') }} />
           <div>
@@ -113,7 +138,10 @@ const RulesContent: React.FC = () => {
 
       {/* 注意事项 */}
       <div>
-        <div className="text-base font-medium mb-2" dangerouslySetInnerHTML={{ __html: t('dao.notes') }} />
+        <div
+          className="text-base font-medium mb-2"
+          dangerouslySetInnerHTML={{ __html: t('dao.notes') }}
+        />
         <div className="grid gap-2 text-base opacity-80">
           <div dangerouslySetInnerHTML={{ __html: t('dao.note1') }} />
           <div dangerouslySetInnerHTML={{ __html: t('dao.note2') }} />

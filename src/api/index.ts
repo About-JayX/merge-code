@@ -1,22 +1,18 @@
-const baseURL = import.meta.env.DEV ? '/api' : 'https://donate.mini-doge.com'
+const baseURL = import.meta.env.DEV ? 'https://donate.mini-doge.com' : 'https://donate.mini-doge.com'
 
 export const getList = async (params?: { page: number; pageSize: number }) => {
   try {
-    const queryParams = new URLSearchParams()
-    if (params) {
-      queryParams.append('page', params.page.toString())
-      queryParams.append('pageSize', params.pageSize.toString())
-    } else {
-      queryParams.append('page', '1')
-      queryParams.append('pageSize', '10')
-    }
+    const queryParams = new URLSearchParams({
+      page: (params?.page ?? 1).toString(),
+      pageSize: (params?.pageSize ?? 10).toString(),
+    })
 
     const response = await fetch(
       `${baseURL}/members?${queryParams.toString()}`,
       {
         method: 'GET',
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json',
         },
       }

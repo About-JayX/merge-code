@@ -44,7 +44,7 @@ const GoogleAnalytics = () => {
     window.gtag('event', 'page_view', {
       page_path: location.pathname,
       page_location: window.location.href,
-      page_title: document.title
+      page_title: document.title,
     })
     console.log('Page view event sent:', location.pathname)
   }, [location])

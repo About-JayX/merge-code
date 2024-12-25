@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
 import { getList } from '@/api'
 import { calc_VOTE_NFT } from '@/util'
-import { isSpecialAddress, getAddressNftAirdrop, getAddressVotingRights } from '@/config/specialAddresses'
+import {
+  isSpecialAddress,
+  getAddressNftAirdrop,
+  getAddressVotingRights,
+} from '@/config/specialAddresses'
 
 interface TokenAmounts {
   USDT: number | string
@@ -29,7 +33,7 @@ interface Member {
   donationCount: number
   nftCount: number
   votes: number
-  timeBasedRank?: number  // 基于时间的排名
+  timeBasedRank?: number // 基于时间的排名
 }
 
 const ITEMS_PER_PAGE = 30
@@ -75,29 +79,31 @@ export default function useFoundationMembers() {
       const totalItems = firstPage.total
       const totalApiPages = Math.ceil(totalItems / API_PAGE_SIZE)
       console.log(`Total items: ${totalItems}, Total pages: ${totalApiPages}`)
-      
+
       // 加载剩余页面（从第2页开始）
-      const remainingPagePromises = Array.from({ length: totalApiPages - 1 }, (_, i) => 
-        getList({ page: i + 2, pageSize: API_PAGE_SIZE })
-          .then(result => {
-            console.log(`Loaded page ${i + 2}/${totalApiPages}`)
-            return result
-          })
-          .catch(err => {
-            console.error(`Failed to load page ${i + 2}:`, err)
-            throw err
-          })
+      const remainingPagePromises = Array.from(
+        { length: totalApiPages - 1 },
+        (_, i) =>
+          getList({ page: i + 2, pageSize: API_PAGE_SIZE })
+            .then(result => {
+              console.log(`Loaded page ${i + 2}/${totalApiPages}`)
+              return result
+            })
+            .catch(err => {
+              console.error(`Failed to load page ${i + 2}:`, err)
+              throw err
+            })
       )
-      
+
       const remainingResults = await Promise.all(remainingPagePromises)
       console.log('All pages loaded')
-      
+
       // 合并第一页和剩余页面的数据
       const allResults = [firstPage, ...remainingResults]
-      
+
       // 使用 Map 来去重
       const uniqueMembers = new Map<string, DonationItem>()
-      
+
       // 合并所有数据并去重
       allResults.forEach(result => {
         if (!result || !result.success || !Array.isArray(result.donations)) {
@@ -109,30 +115,48 @@ export default function useFoundationMembers() {
             // 如果已存在该地址的记录，保留最早的捐赠时间
             const existingMember = uniqueMembers.get(item.from)
             if (existingMember) {
-              item.firstDonationTime = Math.min(item.firstDonationTime, existingMember.firstDonationTime)
+              item.firstDonationTime = Math.min(
+                item.firstDonationTime,
+                existingMember.firstDonationTime
+              )
             }
             uniqueMembers.set(item.from, item)
           }
         })
       })
-      
+
       // 处理去重后的数据
-      const processedMembers = Array.from(uniqueMembers.values()).map((item: DonationItem) => {
-        if (!item || !item.from || !item.tokenAmounts) {
-          console.warn('Invalid donation item:', item)
-          return null
-        }
+      const processedMembers = Array.from(uniqueMembers.values())
+        .map((item: DonationItem) => {
+          if (!item || !item.from || !item.tokenAmounts) {
+            console.warn('Invalid donation item:', item)
+            return null
+          }
 
-        // 确保所有代币数量都存在
-        const tokenAmounts: TokenAmounts = {
-          USDT: item.tokenAmounts.USDT || '0',
-          USDC: item.tokenAmounts.USDC || '0',
-          SOL: item.tokenAmounts.SOL || '0',
-          MINIDOGE: item.tokenAmounts.MINIDOGE || '0'
-        }
+          // 确保所有代币数量都存在
+          const tokenAmounts: TokenAmounts = {
+            USDT: item.tokenAmounts.USDT || '0',
+            USDC: item.tokenAmounts.USDC || '0',
+            SOL: item.tokenAmounts.SOL || '0',
+            MINIDOGE: item.tokenAmounts.MINIDOGE || '0',
+          }
 
-        // 检查是否为特殊地址
-        if (isSpecialAddress(item.from)) {
+          // 检查是否为特殊地址
+          if (isSpecialAddress(item.from)) {
+            return {
+              address: item.from,
+              tokenAmounts,
+              firstDonationTime: item.firstDonationTime,
+              lastDonationTime: item.lastDonationTime,
+              lastSignature: item.lastSignature,
+              donationCount: item.donationCount,
+              nftCount: getAddressNftAirdrop(item.from),
+              votes: getAddressVotingRights(item.from),
+            }
+          }
+
+          const { nftCount, votes } = calc_VOTE_NFT(tokenAmounts)
+
           return {
             address: item.from,
             tokenAmounts,
@@ -140,24 +164,11 @@ export default function useFoundationMembers() {
             lastDonationTime: item.lastDonationTime,
             lastSignature: item.lastSignature,
             donationCount: item.donationCount,
-            nftCount: getAddressNftAirdrop(item.from),
-            votes: getAddressVotingRights(item.from)
+            nftCount,
+            votes,
           }
-        }
-
-        const { nftCount, votes } = calc_VOTE_NFT(tokenAmounts)
-        
-        return {
-          address: item.from,
-          tokenAmounts,
-          firstDonationTime: item.firstDonationTime,
-          lastDonationTime: item.lastDonationTime,
-          lastSignature: item.lastSignature,
-          donationCount: item.donationCount,
-          nftCount,
-          votes
-        }
-      }).filter(Boolean) as Member[]
+        })
+        .filter(Boolean) as Member[]
 
       // 先按照最早捐赠时间排序，计算基于时间的排名
       const timeBasedMembers = [...processedMembers]
@@ -165,28 +176,27 @@ export default function useFoundationMembers() {
       timeBasedMembers.forEach((member, index) => {
         member.timeBasedRank = index + 1
       })
-      
+
       // 再按照 NFT 数量排序（包括额外奖励）
       processedMembers.sort((a, b) => {
         const rankA = a.timeBasedRank || 0
         const rankB = b.timeBasedRank || 0
         const totalNftA = calculateTotalNft(a, rankA)
         const totalNftB = calculateTotalNft(b, rankB)
-        return totalNftB - totalNftA  // 降序排序
+        return totalNftB - totalNftA // 降序排序
       })
-      
+
       console.log(`Processed ${processedMembers.length} unique members`)
-      
+
       // 更新状态
       setAllMembers(processedMembers)
       setTotal(processedMembers.length)
       setTotalPages(Math.ceil(processedMembers.length / ITEMS_PER_PAGE))
-      
+
       // 更新当前页显示的数据
       const start = (currentPage - 1) * ITEMS_PER_PAGE
       const end = start + ITEMS_PER_PAGE
       setMembers(processedMembers.slice(start, end))
-      
     } catch (err: any) {
       console.error('Error loading data:', err)
       setError(err.message || 'Failed to load data')
@@ -223,6 +233,6 @@ export default function useFoundationMembers() {
     currentPage,
     pageSize: ITEMS_PER_PAGE,
     totalPages,
-    setCurrentPage
+    setCurrentPage,
   }
 }
