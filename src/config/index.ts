@@ -17,7 +17,7 @@ import trTR from "@/config/locale/tr-TR";
 import ruRU from "@/config/locale/ru-RU";
 import frFR from "@/config/locale/fr-FR";
 import deDE from "@/config/locale/de-DE";
-import ptBR from "@/config/locale/pt-BR";
+import ptPT from "@/config/locale/pt-PT";
 import esES from "@/config/locale/es-ES";
 import itIT from "@/config/locale/it-IT";
 import hiIN from "@/config/locale/hi-IN";
@@ -62,7 +62,7 @@ export const locale = {
   "ru-RU": ruRU,
   "fr-FR": frFR,
   "de-DE": deDE,
-  "pt-BR": ptBR,
+  "pt-PT": ptPT,
   "es-ES": esES,
   "it-IT": itIT,
   "ar-SA": arSA,
@@ -90,7 +90,7 @@ i18n
       "ru-RU",
       "fr-FR",
       "de-DE",
-      "pt-BR",
+      "pt-PT",
       "es-ES",
       "it-IT",
       "ar-SA",

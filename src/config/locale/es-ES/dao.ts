@@ -1,11 +1,11 @@
 export default {
     title: 'Miembros de la Fundación',
     date: 'Fecha',
-    amount: 'Monto',
+    amount: 'Cantidad',
     donor: 'Donante',
     purpose: 'Propósito',
     status: 'Estado',
-    total: '{{total}} Registros',
+    total: 'Total {{total}} entradas',
   
     // Header
     daoTitle: 'DAO',
@@ -13,76 +13,76 @@ export default {
   
     // Error messages
     loadError: 'Error al cargar',
-    invalidPublicKey: 'Dirección de la Fundación inválida',
+    invalidPublicKey: 'Dirección de fundación inválida',
   
     // Stats
-    totalMembers: 'Miembros Totales',
-    totalNftAirdrops: 'Total de Airdrops de NFT',
-    totalVotes: 'Total de Votos',
+    totalMembers: 'Miembros totales',
+    totalNftAirdrops: 'Total NFT Airdrops',
+    totalVotes: 'Derechos de voto totales',
   
     // Rules Modal
-    rulesTitle: 'Reglas de Participación de la Fundación',
-    importantNotice: 'Aviso Importante: Por favor, use la dirección de su billetera personal para las donaciones, no direcciones de intercambios. Los airdrops de NFT estarán vinculados a las direcciones de billetera y no se podrán cambiar posteriormente.',
+    rulesTitle: 'Reglas de participación en la fundación',
+    importantNotice: '<span class="text-[#FFAC03] font-bold">Aviso importante: </span>Por favor, utilice una dirección de billetera personal para la donación, no una dirección de exchange. El airdrop NFT estará vinculado a la dirección de la billetera y no se podrá modificar posteriormente.',
   
     // NFT Airdrop Rules
-    nftAirdropRules: 'Reglas de Airdrop de NFT',
-    recommended: 'Recomendado',
-    nftAirdropRule1: 'Donar 50 USDT/USDC = 1 Airdrop de NFT',
-    nftAirdropRule2: 'Donar 0.2 SOL = 1 Airdrop de NFT',
-    nftAirdropRule3: 'Donar 20,000 MINIDOGE = 1 Airdrop de NFT',
+    nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Reglas de Airdrop NFT</span>',
+    recommended: '',
+    nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Donación de <span class="text-[#FFAC03] font-medium">50 USD</span> o <span class="text-[#9945FF] font-medium">0.2 SOL</span> o <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> = 1 NFT Airdrop</div>',
+    nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Las primeras <span class="text-[#FFAC03] font-medium">100</span> direcciones reciben <span class="text-[#FFAC03] font-medium">2</span> NFT Airdrops adicionales</div>',
+    nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Las direcciones <span class="text-[#FFAC03] font-medium">101-500</span> reciben <span class="text-[#FFAC03] font-medium">1</span> NFT Airdrop adicional</div>',
   
     // Voting Rights Rules
-    votingRightsRules: 'Reglas de Derechos de Voto',
-    votingRightsRule1: 'Voto Básico: Obtén 1 voto básico por cualquier cantidad donada',
-    votingRightsRule2: 'Votos Adicionales: Obtén 1 voto adicional por cada 5 cuotas de NFT',
-    votingRightsRule3: 'Máximo 4 votos por billetera (1 básico + 3 adicionales)',
+    votingRightsRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Reglas de derechos de voto</span>',
+    votingRightsRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Derecho de voto básico: Posesión de <span class="text-[#FFAC03] font-medium">1</span> o más NFT Airdrops para <span class="text-[#FFAC03] font-medium">1</span> voto básico</div>',
+    votingRightsRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Derechos de voto adicionales: Cada <span class="text-[#FFAC03] font-medium">5</span> NFT Airdrops otorgan <span class="text-[#FFAC03] font-medium">1</span> voto adicional</div>',
+    votingRightsRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Máximo <span class="text-[#FFAC03] font-medium">5</span> votos por billetera (<span class="text-[#FFAC03] font-medium">1</span> voto básico + <span class="text-[#FFAC03] font-medium">4</span> votos adicionales)</div>',
   
     // Voting Rights Examples
-    votingRightsExamples: 'Ejemplos de Derechos de Voto',
-    votingExample1: 'Donar 2 cuotas de NFT = 1 voto (básico)',
-    votingExample2: 'Donar 6 cuotas de NFT = 2 votos (1 básico + 1 adicional)',
-    votingExample3: 'Donar 16 cuotas de NFT = 4 votos (1 básico + 3 adicionales, límite máximo)',
+    votingRightsExamples: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Ejemplos de derechos de voto</span>',
+    votingExample1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Posesión de <span class="text-[#FFAC03] font-medium">2</span> NFT Airdrops = <span class="text-[#FFAC03] font-medium">1</span> voto (básico)</div>',
+    votingExample2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Posesión de <span class="text-[#FFAC03] font-medium">6</span> NFT Airdrops = <span class="text-[#FFAC03] font-medium">2</span> votos (<span class="text-[#FFAC03] font-medium">1</span> voto básico + <span class="text-[#FFAC03] font-medium">1</span> voto adicional)</div>',
+    votingExample3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Posesión de <span class="text-[#FFAC03] font-medium">20</span> NFT Airdrops = <span class="text-[#FFAC03] font-medium">5</span> votos (<span class="text-[#FFAC03] font-medium">1</span> voto básico + <span class="text-[#FFAC03] font-medium">4</span> votos adicionales, límite alcanzado)</div>',
   
     // Participation Process
-    participationProcess: 'Proceso de Participación',
-    processStep1: 'Elige $SOL, $USDT, $USDC, $MINIDOGE para donar',
-    processStep2: 'Transfiere a la dirección de billetera SOL de la Fundación:',
-    processStep3: 'Guarda la captura de pantalla de la transacción',
-    processStep4: 'Contacta al administrador de Telegram',
-    processStep4Extra: 'Envía el comprobante de transferencia, únete al grupo de la fundación después de la verificación',
+    participationProcess: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Proceso de participación</span>',
+    processStep1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Elija <span class="text-[#9945FF] font-medium">$SOL</span>, <span class="text-[#26A17B] font-medium">$USDT</span>, <span class="text-[#2785CA] font-medium">$USDC</span> o <span class="text-[#FFAC03] font-medium">$MINIDOGE</span> para la donación</div>',
+    processStep2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Transferencia a la dirección SOL de la fundación:</div>',
+    processStep3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Guardar una captura de pantalla o video de la transacción</div>',
+    processStep4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Contactar al administrador de Telegram (@xxxx) para unirse</div>',
+    processStep4Extra: '',
   
     // Notes
-    notes: 'Notas',
-    note1: 'No hay límite en el monto de la donación, pero los derechos de voto están limitados',
-    note2: 'Te clasificarás automáticamente para futuros airdrops de NFT después de la donación',
-    note3: 'El tiempo específico del airdrop se anunciará más adelante',
-    note4: 'La Fundación se reserva el derecho de interpretación final',
+    notes: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Notas</span>',
+    note1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Sin límite en el monto de la donación, pero los derechos de voto están limitados</div>',
+    note2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Calificación automática para futuros NFT Airdrops después de la donación</div>',
+    note3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>El NFT se lanzará oficialmente después de que $MINIDOGE alcance una capitalización de mercado de 50M+</div>',
+    note4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Las reglas de la fundación pueden ajustarse mediante decisiones de la fundación y votaciones. Las reglas actuales son solo para referencia</div>',
   
     // Governance Modal
-    modalGovernanceTitle: 'Sistema de Gobernanza de la Fundación',
-    governanceMechanism: 'Mecanismo de Gobernanza',
-    governanceRule1: 'Se requiere una participación de más del 30% de los votantes totales para que una propuesta sea válida',
-    governanceRule2: 'Las decisiones importantes requieren una participación de más del 50% de los votantes totales',
-    governanceRule3: 'Las propuestas necesitan más del 2/3 de votos a favor para ser aprobadas',
-    governanceRule4: 'El equipo principal de la Fundación tiene un peso de gobernanza del 20%, y la votación de la comunidad tiene un peso del 80%',
+    modalGovernanceTitle: 'Sistema de gobernanza de la fundación',
+    governanceMechanism: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Mecanismo de gobernanza</span>',
+    governanceRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Las votaciones de propuestas requieren <span class="text-[#FFAC03] font-medium">>30%</span> de participación total de votantes para ser válidas</div>',
+    governanceRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Las decisiones importantes requieren <span class="text-[#FFAC03] font-medium">>50%</span> de participación total de votantes</div>',
+    governanceRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Las propuestas requieren <span class="text-[#FFAC03] font-medium">>2/3</span> de aprobación para ser adoptadas</div>',
+    governanceRule4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>El equipo principal de la fundación tiene <span class="text-[#FFAC03] font-medium">20%</span> de peso en la gobernanza, el voto comunitario tiene <span class="text-[#FFAC03] font-medium">80%</span> de peso</div>',
   
     // Proposal Rules
-    proposalRules: 'Reglas de Propuestas',
-    proposalRule1: 'Se necesitan 4 derechos de voto para iniciar una propuesta',
-    proposalRule2: 'La propuesta debe contar con el respaldo de 3 titulares de derechos de voto diferentes',
-    proposalRule3: 'Máximo 2 propuestas por semana',
-    proposalRule4: 'El periodo normal de votación es de 72 horas',
+    proposalRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Reglas de propuesta</span>',
+    proposalRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">5</span> derechos de voto requeridos para enviar una propuesta</div>',
+    proposalRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>La propuesta requiere la firma conjunta de <span class="text-[#FFAC03] font-medium">3</span> titulares diferentes de derechos de voto</div>',
+    proposalRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Máximo <span class="text-[#FFAC03] font-medium">2</span> votaciones de propuesta por semana</div>',
+    proposalRule4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>El tiempo regular de votación es de <span class="text-[#FFAC03] font-medium">72</span> horas</div>',
   
     // Buttons
     rulesButton: 'Reglas',
     governanceButton: 'Gobernanza',
   
     // Table Headers
-    numberHeader: 'No.',
-    nftRightsHeader: 'Derechos NFT',
-    votingRightsHeader: 'Derechos de Voto',
-    walletAddressHeader: 'Dirección de Billetera',
-    lastDonationHeader: 'Última Donación',
-    totalDonationHeader: 'Total Donado'
+    numberHeader: 'N°',
+    nftRightsHeader: 'NFT Airdrop',
+    votingRightsHeader: 'Votos',
+    walletAddressHeader: 'Dirección de billetera (No se admiten direcciones de exchange)',
+    lastDonationHeader: 'Última donación',
+    totalDonationHeader: 'Donación total'
   };
   

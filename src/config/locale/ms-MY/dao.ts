@@ -5,73 +5,73 @@ export default {
     donor: 'Penderma',
     purpose: 'Tujuan',
     status: 'Status',
-    total: '{{total}} Rekod',
+    total: 'Jumlah {{total}} rekod',
   
     // Header
     daoTitle: 'DAO',
     governanceTitle: 'Tadbir Urus',
   
     // Error messages
-    loadError: 'Gagal Memuatkan',
-    invalidPublicKey: 'Alamat Yayasan Tidak Sah',
+    loadError: 'Gagal memuat',
+    invalidPublicKey: 'Alamat yayasan tidak sah',
   
     // Stats
     totalMembers: 'Jumlah Ahli',
-    totalNftAirdrops: 'Jumlah NFT Airdrops',
-    totalVotes: 'Jumlah Undian',
+    totalNftAirdrops: 'Jumlah NFT Airdrop',
+    totalVotes: 'Jumlah Hak Mengundi',
   
     // Rules Modal
     rulesTitle: 'Peraturan Penyertaan Yayasan',
-    importantNotice: 'Pemberitahuan Penting: Sila gunakan alamat dompet peribadi anda untuk sumbangan, bukan alamat pertukaran. Airdrop NFT akan dikaitkan dengan alamat dompet dan tidak boleh diubah kemudian.',
+    importantNotice: '<span class="text-[#FFAC03] font-bold">Notis Penting: </span>Sila gunakan alamat dompet peribadi untuk derma, jangan gunakan alamat pertukaran. NFT Airdrop akan dikaitkan dengan alamat dompet dan tidak boleh diubah kemudian.',
   
     // NFT Airdrop Rules
-    nftAirdropRules: 'Peraturan NFT Airdrop',
-    recommended: 'Disyorkan',
-    nftAirdropRule1: 'Sumbang 50 USDT/USDC = 1 NFT Airdrop',
-    nftAirdropRule2: 'Sumbang 0.2 SOL = 1 NFT Airdrop',
-    nftAirdropRule3: 'Sumbang 20,000 MINIDOGE = 1 NFT Airdrop',
+    nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Peraturan NFT Airdrop</span>',
+    recommended: '',
+    nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Derma <span class="text-[#FFAC03] font-medium">50 USD</span> atau <span class="text-[#9945FF] font-medium">0.2 SOL</span> atau <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> = 1 NFT Airdrop</div>',
+    nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">100</span> alamat pertama menerima tambahan <span class="text-[#FFAC03] font-medium">2</span> NFT Airdrop</div>',
+    nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Alamat <span class="text-[#FFAC03] font-medium">101-500</span> menerima tambahan <span class="text-[#FFAC03] font-medium">1</span> NFT Airdrop</div>',
   
     // Voting Rights Rules
-    votingRightsRules: 'Peraturan Hak Mengundi',
-    votingRightsRule1: 'Undian Asas: Dapatkan 1 undian asas untuk sebarang jumlah sumbangan',
-    votingRightsRule2: 'Undian Tambahan: Dapatkan 1 undian tambahan untuk setiap 5 kuota NFT',
-    votingRightsRule3: 'Maksimum 4 undian per dompet (1 asas + 3 tambahan)',
+    votingRightsRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Peraturan Hak Mengundi</span>',
+    votingRightsRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Hak mengundi asas: Memiliki <span class="text-[#FFAC03] font-medium">1</span> atau lebih NFT Airdrop untuk <span class="text-[#FFAC03] font-medium">1</span> undi asas</div>',
+    votingRightsRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Undi tambahan: Setiap <span class="text-[#FFAC03] font-medium">5</span> NFT Airdrop memberikan <span class="text-[#FFAC03] font-medium">1</span> undi tambahan</div>',
+    votingRightsRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Maksimum <span class="text-[#FFAC03] font-medium">5</span> undi setiap dompet (<span class="text-[#FFAC03] font-medium">1</span> asas + <span class="text-[#FFAC03] font-medium">4</span> tambahan)</div>',
   
     // Voting Rights Examples
-    votingRightsExamples: 'Contoh Hak Mengundi',
-    votingExample1: 'Sumbang 2 kuota NFT = 1 undian (asas)',
-    votingExample2: 'Sumbang 6 kuota NFT = 2 undian (1 asas + 1 tambahan)',
-    votingExample3: 'Sumbang 16 kuota NFT = 4 undian (1 asas + 3 tambahan, had maksimum)',
+    votingRightsExamples: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Contoh Hak Mengundi</span>',
+    votingExample1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Memiliki <span class="text-[#FFAC03] font-medium">2</span> NFT Airdrop = <span class="text-[#FFAC03] font-medium">1</span> undi (asas)</div>',
+    votingExample2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Memiliki <span class="text-[#FFAC03] font-medium">6</span> NFT Airdrop = <span class="text-[#FFAC03] font-medium">2</span> undi (<span class="text-[#FFAC03] font-medium">1</span> asas + <span class="text-[#FFAC03] font-medium">1</span> tambahan)</div>',
+    votingExample3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Memiliki <span class="text-[#FFAC03] font-medium">20</span> NFT Airdrop = <span class="text-[#FFAC03] font-medium">5</span> undi (<span class="text-[#FFAC03] font-medium">1</span> asas + <span class="text-[#FFAC03] font-medium">4</span> tambahan, had tercapai)</div>',
   
     // Participation Process
-    participationProcess: 'Proses Penyertaan',
-    processStep1: 'Pilih $SOL, $USDT, $USDC, $MINIDOGE untuk sumbangan',
-    processStep2: 'Pindahkan ke alamat dompet SOL Yayasan:',
-    processStep3: 'Simpan tangkapan layar transaksi',
-    processStep4: 'Hubungi pentadbir Telegram',
-    processStep4Extra: 'Serahkan bukti pemindahan, sertai kumpulan yayasan selepas pengesahan',
+    participationProcess: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Proses Penyertaan</span>',
+    processStep1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Pilih <span class="text-[#9945FF] font-medium">$SOL</span>, <span class="text-[#26A17B] font-medium">$USDT</span>, <span class="text-[#2785CA] font-medium">$USDC</span> atau <span class="text-[#FFAC03] font-medium">$MINIDOGE</span> untuk derma</div>',
+    processStep2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Pindah ke alamat SOL yayasan:</div>',
+    processStep3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Simpan tangkapan skrin atau video transaksi</div>',
+    processStep4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Hubungi pentadbir Telegram (@xxxx) untuk menyertai</div>',
+    processStep4Extra: '',
   
     // Notes
-    notes: 'Nota',
-    note1: 'Tiada had untuk jumlah sumbangan, tetapi hak mengundi adalah terhad',
-    note2: 'Secara automatik layak untuk airdrop NFT yang akan datang selepas sumbangan',
-    note3: 'Masa airdrop yang tepat akan diumumkan kemudian',
-    note4: 'Yayasan berhak untuk membuat tafsiran akhir',
+    notes: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Nota</span>',
+    note1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Tiada had untuk jumlah derma, tetapi hak mengundi adalah terhad</div>',
+    note2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Layak secara automatik untuk NFT Airdrop masa depan selepas derma</div>',
+    note3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>NFT akan dilancarkan secara rasmi selepas $MINIDOGE mencapai permodalan pasaran 50M+</div>',
+    note4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Peraturan yayasan boleh diselaraskan melalui keputusan yayasan dan pengundian. Peraturan semasa hanya untuk rujukan</div>',
   
     // Governance Modal
     modalGovernanceTitle: 'Sistem Tadbir Urus Yayasan',
-    governanceMechanism: 'Mekanisme Tadbir Urus',
-    governanceRule1: 'Undian untuk cadangan mesti melibatkan lebih daripada 30% penyertaan pengundi untuk sah',
-    governanceRule2: 'Keputusan besar memerlukan lebih daripada 50% penyertaan pengundi',
-    governanceRule3: 'Cadangan memerlukan lebih daripada 2/3 undian untuk diluluskan',
-    governanceRule4: 'Pasukan teras Yayasan mempunyai 20% berat tadbir urus, manakala pengundian komuniti mempunyai 80% berat tadbir urus',
+    governanceMechanism: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Mekanisme Tadbir Urus</span>',
+    governanceRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Pengundian cadangan memerlukan <span class="text-[#FFAC03] font-medium">>30%</span> penyertaan jumlah pengundi untuk kesahan</div>',
+    governanceRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Keputusan penting memerlukan <span class="text-[#FFAC03] font-medium">>50%</span> penyertaan jumlah pengundi</div>',
+    governanceRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Cadangan memerlukan <span class="text-[#FFAC03] font-medium">>2/3</span> kelulusan untuk diterima</div>',
+    governanceRule4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Pasukan teras yayasan mempunyai pemberat tadbir urus <span class="text-[#FFAC03] font-medium">20%</span>, undian komuniti mempunyai pemberat <span class="text-[#FFAC03] font-medium">80%</span></div>',
   
     // Proposal Rules
-    proposalRules: 'Peraturan Cadangan',
-    proposalRule1: 'Memerlukan 4 hak mengundi untuk memulakan cadangan',
-    proposalRule2: 'Cadangan memerlukan sokongan daripada 3 pemegang hak mengundi yang berbeza',
-    proposalRule3: 'Maksimum 2 undian cadangan setiap minggu',
-    proposalRule4: 'Tempoh undian biasa adalah 72 jam',
+    proposalRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Peraturan Cadangan</span>',
+    proposalRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">5</span> hak mengundi diperlukan untuk menghantar cadangan</div>',
+    proposalRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Cadangan memerlukan tandatangan bersama <span class="text-[#FFAC03] font-medium">3</span> pemegang hak mengundi yang berbeza</div>',
+    proposalRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Maksimum <span class="text-[#FFAC03] font-medium">2</span> pengundian cadangan setiap minggu</div>',
+    proposalRule4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Masa mengundi biasa adalah <span class="text-[#FFAC03] font-medium">72</span> jam</div>',
   
     // Buttons
     rulesButton: 'Peraturan',
@@ -79,10 +79,10 @@ export default {
   
     // Table Headers
     numberHeader: 'No.',
-    nftRightsHeader: 'Hak NFT',
-    votingRightsHeader: 'Hak Mengundi',
-    walletAddressHeader: 'Alamat Dompet',
-    lastDonationHeader: 'Sumbangan Terakhir',
-    totalDonationHeader: 'Jumlah Sumbangan'
+    nftRightsHeader: 'NFT Airdrop',
+    votingRightsHeader: 'Undi',
+    walletAddressHeader: 'Alamat Dompet (Alamat pertukaran tidak disokong)',
+    lastDonationHeader: 'Derma Terakhir',
+    totalDonationHeader: 'Jumlah Derma'
   };
   

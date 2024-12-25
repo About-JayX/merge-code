@@ -1,5 +1,5 @@
 export default {
-  title: '基金会成员',
+  title: '基金會成員',
   date: '日期',
   amount: '金額',
   donor: '捐贈者',
@@ -22,66 +22,66 @@ export default {
 
   // Rules Modal
   rulesTitle: '基金會參與規則',
-  importantNotice: '重要提醒：請使用個人錢包地址進行捐贈，不要使用易所地址。NFT空投將綁定錢包地址，後續無法更改。',
+  importantNotice: '<span class="text-[#FFAC03] font-bold">重要提醒：</span>請使用個人錢包地址進行捐贈，不要使用交易所地址。NFT空投將綁定錢包地址，後續無法更改。',
   
   // NFT Airdrop Rules
-  nftAirdropRules: 'NFT空投規則',
-  recommended: '推薦',
-  nftAirdropRule1: '捐贈 50 USDT/USDC = 1個 NFT空投',
-  nftAirdropRule2: '捐贈 0.2 SOL = 1個 NFT空投',
-  nftAirdropRule3: '捐贈 20,000 MINIDOGE = 1個 NFT空投',
+  nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">NFT空投規則</span>',
+  recommended: '',
+  nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>捐贈 <span class="text-[#FFAC03] font-medium">50 USD</span> 或 <span class="text-[#9945FF] font-medium">0.2 SOL</span> 或 <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> = 1 NFT空投</div>',
+  nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>前<span class="text-[#FFAC03] font-medium">100</span>名地址，額外獲得 <span class="text-[#FFAC03] font-medium">2</span> NFT空投</div>',
+  nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>前<span class="text-[#FFAC03] font-medium">101-500</span>地址，額外獲得 <span class="text-[#FFAC03] font-medium">1</span> NFT空投</div>',
 
   // Voting Rights Rules
-  votingRightsRules: '投票權規則',
-  votingRightsRule1: '基礎投票權：任意金額捐贈即可獲得1個基礎票',
-  votingRightsRule2: '額外投票權：每5個NFT名額可獲得1個額外投票權',
-  votingRightsRule3: '每個錢包最多4票（1個基礎票 + 3個額外票）',
+  votingRightsRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">投票權規則</span>',
+  votingRightsRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>基礎投票權：持有<span class="text-[#FFAC03] font-medium">1</span> 以上 NFT空投可獲得<span class="text-[#FFAC03] font-medium">1</span> 基礎票</div>',
+  votingRightsRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>額外投票權：每持有<span class="text-[#FFAC03] font-medium">5</span> NFT空投可獲得<span class="text-[#FFAC03] font-medium">1</span> 額外票</div>',
+  votingRightsRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>每個錢包最多<span class="text-[#FFAC03] font-medium">5</span> 票（<span class="text-[#FFAC03] font-medium">1</span> 基礎票 + <span class="text-[#FFAC03] font-medium">4</span> 額外票）</div>',
 
   // Voting Rights Examples
-  votingRightsExamples: '投票權示例',
-  votingExample1: '捐贈2個NFT名額 = 1票（基礎票）',
-  votingExample2: '捐贈6個NFT名額 = 2票（1個基礎票 + 1個額外票）',
-  votingExample3: '捐贈16個NFT名額 = 4票（1個基礎票 + 3個額外票，達到上限）',
+  votingRightsExamples: '<span class="text-[#FFAC03] text-base font-bold opacity-50">投票權示例</span>',
+  votingExample1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>持有<span class="text-[#FFAC03] font-medium">2</span> NFT空投 = <span class="text-[#FFAC03] font-medium">1</span> 票（基礎票）</div>',
+  votingExample2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>持有<span class="text-[#FFAC03] font-medium">6</span> NFT空投 = <span class="text-[#FFAC03] font-medium">2</span> 票（<span class="text-[#FFAC03] font-medium">1</span> 基礎票 + <span class="text-[#FFAC03] font-medium">1</span> 額外票）</div>',
+  votingExample3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>持有<span class="text-[#FFAC03] font-medium">20</span> NFT空投 = <span class="text-[#FFAC03] font-medium">5</span> 票（<span class="text-[#FFAC03] font-medium">1</span> 基礎票 + <span class="text-[#FFAC03] font-medium">4</span> 額外票，達到上限）</div>',
 
   // Participation Process
-  participationProcess: '參與流程',
-  processStep1: '選擇$SOL,$USDT,$USDC,$MINIDOGE 進行捐贈',
-  processStep2: '轉賬至基金會SOL錢包地址：',
-  processStep3: '保存轉賬截圖',
-  processStep4: '聯繫電報管理員',
-  processStep4Extra: '提交轉賬證明，驗證後加入基金會群組',
+  participationProcess: '<span class="text-[#FFAC03] text-base font-bold opacity-50">參與流程</span>',
+  processStep1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 選擇 <span class="text-[#9945FF] font-medium">$SOL</span>、<span class="text-[#26A17B] font-medium">$USDT</span>、<span class="text-[#2785CA] font-medium">$USDC</span>、<span class="text-[#FFAC03] font-medium">$MINIDOGE</span> 進行捐贈</div>',
+  processStep2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 轉賬至基金會 SOL 錢包地址：</div>',
+  processStep3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 保存轉賬截圖或視頻</div>',
+  processStep4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 聯繫 Telegram 管理員 (@xxxx) 加入</div>',
+  processStep4Extra: '',
 
   // Notes
-  notes: '注意事項',
-  note1: '捐贈金額不設上限，但投票權有上限',
-  note2: '捐贈後自動獲得後續NFT空投資格',
-  note3: '具體空投時間另行通知',
-  note4: '基金會擁有最終解釋權',
+  notes: '<span class="text-[#FFAC03] text-base font-bold opacity-50">注意事項</span>',
+  note1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>捐贈金額不設上限，但投票權有上限</div>',
+  note2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>捐贈後自動獲得後續 NFT空投 資格</div>',
+  note3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>NFT正式上線 在$MINIDOGE 50M+ 市值後</div>',
+  note4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>基金會規則可能會根據基金會決策，進行投票決定進行調整。目前展示規則僅作參考</div>',
 
   // Governance Modal
   modalGovernanceTitle: '基金會治理制度',
-  governanceMechanism: '治理機制',
-  governanceRule1: '提案投票需總投票人數>30%參與方為有效',
-  governanceRule2: '重大決策需總投票人數>50%參與',
-  governanceRule3: '提案需>2/3贊成票通過',
-  governanceRule4: '基金會核心團隊佔20%治理權重，社區投票佔80%權重',
+  governanceMechanism: '<span class="text-[#FFAC03] text-base font-bold opacity-50">治理機制</span>',
+  governanceRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>提案投票需總投票人數<span class="text-[#FFAC03] font-medium">>30%</span>參與方為有效</div>',
+  governanceRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>重大決策需總投票人數<span class="text-[#FFAC03] font-medium">>50%</span>參與</div>',
+  governanceRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>提案需<span class="text-[#FFAC03] font-medium">>2/3</span>贊成票通過</div>',
+  governanceRule4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>基金會核心團隊佔<span class="text-[#FFAC03] font-medium">20%</span>治理權重，社區投票佔<span class="text-[#FFAC03] font-medium">80%</span>權重</div>',
 
   // Proposal Rules
-  proposalRules: '提案規則',
-  proposalRule1: '需要4個投票權才能發起提案',
-  proposalRule2: '提案需要3個不同投票權持有者聯署',
-  proposalRule3: '每週最多參與2次提案投票',
-  proposalRule4: '常規投票期為72小時',
+  proposalRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">提案規則</span>',
+  proposalRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>需要<span class="text-[#FFAC03] font-medium">5</span>個投票權才能發起提案</div>',
+  proposalRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>提案需要<span class="text-[#FFAC03] font-medium">3</span>個不同投票權持有者聯署</div>',
+  proposalRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>每週最多參與<span class="text-[#FFAC03] font-medium">2</span>次提案投票</div>',
+  proposalRule4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>常規投票期為<span class="text-[#FFAC03] font-medium">72</span>小時</div>',
 
   // Buttons
   rulesButton: '規則說明',
   governanceButton: '治理機制',
 
   // Table Headers
-  numberHeader: '序號',
-  nftRightsHeader: 'NFT名額',
-  votingRightsHeader: '投票權',
-  walletAddressHeader: '錢包地址',
+  numberHeader: '編號',
+  nftRightsHeader: 'NFT空投',
+  votingRightsHeader: '投票',
+  walletAddressHeader: '錢包地址  (不支持交易所地址)',
   lastDonationHeader: '最後捐贈',
   totalDonationHeader: '總捐贈額'
 }; 

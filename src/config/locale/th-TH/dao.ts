@@ -1,77 +1,77 @@
 export default {
     title: 'สมาชิกมูลนิธิ',
     date: 'วันที่',
-    amount: 'จำนวนเงิน',
+    amount: 'จำนวน',
     donor: 'ผู้บริจาค',
     purpose: 'วัตถุประสงค์',
     status: 'สถานะ',
-    total: '{{total}} รายการ',
+    total: 'ทั้งหมด {{total}} รายการ',
   
     // Header
     daoTitle: 'DAO',
     governanceTitle: 'การกำกับดูแล',
   
     // Error messages
-    loadError: 'การโหลดล้มเหลว',
+    loadError: 'โหลดไม่สำเร็จ',
     invalidPublicKey: 'ที่อยู่มูลนิธิไม่ถูกต้อง',
   
     // Stats
     totalMembers: 'จำนวนสมาชิกทั้งหมด',
     totalNftAirdrops: 'จำนวน NFT Airdrop ทั้งหมด',
-    totalVotes: 'จำนวนคะแนนโหวตทั้งหมด',
+    totalVotes: 'จำนวนคิทธิ์ในการโหวตทั้งหมด',
   
     // Rules Modal
     rulesTitle: 'กฎการเข้าร่วมมูลนิธิ',
-    importantNotice: 'ประกาศสำคัญ: กรุณาใช้ที่อยู่กระเป๋าสตางค์ส่วนบุคคลในการบริจาค ห้ามใช้ที่อยู่กระเป๋าสตางค์จากการแลกเปลี่ยน การแจก NFT Airdrop จะผูกกับที่อยู่กระเป๋าสตางค์และไม่สามารถเปลี่ยนแปลงได้ภายหลัง',
+    importantNotice: '<span class="text-[#FFAC03] font-bold">ประกาศสำคัญ: </span>กรุณาใช้ที่อยู่กระเป๋าเงินส่วนตัวสำหรับการบริจาค ห้ามใช้ที่อยู่ของตลาดแลกเปลี่ยน NFT Airdrop จะถูกผูกกับที่อยู่กระเป๋าเงินและไม่สามารถเปลี่ยนแปลงได้ในภายหลัง',
   
     // NFT Airdrop Rules
-    nftAirdropRules: 'กฎการแจก NFT Airdrop',
-    recommended: 'แนะนำ',
-    nftAirdropRule1: 'บริจาค 50 USDT/USDC = 1 NFT Airdrop',
-    nftAirdropRule2: 'บริจาค 0.2 SOL = 1 NFT Airdrop',
-    nftAirdropRule3: 'บริจาค 20,000 MINIDOGE = 1 NFT Airdrop',
+    nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">กฎ NFT Airdrop</span>',
+    recommended: '',
+    nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>บริจาค <span class="text-[#FFAC03] font-medium">50 USD</span> หรือ <span class="text-[#9945FF] font-medium">0.2 SOL</span> หรือ <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> = 1 NFT Airdrop</div>',
+    nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">100</span> ที่อยู่แรกจะได้รับ <span class="text-[#FFAC03] font-medium">2</span> NFT Airdrop เพิ่มเติม</div>',
+    nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>ที่อยู่ลำดับที่ <span class="text-[#FFAC03] font-medium">101-500</span> จะได้รับ <span class="text-[#FFAC03] font-medium">1</span> NFT Airdrop เพิ่มเติม</div>',
   
     // Voting Rights Rules
-    votingRightsRules: 'กฎสิทธิ์การลงคะแนน',
-    votingRightsRule1: 'สิทธิ์ลงคะแนนพื้นฐาน: ได้รับ 1 คะแนนพื้นฐานสำหรับการบริจาคทุกรายการ',
-    votingRightsRule2: 'คะแนนโหวตเพิ่มเติม: ได้รับ 1 คะแนนโหวตเพิ่มเติมสำหรับทุก ๆ 5 NFT Quota',
-    votingRightsRule3: 'จำกัดสูงสุด 4 คะแนนโหวตต่อกระเป๋า (1 คะแนนพื้นฐาน + 3 คะแนนเพิ่มเติม)',
+    votingRightsRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">กฎสิทธิ์ในการโหวต</span>',
+    votingRightsRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>สิทธิ์โหวตพื้นฐาน: ถือครอง <span class="text-[#FFAC03] font-medium">1</span> NFT Airdrop ขึ้นไปเพื่อรับ <span class="text-[#FFAC03] font-medium">1</span> สิทธิ์โหวตพื้นฐาน</div>',
+    votingRightsRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>สิทธิ์โหวตเพิ่มเติม: ทุก <span class="text-[#FFAC03] font-medium">5</span> NFT Airdrop จะได้รับ <span class="text-[#FFAC03] font-medium">1</span> สิทธิ์โหวตเพิ่มเติม</div>',
+    votingRightsRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>สูงสุด <span class="text-[#FFAC03] font-medium">5</span> สิทธิ์โหวตต่อกระเป๋าเงิน (<span class="text-[#FFAC03] font-medium">1</span> พื้นฐาน + <span class="text-[#FFAC03] font-medium">4</span> เพิ่มเติม)</div>',
   
     // Voting Rights Examples
-    votingRightsExamples: 'ตัวอย่างสิทธิ์การลงคะแนน',
-    votingExample1: 'บริจาค 2 NFT Quota = 1 คะแนน (พื้นฐาน)',
-    votingExample2: 'บริจาค 6 NFT Quota = 2 คะแนน (1 คะแนนพื้นฐาน + 1 คะแนนเพิ่มเติม)',
-    votingExample3: 'บริจาค 16 NFT Quota = 4 คะแนน (1 คะแนนพื้นฐาน + 3 คะแนนเพิ่มเติม, ขีดจำกัดสูงสุด)',
+    votingRightsExamples: '<span class="text-[#FFAC03] text-base font-bold opacity-50">ตัวอย่างสิทธิ์ในการโหวต</span>',
+    votingExample1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>ถือครอง <span class="text-[#FFAC03] font-medium">2</span> NFT Airdrop = <span class="text-[#FFAC03] font-medium">1</span> สิทธิ์โหวต (พื้นฐาน)</div>',
+    votingExample2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>ถือครอง <span class="text-[#FFAC03] font-medium">6</span> NFT Airdrop = <span class="text-[#FFAC03] font-medium">2</span> สิทธิ์โหวต (<span class="text-[#FFAC03] font-medium">1</span> พื้นฐาน + <span class="text-[#FFAC03] font-medium">1</span> เพิ่มเติม)</div>',
+    votingExample3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>ถือครอง <span class="text-[#FFAC03] font-medium">20</span> NFT Airdrop = <span class="text-[#FFAC03] font-medium">5</span> สิทธิ์โหวต (<span class="text-[#FFAC03] font-medium">1</span> พื้นฐาน + <span class="text-[#FFAC03] font-medium">4</span> เพิ่มเติม, ถึงขีดจำกัด)</div>',
   
     // Participation Process
-    participationProcess: 'กระบวนการเข้าร่วม',
-    processStep1: 'เลือก $SOL, $USDT, $USDC, $MINIDOGE สำหรับการบริจาค',
-    processStep2: 'โอนเงินไปยังที่อยู่กระเป๋าสตางค์ SOL ของมูลนิธิ:',
-    processStep3: 'บันทึกภาพหน้าจอการทำธุรกรรม',
-    processStep4: 'ติดต่อผู้ดูแลบน Telegram',
-    processStep4Extra: 'ส่งหลักฐานการโอนเงิน, เข้าร่วมกลุ่มมูลนิธิหลังจากการตรวจสอบ',
+    participationProcess: '<span class="text-[#FFAC03] text-base font-bold opacity-50">ขั้นตอนการเข้าร่วม</span>',
+    processStep1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> เลือก <span class="text-[#9945FF] font-medium">$SOL</span>, <span class="text-[#26A17B] font-medium">$USDT</span>, <span class="text-[#2785CA] font-medium">$USDC</span> หรือ <span class="text-[#FFAC03] font-medium">$MINIDOGE</span> สำหรับการบริจาค</div>',
+    processStep2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> โอนไปยังที่อยู่ SOL ของมูลนิธิ:</div>',
+    processStep3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> บันทึกภาพหน้าจอหรือวิดีโอของธุรกรรม</div>',
+    processStep4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> ติดต่อผู้ดูแล Telegram (@xxxx) เพื่อเข้าร่วม</div>',
+    processStep4Extra: '',
   
     // Notes
-    notes: 'หมายเหตุ',
-    note1: 'ไม่มีข้อจำกัดในการบริจาค แต่สิทธิ์การลงคะแนนจะถูกจำกัด',
-    note2: 'จะได้รับสิทธิ์ในการเข้าร่วม NFT Airdrop อัตโนมัติหลังจากการบริจาค',
-    note3: 'เวลาการแจก NFT Airdrop จะประกาศภายหลัง',
-    note4: 'มูลนิธิขอสงวนสิทธิ์ในการตีความหมาย',
+    notes: '<span class="text-[#FFAC03] text-base font-bold opacity-50">หมายเหตุ</span>',
+    note1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>ไม่จำกัดจำนวนเงินบริจาค แต่สิทธิ์ในการโหวตมีจำกัด</div>',
+    note2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>มีสิทธิ์รับ NFT Airdrop ในอนาคตโดยอัตโนมัติหลังจากบริจาค</div>',
+    note3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>NFT จะเปิดตัวอย่างเป็นทางการหลังจาก $MINIDOGE มีมูลค่าตลาดถึง 50M+</div>',
+    note4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>กฎของมูลนิธิสามารถปรับเปลี่ยนได้ผ่านการตัดสินใจและการโหวตของมูลนิธิ กฎปัจจุบันใช้เพื่อการอ้างอิงเท่านั้น</div>',
   
     // Governance Modal
     modalGovernanceTitle: 'ระบบการกำกับดูแลมูลนิธิ',
-    governanceMechanism: 'กลไกการกำกับดูแล',
-    governanceRule1: 'การลงคะแนนสำหรับข้อเสนอจะต้องมีการมีส่วนร่วมจากผู้ลงคะแนนมากกว่า 30% เพื่อให้มีผล',
-    governanceRule2: 'การตัดสินใจที่สำคัญต้องมีการมีส่วนร่วมจากผู้ลงคะแนนมากกว่า 50%',
-    governanceRule3: 'ข้อเสนอจะต้องได้รับคะแนนเห็นชอบมากกว่า 2/3 จึงจะผ่าน',
-    governanceRule4: 'ทีมหลักของมูลนิธิมีอำนาจการกำกับดูแล 20% และการลงคะแนนจากชุมชนมีอำนาจการกำกับดูแล 80%',
+    governanceMechanism: '<span class="text-[#FFAC03] text-base font-bold opacity-50">กลไกการกำกับดูแล</span>',
+    governanceRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>การโหวตข้อเสนอต้องมีผู้มีสิทธิ์โหวตเข้าร่วม <span class="text-[#FFAC03] font-medium">>30%</span> จึงจะมีผล</div>',
+    governanceRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>การตัดสินใจสำคัญต้องมีผู้มีสิทธิ์โหวตเข้าร่วม <span class="text-[#FFAC03] font-medium">>50%</span></div>',
+    governanceRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>ข้อเสนอต้องได้รับการอนุมัติ <span class="text-[#FFAC03] font-medium">>2/3</span> จึงจะผ่าน</div>',
+    governanceRule4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>ทีมหลักของมูลนิธิมีน้ำหนักการกำกับดูแล <span class="text-[#FFAC03] font-medium">20%</span> การโหวตของชุมชนมีน้ำหนัก <span class="text-[#FFAC03] font-medium">80%</span></div>',
   
     // Proposal Rules
-    proposalRules: 'กฎข้อเสนอ',
-    proposalRule1: 'ต้องมีสิทธิ์การลงคะแนน 4 สิทธิ์เพื่อเริ่มข้อเสนอ',
-    proposalRule2: 'ข้อเสนอจะต้องได้รับการสนับสนุนจากผู้ถือสิทธิ์การลงคะแนน 3 คนที่แตกต่างกัน',
-    proposalRule3: 'จำกัดการโหวตข้อเสนอสูงสุด 2 ข้อเสนอในหนึ่งสัปดาห์',
-    proposalRule4: 'ระยะเวลาการลงคะแนนปกติคือ 72 ชั่วโมง',
+    proposalRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">กฎการเสนอ</span>',
+    proposalRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>ต้องมี <span class="text-[#FFAC03] font-medium">5</span> สิทธิ์โหวตเพื่อส่งข้อเสนอ</div>',
+    proposalRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>ข้อเสนอต้องมีลายเซ็นร่วมจากผู้มีสิทธิ์โหวต <span class="text-[#FFAC03] font-medium">3</span> คนที่แตกต่างกัน</div>',
+    proposalRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>สูงสุด <span class="text-[#FFAC03] font-medium">2</span> การโหวตข้อเสนอต่อสัปดาห์</div>',
+    proposalRule4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>เวลาโหวตปกติคือ <span class="text-[#FFAC03] font-medium">72</span> ชั่วโมง</div>',
   
     // Buttons
     rulesButton: 'กฎ',
@@ -79,10 +79,10 @@ export default {
   
     // Table Headers
     numberHeader: 'ลำดับ',
-    nftRightsHeader: 'สิทธิ์ NFT',
-    votingRightsHeader: 'สิทธิ์การลงคะแนน',
-    walletAddressHeader: 'ที่อยู่กระเป๋าสตางค์',
+    nftRightsHeader: 'NFT Airdrop',
+    votingRightsHeader: 'สิทธิ์โหวต',
+    walletAddressHeader: 'ที่อยู่กระเป๋าเงิน (ไม่รองรับที่อยู่ตลาดแลกเปลี่ยน)',
     lastDonationHeader: 'การบริจาคล่าสุด',
-    totalDonationHeader: 'ยอดบริจาคทั้งหมด'
+    totalDonationHeader: 'ยอดบริจาครวม'
   };
   

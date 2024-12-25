@@ -5,73 +5,73 @@ export default {
   donor: 'اهدا کننده',
   purpose: 'هدف',
   status: 'وضعیت',
-  total: '{{total}} رکورد',
+  total: 'مجموع {{total}} رکورد',
 
   // Header
   daoTitle: 'DAO',
   governanceTitle: 'حاکمیت',
 
   // Error messages
-  loadError: 'بارگذاری ناموفق',
+  loadError: 'بارگیری ناموفق',
   invalidPublicKey: 'آدرس بنیاد نامعتبر',
 
   // Stats
-  totalMembers: 'کل اعضا',
-  totalNftAirdrops: 'کل ایردراپ‌های NFT',
-  totalVotes: 'کل آرا',
+  totalMembers: 'تعداد کل اعضا',
+  totalNftAirdrops: 'مجموع ایردراپ NFT',
+  totalVotes: 'مجموع حق رای',
 
   // Rules Modal
-  rulesTitle: 'قوانین مشارکت بنیاد',
-  importantNotice: 'توجه مهم: لطفاً از آدرس کیف پول شخصی خود برای اهدا استفاده کنید و از آدرس‌های صرافی استفاده نکنید. ایردراپ‌های NFT به آدرس‌های کیف پول مرتبط خواهند شد و بعداً قابل تغییر نخواهند بود.',
+  rulesTitle: 'قوانین مشارکت در بنیاد',
+  importantNotice: '<span class="text-[#FFAC03] font-bold">اطلاعیه مهم: </span>لطفاً برای اهدا از آدرس کیف پول شخصی استفاده کنید، از آدرس صرافی استفاده نکنید. ایردراپ NFT به آدرس کیف پول متصل خواهد شد و بعداً قابل تغییر نیست.',
 
   // NFT Airdrop Rules
-  nftAirdropRules: 'قوانین ایردراپ NFT',
-  recommended: 'توصیه شده',
-  nftAirdropRule1: 'اهدا 50 USDT/USDC = 1 ایردراپ NFT',
-  nftAirdropRule2: 'اهدا 0.2 SOL = 1 ایردراپ NFT',
-  nftAirdropRule3: 'اهدا 20,000 MINIDOGE = 1 ایردراپ NFT',
+  nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">قوانین ایردراپ NFT</span>',
+  recommended: '',
+  nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>اهدای <span class="text-[#FFAC03] font-medium">50 USD</span> یا <span class="text-[#9945FF] font-medium">0.2 SOL</span> یا <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> = 1 ایردراپ NFT</div>',
+  nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">100</span> آدرس اول <span class="text-[#FFAC03] font-medium">2</span> ایردراپ NFT اضافی دریافت می‌کنند</div>',
+  nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>آدرس‌های <span class="text-[#FFAC03] font-medium">101-500</span> <span class="text-[#FFAC03] font-medium">1</span> ایردراپ NFT اضافی دریافت می‌کنند</div>',
 
   // Voting Rights Rules
-  votingRightsRules: 'قوانین حقوق رأی',
-  votingRightsRule1: 'رأی پایه: برای هر مبلغ اهدایی 1 رأی پایه دریافت می‌کنید',
-  votingRightsRule2: 'رأی اضافی: برای هر 5 سهم NFT یک رأی اضافی دریافت می‌کنید',
-  votingRightsRule3: 'حداکثر 4 رأی برای هر کیف پول (1 پایه + 3 اضافی)',
+  votingRightsRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">قوانین حق رای</span>',
+  votingRightsRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>حق رای پایه: با داشتن <span class="text-[#FFAC03] font-medium">1</span> یا بیشتر ایردراپ NFT، <span class="text-[#FFAC03] font-medium">1</span> رای پایه دریافت می‌کنید</div>',
+  votingRightsRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>حق رای اضافی: هر <span class="text-[#FFAC03] font-medium">5</span> ایردراپ NFT، <span class="text-[#FFAC03] font-medium">1</span> رای اضافی</div>',
+  votingRightsRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>حداکثر <span class="text-[#FFAC03] font-medium">5</span> رای برای هر کیف پول (<span class="text-[#FFAC03] font-medium">1</span> رای پایه + <span class="text-[#FFAC03] font-medium">4</span> رای اضافی)</div>',
 
   // Voting Rights Examples
-  votingRightsExamples: 'مثال‌های حقوق رأی',
-  votingExample1: 'اهدا 2 سهم NFT = 1 رأی (پایه)',
-  votingExample2: 'اهدا 6 سهم NFT = 2 رأی (1 پایه + 1 اضافی)',
-  votingExample3: 'اهدا 16 سهم NFT = 4 رأی (1 پایه + 3 اضافی، حد مجاز)',
+  votingRightsExamples: '<span class="text-[#FFAC03] text-base font-bold opacity-50">مثال‌های حق رای</span>',
+  votingExample1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>داشتن <span class="text-[#FFAC03] font-medium">2</span> ایردراپ NFT = <span class="text-[#FFAC03] font-medium">1</span> رای (رای پایه)</div>',
+  votingExample2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>داشتن <span class="text-[#FFAC03] font-medium">6</span> ایردراپ NFT = <span class="text-[#FFAC03] font-medium">2</span> رای (<span class="text-[#FFAC03] font-medium">1</span> رای پایه + <span class="text-[#FFAC03] font-medium">1</span> رای اضافی)</div>',
+  votingExample3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>داشتن <span class="text-[#FFAC03] font-medium">20</span> ایردراپ NFT = <span class="text-[#FFAC03] font-medium">5</span> رای (<span class="text-[#FFAC03] font-medium">1</span> رای پایه + <span class="text-[#FFAC03] font-medium">4</span> رای اضافی، به حد نصاب رسیده)</div>',
 
   // Participation Process
-  participationProcess: 'فرایند مشارکت',
-  processStep1: 'انتخاب $SOL، $USDT، $USDC، $MINIDOGE برای اهدا',
-  processStep2: 'انتقال به آدرس کیف پول SOL بنیاد:',
-  processStep3: 'گرفتن اسکرین‌شات از تراکنش',
-  processStep4: 'تماس با ادمین تلگرام',
-  processStep4Extra: 'ارسال مدرک تراکنش، پس از تأیید به گروه بنیاد بپیوندید',
+  participationProcess: '<span class="text-[#FFAC03] text-base font-bold opacity-50">فرآیند مشارکت</span>',
+  processStep1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> <span class="text-[#9945FF] font-medium">$SOL</span>، <span class="text-[#26A17B] font-medium">$USDT</span>، <span class="text-[#2785CA] font-medium">$USDC</span>، یا <span class="text-[#FFAC03] font-medium">$MINIDOGE</span> را برای اهدا انتخاب کنید</div>',
+  processStep2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> به آدرس کیف پول SOL بنیاد انتقال دهید:</div>',
+  processStep3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> اسکرین‌شات یا ویدیوی تراکنش را ذخیره کنید</div>',
+  processStep4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> با ادمین تلگرام (@xxxx) برای پیوستن تماس بگیرید</div>',
+  processStep4Extra: '',
 
   // Notes
-  notes: 'یادداشت‌ها',
-  note1: 'مقدار اهدایی محدودیتی ندارد، اما حقوق رأی محدود است',
-  note2: 'پس از اهدا به صورت خودکار برای ایردراپ‌های NFT آینده واجد شرایط خواهید شد',
-  note3: 'زمان دقیق ایردراپ‌ها بعداً اعلام خواهد شد',
-  note4: 'بنیاد حق تفسیر نهایی را برای خود محفوظ می‌دارد',
+  notes: '<span class="text-[#FFAC03] text-base font-bold opacity-50">نکات</span>',
+  note1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>محدودیتی در مقدار اهدا وجود ندارد، اما حق رای محدود است</div>',
+  note2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>پس از اهدا، به طور خودکار واجد شرایط ایردراپ‌های NFT آینده خواهید شد</div>',
+  note3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>NFT پس از رسیدن $MINIDOGE به ارزش بازار +50M به طور رسمی راه‌اندازی می‌شود</div>',
+  note4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>قوانین بنیاد ممکن است از طریق تصمیمات بنیاد و رای‌گیری تنظیم شود. قوانین فعلی فقط برای مرجع هستند</div>',
 
   // Governance Modal
   modalGovernanceTitle: 'سیستم حاکمیت بنیاد',
-  governanceMechanism: 'مکانیزم حاکمیت',
-  governanceRule1: 'برای معتبر بودن یک رأی‌گیری، باید بیش از 30% از رأی‌دهندگان مشارکت کنند',
-  governanceRule2: 'تصمیمات مهم نیاز به مشارکت بیش از 50% از رأی‌دهندگان دارند',
-  governanceRule3: 'پیشنهادات نیاز به بیش از 2/3 آرا برای تصویب دارند',
-  governanceRule4: 'تیم هسته‌ای بنیاد 20% وزن حاکمیتی دارد، و رأی‌گیری جامعه 80% وزن حاکمیتی دارد',
+  governanceMechanism: '<span class="text-[#FFAC03] text-base font-bold opacity-50">مکانیزم حاکمیت</span>',
+  governanceRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>رای‌گیری پیشنهاد نیاز به مشارکت <span class="text-[#FFAC03] font-medium">>30%</span> کل رای‌دهندگان برای معتبر بودن دارد</div>',
+  governanceRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>تصمیمات مهم نیاز به مشارکت <span class="text-[#FFAC03] font-medium">>50%</span> کل رای‌دهندگان دارد</div>',
+  governanceRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>پیشنهادات نیاز به <span class="text-[#FFAC03] font-medium">>2/3</span> آرای تایید برای تصویب دارند</div>',
+  governanceRule4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>تیم اصلی بنیاد <span class="text-[#FFAC03] font-medium">20%</span> وزن حاکمیت، رای‌گیری جامعه <span class="text-[#FFAC03] font-medium">80%</span> وزن دارد</div>',
 
   // Proposal Rules
-  proposalRules: 'قوانین پیشنهادات',
-  proposalRule1: 'برای شروع یک پیشنهاد به 4 حقوق رأی نیاز است',
-  proposalRule2: 'پیشنهاد باید از 3 دارنده حقوق رأی مختلف حمایت شود',
-  proposalRule3: 'حداکثر 2 رأی برای پیشنهادات در هر هفته',
-  proposalRule4: 'دوره رای‌گیری معمولی 72 ساعت است',
+  proposalRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">قوانین پیشنهاد</span>',
+  proposalRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>نیاز به <span class="text-[#FFAC03] font-medium">5</span> حق رای برای شروع پیشنهاد</div>',
+  proposalRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>پیشنهاد نیاز به امضای مشترک <span class="text-[#FFAC03] font-medium">3</span> دارنده حق رای مختلف دارد</div>',
+  proposalRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>حداکثر <span class="text-[#FFAC03] font-medium">2</span> رای پیشنهاد در هفته</div>',
+  proposalRule4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>دوره رای‌گیری معمولی <span class="text-[#FFAC03] font-medium">72</span> ساعت است</div>',
 
   // Buttons
   rulesButton: 'قوانین',
@@ -79,9 +79,9 @@ export default {
 
   // Table Headers
   numberHeader: 'شماره',
-  nftRightsHeader: 'حقوق NFT',
-  votingRightsHeader: 'حقوق رأی',
-  walletAddressHeader: 'آدرس کیف پول',
+  nftRightsHeader: 'ایردراپ NFT',
+  votingRightsHeader: 'آرا',
+  walletAddressHeader: 'آدرس کیف پول (آدرس‌های صرافی پشتیبانی نمی‌شوند)',
   lastDonationHeader: 'آخرین اهدا',
   totalDonationHeader: 'مجموع اهدا'
 };
