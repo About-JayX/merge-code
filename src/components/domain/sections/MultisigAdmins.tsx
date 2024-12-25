@@ -26,14 +26,14 @@ const MultisigAdmins: React.FC = () => {
             }}
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 sm:gap-x-16 sm:gap-y-6 sm:px-2 sm:px-8 w-full">
-          {MULTISIG_ADMINS.map((admin, index) => (
-              <div 
-                key={index} 
+          <div className="grid sm:flex flex-wrap gap-2 sm:gap-3 md:gap-4 lg:gap-8 xl:gap-12 break-after-all">
+            {MULTISIG_ADMINS.map((admin, index) => (
+              <div
+                key={index}
                 className="flex items-center justify-start sm:justify-center gap-1"
               >
                 <TwitterEmbed username={admin.twitter.slice(1)} />
-                <div 
+                <div
                   className="w-4 h-4 cursor-help opacity-60 hover:opacity-100 transition-opacity flex items-center"
                   title={admin.walletAddress}
                 >
