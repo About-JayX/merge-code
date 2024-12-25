@@ -27,7 +27,7 @@ export default {
     // NFT Airdrop Rules
     nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">NFT Airdrop Kuralları</span>',
     recommended: '',
-    nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">50 USD</span> veya <span class="text-[#9945FF] font-medium">0.2 SOL</span> veya <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> bağış = 1 NFT Airdrop</div>',
+    nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">50 USD</span> veya <span class="text-[#9945FF] font-medium">0.2 SOL</span> veya <span class="text-[#FFAC03] font-medium">10,000 MINIDOGE</span> bağış = 1 NFT Airdrop</div>',
     nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>İlk <span class="text-[#FFAC03] font-medium">100</span> adres ek <span class="text-[#FFAC03] font-medium">2</span> NFT Airdrop alır</div>',
     nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">101-500</span> arası adresler ek <span class="text-[#FFAC03] font-medium">1</span> NFT Airdrop alır</div>',
   

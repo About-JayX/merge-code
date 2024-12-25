@@ -27,7 +27,7 @@ export default {
     // NFT Airdrop Rules
     nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">กฎ NFT Airdrop</span>',
     recommended: '',
-    nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>บริจาค <span class="text-[#FFAC03] font-medium">50 USD</span> หรือ <span class="text-[#9945FF] font-medium">0.2 SOL</span> หรือ <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> = 1 NFT Airdrop</div>',
+    nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>บริจาค <span class="text-[#FFAC03] font-medium">50 USD</span> หรือ <span class="text-[#9945FF] font-medium">0.2 SOL</span> หรือ <span class="text-[#FFAC03] font-medium">10,000 MINIDOGE</span> = 1 NFT Airdrop</div>',
     nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">100</span> ที่อยู่แรกจะได้รับ <span class="text-[#FFAC03] font-medium">2</span> NFT Airdrop เพิ่มเติม</div>',
     nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>ที่อยู่ลำดับที่ <span class="text-[#FFAC03] font-medium">101-500</span> จะได้รับ <span class="text-[#FFAC03] font-medium">1</span> NFT Airdrop เพิ่มเติม</div>',
   

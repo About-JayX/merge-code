@@ -27,7 +27,7 @@ export default {
     // NFT Airdrop Rules
     nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Mga Patakaran sa NFT Airdrop</span>',
     recommended: '',
-    nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Mag-donate ng <span class="text-[#FFAC03] font-medium">50 USD</span> o <span class="text-[#9945FF] font-medium">0.2 SOL</span> o <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> = 1 NFT Airdrop</div>',
+    nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Mag-donate ng <span class="text-[#FFAC03] font-medium">50 USD</span> o <span class="text-[#9945FF] font-medium">0.2 SOL</span> o <span class="text-[#FFAC03] font-medium">10,000 MINIDOGE</span> = 1 NFT Airdrop</div>',
     nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Unang <span class="text-[#FFAC03] font-medium">100</span> address ay makakatanggap ng Karagdagang <span class="text-[#FFAC03] font-medium">2</span> NFT Airdrop</div>',
     nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Mga address <span class="text-[#FFAC03] font-medium">101-500</span> ay makakatanggap ng Karagdagang <span class="text-[#FFAC03] font-medium">1</span> NFT Airdrop</div>',
   

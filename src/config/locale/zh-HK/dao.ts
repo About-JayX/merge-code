@@ -27,7 +27,7 @@ export default {
   // NFT Airdrop Rules
   nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">NFT空投規則</span>',
   recommended: '',
-  nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>捐贈 <span class="text-[#FFAC03] font-medium">50 USD</span> 或 <span class="text-[#9945FF] font-medium">0.2 SOL</span> 或 <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> = 1 NFT空投</div>',
+  nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>捐贈 <span class="text-[#FFAC03] font-medium">50 USD</span> 或 <span class="text-[#9945FF] font-medium">0.2 SOL</span> 或 <span class="text-[#FFAC03] font-medium">10,000 MINIDOGE</span> = 1 NFT空投</div>',
   nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>前<span class="text-[#FFAC03] font-medium">100</span>名地址，額外獲得 <span class="text-[#FFAC03] font-medium">2</span> NFT空投</div>',
   nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>前<span class="text-[#FFAC03] font-medium">101-500</span>地址，額外獲得 <span class="text-[#FFAC03] font-medium">1</span> NFT空投</div>',
 

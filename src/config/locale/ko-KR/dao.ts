@@ -27,7 +27,7 @@ export default {
     // NFT Airdrop Rules
     nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">NFT 에어드롭 규칙</span>',
     recommended: '',
-    nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">50 USD</span> 또는 <span class="text-[#9945FF] font-medium">0.2 SOL</span> 또는 <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> 기부 = 1 NFT 에어드롭</div>',
+    nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">50 USD</span> 또는 <span class="text-[#9945FF] font-medium">0.2 SOL</span> 또는 <span class="text-[#FFAC03] font-medium">10,000 MINIDOGE</span> 기부 = 1 NFT 에어드롭</div>',
     nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>첫 <span class="text-[#FFAC03] font-medium">100</span>개 주소는 추가 <span class="text-[#FFAC03] font-medium">2</span> NFT 에어드롭 받음</div>',
     nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">101-500</span>번째 주소는 추가 <span class="text-[#FFAC03] font-medium">1</span> NFT 에어드롭 받음</div>',
   

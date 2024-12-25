@@ -27,7 +27,7 @@ export default {
   // NFT Airdrop Rules
   nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Regras do Airdrop NFT</span>',
   recommended: '',
-  nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Doação de <span class="text-[#FFAC03] font-medium">50 USD</span> ou <span class="text-[#9945FF] font-medium">0.2 SOL</span> ou <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> = 1 NFT Airdrop</div>',
+  nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Doação de <span class="text-[#FFAC03] font-medium">50 USD</span> ou <span class="text-[#9945FF] font-medium">0.2 SOL</span> ou <span class="text-[#FFAC03] font-medium">10,000 MINIDOGE</span> = 1 NFT Airdrop</div>',
   nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Os primeiros <span class="text-[#FFAC03] font-medium">100</span> endereços recebem <span class="text-[#FFAC03] font-medium">2</span> NFT Airdrops adicionais</div>',
   nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Endereços <span class="text-[#FFAC03] font-medium">101-500</span> recebem <span class="text-[#FFAC03] font-medium">1</span> NFT Airdrop adicional</div>',
 

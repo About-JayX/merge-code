@@ -27,7 +27,7 @@ export default {
     // NFT Airdrop Rules
     nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">NFT एयरड्रॉप नियम</span>',
     recommended: '',
-    nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">50 USD</span> या <span class="text-[#9945FF] font-medium">0.2 SOL</span> या <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> का दान = 1 NFT एयरड्रॉप</div>',
+    nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">50 USD</span> या <span class="text-[#9945FF] font-medium">0.2 SOL</span> या <span class="text-[#FFAC03] font-medium">10,000 MINIDOGE</span> का दान = 1 NFT एयरड्रॉप</div>',
     nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>पहले <span class="text-[#FFAC03] font-medium">100</span> पते अतिरिक्त <span class="text-[#FFAC03] font-medium">2</span> NFT एयरड्रॉप प्राप्त करेंगे</div>',
     nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span><span class="text-[#FFAC03] font-medium">101-500</span> पते अतिरिक्त <span class="text-[#FFAC03] font-medium">1</span> NFT एयरड्रॉप प्राप्त करेंगे</div>',
   
