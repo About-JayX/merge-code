@@ -31,23 +31,26 @@ interface MemberData {
 const formatNumber = (num: number, type: string) => {
   const formattedNum = Number(num).toFixed(3)
   const [integerPart, decimalPart] = formattedNum.split('.')
-  
+
   if (type === 'SOL') {
     return formattedNum
   }
-  
-  const formattedInteger = type === 'MINIDOGE' 
-    ? Math.floor(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    : integerPart
-    
-  return type === 'MINIDOGE' 
-    ? formattedInteger
-    : (
-      <>
-        {formattedInteger}
-        <span className="opacity-50">.{decimalPart}</span>
-      </>
-    )
+
+  const formattedInteger =
+    type === 'MINIDOGE'
+      ? Math.floor(num)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      : integerPart
+
+  return type === 'MINIDOGE' ? (
+    formattedInteger
+  ) : (
+    <>
+      {formattedInteger}
+      <span className="opacity-50">.{decimalPart}</span>
+    </>
+  )
 }
 
 const getTokenColor = (type: string) => {
@@ -68,19 +71,19 @@ const getTokenColor = (type: string) => {
 // 计算额外 NFT 数量的函数
 const calculateExtraNft = (rank: number, baseNft: number) => {
   if (rank <= 100) {
-    return 2  // 前100名额外2个NFT
+    return 2 // 前100名额外2个NFT
   } else if (rank <= 500) {
-    return 1  // 前500名额外1个NFT
+    return 1 // 前500名额外1个NFT
   }
   return 0
 }
 
 // 添加统计组件
-const StatsDisplay: React.FC<{ members: any[]; allMembers: any[]; total: number }> = ({ 
-  members, 
-  allMembers,
-  total
-}) => {
+const StatsDisplay: React.FC<{
+  members: any[]
+  allMembers: any[]
+  total: number
+}> = ({ members, allMembers, total }) => {
   const { t } = useTranslation()
 
   // 计算统计数据
@@ -110,7 +113,8 @@ const StatsDisplay: React.FC<{ members: any[]; allMembers: any[]; total: number 
     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-0 sm:mb-6">
       <div className="bg-white/10 rounded-xl p-3 px-2 sm:p-4 text-center">
         <div className="text-[#FFAC03] text-2xl font-bold mb-1">
-          {allMembers.filter(member => !isSpecialAddress(member.address)).length || 0}
+          {allMembers.filter(member => !isSpecialAddress(member.address))
+            .length || 0}
         </div>
         <div className="text-white/80 text-sm">{t('dao.totalMembers')}</div>
       </div>
@@ -132,16 +136,16 @@ const StatsDisplay: React.FC<{ members: any[]; allMembers: any[]; total: number 
 
 export const MemberList: React.FC = () => {
   const { t } = useTranslation()
-  const { 
-    members, 
-    allMembers,  // 使用完整数据进行排序
-    loading, 
-    error, 
-    total, 
-    currentPage, 
-    pageSize, 
-    totalPages, 
-    setCurrentPage 
+  const {
+    members,
+    allMembers, // 使用完整数据进行排序
+    loading,
+    error,
+    total,
+    currentPage,
+    pageSize,
+    totalPages,
+    setCurrentPage,
   } = useFoundationMembers()
 
   const memberColumns = [
@@ -197,8 +201,10 @@ export const MemberList: React.FC = () => {
       render: (address: string) => {
         const tag = getAddressTag(address)
         // 处理地址显示格式
-        const displayAddress = `${address.slice(0, 11)}...${address.slice(-11)} (DEMO)`
-        
+        const displayAddress = `${address.slice(0, 11)}...${address.slice(
+          -11
+        )} (DEMO)`
+
         return (
           <div className="flex items-center justify-center gap-2">
             {/* 
@@ -217,8 +223,8 @@ export const MemberList: React.FC = () => {
             */}
             <span
               className={`font-medium ${
-                tag 
-                  ? 'text-white/30 line-through decoration-2' 
+                tag
+                  ? 'text-white/30 line-through decoration-2'
                   : 'text-white/75'
               }`}
             >
@@ -226,9 +232,7 @@ export const MemberList: React.FC = () => {
             </span>
             {/* </a> */}
             {tag && (
-              <span
-                className="px-2 py-0.5 rounded text-xs font-medium bg-white/10 text-white/50"
-              >
+              <span className="px-2 py-0.5 rounded text-xs font-medium bg-white/10 text-white/50">
                 {tag.name}
               </span>
             )}
@@ -275,10 +279,10 @@ export const MemberList: React.FC = () => {
       render: (tokenAmounts: Record<string, number>) => {
         // 计算显示的捐赠项
         const donationItems = Object.entries(tokenAmounts)
-          .filter(([_, amount]) => amount > 0)  // 只显示有数量的代币
+          .filter(([_, amount]) => amount > 0) // 只显示有数量的代币
           .map(([type, amount]) => ({
             type,
-            amount
+            amount,
           }))
 
         const TokemBox = () => (
@@ -297,7 +301,11 @@ export const MemberList: React.FC = () => {
                   {item.type === 'SOL' && <SolanaCircleColorful />}
                   {item.type === 'MINIDOGE' && (
                     <span className="anticon">
-                      <img src="/logo.png" className="w-[1em] h-[1em]" alt="MINIDOGE" />
+                      <img
+                        src="/logo.png"
+                        className="w-[1em] h-[1em]"
+                        alt="MINIDOGE"
+                      />
                     </span>
                   )}
                 </span>
@@ -345,7 +353,9 @@ export const MemberList: React.FC = () => {
   }
 
   return (
-    <ConfigProvider theme={{ components: { Table: { filterDropdownBg: 'transparent' } } }}>
+    <ConfigProvider
+      theme={{ components: { Table: { filterDropdownBg: 'transparent' } } }}
+    >
       <div className="relative">
         {/* 移动端加载动画 */}
         {loading && (
@@ -353,12 +363,8 @@ export const MemberList: React.FC = () => {
             <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#FFAC03] border-t-transparent"></div>
           </div>
         )}
-        
-        <StatsDisplay 
-          members={members} 
-          allMembers={allMembers}
-          total={total}
-        />
+
+        <StatsDisplay members={members} allMembers={allMembers} total={total} />
         {/* 上方分页器 */}
         <div className="flex justify-center mb-0">
           <Table
