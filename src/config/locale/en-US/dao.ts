@@ -5,73 +5,73 @@ export default {
   donor: 'Donor',
   purpose: 'Purpose',
   status: 'Status',
-  total: '{{total}} Records',
+  total: 'Total {{total}} Records',
   
   // Header
   daoTitle: 'DAO',
   governanceTitle: 'Governance',
   
   // Error messages
-  loadError: 'Loading Failed',
+  loadError: 'Failed to Load',
   invalidPublicKey: 'Invalid Foundation Address',
   
   // Stats
   totalMembers: 'Total Members',
   totalNftAirdrops: 'Total NFT Airdrops',
-  totalVotes: 'Total Votes',
+  totalVotes: 'Total Voting Rights',
 
   // Rules Modal
   rulesTitle: 'Foundation Participation Rules',
-  importantNotice: 'Important Notice: Please use your personal wallet address for donations, not exchange addresses. NFT airdrops will be bound to wallet addresses and cannot be changed later.',
+  importantNotice: '<span class="text-[#FFAC03] font-bold">Important Notice: </span>Please use personal wallet address for donation, do not use exchange address. NFT airdrop will be bound to the wallet address and cannot be changed later.',
   
   // NFT Airdrop Rules
-  nftAirdropRules: 'NFT Airdrop Rules',
-  recommended: 'Recommended',
-  nftAirdropRule1: 'Donate 50 USDT/USDC = 1 NFT Airdrop',
-  nftAirdropRule2: 'Donate 0.2 SOL = 1 NFT Airdrop',
-  nftAirdropRule3: 'Donate 20,000 MINIDOGE = 1 NFT Airdrop',
+  nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">NFT Airdrop Rules</span>',
+  recommended: '',
+  nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Donate <span class="text-[#FFAC03] font-medium">50 USD</span> or <span class="text-[#9945FF] font-medium">0.2 SOL</span> or <span class="text-[#FFAC03] font-medium">20,000 MINIDOGE</span> = 1 NFT Airdrop</div>',
+  nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>First <span class="text-[#FFAC03] font-medium">100</span> addresses receive Additional <span class="text-[#FFAC03] font-medium">2</span> NFT Airdrops</div>',
+  nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Addresses <span class="text-[#FFAC03] font-medium">101-500</span> receive Additional <span class="text-[#FFAC03] font-medium">1</span> NFT Airdrop</div>',
 
   // Voting Rights Rules
-  votingRightsRules: 'Voting Rights Rules',
-  votingRightsRule1: 'Basic Vote: Get 1 basic vote for any donation amount',
-  votingRightsRule2: 'Additional Votes: Get 1 additional vote for every 5 NFT quotas',
-  votingRightsRule3: 'Maximum 4 votes per wallet (1 basic + 3 additional)',
+  votingRightsRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Voting Rights Rules</span>',
+  votingRightsRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Basic Voting Right: Hold <span class="text-[#FFAC03] font-medium">1</span> or more NFT Airdrops to get <span class="text-[#FFAC03] font-medium">1</span> Basic Vote</div>',
+  votingRightsRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Additional Voting Rights: Every <span class="text-[#FFAC03] font-medium">5</span> NFT Airdrops get <span class="text-[#FFAC03] font-medium">1</span> Additional Vote</div>',
+  votingRightsRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Maximum <span class="text-[#FFAC03] font-medium">5</span> Votes per wallet (<span class="text-[#FFAC03] font-medium">1</span> Basic Vote + <span class="text-[#FFAC03] font-medium">4</span> Additional Votes)</div>',
 
   // Voting Rights Examples
-  votingRightsExamples: 'Voting Rights Examples',
-  votingExample1: 'Donate 2 NFT quotas = 1 vote (basic)',
-  votingExample2: 'Donate 6 NFT quotas = 2 votes (1 basic + 1 additional)',
-  votingExample3: 'Donate 16 NFT quotas = 4 votes (1 basic + 3 additional, max limit)',
+  votingRightsExamples: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Voting Rights Examples</span>',
+  votingExample1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Hold <span class="text-[#FFAC03] font-medium">2</span> NFT Airdrops = <span class="text-[#FFAC03] font-medium">1</span> Vote (Basic Vote)</div>',
+  votingExample2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Hold <span class="text-[#FFAC03] font-medium">6</span> NFT Airdrops = <span class="text-[#FFAC03] font-medium">2</span> Votes (<span class="text-[#FFAC03] font-medium">1</span> Basic Vote + <span class="text-[#FFAC03] font-medium">1</span> Additional Vote)</div>',
+  votingExample3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Hold <span class="text-[#FFAC03] font-medium">20</span> NFT Airdrops = <span class="text-[#FFAC03] font-medium">5</span> Votes (<span class="text-[#FFAC03] font-medium">1</span> Basic Vote + <span class="text-[#FFAC03] font-medium">4</span> Additional Votes, reached limit)</div>',
 
   // Participation Process
-  participationProcess: 'Participation Process',
-  processStep1: 'Choose $SOL, $USDT, $USDC, $MINIDOGE for donation',
-  processStep2: 'Transfer to Foundation SOL wallet address:',
-  processStep3: 'Save transaction screenshot',
-  processStep4: 'Contact Telegram admin',
-  processStep4Extra: 'submit transfer proof, join foundation group after verification',
+  participationProcess: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Participation Process</span>',
+  processStep1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Choose <span class="text-[#9945FF] font-medium">$SOL</span>, <span class="text-[#26A17B] font-medium">$USDT</span>, <span class="text-[#2785CA] font-medium">$USDC</span>, or <span class="text-[#FFAC03] font-medium">$MINIDOGE</span> for donation</div>',
+  processStep2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Transfer to Foundation SOL wallet address:</div>',
+  processStep3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Save transaction screenshot or video</div>',
+  processStep4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Contact Telegram admin (@xxxx) to join</div>',
+  processStep4Extra: '',
 
   // Notes
-  notes: 'Notes',
-  note1: 'No limit on donation amount, but voting rights are capped',
-  note2: 'Automatically qualify for future NFT airdrops after donation',
-  note3: 'Specific airdrop time will be announced later',
-  note4: 'Foundation reserves the right of final interpretation',
+  notes: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Notes</span>',
+  note1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>No limit on donation amount, but voting rights are capped</div>',
+  note2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Automatically qualify for future NFT airdrops after donation</div>',
+  note3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>NFT officially launches after $MINIDOGE reaches 50M+ market cap</div>',
+  note4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Foundation rules may be adjusted through foundation decisions and voting. Current rules are for reference only</div>',
 
   // Governance Modal
   modalGovernanceTitle: 'Foundation Governance System',
-  governanceMechanism: 'Governance Mechanism',
-  governanceRule1: 'Proposal voting requires >30% total voter participation to be valid',
-  governanceRule2: 'Major decisions require >50% total voter participation',
-  governanceRule3: 'Proposals need >2/3 approval votes to pass',
-  governanceRule4: 'Foundation core team has 20% governance weight, community voting has 80% weight',
+  governanceMechanism: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Governance Mechanism</span>',
+  governanceRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Proposal voting requires <span class="text-[#FFAC03] font-medium">>30%</span> total Voter participation to be valid</div>',
+  governanceRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Major decisions require <span class="text-[#FFAC03] font-medium">>50%</span> total Voter participation</div>',
+  governanceRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Proposals need <span class="text-[#FFAC03] font-medium">>2/3</span> approval Votes to pass</div>',
+  governanceRule4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Foundation core team has <span class="text-[#FFAC03] font-medium">20%</span> governance weight, community voting has <span class="text-[#FFAC03] font-medium">80%</span> weight</div>',
 
   // Proposal Rules
-  proposalRules: 'Proposal Rules',
-  proposalRule1: 'Need 4 voting rights to initiate proposal',
-  proposalRule2: 'Proposal needs endorsement from 3 different voting right holders',
-  proposalRule3: 'Maximum 2 proposal votes per week',
-  proposalRule4: 'Regular voting period is 72 hours',
+  proposalRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Proposal Rules</span>',
+  proposalRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Need <span class="text-[#FFAC03] font-medium">5</span> voting rights to initiate a proposal</div>',
+  proposalRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Proposal requires co-signing by <span class="text-[#FFAC03] font-medium">3</span> different voting right holders</div>',
+  proposalRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Maximum <span class="text-[#FFAC03] font-medium">2</span> proposal Votes per week</div>',
+  proposalRule4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Regular voting period is <span class="text-[#FFAC03] font-medium">72</span> hours</div>',
 
   // Buttons
   rulesButton: 'Rules',
@@ -79,9 +79,9 @@ export default {
 
   // Table Headers
   numberHeader: 'No.',
-  nftRightsHeader: 'NFT Airdrops',
+  nftRightsHeader: 'NFT Airdrop',
   votingRightsHeader: 'Votes',
-  walletAddressHeader: 'Wallet Address  (NOT SUPPORT EXCHANGE ADDRESS)',
+  walletAddressHeader: 'Wallet Address (Exchange addresses not supported)',
   lastDonationHeader: 'Last Donation',
   totalDonationHeader: 'Total Donation'
 }; 

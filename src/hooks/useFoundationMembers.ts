@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getList } from '@/api'
 import { calc_VOTE_NFT } from '@/util'
+import { isSpecialAddress, getAddressNftAirdrop, getAddressVotingRights } from '@/config/specialAddresses'
 
 interface TokenAmounts {
   USDT: number | string
@@ -45,8 +46,17 @@ export default function useFoundationMembers() {
 
   // 计算总 NFT 数量（包括额外奖励）
   const calculateTotalNft = (member: Member, rank: number) => {
+    // 如果是特殊地址，直接返回0
+    if (isSpecialAddress(member.address)) {
+      return 0
+    }
     const baseNft = Number(member.nftCount)
-    const extraNft = rank <= 100 ? baseNft * 2 : rank <= 500 ? baseNft : 0
+    // 如果基础NFT为0，说明是预期奖励，不计算额外奖励
+    if (baseNft === 0) {
+      return 0
+    }
+    // 只有当基础NFT数量大于0时，才计算额外奖励
+    const extraNft = rank <= 100 ? 2 : rank <= 500 ? 1 : 0
     return baseNft + extraNft
   }
 
@@ -66,7 +76,7 @@ export default function useFoundationMembers() {
       const totalApiPages = Math.ceil(totalItems / API_PAGE_SIZE)
       console.log(`Total items: ${totalItems}, Total pages: ${totalApiPages}`)
       
-      // 加���剩余页面（从第2页开始）
+      // 加载剩余页面（从第2页开始）
       const remainingPagePromises = Array.from({ length: totalApiPages - 1 }, (_, i) => 
         getList({ page: i + 2, pageSize: API_PAGE_SIZE })
           .then(result => {
@@ -119,6 +129,20 @@ export default function useFoundationMembers() {
           USDC: item.tokenAmounts.USDC || '0',
           SOL: item.tokenAmounts.SOL || '0',
           MINIDOGE: item.tokenAmounts.MINIDOGE || '0'
+        }
+
+        // 检查是否为特殊地址
+        if (isSpecialAddress(item.from)) {
+          return {
+            address: item.from,
+            tokenAmounts,
+            firstDonationTime: item.firstDonationTime,
+            lastDonationTime: item.lastDonationTime,
+            lastSignature: item.lastSignature,
+            donationCount: item.donationCount,
+            nftCount: getAddressNftAirdrop(item.from),
+            votes: getAddressVotingRights(item.from)
+          }
         }
 
         const { nftCount, votes } = calc_VOTE_NFT(tokenAmounts)

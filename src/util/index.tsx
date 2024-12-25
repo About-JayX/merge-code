@@ -51,24 +51,50 @@ interface IdonationSummary {
 }
 
 export const calc_VOTE_NFT = (
-  object: IdonationSummary
+  object: IdonationSummary,
+  rank?: number
 ): { votes: number; nftCount: number } => {
-  let votes = 0 // 总投票数
   let nftCount = 0 // 总 NFT 数量
-  for (const key in object) {
-    const string_number = (value: any): number => {
-      return typeof value === 'number' && !isNaN(value)
-        ? value
-        : parseFloat(value)
-    }
-    const value = string_number(object[key])
-    // 有任意捐赠获得投票数
-    votes === 0 ? (value ? (votes += 1) : votes) : votes
-    // 计算总获得的NFT总额
-    const count = Math.floor(value / donaMap[key])
-    nftCount += count
+
+  // 计算每种代币可获得的NFT数量
+  const string_number = (value: any): number => {
+    return typeof value === 'number' && !isNaN(value)
+      ? value
+      : parseFloat(value)
   }
-  votes = votes + nftCount / NFT_VOTE > 4 ? 4 : votes
+
+  // USDT/USDC: 50 USD = 1 NFT
+  const usdtAmount = string_number(object.USDT || 0)
+  const usdcAmount = string_number(object.USDC || 0)
+  const usdTotal = usdtAmount + usdcAmount
+  nftCount += Math.floor(usdTotal / donaMap.USDT)
+
+  // SOL: 0.2 SOL = 1 NFT
+  const solAmount = string_number(object.SOL || 0)
+  nftCount += Math.floor(solAmount / donaMap.SOL)
+
+  // MINIDOGE: 20,000 MINIDOGE = 1 NFT
+  const minidogeAmount = string_number(object.MINIDOGE || 0)
+  nftCount += Math.floor(minidogeAmount / donaMap.MINIDOGE)
+
+  // 计算额外NFT奖励
+  if (rank !== undefined) {
+    if (rank <= 100) {
+      nftCount += 2 // 前100名额外获得2个NFT
+    } else if (rank <= 500) {
+      nftCount += 1 // 101-500名额外获得1个NFT
+    }
+  }
+
+  // 计算投票权
+  let votes = 0
+  // 基础票：持有1个以上NFT可获得1票
+  if (nftCount >= 1) {
+    votes = 1
+  }
+  // 额外票：每5个NFT获得1个额外票，最多4个额外票
+  const additionalVotes = Math.floor(nftCount / 5)
+  votes += Math.min(additionalVotes, 4)
   
   return { votes, nftCount }
 }

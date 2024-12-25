@@ -7,7 +7,7 @@ import { SolanaCircleColorful } from '@ant-design/web3-icons'
 import Icon from '@/components/icon'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import { getAddressTag } from '@/config/specialAddresses'
+import { getAddressTag, isSpecialAddress } from '@/config/specialAddresses'
 
 // 配置 dayjs 使用 UTC 插件
 dayjs.extend(utc)
@@ -37,15 +37,17 @@ const formatNumber = (num: number, type: string) => {
   }
   
   const formattedInteger = type === 'MINIDOGE' 
-    ? integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    ? Math.floor(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     : integerPart
     
-  return (
-    <>
-      {formattedInteger}
-      <span className="opacity-50">.{decimalPart}</span>
-    </>
-  )
+  return type === 'MINIDOGE' 
+    ? formattedInteger
+    : (
+      <>
+        {formattedInteger}
+        <span className="opacity-50">.{decimalPart}</span>
+      </>
+    )
 }
 
 const getTokenColor = (type: string) => {
@@ -66,9 +68,9 @@ const getTokenColor = (type: string) => {
 // 计算额外 NFT 数量的函数
 const calculateExtraNft = (rank: number, baseNft: number) => {
   if (rank <= 100) {
-    return baseNft * 2  // 前100名额外2倍
+    return 2  // 前100名额外2个NFT
   } else if (rank <= 500) {
-    return baseNft      // 前500名额外1倍
+    return 1  // 前500名额外1个NFT
   }
   return 0
 }
@@ -84,9 +86,15 @@ const StatsDisplay: React.FC<{ members: any[]; allMembers: any[]; total: number 
   // 计算统计数据
   const stats = allMembers.reduce(
     (acc: any, member: any) => {
+      // 如果是特殊地址，跳过统计
+      if (isSpecialAddress(member.address)) {
+        return acc
+      }
+
       const rank = member.timeBasedRank || 0
       const baseNft = Number(member.nftCount || 0)
-      const extraNft = calculateExtraNft(rank, baseNft)
+      // 只有当基础NFT大于0时，才计算额外NFT
+      const extraNft = baseNft > 0 ? calculateExtraNft(rank, baseNft) : 0
       const totalNft = baseNft + extraNft
       const votes = Number(member.votes || 0)
 
@@ -102,7 +110,7 @@ const StatsDisplay: React.FC<{ members: any[]; allMembers: any[]; total: number 
     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-0 sm:mb-6">
       <div className="bg-white/10 rounded-xl p-3 px-2 sm:p-4 text-center">
         <div className="text-[#FFAC03] text-2xl font-bold mb-1">
-          {allMembers.length || 0}
+          {allMembers.filter(member => !isSpecialAddress(member.address)).length || 0}
         </div>
         <div className="text-white/80 text-sm">{t('dao.totalMembers')}</div>
       </div>
@@ -136,15 +144,6 @@ export const MemberList: React.FC = () => {
     setCurrentPage 
   } = useFoundationMembers()
 
-  const calculateExtraNft = (rank: number, baseNft: number) => {
-    if (rank <= 100) {
-      return baseNft * 2  // 前100名额外2倍
-    } else if (rank <= 500) {
-      return baseNft      // 前500名额外1倍
-    }
-    return 0
-  }
-
   const memberColumns = [
     {
       title: t('dao.numberHeader'),
@@ -166,13 +165,13 @@ export const MemberList: React.FC = () => {
       width: 120,
       align: 'center' as const,
       render: (rights: number, record: any) => {
-        const rank = allMembers.findIndex(member => member.address === record.address) + 1
-        const extraNft = calculateExtraNft(rank, rights)
+        const rank = record.timeBasedRank || 0
+        const extraNft = rights > 0 ? calculateExtraNft(rank, rights) : 0
 
         return (
           <span className="text-lg">
             <span className="text-white font-bold">{rights}</span>
-            {extraNft > 0 && (
+            {rights > 0 && extraNft > 0 && (
               <span className="text-[#FFAC03]"> (+{extraNft})</span>
             )}
           </span>
