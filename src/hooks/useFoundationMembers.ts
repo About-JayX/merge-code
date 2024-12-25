@@ -37,7 +37,7 @@ interface Member {
 }
 
 const ITEMS_PER_PAGE = 30
-const API_PAGE_SIZE = 10
+const API_PAGE_SIZE = 100
 
 export default function useFoundationMembers() {
   const [members, setMembers] = useState<Member[]>([])
@@ -153,6 +153,22 @@ export default function useFoundationMembers() {
               nftCount: getAddressNftAirdrop(item.from),
               votes: getAddressVotingRights(item.from),
             }
+          }
+
+          // 检查捐赠额是否达到最小阈值
+          const solAmount = Number(tokenAmounts.SOL)
+          const usdtAmount = Number(tokenAmounts.USDT)
+          const usdcAmount = Number(tokenAmounts.USDC)
+          const minidogeAmount = Number(tokenAmounts.MINIDOGE)
+
+          // 如果所有代币金额都小于阈值，则过滤掉该地址
+          if (
+            solAmount < 0.001 && 
+            usdtAmount < 0.1 && 
+            usdcAmount < 0.1 && 
+            minidogeAmount < 0.1
+          ) {
+            return null
           }
 
           const { nftCount, votes } = calc_VOTE_NFT(tokenAmounts)
