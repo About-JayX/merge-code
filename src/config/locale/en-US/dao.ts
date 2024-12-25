@@ -22,7 +22,7 @@ export default {
 
   // Rules Modal
   rulesTitle: 'Foundation Participation Rules',
-  importantNotice: '<span class="text-[#FFAC03] font-bold">Important Notice: </span>Please use personal wallet address for donation, do not use exchange address. NFT airdrop will be bound to the wallet address and cannot be changed later.',
+  importantNotice: '<span class="text-[#FFAC03] font-bold">Important Notice: </span>Please use personal wallet address for donation, do not use exchange address. NFT Airdrop will be bound to the wallet address and cannot be changed later.',
   
   // NFT Airdrop Rules
   nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">NFT Airdrop Rules</span>',
@@ -33,8 +33,8 @@ export default {
 
   // Voting Rights Rules
   votingRightsRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Voting Rights Rules</span>',
-  votingRightsRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Basic Voting Right: Hold <span class="text-[#FFAC03] font-medium">1</span> or more NFT Airdrops to get <span class="text-[#FFAC03] font-medium">1</span> Basic Vote</div>',
-  votingRightsRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Additional Voting Rights: Every <span class="text-[#FFAC03] font-medium">5</span> NFT Airdrops get <span class="text-[#FFAC03] font-medium">1</span> Additional Vote</div>',
+  votingRightsRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Basic Voting Rights: Hold <span class="text-[#FFAC03] font-medium">1</span> or more NFT Airdrops to get <span class="text-[#FFAC03] font-medium">1</span> Basic Vote</div>',
+  votingRightsRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Additional Voting Rights: Get <span class="text-[#FFAC03] font-medium">1</span> Additional Vote for every <span class="text-[#FFAC03] font-medium">5</span> NFT Airdrops</div>',
   votingRightsRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Maximum <span class="text-[#FFAC03] font-medium">5</span> Votes per wallet (<span class="text-[#FFAC03] font-medium">1</span> Basic Vote + <span class="text-[#FFAC03] font-medium">4</span> Additional Votes)</div>',
 
   // Voting Rights Examples
@@ -45,16 +45,15 @@ export default {
 
   // Participation Process
   participationProcess: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Participation Process</span>',
-  processStep1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Choose <span class="text-[#9945FF] font-medium">$SOL</span>, <span class="text-[#26A17B] font-medium">$USDT</span>, <span class="text-[#2785CA] font-medium">$USDC</span>, or <span class="text-[#FFAC03] font-medium">$MINIDOGE</span> for donation</div>',
-  processStep2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Transfer to Foundation SOL wallet address:</div>',
-  processStep3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Save transaction screenshot or video</div>',
-  processStep4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> Contact Telegram admin (@xxxx) to join</div>',
-  processStep4Extra: '',
+  processStep1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Choose <span class="text-[#9945FF] font-medium">$SOL</span>, <span class="text-[#26A17B] font-medium">$USDT</span>, <span class="text-[#2785CA] font-medium">$USDC</span>, or <span class="text-[#FFAC03] font-medium">$MINIDOGE</span> for donation</div>',
+  processStep2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Transfer to Foundation SOL wallet address:</div>',
+  processStep3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Save transaction screenshot or video</div>',
+  processStep4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Contact Telegram admin {{telegramAdminLinks}} to join Foundation group</div>',
 
   // Notes
   notes: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Notes</span>',
   note1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>No limit on donation amount, but voting rights are capped</div>',
-  note2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Automatically qualify for future NFT airdrops after donation</div>',
+  note2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Automatically qualify for $MINIDOGE NFT Airdrops after donation</div>',
   note3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>NFT officially launches after $MINIDOGE reaches 50M+ market cap</div>',
   note4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Foundation rules may be adjusted through foundation decisions and voting. Current rules are for reference only</div>',
 
@@ -69,8 +68,8 @@ export default {
   // Proposal Rules
   proposalRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">Proposal Rules</span>',
   proposalRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Need <span class="text-[#FFAC03] font-medium">5</span> voting rights to initiate a proposal</div>',
-  proposalRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Proposal requires co-signing by <span class="text-[#FFAC03] font-medium">3</span> different voting right holders</div>',
-  proposalRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Maximum <span class="text-[#FFAC03] font-medium">2</span> proposal Votes per week</div>',
+  proposalRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Proposal requires <span class="text-[#FFAC03] font-medium">3</span> different voting rights holders to co-sign</div>',
+  proposalRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Maximum <span class="text-[#FFAC03] font-medium">2</span> proposal votes per week</div>',
   proposalRule4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>Regular voting period is <span class="text-[#FFAC03] font-medium">72</span> hours</div>',
 
   // Buttons
@@ -79,7 +78,7 @@ export default {
 
   // Table Headers
   numberHeader: 'No.',
-  nftRightsHeader: 'NFT Airdrop',
+  nftRightsHeader: 'NFT Airdrops',
   votingRightsHeader: 'Votes',
   walletAddressHeader: 'Wallet Address (Exchange addresses not supported)',
   lastDonationHeader: 'Last Donation',

@@ -48,13 +48,13 @@ export default {
   processStep1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 选择 <span class="text-[#9945FF] font-medium">$SOL</span>、<span class="text-[#26A17B] font-medium">$USDT</span>、<span class="text-[#2785CA] font-medium">$USDC</span>、<span class="text-[#FFAC03] font-medium">$MINIDOGE</span> 进行捐赠</div>',
   processStep2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 转账至基金会 SOL 钱包地址：</div>',
   processStep3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 保存转账截图或视频</div>',
-  processStep4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 联系 Telegram 管理员 (@xxxx) 加入</div>',
+  processStep4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 联系 Telegram 管理员加入基金会群组：{{telegramAdminLinks}}</div>',
   processStep4Extra: '',
 
   // Notes
   notes: '<span class="text-[#FFAC03] text-base font-bold opacity-50">注意事项</span>',
   note1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>捐赠金额不设上限，但投票权有上限</div>',
-  note2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>捐赠后自动获得后续 NFT空投 资格</div>',
+  note2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>捐赠后自动获得$MINIDOGE NFT空投 资格</div>',
   note3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>NFT正式上线 在$MINIDOGE 50M+ 市值后</div>',
   note4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>基金会规则可能会根据基金会决策，进行投票决定进行调整。目前展示规则仅作参考</div>',
 
@@ -81,7 +81,7 @@ export default {
   numberHeader: '编号',
   nftRightsHeader: 'NFT空投',
   votingRightsHeader: '投票',
-  walletAddressHeader: '钱包地址  (不支持交易所地址)',
+  walletAddressHeader: '钱包地址 (不支持交易所地址)',
   lastDonationHeader: '最后捐赠',
   totalDonationHeader: '总捐赠额'
 }; 

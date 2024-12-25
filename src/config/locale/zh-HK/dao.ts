@@ -17,19 +17,19 @@ export default {
   
   // Stats
   totalMembers: '總成員數',
-  totalNftAirdrops: '總NFT空投',
+  totalNftAirdrops: '總 NFT 空投數',
   totalVotes: '總投票權',
 
   // Rules Modal
   rulesTitle: '基金會參與規則',
-  importantNotice: '<span class="text-[#FFAC03] font-bold">重要提醒：</span>請使用個人錢包地址進行捐贈，不要使用交易所地址。NFT空投將綁定錢包地址，後續無法更改。',
+  importantNotice: '<span class="text-[#FFAC03] font-bold">重要提示：</span>請使用個人錢包地址進行捐贈，不要使用交易所地址。NFT 空投將綁定錢包地址，後續不可更改。',
   
   // NFT Airdrop Rules
-  nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">NFT空投規則</span>',
+  nftAirdropRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">NFT 空投規則</span>',
   recommended: '',
-  nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>捐贈 <span class="text-[#FFAC03] font-medium">50 USD</span> 或 <span class="text-[#9945FF] font-medium">0.2 SOL</span> 或 <span class="text-[#FFAC03] font-medium">10,000 MINIDOGE</span> = 1 NFT空投</div>',
-  nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>前<span class="text-[#FFAC03] font-medium">100</span>名地址，額外獲得 <span class="text-[#FFAC03] font-medium">2</span> NFT空投</div>',
-  nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>前<span class="text-[#FFAC03] font-medium">101-500</span>地址，額外獲得 <span class="text-[#FFAC03] font-medium">1</span> NFT空投</div>',
+  nftAirdropRule1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>捐贈 <span class="text-[#FFAC03] font-medium">50 USD</span> 或 <span class="text-[#9945FF] font-medium">0.2 SOL</span> 或 <span class="text-[#FFAC03] font-medium">10,000 MINIDOGE</span> = 1 個 NFT 空投</div>',
+  nftAirdropRule2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>前 <span class="text-[#FFAC03] font-medium">100</span> 個地址額外獲得 <span class="text-[#FFAC03] font-medium">2</span> 個 NFT 空投</div>',
+  nftAirdropRule3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>第 <span class="text-[#FFAC03] font-medium">101-500</span> 個地址額外獲得 <span class="text-[#FFAC03] font-medium">1</span> 個 NFT 空投</div>',
 
   // Voting Rights Rules
   votingRightsRules: '<span class="text-[#FFAC03] text-base font-bold opacity-50">投票權規則</span>',
@@ -48,13 +48,12 @@ export default {
   processStep1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 選擇 <span class="text-[#9945FF] font-medium">$SOL</span>、<span class="text-[#26A17B] font-medium">$USDT</span>、<span class="text-[#2785CA] font-medium">$USDC</span>、<span class="text-[#FFAC03] font-medium">$MINIDOGE</span> 進行捐贈</div>',
   processStep2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 轉賬至基金會 SOL 錢包地址：</div>',
   processStep3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 保存轉賬截圖或視頻</div>',
-  processStep4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 聯繫 Telegram 管理員 (@xxxx) 加入</div>',
-  processStep4Extra: '',
+  processStep4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span> 聯繫 Telegram 管理員加入基金會群組：{{telegramAdminLinks}}</div>',
 
   // Notes
   notes: '<span class="text-[#FFAC03] text-base font-bold opacity-50">注意事項</span>',
   note1: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>捐贈金額不設上限，但投票權有上限</div>',
-  note2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>捐贈後自動獲得後續 NFT空投 資格</div>',
+  note2: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>捐贈後自動獲得$MINIDOGE NFT空投 資格</div>',
   note3: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>NFT正式上線 在$MINIDOGE 50M+ 市值後</div>',
   note4: '<div class="flex flex-wrap gap-1 sm:gap-2 text-sm opacity-85"><span class="text-[#FFAC03] font-medium">•</span>基金會規則可能會根據基金會決策，進行投票決定進行調整。目前展示規則僅作參考</div>',
 

@@ -15,7 +15,7 @@ export const FOUNDATION_CONFIG = {
   solscanUrl: `https://solscan.io/account/${FOUNDATION_ADDRESS}`,
   
   // 基金会电报管理员
-  telegramAdmin: "@xxxx",
+  telegramAdmin: ["@web3xTCC","@minidoge_a","@Yippie_yip"],
   
   // 代币合约地址
   tokens: {
@@ -25,5 +25,5 @@ export const FOUNDATION_CONFIG = {
   },
 
   // 代币图标
-  tokenLogos: IMAGES.TOKEN_LOGOS
+  tokenLogos: IMAGES.TOKEN_LOGOS,
 }; 
