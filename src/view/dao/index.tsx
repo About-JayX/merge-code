@@ -21,7 +21,7 @@ const GovernanceContent: React.FC = () => {
           className="text-base font-medium mb-2"
           dangerouslySetInnerHTML={{ __html: t('dao.governanceMechanism') }}
         />
-        <div className="grid gap-2 text-base opacity-80">
+        <div className="grid gap-2 text-base">
           <div dangerouslySetInnerHTML={{ __html: t('dao.governanceRule1') }} />
           <div dangerouslySetInnerHTML={{ __html: t('dao.governanceRule2') }} />
           <div dangerouslySetInnerHTML={{ __html: t('dao.governanceRule3') }} />
@@ -35,7 +35,7 @@ const GovernanceContent: React.FC = () => {
           className="text-base font-medium mb-2"
           dangerouslySetInnerHTML={{ __html: t('dao.proposalRules') }}
         />
-        <div className="grid gap-2 text-base opacity-80">
+        <div className="grid gap-2 text-base">
           <div dangerouslySetInnerHTML={{ __html: t('dao.proposalRule1') }} />
           <div dangerouslySetInnerHTML={{ __html: t('dao.proposalRule2') }} />
           <div dangerouslySetInnerHTML={{ __html: t('dao.proposalRule3') }} />
@@ -94,7 +94,7 @@ const RulesContent: React.FC = () => {
             className="text-base font-medium mb-1"
             dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRules') }}
           />
-          <div className="grid gap-2 text-base opacity-80">
+          <div className="grid gap-2 text-base">
             <div dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRule1') }} />
             <div dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRule2') }} />
             <div dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRule3') }} />
@@ -107,7 +107,7 @@ const RulesContent: React.FC = () => {
             className="text-base font-medium mb-1"
             dangerouslySetInnerHTML={{ __html: t('dao.votingRightsRules') }}
           />
-          <div className="grid gap-2 text-base opacity-80">
+          <div className="grid gap-2 text-base">
             <div
               dangerouslySetInnerHTML={{ __html: t('dao.votingRightsRule1') }}
             />
@@ -126,7 +126,7 @@ const RulesContent: React.FC = () => {
             className="text-base font-medium mb-1"
             dangerouslySetInnerHTML={{ __html: t('dao.votingRightsExamples') }}
           />
-          <div className="grid gap-2 text-sm opacity-80">
+          <div className="grid gap-2 text-sm">
             <div dangerouslySetInnerHTML={{ __html: t('dao.votingExample1') }} />
             <div dangerouslySetInnerHTML={{ __html: t('dao.votingExample2') }} />
             <div dangerouslySetInnerHTML={{ __html: t('dao.votingExample3') }} />
@@ -139,7 +139,7 @@ const RulesContent: React.FC = () => {
             className="text-base font-medium mb-2"
             dangerouslySetInnerHTML={{ __html: t('dao.participationProcess') }}
           />
-          <div className="grid gap-2 text-base opacity-80">
+          <div className="grid gap-2 text-base">
             <div dangerouslySetInnerHTML={{ __html: t('dao.processStep1') }} />
             <div className="flex flex-col gap-2">
               <div dangerouslySetInnerHTML={{ __html: t('dao.processStep2') }} />
@@ -169,7 +169,7 @@ const RulesContent: React.FC = () => {
             className="text-base font-medium mb-2"
             dangerouslySetInnerHTML={{ __html: t('dao.notes') }}
           />
-          <div className="grid gap-2 text-base opacity-80">
+          <div className="grid gap-2 text-base">
             <div dangerouslySetInnerHTML={{ __html: t('dao.note1') }} />
             <div dangerouslySetInnerHTML={{ __html: t('dao.note2') }} />
             <div dangerouslySetInnerHTML={{ __html: t('dao.note3') }} />
