@@ -1,7 +1,7 @@
 import { IMAGES } from './resources';
 
 // 基金会钱包地址
-export const FOUNDATION_ADDRESS = "";
+export const FOUNDATION_ADDRESS = "BB9Ck6U29bdYwvRtWRyX1Zt6ksw1G7iHGYBgqAHMCqgM";
 
 // RPC 节点地址
 export const RPC_ENDPOINT = "https://boldest-broken-gas.solana-mainnet.quiknode.pro/95cb652a0dbf38d8ec52bfbe02e99a941ab51a67/";
@@ -15,7 +15,7 @@ export const FOUNDATION_CONFIG = {
   solscanUrl: `https://solscan.io/account/${FOUNDATION_ADDRESS}`,
   
   // 基金会电报管理员
-  telegramAdmin: ["@web3xTCC","@minidoge_a","@Yippie_yip"],
+  telegramAdmin: ["@web3xTCC","@minidoge_a","@KKong555"],
   
   // 代币合约地址
   tokens: {

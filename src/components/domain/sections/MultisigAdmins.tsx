@@ -4,6 +4,7 @@ import { MULTISIG_ADMINS } from "@/config/multisigAdmins";
 import TwitterEmbed from "@/components/base/TwitterEmbed";
 import { TeamOutlined } from "@ant-design/icons";
 import Icon from "@/components/icon";
+import { Tooltip } from "antd";
 
 const MultisigAdmins: React.FC = () => {
   const { t } = useTranslation();
@@ -33,12 +34,18 @@ const MultisigAdmins: React.FC = () => {
                 className="flex items-center justify-start sm:justify-center gap-1"
               >
                 <TwitterEmbed username={admin.twitter.slice(1)} />
-                <div
-                  className="w-4 h-4 cursor-help opacity-60 hover:opacity-100 transition-opacity flex items-center"
-                  title={admin.walletAddress}
-                >
-                  <Icon name="sol" />
-                </div>
+                {admin.walletAddress && (
+                  <Tooltip title={`${admin.walletAddress.slice(0, 11)}...${admin.walletAddress.slice(-11)}`}>
+                    <a
+                      href={`https://solscan.io/account/${admin.walletAddress}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-4 h-4 opacity-60 hover:opacity-100 transition-opacity flex items-center"
+                    >
+                      <Icon name="sol" />
+                    </a>
+                  </Tooltip>
+                )}
               </div>
             ))}
           </div>

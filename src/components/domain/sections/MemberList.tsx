@@ -29,28 +29,30 @@ interface MemberData {
 }
 
 const formatNumber = (num: number, type: string) => {
-  const formattedNum = Number(num).toFixed(3)
-  const [integerPart, decimalPart] = formattedNum.split('.')
-
+  // SOL保持原有格式
   if (type === 'SOL') {
-    return formattedNum
+    return Number(num).toFixed(3)
   }
 
-  const formattedInteger =
-    type === 'MINIDOGE'
-      ? Math.floor(num)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      : integerPart
+  // MINIDOGE只显示整数部分，带千分位分隔符
+  if (type === 'MINIDOGE') {
+    return Math.floor(num)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  }
 
-  return type === 'MINIDOGE' ? (
-    formattedInteger
-  ) : (
-    <>
-      {formattedInteger}
-      <span className="opacity-50">.{decimalPart}</span>
-    </>
-  )
+  // USDT和USDC显示一位小数，带千分位分隔符
+  if (type === 'USDT' || type === 'USDC') {
+    const formattedNum = Number(num).toFixed(1)
+    const [integerPart, decimalPart] = formattedNum.split('.')
+    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    return `${formattedInteger}.${decimalPart}`
+  }
+
+  // 其他代币保持原有格式
+  const formattedNum = Number(num).toFixed(3)
+  const [integerPart, decimalPart] = formattedNum.split('.')
+  return `${integerPart}.${decimalPart}`
 }
 
 const getTokenColor = (type: string) => {
@@ -200,39 +202,37 @@ export const MemberList: React.FC = () => {
       width: 360,
       render: (address: string) => {
         const tag = getAddressTag(address)
-        // 处理地址显示格式
-        const displayAddress = `${address.slice(0, 11)}...${address.slice(
-          -11
-        )} (DEMO)`
 
         return (
           <div className="flex items-center justify-center gap-2">
-            {/* 
-              // 2024-01-08: 临时注释掉钱包地址的点击链接功能
-              // 后续恢复时取消注释即可
-              <a
-                href={`https://solscan.io/account/${address}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`font-medium ${
-                  tag 
-                    ? 'text-white/30 hover:text-white/40 line-through decoration-2' 
-                    : 'text-white/75 hover:text-white/80'
-                }`}
-              >
-            */}
-            <span
+            <a
+              href={`https://solscan.io/account/${address}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className={`font-medium ${
-                tag
-                  ? 'text-white/30 line-through decoration-2'
-                  : 'text-white/75'
+                tag?.type === 'exchange'
+                  ? 'text-white/30 hover:text-white/40 line-through decoration-2' 
+                  : 'text-white/75 hover:text-white/80'
               }`}
             >
-              {displayAddress}
-            </span>
-            {/* </a> */}
+              <span
+                className={`font-medium ${
+                  tag?.type === 'exchange'
+                    ? 'text-white/30 line-through decoration-2'
+                    : 'text-white/75'
+                }`}
+              >
+                {address}
+              </span>
+            </a>
             {tag && (
-              <span className="px-2 py-0.5 rounded text-xs font-medium bg-white/10 text-white/50">
+              <span 
+                className={`px-2 py-0.5 rounded text-xs font-medium ${
+                  tag.type === 'exchange' 
+                    ? 'bg-white/10 text-white/50'
+                    : 'text-white/75'
+                }`}
+              >
                 {tag.name}
               </span>
             )}
@@ -250,23 +250,17 @@ export const MemberList: React.FC = () => {
         let dataTime = dateStr * 1000
 
         return (
-          /* 
-            // 2024-01-08: 临时注释掉最后捐赠时间的点击链接功能
-            // 后续恢复时取消注释即可
-            <a
-              href={`https://solscan.io/tx/${record.lastSignature}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/75 hover:text-white/80 font-medium"
-            >
-          */
-          <div className="text-white/75 font-medium">
+          <a
+            href={`https://solscan.io/tx/${record.lastSignature}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/75 hover:text-white/80 font-medium"
+          >
             <div className="flex flex-col">
               <span>{dayjs(dataTime).utc().format('YYYY-MM-DD')}</span>
               <span>{dayjs(dataTime).utc().format('HH:mm')} (UTC)</span>
             </div>
-          </div>
-          /* </a> */
+          </a>
         )
       },
     },

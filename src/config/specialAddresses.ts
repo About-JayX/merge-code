@@ -4,6 +4,7 @@ interface AddressTag {
   color: string;
   nftAirdrop?: number;  // NFT空投数量
   votingRights?: number;  // 投票权数量
+  allowExplorer?: boolean; // 是否允许查看区块链浏览器
 }
 
 // 特殊地址配置
@@ -11,17 +12,19 @@ export const specialAddresses: Record<string, AddressTag> = {
   // 交易所地址
   '5VCwKtCXgCJ6kit5FybXjvriW3xELsFDhYrPSqtJNmcD': {
     name: 'Exchange',
-    type: 'Exchange',
+    type: 'exchange',
     color: '#F0B90B',  // Binance 黄色
     nftAirdrop: 0,
-    votingRights: 0
+    votingRights: 0,
+    allowExplorer: false
   },
   'u6PJ8DtQuPFnfmwHbGFULQ4u4EgjDiyYKjVEsynXq2w': {
     name: 'Exchange',
-    type: ' Exchange',
+    type: 'exchange',
     color: '#121212',  // OKX 黑色
     nftAirdrop: 0,
-    votingRights: 0
+    votingRights: 0,
+    allowExplorer: false
   }
 }
 
