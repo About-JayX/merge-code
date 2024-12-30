@@ -2,7 +2,7 @@ import { Section } from "@/components/domain";
 import { memesTextSize, memesTitleSize } from "@/components/domain/styles";
 import MiniDogeCard from "@/components/minidoge/miniDogeCard";
 import Segmented from "@/components/Segmented";
-import { Select } from "antd";
+import { Pagination, Select } from "antd";
 
 export default function Memes() {
   return (
@@ -46,12 +46,38 @@ export default function Memes() {
         type="top"
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full"
       >
-        <MiniDogeCard type="mp3" audioSrc="/SoundHelix-Song-1.mp3" address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq"/>
-        <MiniDogeCard type="mp4" address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq" />
-        <MiniDogeCard type="image" address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq" />
-        <MiniDogeCard type="mp3" audioSrc="" address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq" />
-        <MiniDogeCard type="mp3" audioSrc="/SoundHelix-Song-2.mp3" address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq" />
+        <MiniDogeCard
+          type="mp3"
+          audioSrc="/SoundHelix-Song-1.mp3"
+          address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq"
+        />
+        <MiniDogeCard
+          type="mp4"
+          address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq"
+        />
+        <MiniDogeCard
+          type="image"
+          address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq"
+        />
+        <MiniDogeCard
+          type="mp3"
+          audioSrc=""
+          address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq"
+        />
+        <MiniDogeCard
+          type="mp3"
+          audioSrc="/SoundHelix-Song-2.mp3"
+          address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq"
+        />
         <MiniDogeCard type="mp4" />
+      </Section>
+      <Section type="top">
+        <Pagination
+          defaultCurrent={1}
+          pageSize={20}
+          total={100}
+          showSizeChanger={false}
+        />
       </Section>
     </div>
   );
