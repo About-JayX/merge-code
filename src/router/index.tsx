@@ -44,8 +44,10 @@ const generateRoutes = (
 
     const routePath =
       componentName === 'index'
-        ? `/${dirPath}`
+        ? `/${dirPath || ''}`
         : `/${dirPath ? `${dirPath}/` : ''}${componentName.toLowerCase()}`
+
+    console.log(`生成的路由: ${routePath}`);
 
     const Component = lazy(() =>
       page().then(module => ({ default: module.default }))
@@ -91,17 +93,31 @@ export default function Router({ data }: RouterProps) {
             ? `/:${param[route.path].join('/:')}`
             : ''
 
+        // 处理动态路由，使用正则表达式匹配动态部分
+        const dynamicPath = route.path.replace(/\[(\w+)\]/g, ':$1');
+        const element = React.isValidElement(route.element) 
+          ? React.cloneElement(route.element, { ...data }) // 使用展开运算符确保传递正确的属性
+          : <></>; // 如果无效，则使用一个空的 ReactElement
+
         return [
-          { ...route, path: `/${langKey}${route.path}`, element: React.cloneElement(route.element, { data }) },
-          { ...route, path: `${route.path}${params}`, element: React.cloneElement(route.element, { data }) },
-          { ...route, path: `/${langKey}${route.path}${params}`, element: React.cloneElement(route.element, { data }) },
+          { ...route, path: `/${langKey}${dynamicPath}`, element },
+          { ...route, path: `${dynamicPath}${params}`, element },
+          { ...route, path: `/${langKey}${dynamicPath}${params}`, element },
         ]
       })
     })
   }, [routes, data])
 
   const allRoutes = React.useMemo(
-    () => [...routes.map(route => ({ ...route, element: React.cloneElement(route.element, { data }) })), ...langRoutes],
+    () => [
+      ...routes.map(route => {
+        const element = React.isValidElement(route.element)
+          ? React.cloneElement(route.element, { ...data }) // 使用展开运算符确保传递正确的属性
+          : <></>; // 如果无效，则使用一个空的 ReactElement
+        return { ...route, element };
+      }),
+      ...langRoutes,
+    ],
     [routes, langRoutes, data]
   )
 

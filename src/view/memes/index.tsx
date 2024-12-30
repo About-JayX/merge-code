@@ -1,8 +1,5 @@
 import { Section } from "@/components/domain";
-import {
-  memesTextSize,
-  memesTitleSize,
-} from "@/components/domain/styles";
+import { memesTextSize, memesTitleSize } from "@/components/domain/styles";
 import MiniDogeCard from "@/components/minidoge/miniDogeCard";
 import Segmented from "@/components/Segmented";
 import { Pagination, Select } from "antd";
@@ -18,7 +15,7 @@ export default function Memes() {
           <span className={`${memesTitleSize} text-center mb-4`}>
             {memes.title.map((text: any, index: number) => (
               <span key={index} className={text.status ? `text-[#FFAC03]` : ""}>
-               {text.content}
+                {text.content}
               </span>
             ))}
           </span>
@@ -30,7 +27,7 @@ export default function Memes() {
       {/* 操作区域 */}
       <Section
         type="top"
-        className="flex flex-col gap-4 sm:flex-row justify-between w-full items-center"
+        className="flex gap-2 sm:gap-4 sm:flex-row justify-between w-full items-center mt-4"
       >
         <Segmented
           options={[
@@ -47,7 +44,7 @@ export default function Memes() {
           ]}
           placeholder="Default sort"
           size="large"
-          className="w-full sm:w-auto"
+          className="w-auto"
         />
       </Section>
       {/* 列表 */}

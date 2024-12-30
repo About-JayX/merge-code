@@ -16,12 +16,12 @@ export default function Segmented({
 
   return (
     <div
-      className={`${memesHover}  flex gap-2 sm:max-w-40 items-center px-1 py-1 w-full rounded-full bg-gradient-to-b from-[#FFC30C] to-[#FFAD04] text-black text-base`}
+      className={`${memesHover}  flex gap-1 max-w-36 sm:max-w-40 items-center px-1 py-[4px] w-full rounded-full bg-gradient-to-b from-[#FFC30C] to-[#FFAD04] text-black text-xs sm:text-base`}
     >
       {options.map((option) => (
         <div
           key={option.value}
-          className={`${memesHover} hover:!shadow-none px-4 w-full text-center py-1 rounded-full cursor-pointer ${
+          className={`${memesHover} hover:!shadow-none px-4 w-full text-center py-[6px] rounded-full cursor-pointer ${
             selectedValue === option.value
               ? "bg-black text-[#FFAC03]"
               : "bg-transparent"

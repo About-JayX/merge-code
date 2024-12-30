@@ -8,6 +8,7 @@ import { useState } from "react";
 import { CopyModal } from "../../copyModal";
 import { copy } from "@/util";
 import { useTranslation } from "react-i18next";
+
 export const MiniDogeCardHeader = ({ address = "" }: { address?: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shareModalOpen, setShareModalOpen] = useState(false);

@@ -9,7 +9,7 @@ import { AddressCard } from '../common/AddressCard.tsx'
 import { memesTextColor, memesTitleSize } from '../styles.ts'
 import { CopyModal } from '@/components/minidoge/copyModal/index.tsx'
 
-export const Home = ({ ...props }) => {
+export const Home = ({ }) => {
   const { t } = useTranslation()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -72,8 +72,7 @@ export const Home = ({ ...props }) => {
             </div>
           </Section>
         </div>
-        {props.banner_url && (
-          <Section type="right">
+         <Section type="right">
             <div className="md:w-[17rem] md:h-[17rem] lg:w-[22rem] lg:h-[22rem] xl:w-[26rem] xl:h-[26rem] transition-transform duration-300 hover:scale-105">
               <Link>
                 <img
@@ -84,7 +83,6 @@ export const Home = ({ ...props }) => {
               </Link>
             </div>
           </Section>
-        )}
       </div>
     </>
   )
