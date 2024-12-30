@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Modal } from 'antd'
 import { FOUNDATION_CONFIG } from '@/config/foundation.ts'
 import { IMAGES } from '@/config/resources.ts'
 import { Section } from '../common/Section.tsx'
 import { Button } from '../common/Button.tsx'
 import { Link } from '../common/Link.tsx'
 import { AddressCard } from '../common/AddressCard.tsx'
-import Tgs from '../../tgs'
 import { memesTextColor, memesTitleSize } from '../styles.ts'
+import { CopyModal } from '@/components/minidoge/copyModal/index.tsx'
 
 export const Home = ({ ...props }) => {
   const { t } = useTranslation()
@@ -19,26 +18,7 @@ export const Home = ({ ...props }) => {
 
   return (
     <>
-      <Modal
-        open={isModalOpen}
-        centered
-        footer={null}
-        closable={false}
-        width="auto"
-      >
-        <div className="flex flex-col items-center px-8 py-4">
-          {isModalOpen && (
-            <Tgs
-              name="success"
-              className="!w-24 !h-24 sm:!w-32 sm:!h-32 md:!w-40 md:!h-40"
-              onChange={value => isModalOpen && setIsModalOpen(!value)}
-            />
-          )}
-          <span className="text-lg sm:text-xl md:text-2xl font-bold mt-2">
-            {t('message.copy.success')}
-          </span>
-        </div>
-      </Modal>
+      <CopyModal open={isModalOpen} onClose={setIsModalOpen} />
       <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr),auto] gap-12 sm:gap-16 md:gap-6 xl:gap-12 items-center justify-items-center">
         <div className="flex flex-col w-full">
           <Section type="left">

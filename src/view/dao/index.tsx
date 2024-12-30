@@ -6,7 +6,7 @@ import { MemberList } from '@/components/domain/sections/MemberList'
 import { TableCard } from '@/components/domain/common/TableCard'
 import { FOUNDATION_CONFIG } from '@/config/foundation'
 import { copy } from '@/util'
-import Tgs from '@/components/tgs'
+import { CopyModal } from '@/components/minidoge/copyModal'
 const { Title } = Typography
 
 // 治理规则说明内容组件
@@ -60,27 +60,7 @@ const RulesContent: React.FC = () => {
 
   return (
     <>
-      <Modal
-        open={isModalOpen}
-        centered
-        footer={null}
-        closable={false}
-        width="auto"
-      >
-        <div className="flex flex-col items-center px-8 py-4">
-          {isModalOpen && (
-            <Tgs
-              name="success"
-              className="!w-24 !h-24 sm:!w-32 sm:!h-32 md:!w-40 md:!h-40"
-              onChange={value => isModalOpen && setIsModalOpen(!value)}
-            />
-          )}
-          <span className="text-lg sm:text-xl md:text-2xl font-bold mt-2">
-            {t('message.copy.success')}
-          </span>
-        </div>
-      </Modal>
-
+      <CopyModal open={isModalOpen} onClose={setIsModalOpen} />
       <div className="space-y-6">
         {/* 重要提醒 */}
         <div

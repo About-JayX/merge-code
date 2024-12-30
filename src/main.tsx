@@ -8,6 +8,7 @@ import "virtual:svg-icons-register";
 import "@/i18n";
 import "@/styles/core/global.scss";
 
+
 // 配置 React Router future flags
 const routerOptions = {
   future: {

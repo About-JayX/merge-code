@@ -21,7 +21,11 @@ export default function Theme({ children }: { children?: React.ReactNode }) {
             itemInputBg:"rgba(255,255,255,0.1) !important",
             itemLinkBg:"rgba(255,255,255,0.1) !important",
             itemActiveBg:"rgba(255,255,255,0.1) !important",
-          }
+          },
+          Select: {
+            selectorBg: "#0F0F0F",
+            
+          },
         },
         token: {
           colorPrimary: "#FFC10B",
