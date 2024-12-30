@@ -8,6 +8,7 @@ import howToBuy from "./buyGuide.ts";
 import about from "./about";
 import footer from "./footer";
 import dao from "./dao";
+import memes from "./memes.ts";
 
 
 export default {
@@ -23,6 +24,7 @@ export default {
     footer,
     public: _public,
     message,
-    dao
+    dao,
+    memes
   },
 }; 

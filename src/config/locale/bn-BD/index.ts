@@ -8,6 +8,7 @@
  import about from "./about";
  import footer from "./footer";
  import dao from "./dao";
+import memes from "./memes";
  
  export default {
    translation: {
@@ -23,6 +24,7 @@
      public: _public,
      message,
      dao,
+     memes
    },
  };
  

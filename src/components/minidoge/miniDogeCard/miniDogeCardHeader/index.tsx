@@ -7,18 +7,18 @@ import { MiniDogeCardHeaderReward } from "./reward";
 import { useState } from "react";
 import { CopyModal } from "../../copyModal";
 import { copy } from "@/util";
-
-export const MiniDogeCardHeader = ({
-  address="",
-}: {
-  address?: string;
-}) => {
+import { useTranslation } from "react-i18next";
+export const MiniDogeCardHeader = ({ address = "" }: { address?: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shareModalOpen, setShareModalOpen] = useState(false);
+  const { t } = useTranslation();
+  const memes: any = t("memes", { returnObjects: true });
   return (
     <>
       <MiniDogeCardHeaderReward
-        text={address}
+        title={memes.reward.title}
+        text={memes.reward.text}
+        address={address}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
@@ -52,7 +52,7 @@ export const MiniDogeCardHeader = ({
           <IconWrapper
             onClick={async () => {
               await copy(address);
-              setShareModalOpen(true); 
+              setShareModalOpen(true);
             }}
           >
             <Icon name="share" />

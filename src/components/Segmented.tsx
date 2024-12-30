@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { memesHover } from "./domain/styles";
 
 export default function Segmented({
   options,
@@ -14,11 +15,13 @@ export default function Segmented({
   );
 
   return (
-    <div className="flex gap-2 sm:max-w-40 items-center px-1 py-1 w-full rounded-full bg-gradient-to-b from-[#FFC30C] to-[#FFAD04] text-black text-base">
+    <div
+      className={`${memesHover}  flex gap-2 sm:max-w-40 items-center px-1 py-1 w-full rounded-full bg-gradient-to-b from-[#FFC30C] to-[#FFAD04] text-black text-base`}
+    >
       {options.map((option) => (
         <div
           key={option.value}
-          className={`px-4 w-full text-center py-1 rounded-full cursor-pointer ${
+          className={`${memesHover} hover:!shadow-none px-4 w-full text-center py-1 rounded-full cursor-pointer ${
             selectedValue === option.value
               ? "bg-black text-[#FFAC03]"
               : "bg-transparent"
