@@ -1,15 +1,39 @@
 export default {
-    title: [
-      { content: "Expression pack" },
-      { content: " creation", status: true },
-    ],
-    text: "Web3 emoticon creation supports creators to receive $MINIDOGE rewards through their works.",
-    hot: "Hot",
-    new: "New",
-    selectText: "Default",
-    selectOptions: [],
-    reward:{
-        title: "Support",
-        text: "Scan the QR code or copy the wallet address",
-    }
-  };
+  title: [
+    { content: "Expression pack" },
+    { content: " creation", status: true },
+  ],
+  text: "Web3 emoticon creation supports creators to receive $MINIDOGE rewards through their works.",
+  hot: "Hot",
+  new: "New",
+  selectText: "Default",
+  selectOptions: [],
+  reward: {
+    title: "Support",
+    text: "Scan the QR code or copy the wallet address",
+  },
+  bindingWarningText: "Bind your SOL wallet address to publish your work",
+  bindingWarningText2: "Bind now",
+  ownedBy: "Owned by",
+  bindSOLWallet: "Bind SOL wallet",
+  income: "Income",
+  like: "Like",
+  check: "Check",
+  publish: "Publish",
+  limitText: {
+    image: "Image: JPG/PNG, ≤5MB",
+    gif: "GIF: ≤10MB",
+    video: "Video: MP4, ≤50MB, ≤30s",
+    batchUpload: "Batch upload limit 10",
+  },
+  selectFile: "Select file",
+  userName: "User name",
+  userNamePlaceholder: "Please enter your user name",
+  userNameTip: "4-60 characters, support Chinese, English, numbers, underscore and minus sign",
+  SOLWalletAddress: "SOL wallet address",
+  SOLWalletAddressPlaceholder: "Please enter your SOL wallet address",
+  addLink: "Add link",
+  telegramPlaceholder: "Please enter the Telegram link",
+  twitterPlaceholder: "Please enter the Twitter link",
+  verify: "Verify",
+};

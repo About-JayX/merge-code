@@ -1,31 +1,39 @@
 export default {
   title: [
-    { content: "حزمة التعبير" },
-    { content: "إنشاء ", status: true },
+    { content: "व्यक्तित्व पैक" },
+    { content: " निर्माण", status: true },
   ],
-  text: "يدعم إنشاء الرموز التعبيرية في Web3 المبدعين للحصول على مكافآت $MINIDOGE من خلال أعمالهم.",
-  hot: "ساخن",
-  new: "جديد",
-  selectText: "افتراضي",
+  text: "वेब3 इमोटिकॉन निर्माण रचनाकारों को उनके कार्यों के माध्यम से $MINIDOGE पुरस्कार प्राप्त करने में सहायता करता है।",
+  hot: "गर्म",
+  new: "नया",
+  selectText: "डिफ़ॉल्ट",
   selectOptions: [],
-  reward:{
-      title: "دعم",
-      text: "امسح رمز الاستجابة السريعة أو انسخ عنوان المحفظة",
+  reward: {
+    title: "समर्थन",
+    text: "QR कोड स्कैन करें या वॉलेट पता कॉपी करें",
   },
-  // 新增翻译
-  hi: {
-      title: [
-          { content: "एक्सप्रेशन पैक" },
-          { content: "निर्माण", status: true },
-      ],
-      text: "Web3 में इमोजी बनाने का समर्थन रचनाकारों को उनके काम के लिए $MINIDOGE पुरस्कार प्राप्त करने में मदद करता है।",
-      hot: "गर्म",
-      new: "नया",
-      selectText: "डिफ़ॉल्ट",
-      selectOptions: [],
-      reward:{
-          title: "समर्थन",
-          text: "QR कोड स्कैन करें या वॉलेट पता कॉपी करें",
-      }
-  }
+  bindingWarningText: "अपना SOL वॉलेट पता बाइंड करें ताकि आप अपना काम प्रकाशित कर सकें",
+  bindingWarningText2: "अब बाइंड करें",
+  ownedBy: "द्वारा स्वामित्व",
+  bindSOLWallet: "SOL वॉलेट बाइंड करें",
+  income: "आय",
+  like: "पसंद करें",
+  check: "जांचें",
+  publish: "प्रकाशित करें",
+  limitText: {
+    image: "छवि: JPG/PNG, ≤5MB",
+    gif: "GIF: ≤10MB",
+    video: "वीडियो: MP4, ≤50MB, ≤30s",
+    batchUpload: "बैच अपलोड सीमा 10",
+  },
+  selectFile: "फाइल चुनें",
+  userName: "उपयोगकर्ता नाम",
+  userNamePlaceholder: "कृपया अपना उपयोगकर्ता नाम दर्ज करें",
+  userNameTip: "4-60 अक्षर, चीनी, अंग्रेजी, संख्या, अंडरस्कोर और माइनस साइन का समर्थन करता है",
+  SOLWalletAddress: "SOL वॉलेट पता",
+  SOLWalletAddressPlaceholder: "कृपया अपना SOL वॉलेट पता दर्ज करें",
+  addLink: "लिंक जोड़ें",
+  telegramPlaceholder: "कृपया टेलीग्राम लिंक दर्ज करें",
+  twitterPlaceholder: "कृपया ट्विटर लिंक दर्ज करें",
+  verify: "जांचें",
 };

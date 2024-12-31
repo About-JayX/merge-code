@@ -1,15 +1,39 @@
 export default {
-    title: [
-      { content: "Pacote de Expressões" },
-      { content: " criação", status: true },
-    ],
-    text: "A criação de emoticons Web3 apoia os criadores a receber recompensas de $MINIDOGE através das suas obras.",
-    hot: "Quente",
-    new: "Novo",
-    selectText: "Padrão",
-    selectOptions: [],
-    reward:{
-        title: "Apoio",
-        text: "Escaneie o código QR ou copie o endereço da carteira",
-    }
-  };
+  title: [
+    { content: "Pacote de expressão" },
+    { content: " criação", status: true },
+  ],
+  text: "A criação de emoticons Web3 apoia os criadores a receber recompensas de $MINIDOGE através das suas obras.",
+  hot: "Quente",
+  new: "Novo",
+  selectText: "Padrão",
+  selectOptions: [],
+  reward: {
+    title: "Apoio",
+    text: "Escaneie o código QR ou copie o endereço da carteira",
+  },
+  bindingWarningText: "Vincule o seu endereço de carteira SOL para publicar o seu trabalho",
+  bindingWarningText2: "Vincular agora",
+  ownedBy: "Pertence a",
+  bindSOLWallet: "Vincular carteira SOL",
+  income: "Rendimento",
+  like: "Gosto",
+  check: "Verificar",
+  publish: "Publicar",
+  limitText: {
+    image: "Imagem: JPG/PNG, ≤5MB",
+    gif: "GIF: ≤10MB",
+    video: "Vídeo: MP4, ≤50MB, ≤30s",
+    batchUpload: "Limite de upload em lote 10",
+  },
+  selectFile: "Selecionar ficheiro",
+  userName: "Nome de utilizador",
+  userNamePlaceholder: "Por favor, insira o seu nome de utilizador",
+  userNameTip: "4-60 caracteres, suporta chinês, inglês, números, sublinhado e sinal de menos",
+  SOLWalletAddress: "Endereço da carteira SOL",
+  SOLWalletAddressPlaceholder: "Por favor, insira o seu endereço da carteira SOL",
+  addLink: "Adicionar link",
+  telegramPlaceholder: "Por favor, insira o link do Telegram",
+  twitterPlaceholder: "Por favor, insira o link do Twitter",
+  verify: "Verificar",
+};

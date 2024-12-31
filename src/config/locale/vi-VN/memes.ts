@@ -1,15 +1,39 @@
 export default {
-    title: [
-      { content: "Gói biểu thức" },
-      { content: " tạo", status: true },
-    ],
-    text: "Việc tạo biểu tượng cảm xúc Web3 hỗ trợ các nhà sáng tạo nhận phần thưởng $MINIDOGE thông qua các tác phẩm của họ.",
-    hot: "Nóng",
-    new: "Mới",
-    selectText: "Mặc định",
-    selectOptions: [],
-    reward:{
-        title: "Hỗ trợ",
-        text: "Quét mã QR hoặc sao chép địa chỉ ví",
-    }
-  };
+  title: [
+    { content: "Gói biểu cảm" },
+    { content: " tạo", status: true },
+  ],
+  text: "Việc tạo emoticon Web3 hỗ trợ các nhà sáng tạo nhận phần thưởng $MINIDOGE thông qua các tác phẩm của họ.",
+  hot: "Nóng",
+  new: "Mới",
+  selectText: "Mặc định",
+  selectOptions: [],
+  reward: {
+    title: "Hỗ trợ",
+    text: "Quét mã QR hoặc sao chép địa chỉ ví",
+  },
+  bindingWarningText: "Liên kết địa chỉ ví SOL của bạn để xuất bản tác phẩm của bạn",
+  bindingWarningText2: "Liên kết ngay bây giờ",
+  ownedBy: "Sở hữu bởi",
+  bindSOLWallet: "Liên kết ví SOL",
+  income: "Thu nhập",
+  like: "Thích",
+  check: "Kiểm tra",
+  publish: "Xuất bản",
+  limitText: {
+    image: "Hình ảnh: JPG/PNG, ≤5MB",
+    gif: "GIF: ≤10MB",
+    video: "Video: MP4, ≤50MB, ≤30s",
+    batchUpload: "Giới hạn tải lên hàng loạt 10",
+  },
+  selectFile: "Chọn tệp",
+  userName: "Tên người dùng",
+  userNamePlaceholder: "Vui lòng nhập tên người dùng của bạn",
+  userNameTip: "4-60 ký tự, hỗ trợ tiếng Trung, tiếng Anh, số, gạch dưới và dấu trừ",
+  SOLWalletAddress: "Địa chỉ ví SOL",
+  SOLWalletAddressPlaceholder: "Vui lòng nhập địa chỉ ví SOL của bạn",
+  addLink: "Thêm liên kết",
+  telegramPlaceholder: "Vui lòng nhập liên kết Telegram",
+  twitterPlaceholder: "Vui lòng nhập liên kết Twitter",
+  verify: "Xác minh",
+};

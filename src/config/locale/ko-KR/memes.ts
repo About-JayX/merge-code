@@ -1,15 +1,39 @@
 export default {
-    title: [
-      { content: "표현 팩" },
-      { content: " 생성", status: true },
-    ],
-    text: "Web3 이모티콘 생성은 창작자가 자신의 작품을 통해 $MINIDOGE 보상을 받을 수 있도록 지원합니다.",
-    hot: "핫",
-    new: "새로운",
-    selectText: "기본",
-    selectOptions: [],
-    reward:{
-        title: "지원",
-        text: "QR 코드를 스캔하거나 지갑 주소를 복사하세요",
-    }
-  };
+  title: [
+    { content: "표현 팩" },
+    { content: " 생성", status: true },
+  ],
+  text: "Web3 이모티콘 생성은 창작자가 자신의 작품을 통해 $MINIDOGE 보상을 받을 수 있도록 지원합니다.",
+  hot: "핫",
+  new: "새로운",
+  selectText: "기본값",
+  selectOptions: [],
+  reward: {
+    title: "지원",
+    text: "QR 코드를 스캔하거나 지갑 주소를 복사하세요",
+  },
+  bindingWarningText: "작품을 게시하려면 SOL 지갑 주소를 연결하세요",
+  bindingWarningText2: "지금 연결하기",
+  ownedBy: "소유자",
+  bindSOLWallet: "SOL 지갑 연결",
+  income: "수익",
+  like: "좋아요",
+  check: "확인",
+  publish: "게시",
+  limitText: {
+    image: "이미지: JPG/PNG, ≤5MB",
+    gif: "GIF: ≤10MB",
+    video: "비디오: MP4, ≤50MB, ≤30s",
+    batchUpload: "일괄 업로드 제한 10",
+  },
+  selectFile: "파일 선택",
+  userName: "사용자 이름",
+  userNamePlaceholder: "사용자 이름을 입력하세요",
+  userNameTip: "4-60자, 중국어, 영어, 숫자, 밑줄 및 하이픈 지원",
+  SOLWalletAddress: "SOL 지갑 주소",
+  SOLWalletAddressPlaceholder: "SOL 지갑 주소를 입력하세요",
+  addLink: "링크 추가",
+  telegramPlaceholder: "텔레그램 링크를 입력하세요",
+  twitterPlaceholder: "트위터 링크를 입력하세요",
+  verify: "확인",
+};

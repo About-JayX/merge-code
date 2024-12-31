@@ -1,15 +1,39 @@
 export default {
-    title: [
-      { content: "表現パック" },
-      { content: " 作成", status: true },
-    ],
-    text: "Web3絵文字の作成は、クリエイターが自分の作品を通じて$MINIDOGEの報酬を受け取ることをサポートします。",
-    hot: "ホット",
-    new: "新しい",
-    selectText: "デフォルト",
-    selectOptions: [],
-    reward:{
-        title: "サポート",
-        text: "QRコードをスキャンするか、ウォレットアドレスをコピーしてください",
-    }
-  };
+  title: [
+    { content: "エクスプレッションパック" },
+    { content: " 作成", status: true },
+  ],
+  text: "Web3エモティコンの作成は、クリエイターが自分の作品を通じて$MINIDOGEの報酬を受け取るのをサポートします。",
+  hot: "ホット",
+  new: "新しい",
+  selectText: "デフォルト",
+  selectOptions: [],
+  reward: {
+    title: "サポート",
+    text: "QRコードをスキャンするか、ウォレットアドレスをコピーしてください",
+  },
+  bindingWarningText: "作品を公開するためにSOLウォレットアドレスをバインドしてください",
+  bindingWarningText2: "今すぐバインド",
+  ownedBy: "所有者",
+  bindSOLWallet: "SOLウォレットをバインド",
+  income: "収入",
+  like: "いいね",
+  check: "確認",
+  publish: "公開",
+  limitText: {
+    image: "画像: JPG/PNG, ≤5MB",
+    gif: "GIF: ≤10MB",
+    video: "ビデオ: MP4, ≤50MB, ≤30s",
+    batchUpload: "バッチアップロード制限 10",
+  },
+  selectFile: "ファイルを選択",
+  userName: "ユーザー名",
+  userNamePlaceholder: "ユーザー名を入力してください",
+  userNameTip: "4-60文字、中国語、英語、数字、アンダースコア、マイナス記号をサポート",
+  SOLWalletAddress: "SOLウォレットアドレス",
+  SOLWalletAddressPlaceholder: "SOLウォレットアドレスを入力してください",
+  addLink: "リンクを追加",
+  telegramPlaceholder: "Telegramリンクを入力してください",
+  twitterPlaceholder: "Twitterリンクを入力してください",
+  verify: "確認",
+};

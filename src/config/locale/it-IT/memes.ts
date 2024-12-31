@@ -1,15 +1,39 @@
 export default {
-    title: [
-      { content: "Pacchetto di espressioni" },
-      { content: " creazione", status: true },
-    ],
-    text: "La creazione di emoticon Web3 supporta i creatori nel ricevere ricompense in $MINIDOGE attraverso le loro opere.",
-    hot: "Caldo",
-    new: "Nuovo",
-    selectText: "Predefinito",
-    selectOptions: [],
-    reward:{
-        title: "Supporto",
-        text: "Scansiona il codice QR o copia l'indirizzo del portafoglio",
-    }
-  };
+  title: [
+    { content: "Pacchetto di espressione" },
+    { content: " creazione", status: true },
+  ],
+  text: "La creazione di emoticon Web3 supporta i creatori nel ricevere ricompense di $MINIDOGE attraverso le loro opere.",
+  hot: "Caldo",
+  new: "Nuovo",
+  selectText: "Predefinito",
+  selectOptions: [],
+  reward: {
+    title: "Supporto",
+    text: "Scansiona il codice QR o copia l'indirizzo del portafoglio",
+  },
+  bindingWarningText: "Collega il tuo indirizzo del portafoglio SOL per pubblicare il tuo lavoro",
+  bindingWarningText2: "Collega ora",
+  ownedBy: "Posseduto da",
+  bindSOLWallet: "Collega il portafoglio SOL",
+  income: "Reddito",
+  like: "Mi piace",
+  check: "Controlla",
+  publish: "Pubblica",
+  limitText: {
+    image: "Immagine: JPG/PNG, ≤5MB",
+    gif: "GIF: ≤10MB",
+    video: "Video: MP4, ≤50MB, ≤30s",
+    batchUpload: "Limite di caricamento batch 10",
+  },
+  selectFile: "Seleziona file",
+  userName: "Nome utente",
+  userNamePlaceholder: "Inserisci il tuo nome utente",
+  userNameTip: "4-60 caratteri, supporta cinese, inglese, numeri, underscore e segno meno",
+  SOLWalletAddress: "Indirizzo del portafoglio SOL",
+  SOLWalletAddressPlaceholder: "Inserisci il tuo indirizzo del portafoglio SOL",
+  addLink: "Aggiungi link",
+  telegramPlaceholder: "Inserisci il link di Telegram",
+  twitterPlaceholder: "Inserisci il link di Twitter",
+  verify: "Verifica",
+};

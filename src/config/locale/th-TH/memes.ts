@@ -1,15 +1,39 @@
 export default {
-    title: [
-      { content: "แพ็คเกจการแสดงออก" },
-      { content: " การสร้าง", status: true },
-    ],
-    text: "การสร้างอีโมจิ Web3 สนับสนุนผู้สร้างในการรับรางวัล $MINIDOGE ผ่านผลงานของพวกเขา.",
-    hot: "ร้อน",
-    new: "ใหม่",
-    selectText: "ค่าเริ่มต้น",
-    selectOptions: [],
-    reward:{
-        title: "การสนับสนุน",
-        text: "สแกนรหัส QR หรือคัดลอกที่อยู่กระเป๋าเงิน",
-    }
-  };
+  title: [
+    { content: "แพ็คการแสดงออก" },
+    { content: " การสร้าง", status: true },
+  ],
+  text: "การสร้างอีโมติคอน Web3 ช่วยสนับสนุนผู้สร้างให้ได้รับรางวัล $MINIDOGE ผ่านผลงานของพวกเขา",
+  hot: "ร้อน",
+  new: "ใหม่",
+  selectText: "ค่าเริ่มต้น",
+  selectOptions: [],
+  reward: {
+    title: "สนับสนุน",
+    text: "สแกน QR โค้ดหรือคัดลอกที่อยู่กระเป๋าเงิน",
+  },
+  bindingWarningText: "เชื่อมโยงที่อยู่กระเป๋าเงิน SOL ของคุณเพื่อเผยแพร่ผลงานของคุณ",
+  bindingWarningText2: "เชื่อมโยงตอนนี้",
+  ownedBy: "เป็นเจ้าของโดย",
+  bindSOLWallet: "เชื่อมโยงกระเป๋าเงิน SOL",
+  income: "รายได้",
+  like: "ชอบ",
+  check: "ตรวจสอบ",
+  publish: "เผยแพร่",
+  limitText: {
+    image: "ภาพ: JPG/PNG, ≤5MB",
+    gif: "GIF: ≤10MB",
+    video: "วิดีโอ: MP4, ≤50MB, ≤30s",
+    batchUpload: "ขีดจำกัดการอัปโหลดแบบกลุ่ม 10",
+  },
+  selectFile: "เลือกไฟล์",
+  userName: "ชื่อผู้ใช้",
+  userNamePlaceholder: "กรุณาใส่ชื่อผู้ใช้ของคุณ",
+  userNameTip: "4-60 ตัวอักษร รองรับภาษาไทย อังกฤษ ตัวเลข ขีดล่าง และเครื่องหมายลบ",
+  SOLWalletAddress: "ที่อยู่กระเป๋าเงิน SOL",
+  SOLWalletAddressPlaceholder: "กรุณาใส่ที่อยู่กระเป๋าเงิน SOL ของคุณ",
+  addLink: "เพิ่มลิงก์",
+  telegramPlaceholder: "กรุณาใส่ลิงก์ Telegram",
+  twitterPlaceholder: "กรุณาใส่ลิงก์ Twitter",
+  verify: "ตรวจสอบ",
+};
