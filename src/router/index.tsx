@@ -44,10 +44,8 @@ const generateRoutes = (
 
     const routePath =
       componentName === 'index'
-        ? `/${dirPath || ''}`
+        ? `/${dirPath}`
         : `/${dirPath ? `${dirPath}/` : ''}${componentName.toLowerCase()}`
-
-    console.log(`生成的路由: ${routePath}`);
 
     const Component = lazy(() =>
       page().then(module => ({ default: module.default }))

@@ -27,11 +27,13 @@ export default function MiniDogeCard({
   audioSrc = '',
   address = '',
   id,
+  footerType = 'download',
 }: {
   type?: 'image' | 'mp3' | 'mp4'
   audioSrc?: string
   address?: string
   id?: string
+  footerType?: 'download' | 'delete'
 }) {
   return (
     <Card className="!bg-[#0F0F0F] z-10 !p-4 flex flex-col gap-3">
@@ -41,7 +43,7 @@ export default function MiniDogeCard({
         <MiniDogeCardBody type={type} audioSrc={audioSrc} id={id || address} />
       )}
       {type === 'mp4' && <MiniDogeCardBody type={type} audioSrc={audioSrc} />}
-      <MiniDogeCardFooter />
+      <MiniDogeCardFooter type={footerType} />
     </Card>
   )
 }

@@ -6,10 +6,12 @@ export default memo(function Icon({
   name,
   className,
   style,
+  onClick,
 }: {
   name: string;
   className?: string;
   style?: React.CSSProperties;
+  onClick?: () => void;
 }) {
   useTheme();
 
@@ -21,6 +23,7 @@ export default memo(function Icon({
       )}
       style={style}
       aria-hidden="true"
+      onClick={onClick}
     >
       <use href={`#icon-${name}`} />
     </svg>
