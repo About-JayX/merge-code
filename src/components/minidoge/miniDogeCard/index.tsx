@@ -1,16 +1,16 @@
-import { Card } from "@/components/domain";
-import { MiniDogeCardHeader } from "./miniDogeCardHeader";
-import { MiniDogeCardBody } from "./miniDogeCardBody";
-import { MiniDogeCardFooter } from "./miniDogeCardFooter";
+import { Card } from '@/components/domain'
+import { MiniDogeCardHeader } from './miniDogeCardHeader'
+import { MiniDogeCardBody } from './miniDogeCardBody'
+import { MiniDogeCardFooter } from './miniDogeCardFooter'
 
 export const IconWrapper = ({
   children,
   className,
   onClick,
 }: {
-  children: React.ReactNode;
-  className?: string;
-  onClick?: () => void;
+  children: React.ReactNode
+  className?: string
+  onClick?: () => void
 }) => {
   return (
     <div
@@ -19,25 +19,29 @@ export const IconWrapper = ({
     >
       {children}
     </div>
-  );
-};
+  )
+}
 
 export default function MiniDogeCard({
-  type = "image",
-  audioSrc = "",
-  address = "",
+  type = 'image',
+  audioSrc = '',
+  address = '',
+  id,
 }: {
-  type?: "image" | "mp3" | "mp4";
-  audioSrc?: string;
-  address?: string;
+  type?: 'image' | 'mp3' | 'mp4'
+  audioSrc?: string
+  address?: string
+  id?: string
 }) {
   return (
     <Card className="!bg-[#0F0F0F] z-10 !p-4 flex flex-col gap-3">
       <MiniDogeCardHeader address={address} />
-      {type === "image" && <MiniDogeCardBody type={type} />}
-      {type === "mp3" && <MiniDogeCardBody type={type} audioSrc={audioSrc} />}
-      {type === "mp4" && <MiniDogeCardBody type={type} audioSrc={audioSrc} />}
+      {type === 'image' && <MiniDogeCardBody type={type} />}
+      {type === 'mp3' && (
+        <MiniDogeCardBody type={type} audioSrc={audioSrc} id={id || address} />
+      )}
+      {type === 'mp4' && <MiniDogeCardBody type={type} audioSrc={audioSrc} />}
       <MiniDogeCardFooter />
     </Card>
-  );
+  )
 }
