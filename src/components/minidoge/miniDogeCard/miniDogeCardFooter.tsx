@@ -2,7 +2,7 @@ import Icon from "@/components/icon";
 import { LikeIcon } from "../likeIcon";
 import { useState } from "react";
 
-export const MiniDogeCardFooter = () => {
+export const MiniDogeCardFooter = ({type="download"}:{type:"download"|"delete"}) => {
   const [liked, setLiked] = useState(false);
     return (
       <div className="w-full flex items-center justify-between gap-2 px-2">
@@ -17,7 +17,7 @@ export const MiniDogeCardFooter = () => {
           </div>
         </div>
   
-        <Icon name="download" className="text-lg" />
+        <Icon name={type} className="text-lg" />
       </div>
     );
   };
