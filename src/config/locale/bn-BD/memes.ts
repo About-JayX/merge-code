@@ -36,4 +36,6 @@ export default {
   telegramPlaceholder: "দয়া করে টেলিগ্রাম লিঙ্ক লিখুন",
   twitterPlaceholder: "দয়া করে টুইটার লিঙ্ক লিখুন",
   verify: "যাচাই করুন",
+  submit: "জমা দিন",
+  avatar: "ছবি",
 };

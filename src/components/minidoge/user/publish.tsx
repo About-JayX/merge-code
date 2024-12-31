@@ -2,7 +2,7 @@ import { memesTextSize, memesTitleSize } from "@/components/domain/styles";
 import { Upload } from "@/components/upload";
 import { Button, Modal } from "antd";
 import { useState } from "react";
-
+import { useTranslation } from "react-i18next";
 export const Publish = ({
   open,
   onClose,
@@ -10,6 +10,7 @@ export const Publish = ({
   open: boolean;
   onClose: (value: boolean) => void;
 }) => {
+  const { t } = useTranslation();
   const [url, setUrl] = useState<string[] | null>(null);
   return (
     <Modal
@@ -19,51 +20,19 @@ export const Publish = ({
       maskClosable={false}
       centered
     >
-      <div className="flex flex-col items-center py-4 gap-3 sm:gap-5">
+      <div className="flex flex-col items-center py-4 gap-3 sm:gap-5 mt-4">
         <div className="flex flex-col gap-2 w-full">
           <span className={`${memesTitleSize} !text-base !font-bold`}>
-            Publish
+            {t("memes.publish")}
           </span>
           <Upload
-                  multiple
-                  onSuccess={(urls) => setUrl([...(url || []), ...urls])}
-                  disabled={Boolean(url && url.length >= 10)}
-                >
- <div className="w-full border border-white/10 border-dotted rounded-md p-5">
-            <div className="grid grid-cols-[auto_1fr] items-center gap-2 sm:gap-4">
-              <div className="flex flex-col gap-3">
-                <div className="flex flex-col">
-                  <span
-                    className={`${memesTextSize} !text-xs sm:!text-sm opacity-50`}
-                  >
-                    图片：JPG/PNG，≤5MB
-                  </span>
-                  <span
-                    className={`${memesTextSize} !text-xs sm:!text-sm opacity-50`}
-                  >
-                    GIF：≤10MB
-                  </span>
-                  <span
-                    className={`${memesTextSize} !text-xs sm:!text-sm opacity-50`}
-                  >
-                    视频：MP4，≤50MB，≤30秒
-                  </span>
-                  <span
-                    className={`${memesTextSize} !text-xs sm:!text-sm opacity-50`}
-                  >
-                    批量上传限制10个
-                  </span>
-                </div>
-
-                
-                  <Button
-                    type="default"
-                    className="!min-h-8 !max-w-28 !min-w-28 !text-xs sm:!text-sm"
-                    disabled={Boolean(url && url.length >= 10)}
-                  >
-                    选择文件
-                  </Button>
-                <div className="flex  flex-col gap-0">
+            multiple
+            onSuccess={(urls) => setUrl([...(url || []), ...urls])}
+            disabled={Boolean(url && url.length >= 10)}
+          >
+            <div className="w-full border border-white/10 border-dotted rounded-md p-5">
+              <div className="grid grid-cols-[auto_1fr] items-center gap-2 sm:gap-4">
+                <div className="flex flex-col gap-3">
                   {url && url.length > 0 && (
                     <div className="flex flex-wrap items-center gap-2">
                       {url.map((url, index) => {
@@ -101,15 +70,43 @@ export const Publish = ({
                       })}
                     </div>
                   )}
+
+                  <Button
+                    type="default"
+                    className="!min-h-8 !max-w-28 !min-w-28 !text-xs sm:!text-sm"
+                    disabled={Boolean(url && url.length >= 10)}
+                  >
+                    {t("memes.selectFile")}
+                  </Button>
+                  <div className="flex flex-col">
+                    <span
+                      className={`${memesTextSize} !text-xs sm:!text-sm opacity-50`}
+                    >
+                      {t("memes.limitText.image")}
+                    </span>
+                    <span
+                      className={`${memesTextSize} !text-xs sm:!text-sm opacity-50`}
+                    >
+                      {t("memes.limitText.gif")}
+                    </span>
+                    <span
+                      className={`${memesTextSize} !text-xs sm:!text-sm opacity-50`}
+                    >
+                      {t("memes.limitText.video")}
+                    </span>
+                    <span
+                      className={`${memesTextSize} !text-xs sm:!text-sm opacity-50`}
+                    >
+                      {t("memes.limitText.batchUpload")}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-                </Upload>
-         
+          </Upload>
         </div>
         <Button type="primary" className="w-full" size="large" disabled={!url}>
-          Publish
+          {t("memes.publish")}
         </Button>
       </div>
     </Modal>

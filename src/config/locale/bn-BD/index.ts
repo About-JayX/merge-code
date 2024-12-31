@@ -9,6 +9,7 @@
  import footer from "./footer";
  import dao from "./dao";
 import memes from "./memes";
+import login from "./login.ts";
  
  export default {
    translation: {
@@ -24,7 +25,8 @@ import memes from "./memes";
      public: _public,
      message,
      dao,
-     memes
+     memes,
+     login
    },
  };
  

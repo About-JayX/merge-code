@@ -36,4 +36,6 @@ export default {
   telegramPlaceholder: "يرجى إدخال رابط Telegram",
   twitterPlaceholder: "يرجى إدخال رابط Twitter",
   verify: "تحقق",
+  submit: "إرسال",
+  avatar: "صورة",
 };

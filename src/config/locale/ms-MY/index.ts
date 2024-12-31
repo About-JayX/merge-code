@@ -9,7 +9,7 @@ import about from "./about";
 import footer from "./footer";
 import dao from "./dao";
 import memes from "./memes.ts";
-
+import login from "./login.ts";
 export default {
   translation: {
     language: "Bahasa Melayu",
@@ -24,6 +24,7 @@ export default {
     public: _public,
     message,
     dao,
-    memes
+    memes,
+    login
   },
 }; 

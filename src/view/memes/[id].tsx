@@ -5,6 +5,7 @@ import MiniDogeCard from "@/components/minidoge/miniDogeCard";
 import UserEdit from "@/components/minidoge/user/edit";
 import { Publish } from "@/components/minidoge/user/publish";
 import Segmented from "@/components/Segmented";
+
 import {
   Alert,
   Avatar,
@@ -34,12 +35,18 @@ const { Paragraph } = Typography;
  */
 
 // 用户信息
-export const UserInfo = () => {
+export const UserInfo = ({ editOpens, onEdit }: { editOpens: boolean, onEdit: (value: boolean) => void }) => {
+  const { t } = useTranslation();
   const [editOpen, setEditOpen] = useState(false);
   const [publishOpen, setPublishOpen] = useState(false);
+
+  const handleEdit = (value: boolean) => {
+    setEditOpen(value);
+    onEdit && onEdit(value);
+  };
   return (
     <>
-      <UserEdit open={editOpen} onClose={setEditOpen} />
+      <UserEdit open={editOpens || editOpen} onClose={handleEdit} />
       <Publish open={publishOpen} onClose={setPublishOpen} />
       <Section className="grid grid-cols-[1fr_auto] flex-wrap items-center justify-between gap-4">
         <div className="grid grid-cols-[56px_1fr] sm:grid-cols-[96px_1fr] items-center gap-2 sm:gap-4 w-auto">
@@ -51,7 +58,7 @@ export const UserInfo = () => {
             <span
               className={`${memesTitleSize} !text-xl sm:!text-2xl !font-bold uppercase flex items-center w-full`}
             >
-              <Ellipsis content="Owned by" />
+              <Ellipsis content={t("memes.ownedBy")} />
               &nbsp;
               <Icon name="authenticate" className="text-xl sm:text-2xl" />
               &nbsp;
@@ -78,7 +85,7 @@ export const UserInfo = () => {
                   />
                 </Paragraph>
               ) : (
-                "Bind SOL wallet"
+                t("memes.bindSOLWallet")
               )}
             </span>
           </div>
@@ -92,7 +99,7 @@ export const UserInfo = () => {
             className="rounded-full items-center flex justify-center xl:!max-w-36 sm:!w-auto !h-auto sm:!min-h-11  sm:!text-base"
           >
             <Icon name="publish" className="text-2xl sm:text-3xl" />
-            &nbsp;Publish
+            &nbsp;{t("memes.publish")}
           </Button>
         ) : (
           ""
@@ -104,6 +111,7 @@ export const UserInfo = () => {
 
 // 访问浏览点赞量
 export const ViewInfo = () => {
+  const { t } = useTranslation();
   const InfoItem = ({
     iconName,
     label,
@@ -150,17 +158,17 @@ export const ViewInfo = () => {
     <Section className="flex flex-wrap gap-x-8 gap-y-4 sm:gap-16 -mt-4 sm:-mt-0">
       <InfoItem
         iconName="view"
-        label="Income"
+        label={t("memes.income")}
         value={false ? "5.22 K" : "--"}
       />
       <InfoItem
         iconName="praise"
-        label="Like"
+        label={t("memes.like")}
         value={false ? "5.22 K" : "--"}
       />
       <InfoItem
         iconName="views"
-        label="Check"
+        label={t("memes.check")}
         value={false ? "5.22 K" : "--"}
       />
     </Section>
@@ -184,17 +192,19 @@ export const List = () => {
             { value: "New", label: memes.new },
           ]}
         />
-        <Select
-          options={[
-            {
-              value: "Hot",
-              label: "Hot",
-            },
-          ]}
-          placeholder="Default sort"
-          size="large"
-          className="w-auto"
-        />
+        <div className="antd-rounded">
+          <Select
+            options={[
+              {
+                value: "Hot",
+                label: "Hot",
+              },
+            ]}
+            placeholder="Default sort"
+            size="large"
+            className="w-auto"
+          />
+        </div>
       </Section>
       {/* 列表 */}
 
@@ -247,6 +257,8 @@ export const List = () => {
 
 export default function MemesPage() {
   const { id } = useParams();
+  const { t } = useTranslation();
+  const [editOpen, setEditOpen] = useState(false);
 
   console.log(id);
 
@@ -258,11 +270,14 @@ export default function MemesPage() {
             message={
               <div className="text-center text-base sm:text-lg p-2">
                 <span className="">
-                  Bind your SOL wallet address to publish your work
+                  {t("memes.bindingWarningText")}
                 </span>
                 &nbsp;
-                <a className="text-current !text-[#FFAC03] !underline underline-offset-4">
-                  Bind now
+                <a
+                  className="text-current !text-[#FFAC03] !underline underline-offset-4"
+                  onClick={() => setEditOpen(true)}
+                >
+                  {t("memes.bindingWarningText2")}
                 </a>
               </div>
             }
@@ -272,7 +287,7 @@ export default function MemesPage() {
           ""
         )}
 
-        <UserInfo />
+        <UserInfo editOpens={editOpen} onEdit={setEditOpen} />
         <ViewInfo />
         <Section type="top">
           <Divider className="!my-0" />

@@ -36,4 +36,6 @@ export default {
     telegramPlaceholder: "请输入 Telegram 链接",
     twitterPlaceholder: "请输入 Twitter 链接",
     verify: "验证",
+    submit: "提交",
+    avatar: "头像",
   };

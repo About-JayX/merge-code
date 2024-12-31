@@ -36,4 +36,6 @@ export default {
   telegramPlaceholder: "कृपया टेलीग्राम लिंक दर्ज करें",
   twitterPlaceholder: "कृपया ट्विटर लिंक दर्ज करें",
   verify: "जांचें",
+  submit: "जमा करें",
+  avatar: "अवतार",
 };

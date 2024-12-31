@@ -36,4 +36,6 @@ export default {
   telegramPlaceholder: "텔레그램 링크를 입력하세요",
   twitterPlaceholder: "트위터 링크를 입력하세요",
   verify: "확인",
+  submit: "제출",
+  avatar: "아바타",
 };

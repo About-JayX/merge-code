@@ -36,4 +36,6 @@ export default {
   telegramPlaceholder: "Vui lòng nhập liên kết Telegram",
   twitterPlaceholder: "Vui lòng nhập liên kết Twitter",
   verify: "Xác minh",
+  submit: "Gửi",
+  avatar: "Ảnh đại diện",
 };

@@ -36,4 +36,6 @@ export default {
   telegramPlaceholder: "Sila masukkan pautan Telegram",
   twitterPlaceholder: "Sila masukkan pautan Twitter",
   verify: "Semak",
+  submit: "Kirim",
+  avatar: "Avatar",
 };

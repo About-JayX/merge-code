@@ -36,4 +36,6 @@ export default {
   telegramPlaceholder: "กรุณาใส่ลิงก์ Telegram",
   twitterPlaceholder: "กรุณาใส่ลิงก์ Twitter",
   verify: "ตรวจสอบ",
+  submit: "ส่ง",
+  avatar: "รูปภาพ",
 };

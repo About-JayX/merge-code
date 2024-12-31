@@ -3,12 +3,13 @@ import Icon from "@/components/icon";
 import { Upload } from "@/components/upload";
 import { Avatar, Button, Input, Modal } from "antd";
 import { useState } from "react";
-
+import { useTranslation } from "react-i18next";
 export const UserUpload = () => {
+  const { t } = useTranslation();
   const [url, setUrl] = useState<string | null>(null);
   return (
     <div className="flex flex-col gap-2 w-full">
-      <span className={`${memesTitleSize} !text-base !font-bold`}>头像</span>
+      <span className={`${memesTitleSize} !text-base !font-bold`}>{t("memes.avatar")}</span>
       <div className="w-full border border-white/10 border-dotted rounded-md p-4">
         <div className="grid grid-cols-[auto_1fr] items-center gap-2 sm:gap-4">
           <Upload onSuccess={(urls) => setUrl(urls[0])}>
@@ -32,25 +33,21 @@ export const UserUpload = () => {
               <span
                 className={`${memesTextSize} !text-xs sm:!text-sm opacity-50`}
               >
-                图片：JPG/PNG，≤5MB
+                {t("memes.limitText.image")}
               </span>
               <span
                 className={`${memesTextSize} !text-xs sm:!text-sm opacity-50`}
               >
-                GIF：≤10MB
+                {t("memes.limitText.gif")}
               </span>
-              <span
-                className={`${memesTextSize} !text-xs sm:!text-sm opacity-50`}
-              >
-                视频：MP4，≤50MB，≤30秒
-              </span>
+              
             </div>
             <Upload onSuccess={(urls) => setUrl(urls[0])}>
               <Button
                 type="default"
                 className="!min-h-8 !max-w-28 !min-w-28 !text-xs sm:!text-sm"
               >
-                选择文件
+                {t("memes.selectFile")}
               </Button>
             </Upload>
           </div>
@@ -93,6 +90,7 @@ export default function UserEdit({
   open?: boolean;
   onClose: (value: boolean) => void;
 }) {
+  const { t } = useTranslation();
   const [verify, setVerify] = useState(false);
   const [loading, setLoading] = useState(false);
   return (
@@ -103,17 +101,17 @@ export default function UserEdit({
       maskClosable={false}
       centered
     >
-      <div className="flex flex-col items-center py-4 gap-3 sm:gap-5">
+      <div className="flex flex-col items-center py-4 gap-3 sm:gap-5 mt-4">
         <UserUpload />
         <ItemBox
-          title="用户名"
-          text="4-60个字符,支持中英文、数字、下划线和减号"
+          title={t("memes.userName")}
+          text={t("memes.userNameTip")}
         >
-          <Input placeholder="请输入用户名" size="large" />
+          <Input placeholder={t("memes.userNamePlaceholder")} size="large" />
         </ItemBox>
-        <ItemBox title="SOL钱包地址" text="">
+        <ItemBox title={t("memes.SOLWalletAddress")} text="">
           <div className="flex items-center gap-1">
-            <Input placeholder="请输入SOL钱包地址" size="large" />
+            <Input placeholder={t("memes.SOLWalletAddressPlaceholder")} size="large" />
             &nbsp;
             <Button
               type="primary"
@@ -129,20 +127,20 @@ export default function UserEdit({
                 }, 1000);
               }}
             >
-              {loading ? "" : "验证"}
+              {loading ? "" : t("memes.verify")}
             </Button>
           </div>
         </ItemBox>
-        <ItemBox title="增加链接" text="">
+        <ItemBox title={t("memes.addLink")} text="">
           <div className="flex flex-col items-center gap-2">
             <Input
               addonBefore={<Icon name="telegram" />}
-              placeholder="请输入Telegram链接"
+              placeholder={t("memes.telegramPlaceholder")}
               size="large"
             />
             <Input
               addonBefore={<Icon name="twitter" />}
-              placeholder="请输入Twitter链接"
+              placeholder={t("memes.twitterPlaceholder")}
               size="large"
             />
           </div>
@@ -153,7 +151,7 @@ export default function UserEdit({
           className="w-full"
           disabled={!verify}
         >
-          提交
+          {t("memes.submit")}
         </Button>
       </div>
     </Modal>

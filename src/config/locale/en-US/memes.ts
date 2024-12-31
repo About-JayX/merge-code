@@ -36,4 +36,6 @@ export default {
   telegramPlaceholder: "Please enter the Telegram link",
   twitterPlaceholder: "Please enter the Twitter link",
   verify: "Verify",
+  submit: "Submit",
+  avatar: "Avatar",
 };

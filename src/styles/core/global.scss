@@ -230,7 +230,7 @@ a {
 /* 分页器样式 */
 .ant-pagination {
   @apply mb-4 px-4 py-2 rounded-lg;
-  .ant-pagination-item{
+  .ant-pagination-item {
     @apply m-0;
   }
   .ant-pagination-item,
@@ -352,8 +352,11 @@ a {
   }
 }
 
-.ant-select {
-  .ant-select-selector {
-    @apply bg-transparent !rounded-full !bg-[#0F0F0F] sm:!min-w-32;
+.antd-rounded {
+  // 选择器样式
+  .ant-select {
+    .ant-select-selector {
+      @apply bg-transparent !rounded-full !bg-[#0F0F0F] sm:!min-w-32;
+    }
   }
 }

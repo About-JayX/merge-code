@@ -36,4 +36,6 @@ export default {
   telegramPlaceholder: "Lütfen Telegram bağlantısını girin",
   twitterPlaceholder: "Lütfen Twitter bağlantısını girin",
   verify: "Doğrula",
+  submit: "Gönder",
+  avatar: "Avatar",
 };

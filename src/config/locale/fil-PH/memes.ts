@@ -36,4 +36,6 @@ export default {
   telegramPlaceholder: "Pakisulat ang Telegram link",
   twitterPlaceholder: "Pakisulat ang Twitter link",
   verify: "Suriin",
+  submit: "Ipadala",
+  avatar: "Avatar",
 };

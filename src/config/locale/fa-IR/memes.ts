@@ -36,4 +36,6 @@ export default {
   telegramPlaceholder: "لطفاً لینک تلگرام را وارد کنید",
   twitterPlaceholder: "لطفاً لینک توییتر را وارد کنید",
   verify: "بررسی",
+  submit: "ارسال",
+  avatar: "تصویر",
 };

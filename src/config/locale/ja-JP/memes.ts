@@ -36,4 +36,6 @@ export default {
   telegramPlaceholder: "Telegramリンクを入力してください",
   twitterPlaceholder: "Twitterリンクを入力してください",
   verify: "確認",
+  submit: "送信",
+  avatar: "アバター",
 };

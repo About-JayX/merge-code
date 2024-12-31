@@ -26,6 +26,9 @@ export default function Theme({ children }: { children?: React.ReactNode }) {
             selectorBg: "#0F0F0F",
             
           },
+          Button: {
+            primaryColor: "#242904",
+          },
         },
         token: {
           colorPrimary: "#FFC10B",
