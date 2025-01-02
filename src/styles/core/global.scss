@@ -360,3 +360,61 @@ a {
     }
   }
 }
+
+@layer base {
+  * {
+    @apply break-all text-current select-none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  body {
+    @apply  overflow-auto overscroll-none;
+  }
+
+  html,
+  body,
+  #root {
+    @apply min-h-screen w-full;
+  }
+
+  /* 恢复需要交互的元素的事件 */
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"],
+  .interactive {
+    @apply cursor-pointer !pointer-events-auto !touch-auto;
+  }
+
+  /* 恢复滚动容器的滚动功能 */
+  body,
+  .scrollable,
+  div {
+    @apply cursor-default !pointer-events-auto !touch-pan-y;
+  }
+
+  /* 可选择文本的元素 */
+  .selectable {
+    @apply select-text cursor-text !pointer-events-auto;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply my-4;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full;
+  }
+
+  svg {
+    @apply w-[1em] h-[1em] object-contain text-current;
+  }
+}
