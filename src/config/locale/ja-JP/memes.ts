@@ -24,7 +24,7 @@ export default {
     image: "画像: JPG/PNG, ≤5MB",
     gif: "GIF: ≤10MB",
     video: "ビデオ: MP4, ≤50MB, ≤30s",
-    batchUpload: "バッチアップロード制限 10",
+    batchUpload: "バッチアップロード制限 {{maxCount}}",
   },
   selectFile: "ファイルを選択",
   userName: "ユーザー名",

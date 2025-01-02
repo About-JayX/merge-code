@@ -24,7 +24,7 @@ export default {
     image: "Larawan: JPG/PNG, ≤5MB",
     gif: "GIF: ≤10MB",
     video: "Video: MP4, ≤50MB, ≤30s",
-    batchUpload: "Limit ng batch upload 10",
+    batchUpload: "Limit ng batch upload {{maxCount}}",
   },
   selectFile: "Pumili ng file",
   userName: "Pangalan ng gumagamit",

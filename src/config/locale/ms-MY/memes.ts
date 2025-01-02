@@ -24,7 +24,7 @@ export default {
     image: "Imej: JPG/PNG, ≤5MB",
     gif: "GIF: ≤10MB",
     video: "Video: MP4, ≤50MB, ≤30s",
-    batchUpload: "Had muat naik kumpulan 10",
+    batchUpload: "Had muat naik kumpulan {{maxCount}}",
   },
   selectFile: "Pilih fail",
   userName: "Nama pengguna",

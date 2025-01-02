@@ -24,7 +24,7 @@ export default {
     image: "Hình ảnh: JPG/PNG, ≤5MB",
     gif: "GIF: ≤10MB",
     video: "Video: MP4, ≤50MB, ≤30s",
-    batchUpload: "Giới hạn tải lên hàng loạt 10",
+    batchUpload: "Giới hạn tải lên hàng loạt {{maxCount}}",
   },
   selectFile: "Chọn tệp",
   userName: "Tên người dùng",

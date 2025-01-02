@@ -24,7 +24,7 @@ export default {
     image: "ছবি: JPG/PNG, ≤5MB",
     gif: "GIF: ≤10MB",
     video: "ভিডিও: MP4, ≤50MB, ≤30s",
-    batchUpload: "ব্যাচ আপলোড সীমা 10",
+    batchUpload: "ব্যাচ আপলোড সীমা {{maxCount}}",
   },
   selectFile: "ফাইল নির্বাচন করুন",
   userName: "ব্যবহারকারীর নাম",
