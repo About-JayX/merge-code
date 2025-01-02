@@ -3,7 +3,7 @@ import { Button, Modal } from "antd";
 import { Ellipsis } from "antd-mobile";
 import { useTranslation } from "react-i18next";
 
-export default function BindWallet({ open, onClose, onChange }: { open: boolean, onClose: (value: boolean) => void, onChange: () => void }) {
+export default function VerifyBindWallet({ open, onClose, onChange }: { open: boolean, onClose: (value: boolean) => void, onChange: () => void }) {
   const { t } = useTranslation();
   return (
     <Modal open={open} onCancel={() => onClose(false)} footer={null} centered>

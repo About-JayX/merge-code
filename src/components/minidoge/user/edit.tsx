@@ -4,7 +4,7 @@ import { Upload } from "@/components/upload";
 import { Avatar, Button, Input, Modal } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import BindWallet from "./bindWallet";
+import VerifyBindWallet from "./verifyBindWallet";
 export const UserUpload = () => {
   const { t } = useTranslation();
   const [url, setUrl] = useState<string | null>(null);
@@ -98,7 +98,7 @@ export default function UserEdit({
   const [bindWalletOpen, setBindWalletOpen] = useState(false);
   return (
     <>
-      <BindWallet
+      <VerifyBindWallet
         open={bindWalletOpen}
         onClose={setBindWalletOpen}
         onChange={() => {
