@@ -35,7 +35,14 @@ export default {
   addLink: "Tambah pautan",
   telegramPlaceholder: "Sila masukkan pautan Telegram",
   twitterPlaceholder: "Sila masukkan pautan Twitter",
-  verify: "Semak",
-  submit: "Kirim",
+  verify: "Sahkan",
+  submit: "Hantar",
   avatar: "Avatar",
+  bindWallet: {
+    title: "Ikat alamat dompet SOL",
+    text: "Tidak boleh diubah selepas pengikatan berjaya",
+    solWalletAddress: "Alamat dompet SOL",
+  },
+  confirm: "Sahkan",
+  cancel: "Batal",
 };

@@ -1,9 +1,9 @@
 export default {
   title: [
-    { content: "Pacchetto di espressione" },
+    { content: "Pacchetto di espressioni" },
     { content: " creazione", status: true },
   ],
-  text: "La creazione di emoticon Web3 supporta i creatori nel ricevere ricompense di $MINIDOGE attraverso le loro opere.",
+  text: "La creazione di emoticon Web3 supporta i creatori per ricevere ricompense in $MINIDOGE attraverso le loro opere.",
   hot: "Caldo",
   new: "Nuovo",
   selectText: "Predefinito",
@@ -38,4 +38,11 @@ export default {
   verify: "Verifica",
   submit: "Invia",
   avatar: "Avatar",
+  bindWallet: {
+    title: "Collega l'indirizzo del portafoglio SOL",
+    text: "Non può essere modificato dopo il collegamento riuscito",
+    solWalletAddress: "Indirizzo del portafoglio SOL",
+  },
+  confirm: "Conferma",
+  cancel: "Annulla",
 };

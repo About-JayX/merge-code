@@ -3,7 +3,7 @@ export default {
     { content: "İfade paketi" },
     { content: " oluşturma", status: true },
   ],
-  text: "Web3 emojisi oluşturma, yaratıcıların eserleri aracılığıyla $MINIDOGE ödülleri almasına yardımcı olur.",
+  text: "Web3 emojileri oluşturma, yaratıcıların eserleri aracılığıyla $MINIDOGE ödülleri almasını destekler.",
   hot: "Sıcak",
   new: "Yeni",
   selectText: "Varsayılan",
@@ -29,7 +29,8 @@ export default {
   selectFile: "Dosya seç",
   userName: "Kullanıcı adı",
   userNamePlaceholder: "Lütfen kullanıcı adınızı girin",
-  userNameTip: "4-60 karakter, Çince, İngilizce, rakamlar, alt çizgi ve eksi işareti destekler",
+  userNameTip:
+    "4-60 karakter, Çince, İngilizce, rakamlar, alt çizgi ve eksi işareti destekler",
   SOLWalletAddress: "SOL cüzdan adresi",
   SOLWalletAddressPlaceholder: "Lütfen SOL cüzdan adresinizi girin",
   addLink: "Bağlantı ekle",
@@ -38,4 +39,11 @@ export default {
   verify: "Doğrula",
   submit: "Gönder",
   avatar: "Avatar",
+  bindWallet: {
+    title: "SOL cüzdan adresini bağla",
+    text: "Başarılı bağlama işleminden sonra değiştirilemez",
+    solWalletAddress: "SOL cüzdan adresi",
+  },
+  confirm: "Onayla",
+  cancel: "İptal et",
 };

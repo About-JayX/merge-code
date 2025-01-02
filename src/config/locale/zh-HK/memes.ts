@@ -3,10 +3,10 @@ export default {
     { content: "表情包" },
     { content: " 創建", status: true },
   ],
-  text: "Web3 表情符號創建支持創作者透過他們的作品獲得 $MINIDOGE 獎勵。",
+  text: "Web3 表情符號創建支持創作者通過他們的作品獲得 $MINIDOGE 獎勵。",
   hot: "熱門",
   new: "新",
-  selectText: "預設",
+  selectText: "默認",
   selectOptions: [],
   reward: {
     title: "支持",
@@ -38,4 +38,11 @@ export default {
   verify: "驗證",
   submit: "提交",
   avatar: "頭像",
+  bindWallet: {
+    title: "綁定 SOL 錢包地址",
+    text: "綁定成功後無法更改",
+    solWalletAddress: "SOL 錢包地址",
+  },
+  confirm: "確認",
+  cancel: "取消",
 };
