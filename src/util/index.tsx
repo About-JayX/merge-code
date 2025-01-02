@@ -97,7 +97,6 @@ export const calc_VOTE_NFT = (
   // 额外票：每5个NFT获得1个额外票，最多4个额外票
   const additionalVotes = Math.floor(nftCount / 5)
   votes += Math.min(additionalVotes, 4)
-  
+
   return { votes, nftCount }
 }
-

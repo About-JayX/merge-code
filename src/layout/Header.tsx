@@ -46,7 +46,7 @@ const Header: React.FC = () => {
   const userMenuItems = [
     {
       key: 'username',
-      label: user?.profile.username || user?.profile.email,
+      label: user?.profile.username || user?.userId || user?.profile.email,
       disabled: true,
     },
     {

@@ -268,6 +268,7 @@ const Register = ({
   const [error, setError] = useState('')
   const [showCode, setShowCode] = useState(false)
   const { signUp, isLoaded: signUpLoaded } = useSignUp()
+
   const clerk = useClerk()
 
   const handleRegister = async () => {
