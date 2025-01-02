@@ -3,10 +3,9 @@ import Icon from '@/components/icon'
 import { Button, Divider, Input, Select, Modal, Alert } from 'antd'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { message } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useSignIn, useClerk, useSignUp, useSession } from '@clerk/clerk-react'
-import { se } from 'date-fns/locale'
+import { useClerkSession } from '@/hooks/useClerkSession'
 
 const { Option } = Select
 
@@ -33,9 +32,13 @@ const Login = ({
   const [code, setCode] = useState('')
   const [loading, setLoading] = useState(false)
   const { signIn, isLoaded: signInLoaded } = useSignIn()
-  const { signOut } = useClerk()
+  const { session } = useSession()
+  const clerk = useClerk()
 
-  // 邮箱登陆流程...
+  useEffect(() => {
+    console.log(session, 'session')
+  }, [session])
+
   const handleSendCode = async () => {
     if (!signInLoaded || !signIn) return
 
@@ -87,7 +90,14 @@ const Login = ({
         setErrorMessage('验证失败，请重试')
         return
       }
-      // 验证成功后操作
+      await clerk.setActive({ session: result.createdSessionId })
+
+      setEmail('')
+      setCode('')
+      setError(false)
+      setErrorMessage('')
+      setSendCode(false)
+      onSuccess()
     } catch (err: unknown) {
       const error = err as ClerkError
       setError(true)
@@ -102,11 +112,13 @@ const Login = ({
     if (!signInLoaded || !signIn) return
 
     try {
-      await signIn.authenticateWithRedirect({
+      const result = await signIn.authenticateWithRedirect({
         strategy: 'oauth_google',
         redirectUrl: window.location.href,
         redirectUrlComplete: window.location.href,
       })
+      console.log(result, 'result')
+
       // google登陆成功后操作
     } catch (err) {
       console.error('Google 登录错误:', err)
@@ -134,6 +146,19 @@ const Login = ({
         >
           {t('login.text')}
         </span>
+        <Button
+          type="primary"
+          size="large"
+          className="w-full"
+          onClick={async () => {
+            console.log(session, 'token_')
+            const token = await session?.getToken()
+            console.log(token, 'token')
+          }}
+          loading={loading}
+        >
+          {'getToken'}
+        </Button>
       </div>
       {error && (
         <Alert
@@ -191,15 +216,18 @@ const Login = ({
         />
       )}
       {sendCode ? (
-        <Button
-          type="primary"
-          size="large"
-          className="w-full"
-          onClick={handleConfirm}
-          loading={loading}
-        >
-          {loading ? '验证中...' : t('login.confirm')}
-        </Button>
+        <>
+          {' '}
+          <Button
+            type="primary"
+            size="large"
+            className="w-full"
+            onClick={handleConfirm}
+            loading={loading}
+          >
+            {loading ? '验证中...' : t('login.confirm')}
+          </Button>
+        </>
       ) : (
         <Button
           type="primary"
@@ -355,8 +383,8 @@ export const LoginModal = ({
 }) => {
   const [state, setState] = useState<'login' | 'register'>('login')
   const router = useNavigate()
-  // const { session } = useSession()
   const { signOut } = useClerk()
+  useClerkSession()
 
   // 监听 Modal 打开状态，打开时退出登录
   useEffect(() => {
@@ -364,13 +392,6 @@ export const LoginModal = ({
       signOut()
     }
   }, [open, signOut])
-
-  // // 监听会话状态
-  // useEffect(() => {
-  //   if (session) {
-  //     onClose()
-  //   }
-  // }, [session, onClose])
 
   useEffect(() => {
     if (!open) {
@@ -385,14 +406,14 @@ export const LoginModal = ({
           open
           setState={setState}
           onSuccess={() => {
-            // 不再立即关闭 Modal，等待 session 变化时自动关闭
+            onClose()
           }}
         />
       ) : (
         <Register
           open
           onSuccess={() => {
-            // 不再立即关闭 Modal，等待 session 变化时自动关闭
+            onClose()
           }}
         />
       )}

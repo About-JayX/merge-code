@@ -3,7 +3,7 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 // 创建用户相关的 axios 实例
 export const userInstance: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_USER_API_URL || '/api/user',
+  baseURL: import.meta.env.VITE_USER_API_URL || '/userApi',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',

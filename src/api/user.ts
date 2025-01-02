@@ -1,13 +1,8 @@
 import { request } from './instance'
 
-// 用户相关的接口类型定义
-export interface UserInfo {
-  id: string
-  email: string
-  nickname?: string
-  avatar?: string
-  createdAt: string
-  updatedAt: string
+interface responseStatus<T> {
+  success: boolean
+  result: T
 }
 
 export interface LoginParams {
@@ -15,23 +10,21 @@ export interface LoginParams {
   code: string
 }
 
-// 用户相关的 API 接口
-export const userApi = {
-  // 获取用户信息
-  getUserInfo: () => request.user.get<UserInfo>('/info'),
-
-  // 更新用户信息
-  updateUserInfo: (data: Partial<UserInfo>) =>
-    request.user.put<UserInfo>('/info', data),
-
-  // 发送验证码
-  sendVerificationCode: (email: string) =>
-    request.user.post<void>('/send-code', { email }),
-
-  // 邮箱验证码登录
-  loginWithCode: (params: LoginParams) =>
-    request.user.post<{ token: string }>('/login', params),
-
-  // 退出登录
-  logout: () => request.user.post<void>('/logout'),
+// 登录 API 返回结果类型
+export interface LoginResponse {
+  profile: {
+    username: string | null
+    sol_wallet_address: string | null
+    email: string
+    role: 'member'
+  }
+  userId: string
 }
+
+// 登录 API
+export const loginAPI = (token: string) =>
+  request.user.post<responseStatus<LoginResponse>>(
+    '/auth/login',
+    {},
+    { headers: { Authorization: `Bearer ${token}` } }
+  )

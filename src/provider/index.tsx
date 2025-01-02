@@ -11,17 +11,7 @@ if (!PUBLISHABLE_KEY) {
 
 export default function Provider({ children }: { children?: React.ReactNode }) {
   return (
-    <ClerkProvider 
-      publishableKey={PUBLISHABLE_KEY}
-      appearance={{
-        baseTheme: undefined,
-        variables: {
-          colorPrimary: '#FFAC03'
-        }
-      }}
-      afterSignInUrl="/memes/123456"
-      afterSignUpUrl="/memes/123456"
-    >
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <StoreProvider store={store}>
         <Theme>{children}</Theme>
       </StoreProvider>

@@ -100,3 +100,4 @@ export const calc_VOTE_NFT = (
   
   return { votes, nftCount }
 }
+

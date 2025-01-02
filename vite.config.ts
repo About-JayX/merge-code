@@ -10,6 +10,7 @@ import viteImagemin from 'vite-plugin-imagemin'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import copy from 'rollup-plugin-copy'
+import { useSession } from '@clerk/clerk-react'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
@@ -17,7 +18,7 @@ export default defineConfig(({ mode }) => {
   return {
     define: {
       'process.env': env,
-      global: 'window',
+      // global: 'window',
     },
     plugins: [
       nodePolyfills({
@@ -176,6 +177,11 @@ export default defineConfig(({ mode }) => {
           target: 'https://donate.mini-doge.com',
           changeOrigin: true,
           rewrite: path => path.replace(/^\/api/, ''),
+        },
+        '/userApi': {
+          target: 'http://192.168.1.97:8787',
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/userApi/, ''),
         },
       },
       watch: {

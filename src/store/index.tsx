@@ -11,10 +11,11 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 import theme from './theme'
-
+import user from './user'
 // 组合所有 reducers
 const rootReducer = combineReducers({
-  theme,    // 主题相关状态
+  theme, // 主题相关状态
+  user,
 })
 
 // 创建 Redux store
