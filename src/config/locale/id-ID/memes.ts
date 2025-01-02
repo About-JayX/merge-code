@@ -24,7 +24,7 @@ export default {
     image: "Gambar: JPG/PNG, ≤5MB",
     gif: "GIF: ≤10MB",
     video: "Video: MP4, ≤50MB, ≤30s",
-    batchUpload: "Batas unggahan batch 10",
+    batchUpload: "Batas unggahan batch {{maxCount}}",
   },
   selectFile: "Pilih file",
   userName: "Nama pengguna",

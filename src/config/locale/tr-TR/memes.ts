@@ -24,7 +24,7 @@ export default {
     image: "Görüntü: JPG/PNG, ≤5MB",
     gif: "GIF: ≤10MB",
     video: "Video: MP4, ≤50MB, ≤30s",
-    batchUpload: "Toplu yükleme limiti 10",
+    batchUpload: "Toplu yükleme limiti {{maxCount}}",
   },
   selectFile: "Dosya seç",
   userName: "Kullanıcı adı",

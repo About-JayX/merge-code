@@ -24,7 +24,7 @@ export default {
     image: "تصویر: JPG/PNG، ≤5MB",
     gif: "GIF: ≤10MB",
     video: "ویدیو: MP4، ≤50MB، ≤30s",
-    batchUpload: "حداکثر بارگذاری دسته‌ای 10",
+    batchUpload: "حداکثر بارگذاری دسته‌ای {{maxCount}}",
   },
   selectFile: "انتخاب فایل",
   userName: "نام کاربری",

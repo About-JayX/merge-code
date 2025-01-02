@@ -1,4 +1,6 @@
 import React, { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { message } from "antd";
 
 interface UploadProps {
   children?: React.ReactNode;
@@ -26,11 +28,13 @@ export const Upload = ({
   },
   maxVideoDuration = 30,
   multiple = false,
-  maxCount = 9,
+  maxCount = 10,
   disabled = false,
 }: UploadProps) => {
+  const { t } = useTranslation();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
 
   const validateFile = async (
     file: File
@@ -49,20 +53,22 @@ export const Upload = ({
       if (fileType === "video/mp4") {
         const videoDuration = await getVideoDuration(file);
         if (videoDuration > maxVideoDuration) {
+          messageApi.error(t("memes.limitText.video"));
           return {
             valid: false,
-            error: `视频时长不能超过 ${maxVideoDuration} 秒。`,
+            error: t("memes.limitText.video"),
           };
         }
       }
       return { valid: true };
     } else {
       const errorMessages = {
-        "image/jpeg": `JPG 图片大小不能超过 ${maxSizes.image}MB`,
-        "image/png": `PNG 图片大小不能超过 ${maxSizes.image}MB`,
-        "image/gif": `GIF 大小不能超过 ${maxSizes.gif}MB`,
-        "video/mp4": `视频大小不能超过 ${maxSizes.video}MB`,
+        "image/jpeg": t("memes.limitText.image"),
+        "image/png": t("memes.limitText.image"),
+        "image/gif": t("memes.limitText.gif"),
+        "video/mp4": t("memes.limitText.video"),
       };
+      messageApi.error(errorMessages[fileType as keyof typeof errorMessages]);
       return {
         valid: false,
         error:
@@ -89,7 +95,7 @@ export const Upload = ({
     if (selectedFiles.length === 0) return;
 
     if (selectedFiles.length > maxCount) {
-      onError?.(`最多只能上传 ${maxCount} 个文件`);
+      onError?.(t("memes.limitText.batchUpload", { maxCount }));
       return;
     }
 
@@ -152,12 +158,12 @@ export const Upload = ({
   const handleDragLeave = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     // 检查是否真的离开了容器
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX;
     const y = e.clientY;
-    
+
     if (
       x <= rect.left ||
       x >= rect.right ||
@@ -185,7 +191,8 @@ export const Upload = ({
     if (droppedFiles.length === 0) return;
 
     if (droppedFiles.length > maxCount) {
-      onError?.(`最多只能上传 ${maxCount} 个文件`);
+      messageApi.error(t("memes.limitText.batchUpload", { maxCount }));
+      onError?.(t("memes.limitText.batchUpload", { maxCount }));
       return;
     }
 
@@ -211,57 +218,60 @@ export const Upload = ({
   };
 
   return (
-    <div
-      onDragEnter={handleDragEnter}
-      onDragLeave={handleDragLeave}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-      style={{
-        position: "relative",
-        cursor: disabled ? "" : "pointer",
-      }}
-    >
-      <input
-        type="file"
-        onChange={handleFileChange}
-        style={{ display: "none" }}
-        ref={fileInputRef}
-        multiple={multiple}
-        accept="image/jpeg,image/png,image/gif,video/mp4"
-        disabled={disabled}
-      />
+    <>
+      {contextHolder}
       <div
-        onClick={disabled ? undefined : handleChildrenClick}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
         style={{
           position: "relative",
-          opacity: isDragging ? 0.6 : 1,
-          transition: "all 0.3s ease",
+          cursor: disabled ? "" : "pointer",
         }}
-        className="relative"
       >
-        {children}
-      </div>
-      {isDragging && (
+        <input
+          type="file"
+          onChange={handleFileChange}
+          style={{ display: "none" }}
+          ref={fileInputRef}
+          multiple={multiple}
+          accept="image/jpeg,image/png,image/gif,video/mp4"
+          disabled={disabled}
+        />
         <div
+          onClick={disabled ? undefined : handleChildrenClick}
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            border: "2px dashed #FFAC03",
-            borderRadius: "4px",
-            backgroundColor: "rgba(43, 33, 17, 0.6)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            pointerEvents: "none",
+            position: "relative",
+            opacity: isDragging ? 0.6 : 1,
             transition: "all 0.3s ease",
           }}
+          className="relative"
         >
           {children}
         </div>
-      )}
-    </div>
+        {isDragging && (
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              border: "2px dashed #FFAC03",
+              borderRadius: "4px",
+              backgroundColor: "rgba(43, 33, 17, 0.6)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              pointerEvents: "none",
+              transition: "all 0.3s ease",
+            }}
+          >
+            {children}
+          </div>
+        )}
+      </div>
+    </>
   );
 };

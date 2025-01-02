@@ -24,7 +24,7 @@ export default {
     image: "Изображение: JPG/PNG, ≤5MB",
     gif: "GIF: ≤10MB",
     video: "Видео: MP4, ≤50MB, ≤30s",
-    batchUpload: "Лимит загрузки пакетом 10",
+    batchUpload: "Лимит загрузки пакетом {{maxCount}}",
   },
   selectFile: "Выбрать файл",
   userName: "Имя пользователя",

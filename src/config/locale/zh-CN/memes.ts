@@ -24,7 +24,7 @@ export default {
       image: "图片: JPG/PNG, ≤5MB",
       gif: "GIF: ≤10MB",
       video: "视频: MP4, ≤50MB, ≤30s",
-      batchUpload: "批量上传限制 10",
+      batchUpload: "批量上传限制 {{maxCount}}",
     },
     selectFile: "选择文件",
     userName: "用户名",
