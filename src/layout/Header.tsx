@@ -1,41 +1,71 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { Button, Section } from "@/components/domain";
-import { Card as IconCard } from "@/components/domain/common/Icon.tsx";
-import { images } from "@/assets/images";
-import { locale } from "@/config";
-import { Avatar, Dropdown } from "antd";
-import { memesTextColor, memesHover } from "@/components/domain/styles";
-import { Link } from "react-router-dom";
-import { NAV } from "@/config/resources";
-import MusicPlayer from "@/components/MusicPlayer";
-import { useLocation } from "react-router";
-import { LoginModal } from "@/components/minidoge/user/login";
-import { useNavigate } from "react-router";
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { Button, Section } from '@/components/domain'
+import { Card as IconCard } from '@/components/domain/common/Icon.tsx'
+import { images } from '@/assets/images'
+import { locale } from '@/config'
+import { Avatar, Dropdown } from 'antd'
+import { memesTextColor, memesHover } from '@/components/domain/styles'
+import { Link } from 'react-router-dom'
+import { NAV } from '@/config/resources'
+import MusicPlayer from '@/components/MusicPlayer'
+import { useLocation } from 'react-router'
+import { LoginModal } from '@/components/minidoge/user/login'
+import { useNavigate } from 'react-router'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '@/store'
+import { clearUser } from '@/store/user'
+import { useClerk } from '@clerk/clerk-react'
+import { UserOutlined } from '@ant-design/icons'
 
 const Header: React.FC = () => {
-  const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
-  const [isScrolled, setIsScrolled] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
-  const location = useLocation();
+  const navigate = useNavigate()
+  const { t, i18n } = useTranslation()
+  const [isScrolled, setIsScrolled] = React.useState(false)
+  const [open, setOpen] = React.useState(false)
+  const location = useLocation()
+  const user = useSelector((state: RootState) => state.user.user)
+  const dispatch = useDispatch()
+  const { signOut } = useClerk()
+
+  const handleLogout = async () => {
+    await signOut({ redirectUrl: '/memes' })
+    dispatch(clearUser())
+  }
 
   React.useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 50);
-    };
+      const scrollTop = window.scrollY
+      setIsScrolled(scrollTop > 50)
+    }
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const userMenuItems = [
+    {
+      key: 'username',
+      label: user?.profile.username || user?.profile.email,
+      disabled: true,
+    },
+    {
+      key: 'divider',
+      type: 'divider' as const,
+    },
+    {
+      key: 'logout',
+      label: t('login.logout'),
+      onClick: handleLogout,
+    },
+  ]
 
   return (
     <>
       <LoginModal open={open} onClose={() => setOpen(false)} />
       <header
         className={`fixed top-0 left-0 w-full z-50 ${
-          isScrolled ? "bg-black/10 backdrop-blur-sm" : ""
+          isScrolled ? 'bg-black/10 backdrop-blur-sm' : ''
         }`}
       >
         <div className="p-3 sm:p-8 md:pt-8 md:px-4 flex gap-1 sm:gap-4 items-center w-full max-w-screen-xl mx-auto">
@@ -62,7 +92,7 @@ const Header: React.FC = () => {
           </Section>
           <div className="flex-1" />
           <div className="flex items-center gap-1 sm:gap-4">
-            {!location.pathname.includes("/memes") && (
+            {!location.pathname.includes('/memes') && (
               <div className={memesHover}>
                 <MusicPlayer />
               </div>
@@ -90,29 +120,39 @@ const Header: React.FC = () => {
                   key,
                   label: value.translation.language,
                   onClick: () => {
-                    i18n.changeLanguage(key);
+                    i18n.changeLanguage(key)
                   },
                 })),
               }}
             >
               <a className="bg-white/10 border font-bold border-white/10 px-4 sm:px-5 rounded flex items-center justify-center min-w-[36px] min-h-[36px] sm:min-w-[48px] sm:min-h-[48px] text-current">
-                <span>{t("lang")}</span>
+                <span>{t('lang')}</span>
               </a>
             </Dropdown>
-            {location.pathname.includes("/memes") && (
+            {location.pathname.includes('/memes') && (
               <>
-                {false ? (
-                  <Avatar
-                    className="bg-white/10 border-white border-1 min-w-[36px] min-h-[36px] sm:min-w-[48px] sm:min-h-[48px]"
-                    src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSMGfYcjYZSvX_ImhPQIzTgNBcJ9Go17UxVolXIhErN9xb2v7Kb3ynKL37eVNASIW8We82veVGV9PRLY1x9c6BlYsLWfClv1oV36TIU44zI"
-                    onClick={() => navigate("/memes/1234596")}
-                  />
+                {user ? (
+                  <Dropdown
+                    menu={{ items: userMenuItems }}
+                    placement="bottomRight"
+                  >
+                    <Avatar
+                      size="large"
+                      icon={<UserOutlined />}
+                      style={{
+                        cursor: 'pointer',
+                        backgroundColor: '#FFAC03',
+                        minWidth: '48px',
+                        minHeight: '48px',
+                      }}
+                    />
+                  </Dropdown>
                 ) : (
                   <Button
                     className="sm:!h-12 sm:!min-h-12"
                     onClick={() => setOpen(true)}
                   >
-                    {t("login.login")}
+                    {t('login.login')}
                   </Button>
                 )}
               </>
@@ -121,7 +161,7 @@ const Header: React.FC = () => {
         </div>
       </header>
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

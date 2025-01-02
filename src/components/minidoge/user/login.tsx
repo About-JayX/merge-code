@@ -2,7 +2,6 @@ import { memesTextSize, memesTitleSize } from '@/components/domain/styles'
 import Icon from '@/components/icon'
 import { Button, Divider, Input, Select, Modal, Alert } from 'antd'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useSignIn, useClerk, useSignUp, useSession } from '@clerk/clerk-react'
 import { useClerkSession } from '@/hooks/useClerkSession'
@@ -146,19 +145,6 @@ const Login = ({
         >
           {t('login.text')}
         </span>
-        <Button
-          type="primary"
-          size="large"
-          className="w-full"
-          onClick={async () => {
-            console.log(session, 'token_')
-            const token = await session?.getToken()
-            console.log(token, 'token')
-          }}
-          loading={loading}
-        >
-          {'getToken'}
-        </Button>
       </div>
       {error && (
         <Alert
@@ -277,9 +263,12 @@ const Register = ({
 }) => {
   const { t } = useTranslation()
   const [email, setEmail] = useState('')
+  const [code, setCode] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [showCode, setShowCode] = useState(false)
   const { signUp, isLoaded: signUpLoaded } = useSignUp()
+  const clerk = useClerk()
 
   const handleRegister = async () => {
     if (!signUpLoaded || !signUp) return
@@ -297,16 +286,15 @@ const Register = ({
 
     setLoading(true)
     try {
-      const result = await signUp.create({
+      await signUp.create({
         emailAddress: email,
       })
 
-      if (result.status === 'complete') {
-        setEmail('')
-        onSuccess && onSuccess()
-      } else {
-        setError('注册失败，请重试')
-      }
+      await signUp.prepareEmailAddressVerification({
+        strategy: 'email_code',
+      })
+      setShowCode(true)
+      setError('')
     } catch (err: unknown) {
       const error = err as ClerkError
       setError(error.message || '注册失败，请稍后重试')
@@ -316,10 +304,53 @@ const Register = ({
     }
   }
 
+  const handleVerifyCode = async () => {
+    if (!signUpLoaded || !signUp) return
+
+    if (!code) {
+      setError('请输入验证码')
+      return
+    }
+
+    setLoading(true)
+    try {
+      const completeSignUp = await signUp.attemptEmailAddressVerification({
+        code,
+      })
+
+      if (
+        completeSignUp.status === 'complete' &&
+        completeSignUp.createdSessionId
+      ) {
+        await clerk.setActive({ session: completeSignUp.createdSessionId })
+        setEmail('')
+        setCode('')
+        setError('')
+        setShowCode(false)
+        onSuccess()
+      } else {
+        throw new Error('注册未完成')
+      }
+    } catch (err: unknown) {
+      const error = err as ClerkError
+      if (error.code === 'session_exists') {
+        await clerk.signOut()
+        handleVerifyCode()
+        return
+      }
+      setError(error.message || '验证码验证失败，请检查后重试')
+      console.error('验证码验证错误:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
     if (!open) {
       setEmail('')
+      setCode('')
       setError('')
+      setShowCode(false)
     }
   }, [open])
 
@@ -343,31 +374,55 @@ const Register = ({
             type="error"
           />
         )}
-        <div className="flex gap-2 w-full">
-          <Input
-            placeholder={t('login.emailAddress')}
-            size="large"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <Select
-            defaultValue="Gmail.com"
-            className="!rounded-none"
-            size="large"
-          >
-            <Option value="Gmail.com">Gmail.com</Option>
-          </Select>
-        </div>
+        {showCode ? (
+          <div className="flex flex-col gap-5 w-full">
+            <Input
+              placeholder={t('login.verificationCode')}
+              size="large"
+              value={code}
+              onChange={e => setCode(e.target.value)}
+            />
+            <div className="flex gap-4">
+              <Button
+                size="large"
+                className="flex-1"
+                onClick={() => setShowCode(false)}
+              >
+                {t('login.back')}
+              </Button>
+              <Button
+                type="primary"
+                size="large"
+                className="flex-1"
+                onClick={handleVerifyCode}
+                loading={loading}
+              >
+                {loading ? '验证中...' : t('login.verify')}
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="flex gap-2 w-full">
+              <Input
+                placeholder={t('login.emailAddress')}
+                size="large"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </div>
 
-        <Button
-          type="primary"
-          size="large"
-          className="w-full"
-          onClick={handleRegister}
-          loading={loading}
-        >
-          {loading ? '注册中...' : t('login.register')}
-        </Button>
+            <Button
+              type="primary"
+              size="large"
+              className="w-full"
+              onClick={handleRegister}
+              loading={loading}
+            >
+              {loading ? '发送中...' : t('login.sendVerificationCode')}
+            </Button>
+          </>
+        )}
       </div>
     </>
   )
@@ -382,17 +437,7 @@ export const LoginModal = ({
   onClose: () => void
 }) => {
   const [state, setState] = useState<'login' | 'register'>('login')
-  const router = useNavigate()
-  const { signOut } = useClerk()
   useClerkSession()
-
-  // 监听 Modal 打开状态，打开时退出登录
-  useEffect(() => {
-    if (open && signOut) {
-      signOut()
-    }
-  }, [open, signOut])
-
   useEffect(() => {
     if (!open) {
       setState('login')
