@@ -1,5 +1,5 @@
 import Router from '@/router'
-import GoogleAnalytics from './util/GoogleAnalytics'
+// import GoogleAnalytics from './util/GoogleAnalytics'
 import Layout from '@/layout'
 import { Footer } from '@/layout/Footer'
 import { useEffect, useState } from 'react'
@@ -87,7 +87,7 @@ export default function App() {
       />
 
       {/* Google Analytics 跟踪 */}
-      <GoogleAnalytics />
+      {/* <GoogleAnalytics /> */}
 
       {/* 主要内容区域 */}
       <div className="flex flex-col flex-grow">

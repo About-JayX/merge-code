@@ -101,7 +101,7 @@ const Header: React.FC = () => {
             </Dropdown>
             {location.pathname.includes("/memes") && (
               <>
-                {true ? (
+                {false ? (
                   <Avatar
                     className="bg-white/10 border-white border-1 min-w-[36px] min-h-[36px] sm:min-w-[48px] sm:min-h-[48px]"
                     src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSMGfYcjYZSvX_ImhPQIzTgNBcJ9Go17UxVolXIhErN9xb2v7Kb3ynKL37eVNASIW8We82veVGV9PRLY1x9c6BlYsLWfClv1oV36TIU44zI"
