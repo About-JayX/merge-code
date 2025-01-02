@@ -225,7 +225,7 @@ export const Upload = ({
             left: 0,
             right: 0,
             bottom: 0,
-            border: '2px dashed #1890ff',
+            border: '2px dashed #FFAC03',
             borderRadius: '4px',
             backgroundColor: 'rgba(24, 144, 255, 0.1)',
             display: 'flex',
@@ -234,7 +234,7 @@ export const Upload = ({
             pointerEvents: 'none'
           }}
         >
-          <span>释放文件以上传</span>
+          {/* <span>释放文件以上传</span> */}
         </div>
       )}
     </div>
