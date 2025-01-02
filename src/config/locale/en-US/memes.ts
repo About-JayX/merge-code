@@ -29,7 +29,8 @@ export default {
   selectFile: "Select file",
   userName: "User name",
   userNamePlaceholder: "Please enter your user name",
-  userNameTip: "4-60 characters, support Chinese, English, numbers, underscore and minus sign",
+  userNameTip:
+    "4-60 characters, support Chinese, English, numbers, underscore and minus sign",
   SOLWalletAddress: "SOL wallet address",
   SOLWalletAddressPlaceholder: "Please enter your SOL wallet address",
   addLink: "Add link",
@@ -38,4 +39,11 @@ export default {
   verify: "Verify",
   submit: "Submit",
   avatar: "Avatar",
+  bindWallet: {
+    title: "Bind SOL wallet address",
+    text: "Cannot be changed after successful binding",
+    solWalletAddress: "SOL wallet address",
+  },
+  confirm: "Confirm",
+  cancel: "Cancel",
 };

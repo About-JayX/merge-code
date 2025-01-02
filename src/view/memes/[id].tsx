@@ -1,5 +1,9 @@
 import { Button, Section } from "@/components/domain";
-import { memesTextSize, memesTitleSize } from "@/components/domain/styles";
+import {
+  memesHover,
+  memesTextSize,
+  memesTitleSize,
+} from "@/components/domain/styles";
 import Icon from "@/components/icon";
 import MiniDogeCard from "@/components/minidoge/miniDogeCard";
 import UserEdit from "@/components/minidoge/user/edit";
@@ -35,7 +39,13 @@ const { Paragraph } = Typography;
  */
 
 // 用户信息
-export const UserInfo = ({ editOpens, onEdit }: { editOpens: boolean, onEdit: (value: boolean) => void }) => {
+export const UserInfo = ({
+  editOpens,
+  onEdit,
+}: {
+  editOpens: boolean;
+  onEdit: (value: boolean) => void;
+}) => {
   const { t } = useTranslation();
   const [editOpen, setEditOpen] = useState(false);
   const [publishOpen, setPublishOpen] = useState(false);
@@ -62,9 +72,23 @@ export const UserInfo = ({ editOpens, onEdit }: { editOpens: boolean, onEdit: (v
               &nbsp;
               <Icon name="authenticate" className="text-xl sm:text-2xl" />
               &nbsp;
+              <a>
+                <Icon
+                  name="twitter"
+                  className={`text-white text-sm sm:text-base `}
+                />
+              </a>
+              &nbsp;
+              <a>
+                <Icon
+                  name="telegram"
+                  className="text-white text-sm sm:text-base"
+                />
+              </a>
+              &nbsp;
               <Icon
                 name="edit"
-                className="text-lg sm:text-xl"
+                className="text-lg sm:text-xl ml-2"
                 onClick={() => setEditOpen(true)}
               />
             </span>
@@ -269,9 +293,7 @@ export default function MemesPage() {
           <Alert
             message={
               <div className="text-center text-base sm:text-lg p-2">
-                <span className="">
-                  {t("memes.bindingWarningText")}
-                </span>
+                <span className="">{t("memes.bindingWarningText")}</span>
                 &nbsp;
                 <a
                   className="text-current !text-[#FFAC03] !underline underline-offset-4"
