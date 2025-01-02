@@ -1,15 +1,15 @@
 export default {
   title: [
-    { content: "แพ็คการแสดงออก" },
+    { content: "แพ็คการมณ์" },
     { content: " การสร้าง", status: true },
   ],
-  text: "การสร้างอีโมติคอน Web3 ช่วยสนับสนุนผู้สร้างให้ได้รับรางวัล $MINIDOGE ผ่านผลงานของพวกเขา",
+  text: "การสร้างอีโมจิ Web3 สนับสนุนผู้สร้างให้ได้รับรางวัล $MINIDOGE ผ่านผลงานของพวกเขา",
   hot: "ร้อน",
   new: "ใหม่",
   selectText: "ค่าเริ่มต้น",
   selectOptions: [],
   reward: {
-    title: "สนับสนุน",
+    title: "สารสนับสนุน",
     text: "สแกน QR โค้ดหรือคัดลอกที่อยู่กระเป๋าเงิน",
   },
   bindingWarningText: "เชื่อมโยงที่อยู่กระเป๋าเงิน SOL ของคุณเพื่อเผยแพร่ผลงานของคุณ",
@@ -29,7 +29,7 @@ export default {
   selectFile: "เลือกไฟล์",
   userName: "ชื่อผู้ใช้",
   userNamePlaceholder: "กรุณาใส่ชื่อผู้ใช้ของคุณ",
-  userNameTip: "4-60 ตัวอักษร รองรับภาษาไทย อังกฤษ ตัวเลข ขีดล่าง และเครื่องหมายลบ",
+  userNameTip: "4-60 ตัวอักษร รองรับภาษาจีน อังกฤษ ตัวเลข ขีดล่าง และเครื่องหมายลบ",
   SOLWalletAddress: "ที่อยู่กระเป๋าเงิน SOL",
   SOLWalletAddressPlaceholder: "กรุณาใส่ที่อยู่กระเป๋าเงิน SOL ของคุณ",
   addLink: "เพิ่มลิงก์",
@@ -38,4 +38,11 @@ export default {
   verify: "ตรวจสอบ",
   submit: "ส่ง",
   avatar: "รูปภาพ",
+  bindWallet: {
+    title: "เชื่อมโยงที่อยู่กระเป๋าเงิน SOL",
+    text: "ไม่สามารถเปลี่ยนแปลงได้หลังจากการเชื่อมโยงสำเร็จ",
+    solWalletAddress: "ที่อยู่กระเป๋าเงิน SOL",
+  },
+  confirm: "ยืนยัน",
+  cancel: "ยกเลิก",
 };

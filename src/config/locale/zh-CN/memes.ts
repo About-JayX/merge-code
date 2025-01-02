@@ -38,4 +38,11 @@ export default {
     verify: "验证",
     submit: "提交",
     avatar: "头像",
+    bindWallet: {
+      title: "绑定 SOL 钱包地址",
+      text: "绑定成功后无法更改",
+      solWalletAddress: "SOL 钱包地址",
+    },
+    confirm: "确认",
+    cancel: "取消",
   };

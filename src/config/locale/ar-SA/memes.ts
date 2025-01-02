@@ -29,7 +29,8 @@ export default {
   selectFile: "اختر ملف",
   userName: "اسم المستخدم",
   userNamePlaceholder: "يرجى إدخال اسم المستخدم الخاص بك",
-  userNameTip: "4-60 حرفًا، يدعم الصينية والإنجليزية والأرقام والشرطة السفلية وعلامة الطرح",
+  userNameTip:
+    "4-60 حرفًا، يدعم الصينية والإنجليزية والأرقام، والشرطة السفلية وعلامة الطرح",
   SOLWalletAddress: "عنوان محفظة SOL",
   SOLWalletAddressPlaceholder: "يرجى إدخال عنوان محفظة SOL الخاصة بك",
   addLink: "إضافة رابط",
@@ -37,5 +38,12 @@ export default {
   twitterPlaceholder: "يرجى إدخال رابط Twitter",
   verify: "تحقق",
   submit: "إرسال",
-  avatar: "صورة",
+  avatar: "الصورة الرمزية",
+  bindWallet: {
+    title: "ربط عنوان محفظة SOL",
+    text: "لا يمكن تغييره بعد الربط الناجح",
+    solWalletAddress: "عنوان محفظة SOL",
+  },
+  confirm: "تأكيد",
+  cancel: "إلغاء",
 };

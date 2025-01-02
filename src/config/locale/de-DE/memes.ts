@@ -3,7 +3,7 @@ export default {
     { content: "Ausdruckspaket" },
     { content: " Erstellung", status: true },
   ],
-  text: "Web3 Emoticon-Erstellung unterstützt Kreatoren dabei, $MINIDOGE Belohnungen durch ihre Werke zu erhalten.",
+  text: "Die Erstellung von Web3-Emoticons unterstützt Kreative dabei, $MINIDOGE-Belohnungen durch ihre Werke zu erhalten.",
   hot: "Heiß",
   new: "Neu",
   selectText: "Standard",
@@ -37,5 +37,12 @@ export default {
   twitterPlaceholder: "Bitte geben Sie den Twitter-Link ein",
   verify: "Überprüfen",
   submit: "Einreichen",
-  avatar: "Bild",
+  avatar: "Avatar",
+  bindWallet: {
+    title: "SOL-Wallet-Adresse binden",
+    text: "Kann nach erfolgreichem Binden nicht geändert werden",
+    solWalletAddress: "SOL-Wallet-Adresse",
+  },
+  confirm: "Bestätigen",
+  cancel: "Abbrechen",
 };

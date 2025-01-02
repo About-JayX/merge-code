@@ -1,9 +1,9 @@
 export default {
   title: [
-    { content: "Pack d'expression" },
+    { content: "Pack d'expressions" },
     { content: " création", status: true },
   ],
-  text: "La création d'emoticônes Web3 aide les créateurs à recevoir des récompenses de $MINIDOGE grâce à leurs œuvres.",
+  text: "La création d'emojis Web3 soutient les créateurs pour recevoir des récompenses de $MINIDOGE à travers leurs œuvres.",
   hot: "Chaud",
   new: "Nouveau",
   selectText: "Par défaut",
@@ -29,13 +29,21 @@ export default {
   selectFile: "Sélectionner un fichier",
   userName: "Nom d'utilisateur",
   userNamePlaceholder: "Veuillez entrer votre nom d'utilisateur",
-  userNameTip: "4-60 caractères, prend en charge le chinois, l'anglais, les chiffres, le soulignement et le signe moins",
+  userNameTip:
+    "4-60 caractères, prend en charge le chinois, l'anglais, les chiffres, le soulignement et le tiret",
   SOLWalletAddress: "Adresse de portefeuille SOL",
   SOLWalletAddressPlaceholder: "Veuillez entrer votre adresse de portefeuille SOL",
   addLink: "Ajouter un lien",
   telegramPlaceholder: "Veuillez entrer le lien Telegram",
   twitterPlaceholder: "Veuillez entrer le lien Twitter",
   verify: "Vérifier",
-  submit: "Envoyer",
+  submit: "Soumettre",
   avatar: "Avatar",
+  bindWallet: {
+    title: "Lier l'adresse de portefeuille SOL",
+    text: "Ne peut pas être changé après une liaison réussie",
+    solWalletAddress: "Adresse de portefeuille SOL",
+  },
+  confirm: "Confirmer",
+  cancel: "Annuler",
 };

@@ -4,12 +4,15 @@ import { Upload } from "@/components/upload";
 import { Avatar, Button, Input, Modal } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import VerifyBindWallet from "./verifyBindWallet";
 export const UserUpload = () => {
   const { t } = useTranslation();
   const [url, setUrl] = useState<string | null>(null);
   return (
     <div className="flex flex-col gap-2 w-full">
-      <span className={`${memesTitleSize} !text-base !font-bold`}>{t("memes.avatar")}</span>
+      <span className={`${memesTitleSize} !text-base !font-bold`}>
+        {t("memes.avatar")}
+      </span>
       <div className="w-full border border-white/10 border-dotted rounded-md p-4">
         <div className="grid grid-cols-[auto_1fr] items-center gap-2 sm:gap-4">
           <Upload onSuccess={(urls) => setUrl(urls[0])}>
@@ -40,7 +43,6 @@ export const UserUpload = () => {
               >
                 {t("memes.limitText.gif")}
               </span>
-              
             </div>
             <Upload onSuccess={(urls) => setUrl(urls[0])}>
               <Button
@@ -93,67 +95,77 @@ export default function UserEdit({
   const { t } = useTranslation();
   const [verify, setVerify] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [bindWalletOpen, setBindWalletOpen] = useState(false);
   return (
-    <Modal
-      open={open}
-      onCancel={() => onClose && onClose(!open)}
-      footer={null}
-      maskClosable={false}
-      centered
-    >
-      <div className="flex flex-col items-center py-4 gap-3 sm:gap-5 mt-4">
-        <UserUpload />
-        <ItemBox
-          title={t("memes.userName")}
-          text={t("memes.userNameTip")}
-        >
-          <Input placeholder={t("memes.userNamePlaceholder")} size="large" />
-        </ItemBox>
-        <ItemBox title={t("memes.SOLWalletAddress")} text="">
-          <div className="flex items-center gap-1">
-            <Input placeholder={t("memes.SOLWalletAddressPlaceholder")} size="large" />
-            &nbsp;
-            <Button
-              type="primary"
-              size="large"
-              loading={loading}
-              className="aspect-square"
-              onClick={() => {
-                setVerify(false);
-                setLoading(true);
-                setTimeout(() => {
-                  setLoading(false);
-                  setVerify(true);
-                }, 1000);
-              }}
-            >
-              {loading ? "" : t("memes.verify")}
-            </Button>
-          </div>
-        </ItemBox>
-        <ItemBox title={t("memes.addLink")} text="">
-          <div className="flex flex-col items-center gap-2">
-            <Input
-              addonBefore={<Icon name="telegram" />}
-              placeholder={t("memes.telegramPlaceholder")}
-              size="large"
-            />
-            <Input
-              addonBefore={<Icon name="twitter" />}
-              placeholder={t("memes.twitterPlaceholder")}
-              size="large"
-            />
-          </div>
-        </ItemBox>
-        <Button
-          type="primary"
-          size="large"
-          className="w-full"
-          disabled={!verify}
-        >
-          {t("memes.submit")}
-        </Button>
-      </div>
-    </Modal>
+    <>
+      <VerifyBindWallet
+        open={bindWalletOpen}
+        onClose={setBindWalletOpen}
+        onChange={() => {
+          setVerify(false);
+          setLoading(true);
+          setTimeout(() => {
+            setLoading(false);
+            setVerify(true);
+          }, 1000);
+        }}
+      />
+      <Modal
+        open={open}
+        onCancel={() => onClose && onClose(!open)}
+        footer={null}
+        maskClosable={false}
+        centered
+      >
+        <div className="flex flex-col items-center py-4 gap-3 sm:gap-5 mt-4">
+          <UserUpload />
+          <ItemBox title={t("memes.userName")} text={t("memes.userNameTip")}>
+            <Input placeholder={t("memes.userNamePlaceholder")} size="large" />
+          </ItemBox>
+          <ItemBox title={t("memes.SOLWalletAddress")} text="">
+            <div className="flex items-center gap-1">
+              <Input
+                placeholder={t("memes.SOLWalletAddressPlaceholder")}
+                size="large"
+              />
+              &nbsp;
+              <Button
+                type="primary"
+                size="large"
+                loading={loading}
+                className="aspect-square"
+                onClick={() => {
+                  setBindWalletOpen(true);
+                }}
+              >
+                {loading ? "" : t("memes.verify")}
+              </Button>
+            </div>
+          </ItemBox>
+          <ItemBox title={t("memes.addLink")} text="">
+            <div className="flex flex-col items-center gap-2">
+              <Input
+                addonBefore={<Icon name="telegram" />}
+                placeholder={t("memes.telegramPlaceholder")}
+                size="large"
+              />
+              <Input
+                addonBefore={<Icon name="twitter" />}
+                placeholder={t("memes.twitterPlaceholder")}
+                size="large"
+              />
+            </div>
+          </ItemBox>
+          <Button
+            type="primary"
+            size="large"
+            className="w-full"
+            disabled={!verify}
+          >
+            {t("memes.submit")}
+          </Button>
+        </div>
+      </Modal>
+    </>
   );
 }

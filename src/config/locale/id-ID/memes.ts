@@ -24,12 +24,13 @@ export default {
     image: "Gambar: JPG/PNG, ≤5MB",
     gif: "GIF: ≤10MB",
     video: "Video: MP4, ≤50MB, ≤30s",
-    batchUpload: "Batas unggah batch 10",
+    batchUpload: "Batas unggahan batch 10",
   },
   selectFile: "Pilih file",
   userName: "Nama pengguna",
   userNamePlaceholder: "Silakan masukkan nama pengguna Anda",
-  userNameTip: "4-60 karakter, mendukung bahasa Mandarin, Inggris, angka, garis bawah, dan tanda minus",
+  userNameTip:
+    "4-60 karakter, mendukung bahasa Cina, Inggris, angka, garis bawah, dan tanda minus",
   SOLWalletAddress: "Alamat dompet SOL",
   SOLWalletAddressPlaceholder: "Silakan masukkan alamat dompet SOL Anda",
   addLink: "Tambahkan tautan",
@@ -38,4 +39,11 @@ export default {
   verify: "Verifikasi",
   submit: "Kirim",
   avatar: "Avatar",
+  bindWallet: {
+    title: "Ikat alamat dompet SOL",
+    text: "Tidak dapat diubah setelah pengikatan berhasil",
+    solWalletAddress: "Alamat dompet SOL",
+  },
+  confirm: "Konfirmasi",
+  cancel: "Batal",
 };

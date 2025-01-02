@@ -29,7 +29,8 @@ export default {
   selectFile: "파일 선택",
   userName: "사용자 이름",
   userNamePlaceholder: "사용자 이름을 입력하세요",
-  userNameTip: "4-60자, 중국어, 영어, 숫자, 밑줄 및 하이픈 지원",
+  userNameTip:
+    "4-60자, 중국어, 영어, 숫자, 밑줄 및 하이픈 지원",
   SOLWalletAddress: "SOL 지갑 주소",
   SOLWalletAddressPlaceholder: "SOL 지갑 주소를 입력하세요",
   addLink: "링크 추가",
@@ -38,4 +39,11 @@ export default {
   verify: "확인",
   submit: "제출",
   avatar: "아바타",
+  bindWallet: {
+    title: "SOL 지갑 주소 연결",
+    text: "연결 성공 후 변경할 수 없습니다",
+    solWalletAddress: "SOL 지갑 주소",
+  },
+  confirm: "확인",
+  cancel: "취소",
 };

@@ -1,9 +1,9 @@
 export default {
   title: [
-    { content: "エクスプレッションパック" },
+    { content: "表現パック" },
     { content: " 作成", status: true },
   ],
-  text: "Web3エモティコンの作成は、クリエイターが自分の作品を通じて$MINIDOGEの報酬を受け取るのをサポートします。",
+  text: "Web3絵文字の作成は、クリエイターが自分の作品を通じて$MINIDOGEの報酬を受け取ることをサポートします。",
   hot: "ホット",
   new: "新しい",
   selectText: "デフォルト",
@@ -12,7 +12,7 @@ export default {
     title: "サポート",
     text: "QRコードをスキャンするか、ウォレットアドレスをコピーしてください",
   },
-  bindingWarningText: "作品を公開するためにSOLウォレットアドレスをバインドしてください",
+  bindingWarningText: "作品を公開するには、SOLウォレットアドレスをバインドしてください",
   bindingWarningText2: "今すぐバインド",
   ownedBy: "所有者",
   bindSOLWallet: "SOLウォレットをバインド",
@@ -29,7 +29,8 @@ export default {
   selectFile: "ファイルを選択",
   userName: "ユーザー名",
   userNamePlaceholder: "ユーザー名を入力してください",
-  userNameTip: "4-60文字、中国語、英語、数字、アンダースコア、マイナス記号をサポート",
+  userNameTip:
+    "4-60文字、中国語、英語、数字、アンダースコア、マイナス記号をサポート",
   SOLWalletAddress: "SOLウォレットアドレス",
   SOLWalletAddressPlaceholder: "SOLウォレットアドレスを入力してください",
   addLink: "リンクを追加",
@@ -38,4 +39,11 @@ export default {
   verify: "確認",
   submit: "送信",
   avatar: "アバター",
+  bindWallet: {
+    title: "SOLウォレットアドレスをバインド",
+    text: "成功したバインド後は変更できません",
+    solWalletAddress: "SOLウォレットアドレス",
+  },
+  confirm: "確認",
+  cancel: "キャンセル",
 };
