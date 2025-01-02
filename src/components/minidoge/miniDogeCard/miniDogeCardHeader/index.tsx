@@ -1,19 +1,27 @@
-import { memesTextSize, memesTitleSize } from "@/components/domain/styles";
-import Icon from "@/components/icon";
-import { Avatar } from "antd";
-import { Ellipsis } from "antd-mobile";
-import { IconWrapper } from "@/components/minidoge/miniDogeCard";
-import { MiniDogeCardHeaderReward } from "./reward";
-import { useState } from "react";
-import { CopyModal } from "../../copyModal";
-import { copy } from "@/util";
-import { useTranslation } from "react-i18next";
-
-export const MiniDogeCardHeader = ({ address = "" }: { address?: string }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [shareModalOpen, setShareModalOpen] = useState(false);
-  const { t } = useTranslation();
-  const memes: any = t("memes", { returnObjects: true });
+import { memesTextSize, memesTitleSize } from '@/components/domain/styles'
+import Icon from '@/components/icon'
+import { Avatar } from 'antd'
+import { Ellipsis } from 'antd-mobile'
+import { IconWrapper } from '@/components/minidoge/miniDogeCard'
+import { MiniDogeCardHeaderReward } from './reward'
+import { useState } from 'react'
+import { CopyModal } from '../../copyModal'
+import { copy } from '@/util'
+import { useTranslation } from 'react-i18next'
+import dayjs from 'dayjs'
+export const MiniDogeCardHeader = ({
+  address = '',
+  ownerBy = '',
+  createdAt = '',
+}: {
+  address?: string
+  ownerBy?: string
+  createdAt?: string
+}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [shareModalOpen, setShareModalOpen] = useState(false)
+  const { t } = useTranslation()
+  const memes: any = t('memes', { returnObjects: true })
   return (
     <>
       <MiniDogeCardHeaderReward
@@ -25,7 +33,7 @@ export const MiniDogeCardHeader = ({ address = "" }: { address?: string }) => {
       />
       <CopyModal
         open={shareModalOpen}
-        onClose={(value) => setShareModalOpen(value)}
+        onClose={value => setShareModalOpen(value)}
       />
       <div className="flex items-center justify-between gap-4 px-2">
         <div className="grid grid-cols-[48px_1fr] items-center gap-2">
@@ -37,12 +45,12 @@ export const MiniDogeCardHeader = ({ address = "" }: { address?: string }) => {
             <span
               className={`${memesTitleSize} !text-xs !font-bold uppercase flex`}
             >
-              <Ellipsis content="Owned by" />
+              <Ellipsis content={ownerBy} />
               &nbsp;
               <Icon name="authenticate" className="text-base" />
             </span>
             <span className={`${memesTextSize} !text-xs opacity-50`}>
-              2024/12/27
+              {dayjs(createdAt).format('YYYY/MM/DD')}
             </span>
           </div>
         </div>
@@ -52,8 +60,8 @@ export const MiniDogeCardHeader = ({ address = "" }: { address?: string }) => {
           </IconWrapper>
           <IconWrapper
             onClick={async () => {
-              await copy(address);
-              setShareModalOpen(true);
+              await copy(address)
+              setShareModalOpen(true)
             }}
           >
             <Icon name="share" />
@@ -61,5 +69,5 @@ export const MiniDogeCardHeader = ({ address = "" }: { address?: string }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}

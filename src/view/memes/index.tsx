@@ -89,6 +89,8 @@ export default function Memes() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
             {emojiList.map(item => (
               <MiniDogeCard
+                createdAt={item.created_at}
+                likeCount={item.like_count}
                 key={item.id}
                 type={
                   item.file_type.includes('image')
@@ -99,6 +101,8 @@ export default function Memes() {
                 }
                 audioSrc={item.file_path}
                 address={item.author_account}
+                id={item.id}
+                ownerBy={item.author_username || item.author_id}
               />
             ))}
           </div>

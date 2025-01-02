@@ -20,13 +20,13 @@ export const MiniDogeCardBody = ({
     >
       {type === 'image' && (
         <img
-          src="/logo.png"
+          src={audioSrc}
           alt="doge"
           className="object-cover w-full h-[30vh] md:h-auto"
         />
       )}
       {type === 'mp3' && <Mp3 audioSrc={audioSrc} id={id} />}
-      {type === 'mp4' && <Mp4 />}
+      {type === 'mp4' && <Mp4 id={id} />}
     </div>
   )
 }
