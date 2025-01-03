@@ -1,15 +1,23 @@
 export default {
   copy: {
-    fail: "Gagal menyalin",
-    success: "Berhasil menyalin",
+    fail: "Salin Gagal",
+    success: "Salin Berhasil",
   },
   login:{
-    sendCodeFail: "Gagal mengirim kode, silakan coba lagi nanti",
-    sendCodeError: "Terjadi kesalahan saat mengirim kode",
-    pleaseEnterTheCode: "Silakan masukkan kode",
-    verifyFail: "Gagal verifikasi, silakan coba lagi",
+    sendCodeFail: "Gagal Mengirim Kode, Silakan Coba Lagi Nanti",
+    sendCodeError: "Kesalahan Mengirim Kode",
+    pleaseEnterTheCode: "Silakan Masukkan Kode",
+    verifyFail: "Verifikasi Gagal, Silakan Coba Lagi",
   },
   register:{
-    registrationFailedPleaseTryAgainLater: "Pendaftaran gagal, silakan coba lagi nanti",
-  }
+    registrationFailedPleaseTryAgainLater: "Pendaftaran Gagal, Silakan Coba Lagi Nanti",
+  },
+  bindWallet: {
+    bindWalletFail: "Gagal Mengikat Dompet",
+    bindWalletSuccess: "Dompet Berhasil Diikat",
+  },
+  updateUserProfile: {
+    updateUserProfileFail: "Gagal Memperbarui Profil Pengguna",
+    updateUserProfileSuccess: "Profil Pengguna Berhasil Diperbarui",
+  },
 };

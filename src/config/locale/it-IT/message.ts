@@ -1,15 +1,23 @@
 export default {
   copy: {
-    fail: "Copia fallita",
-    success: "Copia riuscita",
+    fail: "Copia Fallita",
+    success: "Copia Riuscita",
   },
   login:{
-    sendCodeFail: "Invio del codice fallito, riprova più tardi",
-    sendCodeError: "Si è verificato un errore durante l'invio del codice",
-    pleaseEnterTheCode: "Inserisci il codice",
-    verifyFail: "Verifica fallita, riprova",
+    sendCodeFail: "Invio del Codice Fallito, Per Favore Riprova Più Tardi",
+    sendCodeError: "Errore nell'Invio del Codice",
+    pleaseEnterTheCode: "Per Favore Inserisci il Codice",
+    verifyFail: "Verifica Fallita, Per Favore Riprova",
   },
   register:{
-    registrationFailedPleaseTryAgainLater: "Registrazione fallita, riprova più tardi",
-  }
+    registrationFailedPleaseTryAgainLater: "Registrazione Fallita, Per Favore Riprova Più Tardi",
+  },
+  bindWallet: {
+    bindWalletFail: "Associazione del Wallet Fallita",
+    bindWalletSuccess: "Associazione del Wallet Riuscita",
+  },
+  updateUserProfile: {
+    updateUserProfileFail: "Aggiornamento del Profilo Utente Fallito",
+    updateUserProfileSuccess: "Profilo Utente Aggiornato con Successo",
+  },
 };

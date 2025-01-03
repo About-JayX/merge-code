@@ -5,11 +5,19 @@ export default {
   },
   login:{
     sendCodeFail: "发送验证码失败，请稍后再试",
-    sendCodeError: "发送验证码时发生错误",
+    sendCodeError: "发送验证码错误",
     pleaseEnterTheCode: "请输入验证码",
     verifyFail: "验证失败，请重试",
   },
   register:{
     registrationFailedPleaseTryAgainLater: "注册失败，请稍后再试",
-  }
+  },
+  bindWallet: {
+    bindWalletFail: "绑定钱包失败",
+    bindWalletSuccess: "绑定钱包成功",
+  },
+  updateUserProfile: {
+    updateUserProfileFail: "更新用户资料失败",
+    updateUserProfileSuccess: "用户资料更新成功",
+  },
 }; 

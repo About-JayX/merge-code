@@ -11,5 +11,13 @@ export default {
   },
   register:{
     registrationFailedPleaseTryAgainLater: "Registration failed, please try again later",
-  }
+  },
+  bindWallet: {
+    bindWalletFail: "Bind Wallet Fail",
+    bindWalletSuccess: "Bind Wallet Success",
+  },
+  updateUserProfile: {
+    updateUserProfileFail: "Update User Profile Fail",
+    updateUserProfileSuccess: "Update User Profile Success",
+  },
 };

@@ -1,15 +1,23 @@
 export default {
   copy: {
-    fail: "Cópia falhou",
-    success: "Cópia bem-sucedida",
+    fail: "Cópia Falhada",
+    success: "Cópia Bem-Sucedida",
   },
   login:{
-    sendCodeFail: "Falha ao enviar o código, por favor tente novamente mais tarde",
-    sendCodeError: "Ocorreu um erro ao enviar o código",
-    pleaseEnterTheCode: "Por favor, insira o código",
-    verifyFail: "Falha na verificação, por favor tente novamente",
+    sendCodeFail: "Falha ao Enviar Código, Por Favor Tente Novamente Mais Tarde",
+    sendCodeError: "Erro ao Enviar Código",
+    pleaseEnterTheCode: "Por Favor Insira o Código",
+    verifyFail: "Verificação Falhada, Por Favor Tente Novamente",
   },
   register:{
-    registrationFailedPleaseTryAgainLater: "Falha no registro, por favor tente novamente mais tarde",
-  }
+    registrationFailedPleaseTryAgainLater: "Registo Falhado, Por Favor Tente Novamente Mais Tarde",
+  },
+  bindWallet: {
+    bindWalletFail: "Falha ao Vincular a Carteira",
+    bindWalletSuccess: "Vinculação da Carteira Bem-Sucedida",
+  },
+  updateUserProfile: {
+    updateUserProfileFail: "Falha ao Atualizar o Perfil do Usuário",
+    updateUserProfileSuccess: "Perfil do Usuário Atualizado com Sucesso",
+  },
 }; 
