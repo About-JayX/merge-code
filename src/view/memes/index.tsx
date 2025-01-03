@@ -12,7 +12,7 @@ export default function Memes() {
   const memes: any = t('memes', { returnObjects: true })
   const [emojiList, setEmojiList] = useState<EmojiItem[]>([])
   const [currentPage, setCurrentPage] = useState(1)
-  const [pageSize, setPageSize] = useState(10)
+  const [pageSize, _] = useState(10)
   const [total, setTotal] = useState(0)
   const [segmentValue, setSegmentValue] = useState('like_count')
 
@@ -89,6 +89,7 @@ export default function Memes() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
             {emojiList.map(item => (
               <MiniDogeCard
+                avatar={item.avatar || '/logo.png'}
                 createdAt={item.created_at}
                 likeCount={item.like_count}
                 key={item.id}

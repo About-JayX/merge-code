@@ -9,19 +9,23 @@ import { CopyModal } from '../../copyModal'
 import { copy } from '@/util'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
+import { useNavigate } from 'react-router'
 export const MiniDogeCardHeader = ({
   address = '',
   ownerBy = '',
   createdAt = '',
+  avatar = '',
 }: {
   address?: string
   ownerBy?: string
   createdAt?: string
+  avatar?: string
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [shareModalOpen, setShareModalOpen] = useState(false)
   const { t } = useTranslation()
   const memes: any = t('memes', { returnObjects: true })
+  const navigate = useNavigate()
   return (
     <>
       <MiniDogeCardHeaderReward
@@ -38,8 +42,9 @@ export const MiniDogeCardHeader = ({
       <div className="flex items-center justify-between gap-4 px-2">
         <div className="grid grid-cols-[48px_1fr] items-center gap-2">
           <Avatar
-            src="/logo.png"
+            src={avatar}
             className="w-12 h-12 bg-white aspect-square"
+            onClick={() => navigate(`/memes/${ownerBy}`)}
           />
           <div className="flex flex-col gap-1">
             <span

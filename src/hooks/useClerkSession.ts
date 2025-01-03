@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSession } from '@clerk/clerk-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginAPI } from '@/api/user'
-import { getUser } from '@/store/user'
+import { setUser } from '@/store/user'
 import { RootState } from '@/store'
 
 export const useClerkSession = () => {
@@ -18,7 +18,7 @@ export const useClerkSession = () => {
           if (token) {
             const response = await loginAPI(token)
             if (response.success) {
-              dispatch(getUser(response.result))
+              dispatch(setUser(response.result))
             }
           }
         } catch (error) {

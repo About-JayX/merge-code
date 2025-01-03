@@ -1,10 +1,22 @@
-import { memesTextSize, memesTitleSize } from "@/components/domain/styles";
-import { Button, Modal } from "antd";
-import { Ellipsis } from "antd-mobile";
-import { useTranslation } from "react-i18next";
+import { memesTextSize, memesTitleSize } from '@/components/domain/styles'
+import { Button, Modal } from 'antd'
+import { Ellipsis } from 'antd-mobile'
+import { useTranslation } from 'react-i18next'
 
-export default function VerifyBindWallet({ open, onClose, onChange }: { open: boolean, onClose: (value: boolean) => void, onChange: () => void }) {
-  const { t } = useTranslation();
+export default function VerifyBindWallet({
+  open,
+  loading,
+  onClose,
+  onChange,
+  address,
+}: {
+  open: boolean
+  loading: boolean
+  onClose: (value: boolean) => void
+  onChange: () => void
+  address: string
+}) {
+  const { t } = useTranslation()
   return (
     <Modal open={open} onCancel={() => onClose(false)} footer={null} centered>
       <div className="flex flex-col items-center py-4 gap-4 sm:gap-7 mt-4">
@@ -23,20 +35,31 @@ export default function VerifyBindWallet({ open, onClose, onChange }: { open: bo
         >
           {t('memes.bindWallet.solWalletAddress')}:&nbsp;
           <Ellipsis
-            content="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq"
+            content={address}
             direction="middle"
             className="text-white"
           />
         </span>
         <div className="w-full flex gap-2">
-          <Button type="default" size="large" className="w-full" onClick={() => onClose(false)}>
+          <Button
+            type="default"
+            size="large"
+            className="w-full"
+            onClick={() => onClose(false)}
+          >
             {t('memes.cancel')}
           </Button>
-          <Button type="primary" size="large" className="w-full" onClick={onChange}>
+          <Button
+            type="primary"
+            size="large"
+            className="w-full"
+            loading={loading}
+            onClick={onChange}
+          >
             {t('memes.confirm')}
           </Button>
         </div>
       </div>
     </Modal>
-  );
+  )
 }

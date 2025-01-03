@@ -35,8 +35,12 @@ export interface BindWalletParams {
 }
 
 // 绑定钱包 API
-export const bindWalletAPI = (params: BindWalletParams) =>
-  request.user.post<responseStatus<LoginResponse>>('/auth/bind/wallet', params)
+export const bindWalletAPI = (params: BindWalletParams, token: string) =>
+  request.user.post<responseStatus<LoginResponse>>(
+    '/auth/bind/wallet',
+    params,
+    { headers: { Authorization: `Bearer ${token}` } }
+  )
 
 // Emoji 返回类型定义
 export interface EmojiItem {
@@ -53,6 +57,9 @@ export interface EmojiItem {
   author_username: string | null
   author_account: string
   status: number
+  avatar: string | null
+  x: string | null
+  telegram: string | null
 }
 
 export const getEmojiAPI = (params?: {

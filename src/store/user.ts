@@ -19,11 +19,12 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    getUser: (state, action) => {
+    setUser: (state, action) => {
       state.user = action.payload
       // 存储到 localStorage
       localStorage.setItem('user', JSON.stringify(action.payload))
     },
+
     clearUser: state => {
       state.user = null
       localStorage.removeItem('user')
@@ -32,5 +33,5 @@ const userSlice = createSlice({
   extraReducers: builder => {},
 })
 
-export const { getUser, clearUser } = userSlice.actions
+export const { setUser, clearUser } = userSlice.actions
 export default userSlice.reducer
