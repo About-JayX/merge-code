@@ -10,6 +10,7 @@ interface UploadProps {
     image?: number
     gif?: number
     video?: number
+    audio?: number
   }
   maxVideoDuration?: number
   multiple?: boolean
@@ -29,6 +30,7 @@ export const Upload = ({
     image: 5,
     gif: 10,
     video: 50,
+    audio: 50,
   },
   maxVideoDuration = 30,
   multiple = false,
@@ -51,7 +53,8 @@ export const Upload = ({
       ((fileType === 'image/jpeg' || fileType === 'image/png') &&
         fileSizeInMB <= maxSizes.image!) ||
       (fileType === 'image/gif' && fileSizeInMB <= maxSizes.gif!) ||
-      (fileType === 'video/mp4' && fileSizeInMB <= maxSizes.video!)
+      (fileType === 'video/mp4' && fileSizeInMB <= maxSizes.video!) ||
+      (fileType === 'audio/mpeg' && fileSizeInMB <= maxSizes.audio!)
     ) {
       // 对于视频文件，检查时长
       if (fileType === 'video/mp4') {
@@ -109,6 +112,7 @@ export const Upload = ({
 
       // 检查是否所有文件都有效
       const invalidFile = validationResults.find(result => !result.valid)
+
       if (invalidFile) {
         onError?.(invalidFile.error!)
         return
@@ -117,6 +121,8 @@ export const Upload = ({
       const urls = await Promise.all(
         selectedFiles.map(file => readFileAsDataURL(file))
       )
+      console.log(selectedFiles, 'selectedFiles')
+
       setFiles?.(selectedFiles)
       onSuccess?.(urls)
     } catch (error) {
@@ -238,7 +244,7 @@ export const Upload = ({
           style={{ display: 'none' }}
           ref={fileInputRef}
           multiple={multiple}
-          accept="image/jpeg,image/png,image/gif,video/mp4"
+          accept="image/jpeg,image/png,image/gif,video/mp4,audio/mpeg"
           disabled={disabled}
         />
         <div

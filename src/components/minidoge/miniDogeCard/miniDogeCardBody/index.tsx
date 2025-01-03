@@ -26,7 +26,7 @@ export const MiniDogeCardBody = ({
         />
       )}
       {type === 'mp3' && <Mp3 audioSrc={audioSrc} id={id} />}
-      {type === 'mp4' && <Mp4 id={id} />}
+      {type === 'mp4' && <Mp4 id={id} src={audioSrc} />}
     </div>
   )
 }
