@@ -8,7 +8,7 @@ export const memesSubTitleSize =
   "text-2xl sm:text-3xl xl:text-4xl font-normal orbitron";
 
 export const memesTextSize =
-  "text-sm sm:text-sm xl:text-base font-normal opacity-100";
+  "text-sm sm:text-sm xl:text-base font-normal  opacity-100";
 
 export const memesBntColor =
   "bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] text-black";

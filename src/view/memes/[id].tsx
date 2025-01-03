@@ -1,13 +1,13 @@
-import { Button, Section } from '@/components/domain'
-import { memesTextSize, memesTitleSize } from '@/components/domain/styles'
-import Icon from '@/components/icon'
-import MiniDogeCard from '@/components/minidoge/miniDogeCard'
-import UserEdit from '@/components/minidoge/user/edit'
-import { Publish } from '@/components/minidoge/user/publish'
-import Segmented from '@/components/Segmented'
-import { useSelector } from 'react-redux'
-import { getUserProfileAPI, LoginResponse } from '@/api'
-import { UserProfile, EmojiItem } from '@/api/user/interface'
+import { Button, Section } from "@/components/domain";
+import { memesTextSize, memesTitleSize } from "@/components/domain/styles";
+import Icon from "@/components/icon";
+import MiniDogeCard from "@/components/minidoge/miniDogeCard";
+import UserEdit from "@/components/minidoge/user/edit";
+import { Publish } from "@/components/minidoge/user/publish";
+import Segmented from "@/components/Segmented";
+import { useSelector } from "react-redux";
+import { getUserProfileAPI, LoginResponse } from "@/api";
+import { UserProfile, EmojiItem } from "@/api/user/interface";
 
 import {
   Alert,
@@ -17,17 +17,17 @@ import {
   message,
   Select,
   Typography,
-} from 'antd'
-const { Paragraph } = Typography
-import { Ellipsis } from 'antd-mobile'
-import { useState, useMemo, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router'
+} from "antd";
+const { Paragraph } = Typography;
+import { Ellipsis } from "antd-mobile";
+import { useState, useMemo, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router";
 
 interface UserContextProps {
-  user: LoginResponse | null
-  isCurrentUser: boolean
-  hasWallet: boolean
+  user: LoginResponse | null;
+  isCurrentUser: boolean;
+  hasWallet: boolean;
 }
 
 // 用户信息
@@ -37,34 +37,41 @@ export const UserInfo = ({
   userContext,
   userProfile,
 }: {
-  editOpens: boolean
-  onEdit: (value: boolean) => void
-  userContext: UserContextProps
-  userProfile: UserProfile | null
+  editOpens: boolean;
+  onEdit: (value: boolean) => void;
+  userContext: UserContextProps;
+  userProfile: UserProfile | null;
 }) => {
-  const { t } = useTranslation()
-  const [editOpen, setEditOpen] = useState(false)
-  const [publishOpen, setPublishOpen] = useState(false)
-  const { user, isCurrentUser, hasWallet } = userContext
+  const { t } = useTranslation();
+  const [editOpen, setEditOpen] = useState(false);
+  const [publishOpen, setPublishOpen] = useState(false);
+  const { user, isCurrentUser, hasWallet } = userContext;
   const handleEdit = (value: boolean) => {
-    setEditOpen(value)
-    onEdit && onEdit(value)
-  }
+    setEditOpen(value);
+    onEdit && onEdit(value);
+  };
 
   // 如果数据还未加载完成，显示加载状态
   if (!userProfile?.user) {
     return (
       <Section className="grid grid-cols-[1fr_auto] flex-wrap items-center justify-between gap-4">
         <div className="grid grid-cols-[56px_1fr] sm:grid-cols-[96px_1fr] items-center gap-2 sm:gap-4 w-auto">
-          <Avatar
-            src="/logo.png"
-            className="w-14 h-14 sm:w-24 sm:h-24 bg-white aspect-square"
-          />
+          {userProfile?.user.avatar ? (
+            <Avatar
+              src={userProfile.user.avatar || "/logo.png"}
+              className="w-14 h-14 sm:w-24 sm:h-24 bg-white aspect-square"
+            />
+          ) : (
+            <Icon
+              name="avatar"
+              className="text-[56px] sm:text-[96px] !border-2 rounded-full !border-white aspect-square"
+            />
+          )}
           <div className="flex flex-col gap-1">
             <span
               className={`${memesTitleSize} !text-xl sm:!text-2xl !font-bold uppercase flex items-center w-full`}
             >
-              <Ellipsis content={t('memes.ownedBy')} />
+              <Ellipsis content={t("memes.ownedBy")} />
             </span>
             <span
               className={`${memesTextSize} !text-sm sm:!text-lg opacity-50`}
@@ -74,7 +81,7 @@ export const UserInfo = ({
           </div>
         </div>
       </Section>
-    )
+    );
   }
 
   return (
@@ -83,10 +90,19 @@ export const UserInfo = ({
       <Publish open={publishOpen} onClose={setPublishOpen} />
       <Section className="grid grid-cols-[1fr_auto] flex-wrap items-center justify-between gap-4">
         <div className="grid grid-cols-[56px_1fr] sm:grid-cols-[96px_1fr] items-center gap-2 sm:gap-4 w-auto">
-          <Avatar
-            src={userProfile.user.avatar || '/logo.png'}
-            className="w-14 h-14 sm:w-24 sm:h-24 bg-white aspect-square"
-          />
+          {userProfile?.user.avatar ? (
+            <Avatar
+              src={userProfile.user.avatar || "/logo.png"}
+              className="w-14 h-14 sm:w-24 sm:h-24 border-2 border-white aspect-square"
+            />
+          ) : (
+            <div className="w-14 h-14 sm:w-24 sm:h-24 !border-1 !border-white">
+              <Icon
+                name="avatar"
+                className="text-[56px] sm:text-[96px]  aspect-square"
+              />
+            </div>
+          )}
           <div className="flex flex-col gap-1">
             <span
               className={`${memesTitleSize}  !text-xl sm:!text-2xl !font-bold uppercase flex items-center w-full`}
@@ -95,7 +111,7 @@ export const UserInfo = ({
                 content={
                   userProfile.user.username ||
                   userProfile.user.id ||
-                  t('memes.ownedBy')
+                  t("memes.ownedBy")
                 }
                 className="h-8"
               />
@@ -159,9 +175,9 @@ export const UserInfo = ({
                   />
                 </Paragraph>
               ) : user && isCurrentUser ? (
-                t('memes.bindSOLWallet')
+                t("memes.bindSOLWallet")
               ) : (
-                '--'
+                "--"
               )}
             </span>
           </div>
@@ -176,58 +192,58 @@ export const UserInfo = ({
             className="rounded-full items-center flex justify-center xl:!max-w-36 sm:!w-auto !h-auto sm:!min-h-11  sm:!text-base"
           >
             <Icon name="publish" className="text-2xl sm:text-3xl" />
-            &nbsp;{t('memes.publish')}
+            &nbsp;{t("memes.publish")}
           </Button>
         )}
       </Section>
     </>
-  )
-}
+  );
+};
 
 // 访问浏览点赞量
 export const ViewInfo = ({
   userProfile,
 }: {
-  userProfile: UserProfile | null
+  userProfile: UserProfile | null;
 }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   // 计算总点赞数
   const getTotalLikes = (emojis: EmojiItem[]): string => {
-    if (!emojis?.length) return '--'
-    const total = emojis.reduce((sum, item) => sum + item.like_count, 0)
-    return total > 1000 ? `${(total / 1000).toFixed(2)}K` : total.toString()
-  }
+    if (!emojis?.length) return "--";
+    const total = emojis.reduce((sum, item) => sum + item.like_count, 0);
+    return total > 1000 ? `${(total / 1000).toFixed(2)}K` : total.toString();
+  };
 
   // 计算总收入
   const getTotalIncome = (emojis: EmojiItem[]): string => {
-    if (!emojis?.length) return '--'
+    if (!emojis?.length) return "--";
     const total = emojis.reduce(
       (sum, item) => sum + (item.total_donation_amount || 0),
       0
-    )
-    return total > 1000 ? `${(total / 1000).toFixed(2)}K` : total.toString()
-  }
+    );
+    return total > 1000 ? `${(total / 1000).toFixed(2)}K` : total.toString();
+  };
 
   // 计算总浏览量（这里假设每个 emoji 的浏览量为点赞数的 5 倍，实际应该从 API 获取）
   const getTotalViews = (emojis: EmojiItem[]): string => {
-    if (!emojis?.length) return '--'
-    const total = emojis.reduce((sum, item) => sum + item.like_count * 5, 0)
-    return total > 1000 ? `${(total / 1000).toFixed(2)}K` : total.toString()
-  }
+    if (!emojis?.length) return "--";
+    const total = emojis.reduce((sum, item) => sum + item.like_count * 5, 0);
+    return total > 1000 ? `${(total / 1000).toFixed(2)}K` : total.toString();
+  };
 
   const InfoItem = ({
     iconName,
     label,
     value,
   }: {
-    iconName: string
-    label: string
-    value: string
+    iconName: string;
+    label: string;
+    value: string;
   }) => {
     return (
       <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-2 sm:mt-0">
-        {iconName === 'view' ? (
+        {iconName === "view" ? (
           <img
             src="/logo.png"
             className="w-8 h-8 sm:w-12 sm:h-12 aspect-square"
@@ -236,9 +252,9 @@ export const ViewInfo = ({
           <Icon
             name={iconName}
             className={`${
-              iconName === 'praise'
-                ? 'text-3xl sm:text-3xl md:text-4xl opacity-50'
-                : 'text-4xl sm:text-4xl md:text-5xl'
+              iconName === "praise"
+                ? "text-3xl sm:text-3xl md:text-4xl opacity-50"
+                : "text-4xl sm:text-4xl md:text-5xl"
             }`}
           />
         )}
@@ -255,66 +271,68 @@ export const ViewInfo = ({
           </span>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   if (!userProfile?.emojis) {
     return (
       <Section className="flex flex-wrap gap-x-8 gap-y-4 sm:gap-16 -mt-4 sm:-mt-0">
-        <InfoItem iconName="view" label={t('memes.income')} value="--" />
-        <InfoItem iconName="praise" label={t('memes.like')} value="--" />
-        <InfoItem iconName="views" label={t('memes.check')} value="--" />
+        <InfoItem iconName="view" label={t("memes.income")} value="--" />
+        <InfoItem iconName="praise" label={t("memes.like")} value="--" />
+        <InfoItem iconName="views" label={t("memes.check")} value="--" />
       </Section>
-    )
+    );
   }
 
   return (
     <Section className="flex flex-wrap gap-x-8 gap-y-4 sm:gap-16 -mt-4 sm:-mt-0">
       <InfoItem
         iconName="view"
-        label={t('memes.income')}
+        label={t("memes.income")}
         value={getTotalIncome(userProfile.emojis)}
       />
       <InfoItem
         iconName="praise"
-        label={t('memes.like')}
+        label={t("memes.like")}
         value={getTotalLikes(userProfile.emojis)}
       />
       <InfoItem
         iconName="views"
-        label={t('memes.check')}
+        label={t("memes.check")}
         value={getTotalViews(userProfile.emojis)}
       />
     </Section>
-  )
-}
+  );
+};
 
 // 列表
 export const List = ({ userProfile }: { userProfile: UserProfile | null }) => {
-  const { t } = useTranslation()
-  const memes: any = t('memes', { returnObjects: true })
-  const [sortBy, setSortBy] = useState('Hot')
+  const { t } = useTranslation();
+  const memes: any = t("memes", { returnObjects: true });
+  const [sortBy, setSortBy] = useState("Hot");
 
   // 排序函数
   const getSortedEmojis = (emojis: EmojiItem[], sortType: string) => {
     return [...emojis].sort((a, b) => {
-      if (sortType === 'Hot') {
-        return b.like_count - a.like_count
+      if (sortType === "Hot") {
+        return b.like_count - a.like_count;
       }
       // 按时间排序，新的在前
-      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    })
-  }
+      return (
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+    });
+  };
 
   if (!userProfile?.emojis) {
     return (
       <Section type="top">
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="" />
       </Section>
-    )
+    );
   }
 
-  const sortedEmojis = getSortedEmojis(userProfile.emojis, sortBy)
+  const sortedEmojis = getSortedEmojis(userProfile.emojis, sortBy);
 
   return (
     <div className="flex flex-col gap-4 sm:gap-4 md:gap-8 xl:gap-8 items-center -mt-0 w-full">
@@ -325,23 +343,23 @@ export const List = ({ userProfile }: { userProfile: UserProfile | null }) => {
       >
         <Segmented
           value={sortBy}
-          onChange={value => setSortBy(value as string)}
+          onChange={(value) => setSortBy(value as string)}
           options={[
-            { value: 'Hot', label: memes.hot },
-            { value: 'New', label: memes.new },
+            { value: "Hot", label: memes.hot },
+            { value: "New", label: memes.new },
           ]}
         />
         <div className="antd-rounded">
           <Select
             value={sortBy}
-            onChange={value => setSortBy(value)}
+            onChange={(value) => setSortBy(value)}
             options={[
               {
-                value: 'Hot',
+                value: "Hot",
                 label: memes.hot,
               },
               {
-                value: 'New',
+                value: "New",
                 label: memes.new,
               },
             ]}
@@ -355,18 +373,18 @@ export const List = ({ userProfile }: { userProfile: UserProfile | null }) => {
       <Section type="top" className="w-full">
         {sortedEmojis.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
-            {sortedEmojis.map(item => (
+            {sortedEmojis.map((item) => (
               <MiniDogeCard
-                avatar={item.avatar || '/logo.png'}
+                avatar={item.avatar || "/logo.png"}
                 createdAt={item.created_at}
                 likeCount={item.like_count}
                 key={item.id}
                 type={
-                  item.file_type.includes('image')
-                    ? 'image'
-                    : item.file_type.includes('video')
-                    ? 'mp4'
-                    : 'mp3'
+                  item.file_type.includes("image")
+                    ? "image"
+                    : item.file_type.includes("video")
+                    ? "mp4"
+                    : "mp3"
                 }
                 audioSrc={item.file_path}
                 address={item.author_account}
@@ -382,50 +400,50 @@ export const List = ({ userProfile }: { userProfile: UserProfile | null }) => {
         )}
       </Section>
     </div>
-  )
-}
+  );
+};
 
 export default function MemesPage() {
-  const { id } = useParams()
-  const { t } = useTranslation()
-  const [editOpen, setEditOpen] = useState(false)
-  const user = useSelector((state: any) => state.user.user)
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
+  const { id } = useParams();
+  const { t } = useTranslation();
+  const [editOpen, setEditOpen] = useState(false);
+  const user = useSelector((state: any) => state.user.user);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
 
   // 用户上下文数据
   const userContext = useMemo<UserContextProps>(() => {
-    const isCurrentUser = id ? id === user?.userId : false
-    const hasWallet = Boolean(user?.profile.sol_wallet_address)
+    const isCurrentUser = id ? id === user?.userId : false;
+    const hasWallet = Boolean(user?.profile.sol_wallet_address);
 
     return {
       user,
       isCurrentUser,
       hasWallet,
-    }
-  }, [user, id])
+    };
+  }, [user, id]);
 
   // 判断是否需要显示绑定钱包提醒
   const showBindWalletAlert = useMemo(() => {
-    return userContext.isCurrentUser && !userContext.hasWallet
-  }, [userContext])
+    return userContext.isCurrentUser && !userContext.hasWallet;
+  }, [userContext]);
 
   // 获取用户资料
   const init = async () => {
     if (id) {
       try {
-        const { result, success } = await getUserProfileAPI(id)
+        const { result, success } = await getUserProfileAPI(id);
         if (success) {
-          setUserProfile(result)
+          setUserProfile(result);
         }
       } catch (error) {
-        message.error('获取数据失败')
+        message.error("获取数据失败");
       }
     }
-  }
+  };
 
   useEffect(() => {
-    init()
-  }, [id])
+    init();
+  }, [id]);
 
   return (
     <>
@@ -434,13 +452,13 @@ export default function MemesPage() {
           <Alert
             message={
               <div className="text-center text-base sm:text-lg p-2">
-                <span className="">{t('memes.bindingWarningText')}</span>
+                <span className="">{t("memes.bindingWarningText")}</span>
                 &nbsp;
                 <a
                   className="text-current !text-[#FFAC03] !underline underline-offset-4"
                   onClick={() => setEditOpen(true)}
                 >
-                  {t('memes.bindingWarningText2')}
+                  {t("memes.bindingWarningText2")}
                 </a>
               </div>
             }
@@ -461,5 +479,5 @@ export default function MemesPage() {
         <List userProfile={userProfile} />
       </div>
     </>
-  )
+  );
 }

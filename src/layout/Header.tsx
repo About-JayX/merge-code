@@ -1,56 +1,57 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { Button, Section } from '@/components/domain'
-import { Card as IconCard } from '@/components/domain/common/Icon.tsx'
-import { images } from '@/assets/images'
-import { locale } from '@/config'
-import { Avatar, Dropdown } from 'antd'
-import { memesTextColor, memesHover } from '@/components/domain/styles'
-import { Link } from 'react-router-dom'
-import { NAV } from '@/config/resources'
-import MusicPlayer from '@/components/MusicPlayer'
-import { useLocation } from 'react-router'
-import { LoginModal } from '@/components/minidoge/user/login'
-import { useNavigate } from 'react-router'
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from '@/store'
-import { clearUser } from '@/store/user'
-import { useClerk } from '@clerk/clerk-react'
-import { UserOutlined } from '@ant-design/icons'
-import { Ellipsis } from 'antd-mobile'
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { Button, Section } from "@/components/domain";
+import { Card as IconCard } from "@/components/domain/common/Icon.tsx";
+import { images } from "@/assets/images";
+import { locale } from "@/config";
+import { Avatar, Dropdown } from "antd";
+import { memesTextColor, memesHover } from "@/components/domain/styles";
+import { Link } from "react-router-dom";
+import { NAV } from "@/config/resources";
+import MusicPlayer from "@/components/MusicPlayer";
+import { useLocation } from "react-router";
+import { LoginModal } from "@/components/minidoge/user/login";
+import { useNavigate } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/store";
+import { clearUser } from "@/store/user";
+import { useClerk } from "@clerk/clerk-react";
+import { UserOutlined } from "@ant-design/icons";
+import { Ellipsis } from "antd-mobile";
+import Icon from "@/components/icon";
 
 const Header: React.FC = () => {
-  const navigate = useNavigate()
-  const { t, i18n } = useTranslation()
-  const [isScrolled, setIsScrolled] = React.useState(false)
-  const [open, setOpen] = React.useState(false)
-  const location = useLocation()
-  const user = useSelector((state: RootState) => state.user.user)
-  const dispatch = useDispatch()
-  const { signOut } = useClerk()
+  const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const location = useLocation();
+  const user = useSelector((state: RootState) => state.user.user);
+  const dispatch = useDispatch();
+  const { signOut } = useClerk();
 
   const handleLogout = async () => {
-    await signOut({ redirectUrl: '/memes' })
-    dispatch(clearUser())
-  }
+    await signOut({ redirectUrl: "/memes" });
+    dispatch(clearUser());
+  };
 
   React.useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY
-      setIsScrolled(scrollTop > 50)
-    }
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 50);
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const userMenuItems = [
     {
-      key: 'username',
+      key: "username",
       label: (
         <Ellipsis
           content={
-            user?.profile.username || user?.userId || user?.profile.email || ''
+            user?.profile.username || user?.userId || user?.profile.email || ""
           }
           direction="middle"
           className="max-w-[140px]"
@@ -59,32 +60,32 @@ const Header: React.FC = () => {
       disabled: true,
     },
     {
-      key: 'profile',
+      key: "profile",
       label: (
         <div className="flex items-center gap-2">
           <UserOutlined />
-          <span>{t('login.profile')}</span>
+          <span>{t("login.profile")}</span>
         </div>
       ),
       onClick: () => navigate(`/memes/${user?.userId}`),
     },
     {
-      key: 'divider',
-      type: 'divider' as const,
+      key: "divider",
+      type: "divider" as const,
     },
     {
-      key: 'logout',
-      label: t('login.logout'),
+      key: "logout",
+      label: t("login.logout"),
       onClick: handleLogout,
     },
-  ]
+  ];
 
   return (
     <>
       <LoginModal open={open} onClose={() => setOpen(false)} />
       <header
         className={`fixed top-0 left-0 w-full z-50 ${
-          isScrolled ? 'bg-black/10 backdrop-blur-sm' : ''
+          isScrolled ? "bg-black/10 backdrop-blur-sm" : ""
         }`}
       >
         <div className="p-3 sm:p-8 md:pt-8 md:px-4 flex gap-1 sm:gap-4 items-center w-full max-w-screen-xl mx-auto">
@@ -111,7 +112,7 @@ const Header: React.FC = () => {
           </Section>
           <div className="flex-1" />
           <div className="flex items-center gap-1 sm:gap-4">
-            {!location.pathname.includes('/memes') && (
+            {!location.pathname.includes("/memes") && (
               <div className={memesHover}>
                 <MusicPlayer />
               </div>
@@ -139,38 +140,41 @@ const Header: React.FC = () => {
                   key,
                   label: value.translation.language,
                   onClick: () => {
-                    i18n.changeLanguage(key)
+                    i18n.changeLanguage(key);
                   },
                 })),
               }}
             >
               <a className="bg-white/10 border font-bold border-white/10 px-4 sm:px-5 rounded flex items-center justify-center min-w-[36px] min-h-[36px] sm:min-w-[48px] sm:min-h-[48px] text-current">
-                <span>{t('lang')}</span>
+                <span>{t("lang")}</span>
               </a>
             </Dropdown>
-            {location.pathname.includes('/memes') && (
+            {location.pathname.includes("/memes") && (
               <>
                 {user ? (
                   <Dropdown
                     menu={{ items: userMenuItems }}
                     placement="bottomRight"
                   >
-                    <Avatar
-                      size="large"
-                      src={user.profile.avatar || '/logo.png'}
-                      style={{
-                        cursor: 'pointer',
-                        minWidth: '48px',
-                        minHeight: '48px',
-                      }}
-                    />
+                    {user.profile.avatar ? (
+                      <Avatar
+                        size="large"
+                        src={user.profile.avatar || "/logo.png"}
+                        className="cursor-pointer sm:min-w-12 sm:min-h-12 border-1 border-white/10 aspect-square bg-white/15"
+                      />
+                    ) : (
+                      <Icon
+                        name="avatar"
+                        className="text-[32px] sm:text-[48px] !border rounded-full !border-white/10 aspect-square"
+                      />
+                    )}
                   </Dropdown>
                 ) : (
                   <Button
                     className="sm:!h-12 sm:!min-h-12"
                     onClick={() => setOpen(true)}
                   >
-                    {t('login.login')}
+                    {t("login.login")}
                   </Button>
                 )}
               </>
@@ -179,7 +183,7 @@ const Header: React.FC = () => {
         </div>
       </header>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
