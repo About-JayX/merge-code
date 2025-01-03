@@ -409,6 +409,7 @@ export default function MemesPage() {
   const [editOpen, setEditOpen] = useState(false);
   const user = useSelector((state: any) => state.user.user);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [messageApi, contextHolder] = message.useMessage();
 
   // 用户上下文数据
   const userContext = useMemo<UserContextProps>(() => {
@@ -436,7 +437,7 @@ export default function MemesPage() {
           setUserProfile(result);
         }
       } catch (error) {
-        message.error(t("message.getProfileFailed"));
+        messageApi.error(t("message.getProfileFailed"));
       }
     }
   };
@@ -447,6 +448,7 @@ export default function MemesPage() {
 
   return (
     <>
+      {contextHolder}
       <div className="flex flex-col gap-8 sm:gap-12 sm:mt-4">
         {showBindWalletAlert && (
           <Alert
