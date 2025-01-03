@@ -1,9 +1,5 @@
-import { request } from './instance'
-
-interface ListParams {
-  page?: number
-  pageSize?: number
-}
+import { request } from '../instance'
+import { ListParams } from './interface'
 
 // 直接导出 getList 方法
 export const getList = (params?: ListParams) =>

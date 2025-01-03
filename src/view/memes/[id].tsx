@@ -1,16 +1,12 @@
 import { Button, Section } from '@/components/domain'
-import {
-  memesHover,
-  memesTextSize,
-  memesTitleSize,
-} from '@/components/domain/styles'
+import { memesTextSize, memesTitleSize } from '@/components/domain/styles'
 import Icon from '@/components/icon'
 import MiniDogeCard from '@/components/minidoge/miniDogeCard'
 import UserEdit from '@/components/minidoge/user/edit'
 import { Publish } from '@/components/minidoge/user/publish'
 import Segmented from '@/components/Segmented'
 import { useSelector } from 'react-redux'
-import { LoginResponse } from '@/api'
+import { getUserProfileAPI, LoginResponse } from '@/api'
 
 import {
   Alert,
@@ -22,7 +18,7 @@ import {
   Typography,
 } from 'antd'
 import { Ellipsis } from 'antd-mobile'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router'
 const { Paragraph } = Typography
@@ -47,12 +43,21 @@ export const UserInfo = ({
   const [editOpen, setEditOpen] = useState(false)
   const [publishOpen, setPublishOpen] = useState(false)
   const { user, isCurrentUser, hasWallet } = userContext
-
+  const params = useParams()
   const handleEdit = (value: boolean) => {
     setEditOpen(value)
     onEdit && onEdit(value)
   }
-
+  const init = async () => {
+    if (params.id) {
+      const { id } = params
+      const res = await getUserProfileAPI(id)
+      console.log(res, 'res')
+    }
+  }
+  useEffect(() => {
+    init()
+  }, [params])
   return (
     <>
       <UserEdit open={editOpens || editOpen} onClose={handleEdit} />

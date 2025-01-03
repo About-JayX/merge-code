@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
-import { getList } from '@/api'
+
 import { calc_VOTE_NFT } from '@/util'
 import {
   isSpecialAddress,
   getAddressNftAirdrop,
   getAddressVotingRights,
 } from '@/config/specialAddresses'
+import { getList } from '@/api'
 
 interface TokenAmounts {
   USDT: number | string
