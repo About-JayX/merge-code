@@ -50,6 +50,16 @@ const Header: React.FC = () => {
       disabled: true,
     },
     {
+      key: 'profile',
+      label: (
+        <div className="flex items-center gap-2">
+          <UserOutlined />
+          <span>{t('memes.profile')}</span>
+        </div>
+      ),
+      onClick: () => navigate(`/memes/${user?.userId}`),
+    },
+    {
       key: 'divider',
       type: 'divider' as const,
     },
@@ -138,10 +148,9 @@ const Header: React.FC = () => {
                   >
                     <Avatar
                       size="large"
-                      icon={<UserOutlined />}
+                      src={user.profile.avatar || '/logo.png'}
                       style={{
                         cursor: 'pointer',
-                        backgroundColor: '#FFAC03',
                         minWidth: '48px',
                         minHeight: '48px',
                       }}

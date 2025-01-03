@@ -12,9 +12,12 @@ export interface LoginParams {
 export interface LoginResponse {
   profile: {
     username: string | null
+    telegram: string | null
+    x: string | null
     sol_wallet_address: string | null
     email: string
     role: 'member'
+    avatar: string | null
   }
   userId: string
 }
@@ -55,4 +58,11 @@ export interface UserProfile {
     id: string
     sol_wallet_address: string | null
   }
+}
+
+export interface UpdateUserProfileParams {
+  file?: File
+  telegram?: string
+  x?: string
+  username?: string
 }

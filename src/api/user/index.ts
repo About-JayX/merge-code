@@ -5,6 +5,7 @@ import {
   BindWalletParams,
   EmojiItem,
   UserProfile,
+  UpdateUserProfileParams,
 } from './interface'
 
 // 登录 API
@@ -38,3 +39,21 @@ export const getEmojiAPI = (params?: {
 
 export const getUserProfileAPI = (user_id: string) =>
   request.user.get<responseStatus<UserProfile>>(`/user?user_id=${user_id}`)
+
+export const updateUserProfileAPI = (
+  params: UpdateUserProfileParams,
+  token: string
+) => {
+  const formData = new FormData()
+  if (params.file) formData.append('file', params.file)
+  if (params.telegram) formData.append('telegram', params.telegram)
+  if (params.x) formData.append('x', params.x)
+  if (params.username) formData.append('username', params.username)
+
+  return request.user.post<responseStatus<any>>('/auth/profile', formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+}

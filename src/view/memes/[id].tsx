@@ -393,8 +393,7 @@ export default function MemesPage() {
 
   // 用户上下文数据
   const userContext = useMemo<UserContextProps>(() => {
-    const isCurrentUser =
-      user && id ? id === (user.profile.username || user.userId) : false
+    const isCurrentUser = id ? id === user.userId : false
     const hasWallet = Boolean(user?.profile.sol_wallet_address)
 
     return {

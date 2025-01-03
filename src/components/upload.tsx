@@ -1,25 +1,29 @@
-import React, { useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { message } from "antd";
+import React, { useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { message } from 'antd'
 
 interface UploadProps {
-  children?: React.ReactNode;
-  onSuccess?: (urls: string[]) => void;
-  onError?: (error: string) => void;
+  children?: React.ReactNode
+  onSuccess?: (urls: string[]) => void
+  onError?: (error: string) => void
   maxSizes?: {
-    image?: number;
-    gif?: number;
-    video?: number;
-  };
-  maxVideoDuration?: number;
-  multiple?: boolean;
-  maxCount?: number;
-  disabled?: boolean;
+    image?: number
+    gif?: number
+    video?: number
+  }
+  maxVideoDuration?: number
+  multiple?: boolean
+  maxCount?: number
+  disabled?: boolean
+  setFiles?: (files: File[]) => void
+  files?: File[]
 }
 
 export const Upload = ({
   children,
   onSuccess,
+  setFiles,
+  files,
   onError,
   maxSizes = {
     image: 5,
@@ -31,138 +35,138 @@ export const Upload = ({
   maxCount = 10,
   disabled = false,
 }: UploadProps) => {
-  const { t } = useTranslation();
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [messageApi, contextHolder] = message.useMessage();
+  const { t } = useTranslation()
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const [messageApi, contextHolder] = message.useMessage()
 
   const validateFile = async (
     file: File
   ): Promise<{ valid: boolean; error?: string }> => {
-    const fileType = file.type;
-    const fileSizeInMB = file.size / (1024 * 1024);
+    const fileType = file.type
+    const fileSizeInMB = file.size / (1024 * 1024)
 
     // 验证文件类型和大小
     if (
-      ((fileType === "image/jpeg" || fileType === "image/png") &&
+      ((fileType === 'image/jpeg' || fileType === 'image/png') &&
         fileSizeInMB <= maxSizes.image!) ||
-      (fileType === "image/gif" && fileSizeInMB <= maxSizes.gif!) ||
-      (fileType === "video/mp4" && fileSizeInMB <= maxSizes.video!)
+      (fileType === 'image/gif' && fileSizeInMB <= maxSizes.gif!) ||
+      (fileType === 'video/mp4' && fileSizeInMB <= maxSizes.video!)
     ) {
       // 对于视频文件，检查时长
-      if (fileType === "video/mp4") {
-        const videoDuration = await getVideoDuration(file);
+      if (fileType === 'video/mp4') {
+        const videoDuration = await getVideoDuration(file)
         if (videoDuration > maxVideoDuration) {
-          messageApi.error(t("memes.limitText.video"));
+          messageApi.error(t('memes.limitText.video'))
           return {
             valid: false,
-            error: t("memes.limitText.video"),
-          };
+            error: t('memes.limitText.video'),
+          }
         }
       }
-      return { valid: true };
+      return { valid: true }
     } else {
       const errorMessages = {
-        "image/jpeg": t("memes.limitText.image"),
-        "image/png": t("memes.limitText.image"),
-        "image/gif": t("memes.limitText.gif"),
-        "video/mp4": t("memes.limitText.video"),
-      };
-      messageApi.error(errorMessages[fileType as keyof typeof errorMessages]);
+        'image/jpeg': t('memes.limitText.image'),
+        'image/png': t('memes.limitText.image'),
+        'image/gif': t('memes.limitText.gif'),
+        'video/mp4': t('memes.limitText.video'),
+      }
+      messageApi.error(errorMessages[fileType as keyof typeof errorMessages])
       return {
         valid: false,
         error:
           errorMessages[fileType as keyof typeof errorMessages] ||
-          "文件类型或大小不符合要求。",
-      };
+          '文件类型或大小不符合要求。',
+      }
     }
-  };
+  }
 
   const readFileAsDataURL = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = () => reject("文件读取失败。");
-      reader.readAsDataURL(file);
-    });
-  };
+      const reader = new FileReader()
+      reader.onload = () => resolve(reader.result as string)
+      reader.onerror = () => reject('文件读取失败。')
+      reader.readAsDataURL(file)
+    })
+  }
 
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const selectedFiles = Array.from(event.target.files || []);
+    const selectedFiles = Array.from(event.target.files || [])
 
-    if (selectedFiles.length === 0) return;
+    if (selectedFiles.length === 0) return
 
     if (selectedFiles.length > maxCount) {
-      onError?.(t("memes.limitText.batchUpload", { maxCount }));
-      return;
+      onError?.(t('memes.limitText.batchUpload', { maxCount }))
+      return
     }
+    setFiles?.(selectedFiles)
 
     try {
       const validationResults = await Promise.all(
-        selectedFiles.map((file) => validateFile(file))
-      );
+        selectedFiles.map(file => validateFile(file))
+      )
 
       // 检查是否所有文件都有效
-      const invalidFile = validationResults.find((result) => !result.valid);
+      const invalidFile = validationResults.find(result => !result.valid)
       if (invalidFile) {
-        onError?.(invalidFile.error!);
-        return;
+        onError?.(invalidFile.error!)
+        return
       }
-
       // 读取所有文件内容
       const urls = await Promise.all(
-        selectedFiles.map((file) => readFileAsDataURL(file))
-      );
+        selectedFiles.map(file => readFileAsDataURL(file))
+      )
 
-      onSuccess?.(urls);
+      onSuccess?.(urls)
     } catch (error) {
-      onError?.(error instanceof Error ? error.message : "文件处理失败");
+      onError?.(error instanceof Error ? error.message : '文件处理失败')
     }
 
     // 清空 input 的值，允许重复选择相同文件
     if (fileInputRef.current) {
-      fileInputRef.current.value = "";
+      fileInputRef.current.value = ''
     }
-  };
+  }
 
   const getVideoDuration = (file: File): Promise<number> => {
     return new Promise((resolve, reject) => {
-      const video = document.createElement("video");
-      video.preload = "metadata";
+      const video = document.createElement('video')
+      video.preload = 'metadata'
       video.onloadedmetadata = () => {
-        resolve(video.duration);
-        URL.revokeObjectURL(video.src); // 清理创建的 URL
-      };
+        resolve(video.duration)
+        URL.revokeObjectURL(video.src) // 清理创建的 URL
+      }
       video.onerror = () => {
-        URL.revokeObjectURL(video.src); // 清理创建的 URL
-        reject("视频加载失败。");
-      };
-      video.src = URL.createObjectURL(file);
-    });
-  };
+        URL.revokeObjectURL(video.src) // 清理创建的 URL
+        reject('视频加载失败。')
+      }
+      video.src = URL.createObjectURL(file)
+    })
+  }
 
   const handleChildrenClick = () => {
-    fileInputRef.current?.click();
-  };
+    fileInputRef.current?.click()
+  }
 
   const handleDragEnter = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault()
+    e.stopPropagation()
     if (!disabled && !isDragging) {
-      setIsDragging(true);
+      setIsDragging(true)
     }
-  };
+  }
 
   const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault()
+    e.stopPropagation()
 
     // 检查是否真的离开了容器
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX;
-    const y = e.clientY;
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = e.clientX
+    const y = e.clientY
 
     if (
       x <= rect.left ||
@@ -170,52 +174,52 @@ export const Upload = ({
       y <= rect.top ||
       y >= rect.bottom
     ) {
-      setIsDragging(false);
+      setIsDragging(false)
     }
-  };
+  }
 
   const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
+    e.preventDefault()
+    e.stopPropagation()
+  }
 
   const handleDrop = async (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(false)
 
-    if (disabled) return;
+    if (disabled) return
 
-    const droppedFiles = Array.from(e.dataTransfer.files);
+    const droppedFiles = Array.from(e.dataTransfer.files)
 
-    if (droppedFiles.length === 0) return;
+    if (droppedFiles.length === 0) return
 
     if (droppedFiles.length > maxCount) {
-      messageApi.error(t("memes.limitText.batchUpload", { maxCount }));
-      onError?.(t("memes.limitText.batchUpload", { maxCount }));
-      return;
+      messageApi.error(t('memes.limitText.batchUpload', { maxCount }))
+      onError?.(t('memes.limitText.batchUpload', { maxCount }))
+      return
     }
 
     try {
       const validationResults = await Promise.all(
-        droppedFiles.map((file) => validateFile(file))
-      );
+        droppedFiles.map(file => validateFile(file))
+      )
 
-      const invalidFile = validationResults.find((result) => !result.valid);
+      const invalidFile = validationResults.find(result => !result.valid)
       if (invalidFile) {
-        onError?.(invalidFile.error!);
-        return;
+        onError?.(invalidFile.error!)
+        return
       }
 
       const urls = await Promise.all(
-        droppedFiles.map((file) => readFileAsDataURL(file))
-      );
+        droppedFiles.map(file => readFileAsDataURL(file))
+      )
 
-      onSuccess?.(urls);
+      onSuccess?.(urls)
     } catch (error) {
-      onError?.(error instanceof Error ? error.message : "文件处理失败");
+      onError?.(error instanceof Error ? error.message : '文件处理失败')
     }
-  };
+  }
 
   return (
     <>
@@ -226,14 +230,14 @@ export const Upload = ({
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         style={{
-          position: "relative",
-          cursor: disabled ? "" : "pointer",
+          position: 'relative',
+          cursor: disabled ? '' : 'pointer',
         }}
       >
         <input
           type="file"
           onChange={handleFileChange}
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
           ref={fileInputRef}
           multiple={multiple}
           accept="image/jpeg,image/png,image/gif,video/mp4"
@@ -242,9 +246,9 @@ export const Upload = ({
         <div
           onClick={disabled ? undefined : handleChildrenClick}
           style={{
-            position: "relative",
+            position: 'relative',
             opacity: isDragging ? 0.6 : 1,
-            transition: "all 0.3s ease",
+            transition: 'all 0.3s ease',
           }}
           className="relative"
         >
@@ -253,19 +257,19 @@ export const Upload = ({
         {isDragging && (
           <div
             style={{
-              position: "absolute",
+              position: 'absolute',
               top: 0,
               left: 0,
               right: 0,
               bottom: 0,
-              border: "2px dashed #FFAC03",
-              borderRadius: "4px",
-              backgroundColor: "rgba(43, 33, 17, 0.6)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              pointerEvents: "none",
-              transition: "all 0.3s ease",
+              border: '2px dashed #FFAC03',
+              borderRadius: '4px',
+              backgroundColor: 'rgba(43, 33, 17, 0.6)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              pointerEvents: 'none',
+              transition: 'all 0.3s ease',
             }}
           >
             {children}
@@ -273,5 +277,5 @@ export const Upload = ({
         )}
       </div>
     </>
-  );
-};
+  )
+}

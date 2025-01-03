@@ -6,13 +6,23 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import VerifyBindWallet from './verifyBindWallet'
 import { useAppDispatch, useAppSelector } from '@/store'
-import { bindWalletAPI } from '@/api'
+import { bindWalletAPI, updateUserProfileAPI } from '@/api'
 import { message } from 'antd'
 import { useSession } from '@clerk/clerk-react'
 import { setUser } from '@/store/user'
-export const UserUpload = () => {
+export const UserUpload = ({
+  value,
+  onChange,
+  files,
+  setFiles,
+}: {
+  value: string
+  onChange: (value: string) => void
+  files: File[]
+  setFiles: (files: File[]) => void
+}) => {
   const { t } = useTranslation()
-  const [url, setUrl] = useState<string | null>(null)
+
   return (
     <div className="flex flex-col gap-2 w-full">
       <span className={`${memesTitleSize} !text-base !font-bold`}>
@@ -20,11 +30,11 @@ export const UserUpload = () => {
       </span>
       <div className="w-full border border-white/10 border-dotted rounded-md p-4">
         <div className="grid grid-cols-[auto_1fr] items-center gap-2 sm:gap-4">
-          <Upload onSuccess={urls => setUrl(urls[0])}>
+          <Upload onSuccess={urls => onChange(urls[0])}>
             <div className="w-24 h-24 sm:w-32 sm:h-32 cursor-pointer bg-white/10 aspect-square rounded-full flex items-center justify-center">
-              {url ? (
+              {value ? (
                 <Avatar
-                  src={url}
+                  src={value}
                   className="w-full h-full aspect-square rounded-full"
                 />
               ) : (
@@ -49,7 +59,11 @@ export const UserUpload = () => {
                 {t('memes.limitText.gif')}
               </span>
             </div>
-            <Upload onSuccess={urls => setUrl(urls[0])}>
+            <Upload
+              onSuccess={urls => onChange(urls[0])}
+              setFiles={setFiles}
+              files={files}
+            >
               <Button
                 type="default"
                 className="!min-h-8 !max-w-28 !min-w-28 !text-xs sm:!text-sm"
@@ -103,8 +117,14 @@ export default function UserEdit({
   const [bindWalletOpen, setBindWalletOpen] = useState(false)
   const { user } = useAppSelector(state => state.user)
   const [wallAddress, setWallAddress] = useState<string>('')
+  const [telegram, setTelegram] = useState<string>('')
+  const [x, setX] = useState<string>('')
+  const [username, setUsername] = useState<string>('')
+  const [avatar, setAvatar] = useState<string>('')
+  const [files, setFiles] = useState<File[]>([])
   const { session } = useSession()
   const dispatch = useAppDispatch()
+
   const bindWallet = async () => {
     try {
       setVerify(false)
@@ -127,8 +147,30 @@ export default function UserEdit({
     setVerify(true)
     setLoading(false)
   }
+
+  const updateUserProfile = async () => {
+    const token = (await session?.getToken()) || ''
+    const result = await updateUserProfileAPI(
+      { telegram, x, username, file: files[0] },
+      token
+    )
+    if (result.success) {
+      dispatch(
+        setUser({ ...user, profile: { ...user?.profile, ...result.result } })
+      )
+      onClose(false)
+      message.success('更新用户信息成功')
+    } else {
+      message.error('更新用户信息失败')
+    }
+  }
+
   useEffect(() => {
     setWallAddress(user?.profile.sol_wallet_address || '')
+    setTelegram(user?.profile.telegram || '')
+    setX(user?.profile.x || '')
+    setUsername(user?.profile.username || '')
+    setAvatar(user?.profile.avatar || '')
   }, [user])
 
   return (
@@ -148,9 +190,19 @@ export default function UserEdit({
         centered
       >
         <div className="flex flex-col items-center py-4 gap-3 sm:gap-5 mt-4">
-          <UserUpload />
+          <UserUpload
+            value={avatar}
+            onChange={setAvatar}
+            files={files}
+            setFiles={setFiles}
+          />
           <ItemBox title={t('memes.userName')} text={t('memes.userNameTip')}>
-            <Input placeholder={t('memes.userNamePlaceholder')} size="large" />
+            <Input
+              placeholder={t('memes.userNamePlaceholder')}
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              size="large"
+            />
           </ItemBox>
           <ItemBox title={t('memes.SOLWalletAddress')} text="">
             <div className="flex items-center gap-1">
@@ -179,11 +231,15 @@ export default function UserEdit({
           <ItemBox title={t('memes.addLink')} text="">
             <div className="flex flex-col items-center gap-2">
               <Input
+                value={telegram}
+                onChange={e => setTelegram(e.target.value)}
                 addonBefore={<Icon name="telegram" />}
                 placeholder={t('memes.telegramPlaceholder')}
                 size="large"
               />
               <Input
+                value={x}
+                onChange={e => setX(e.target.value)}
                 addonBefore={<Icon name="twitter" />}
                 placeholder={t('memes.twitterPlaceholder')}
                 size="large"
@@ -194,6 +250,7 @@ export default function UserEdit({
             type="primary"
             size="large"
             className="w-full"
+            onClick={updateUserProfile}
           >
             {t('memes.submit')}
           </Button>
