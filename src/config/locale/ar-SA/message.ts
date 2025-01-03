@@ -20,4 +20,5 @@ export default {
     updateUserProfileFail: "فشل تحديث ملف المستخدم",
     updateUserProfileSuccess: "نجاح تحديث ملف المستخدم",
   },
+  getProfileFailed: "فشل الحصول على الملف الشخصي",
 };

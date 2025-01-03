@@ -436,7 +436,7 @@ export default function MemesPage() {
           setUserProfile(result);
         }
       } catch (error) {
-        message.error("获取数据失败");
+        message.error(t("message.getProfileFailed"));
       }
     }
   };

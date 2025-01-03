@@ -20,4 +20,5 @@ export default {
     updateUserProfileFail: "Cập nhật hồ sơ người dùng thất bại",
     updateUserProfileSuccess: "Hồ sơ người dùng đã được cập nhật thành công",
   },
+  getProfileFailed: "Lấy hồ sơ thất bại",
 }; 

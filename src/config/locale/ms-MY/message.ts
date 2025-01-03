@@ -14,10 +14,11 @@ export default {
   },
   bindWallet: {
     bindWalletFail: "Gagal Mengikat Dompet",
-    bindWalletSuccess: "Dompet Berjaya Dikaitkan",
+    bindWalletSuccess: "Dompet Berjaya Diikat",
   },
   updateUserProfile: {
     updateUserProfileFail: "Gagal Mengemas Kini Profil Pengguna",
     updateUserProfileSuccess: "Profil Pengguna Berjaya Dikemas Kini",
   },
+  getProfileFailed: "Gagal Mendapatkan Profil",
 }; 

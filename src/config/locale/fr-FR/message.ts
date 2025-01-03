@@ -14,10 +14,11 @@ export default {
   },
   bindWallet: {
     bindWalletFail: "Échec de la liaison du portefeuille",
-    bindWalletSuccess: "Liaison du portefeuille réussie",
+    bindWalletSuccess: "Portefeuille lié avec succès",
   },
   updateUserProfile: {
     updateUserProfileFail: "Échec de la mise à jour du profil utilisateur",
     updateUserProfileSuccess: "Profil utilisateur mis à jour avec succès",
   },
+  getProfileFailed: "Échec de la récupération du profil",
 }; 

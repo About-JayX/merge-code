@@ -14,10 +14,11 @@ export default {
   },
   bindWallet: {
     bindWalletFail: "Associazione del Wallet Fallita",
-    bindWalletSuccess: "Associazione del Wallet Riuscita",
+    bindWalletSuccess: "Wallet Associato con Successo",
   },
   updateUserProfile: {
     updateUserProfileFail: "Aggiornamento del Profilo Utente Fallito",
     updateUserProfileSuccess: "Profilo Utente Aggiornato con Successo",
   },
+  getProfileFailed: "Recupero del Profilo Fallito",
 };

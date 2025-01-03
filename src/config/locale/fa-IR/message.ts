@@ -20,4 +20,5 @@ export default {
     updateUserProfileFail: "به‌روزرسانی پروفایل کاربر ناموفق",
     updateUserProfileSuccess: "پروفایل کاربر با موفقیت به‌روزرسانی شد",
   },
+  getProfileFailed: "دریافت پروفایل ناموفق",
 }; 

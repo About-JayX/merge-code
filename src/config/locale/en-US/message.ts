@@ -20,4 +20,5 @@ export default {
     updateUserProfileFail: "Update User Profile Fail",
     updateUserProfileSuccess: "Update User Profile Success",
   },
+  getProfileFailed: "Get Profile Failed",
 };

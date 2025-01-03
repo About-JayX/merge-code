@@ -20,4 +20,5 @@ export default {
     updateUserProfileFail: "Gagal Memperbarui Profil Pengguna",
     updateUserProfileSuccess: "Profil Pengguna Berhasil Diperbarui",
   },
+  getProfileFailed: "Gagal Mendapatkan Profil",
 };

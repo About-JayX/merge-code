@@ -14,10 +14,11 @@ export default {
   },
   bindWallet: {
     bindWalletFail: "Ошибка привязки кошелька",
-    bindWalletSuccess: "Привязка кошелька успешна",
+    bindWalletSuccess: "Кошелек успешно привязан",
   },
   updateUserProfile: {
     updateUserProfileFail: "Ошибка обновления профиля пользователя",
     updateUserProfileSuccess: "Профиль пользователя успешно обновлен",
   },
+  getProfileFailed: "Ошибка получения профиля",
 }; 

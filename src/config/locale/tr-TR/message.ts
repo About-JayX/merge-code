@@ -4,20 +4,21 @@ export default {
     success: "Kopyalama Başarılı",
   },
   login:{
-    sendCodeFail: "Kod gönderimi başarısız, lütfen daha sonra tekrar deneyin",
-    sendCodeError: "Kod gönderim hatası",
-    pleaseEnterTheCode: "Lütfen kodu girin",
-    verifyFail: "Doğrulama başarısız, lütfen tekrar deneyin",
+    sendCodeFail: "Kod Gönderimi Başarısız, Lütfen Daha Sonra Tekrar Deneyin",
+    sendCodeError: "Kod Gönderim Hatası",
+    pleaseEnterTheCode: "Lütfen Kodu Girin",
+    verifyFail: "Doğrulama Başarısız, Lütfen Tekrar Deneyin",
   },
   register:{
-    registrationFailedPleaseTryAgainLater: "Kayıt başarısız, lütfen daha sonra tekrar deneyin",
+    registrationFailedPleaseTryAgainLater: "Kayıt Başarısız, Lütfen Daha Sonra Tekrar Deneyin",
   },
   bindWallet: {
-    bindWalletFail: "Cüzdan bağlama başarısız",
-    bindWalletSuccess: "Cüzdan başarıyla bağlandı",
+    bindWalletFail: "Cüzdan Bağlama Başarısız",
+    bindWalletSuccess: "Cüzdan Başarıyla Bağlandı",
   },
   updateUserProfile: {
-    updateUserProfileFail: "Kullanıcı profili güncelleme başarısız",
-    updateUserProfileSuccess: "Kullanıcı profili başarıyla güncellendi",
+    updateUserProfileFail: "Kullanıcı Profilini Güncelleme Başarısız",
+    updateUserProfileSuccess: "Kullanıcı Profili Başarıyla Güncellendi",
   },
+  getProfileFailed: "Profil Alma Başarısız",
 }; 

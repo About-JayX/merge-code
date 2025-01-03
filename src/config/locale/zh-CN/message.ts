@@ -20,4 +20,5 @@ export default {
     updateUserProfileFail: "更新用户资料失败",
     updateUserProfileSuccess: "用户资料更新成功",
   },
+  getProfileFailed: "获取资料失败",
 }; 

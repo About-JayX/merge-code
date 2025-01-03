@@ -14,10 +14,11 @@ export default {
   },
   bindWallet: {
     bindWalletFail: "वॉलेट बाइंड करने में विफल",
-    bindWalletSuccess: "वॉलेट बाइंड सफल",
+    bindWalletSuccess: "वॉलेट सफलतापूर्वक बाइंड किया गया",
   },
   updateUserProfile: {
     updateUserProfileFail: "उपयोगकर्ता प्रोफ़ाइल अपडेट करने में विफल",
     updateUserProfileSuccess: "उपयोगकर्ता प्रोफ़ाइल सफलतापूर्वक अपडेट की गई",
   },
+  getProfileFailed: "प्रोफ़ाइल प्राप्त करने में विफल",
 }; 

@@ -20,4 +20,5 @@ export default {
     updateUserProfileFail: "ব্যবহারকারীর প্রোফাইল আপডেট করতে ব্যর্থ",
     updateUserProfileSuccess: "ব্যবহারকারীর প্রোফাইল সফলভাবে আপডেট হয়েছে",
   },
+  getProfileFailed: "প্রোফাইল পেতে ব্যর্থ",
 };

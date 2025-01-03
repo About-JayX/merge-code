@@ -18,6 +18,7 @@ export default {
   },
   updateUserProfile: {
     updateUserProfileFail: "사용자 프로필 업데이트 실패",
-    updateUserProfileSuccess: "사용자 프로필이 성공적으로 업데이트되었습니다",
+    updateUserProfileSuccess: "사용자 프로필 업데이트 성공",
   },
+  getProfileFailed: "프로필 가져오기 실패",
 };

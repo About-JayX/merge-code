@@ -14,10 +14,11 @@ export default {
   },
   bindWallet: {
     bindWalletFail: "Wallet-Bindung fehlgeschlagen",
-    bindWalletSuccess: "Wallet-Bindung erfolgreich",
+    bindWalletSuccess: "Wallet erfolgreich gebunden",
   },
   updateUserProfile: {
     updateUserProfileFail: "Aktualisierung des Benutzerprofils fehlgeschlagen",
     updateUserProfileSuccess: "Benutzerprofil erfolgreich aktualisiert",
   },
+  getProfileFailed: "Profil abrufen fehlgeschlagen",
 }; 

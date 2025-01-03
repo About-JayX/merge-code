@@ -14,10 +14,11 @@ export default {
   },
   bindWallet: {
     bindWalletFail: "Error al vincular la billetera",
-    bindWalletSuccess: "Vinculación de billetera exitosa",
+    bindWalletSuccess: "Billetera vinculada con éxito",
   },
   updateUserProfile: {
     updateUserProfileFail: "Error al actualizar el perfil del usuario",
     updateUserProfileSuccess: "Perfil del usuario actualizado con éxito",
   },
+  getProfileFailed: "Error al obtener el perfil",
 }; 
