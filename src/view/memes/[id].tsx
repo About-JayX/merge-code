@@ -89,7 +89,7 @@ export const UserInfo = ({
           />
           <div className="flex flex-col gap-1">
             <span
-              className={`${memesTitleSize} !text-xl sm:!text-2xl !font-bold uppercase flex items-center w-full`}
+              className={`${memesTitleSize}  !text-xl sm:!text-2xl !font-bold uppercase flex items-center w-full`}
             >
               <Ellipsis
                 content={
@@ -97,6 +97,7 @@ export const UserInfo = ({
                   userProfile.user.id ||
                   t('memes.ownedBy')
                 }
+                className='h-8'
               />
               &nbsp;
               <Icon name="authenticate" className="text-xl sm:text-2xl" />
@@ -149,12 +150,12 @@ export const UserInfo = ({
                   copyable={{
                     text: userProfile.user.sol_wallet_address,
                   }}
-                  className="grid grid-cols-[1fr_auto] items-center"
+                  className="flex items-center"
                 >
                   <Ellipsis
                     content={userProfile.user.sol_wallet_address}
                     direction="middle"
-                    className="w-full h-[24px] flex-1"
+                    className="h-[24px] -mb-1"
                   />
                 </Paragraph>
               ) : user && isCurrentUser ? (
@@ -236,19 +237,19 @@ export const ViewInfo = ({
             name={iconName}
             className={`${
               iconName === 'praise'
-                ? 'text-2xl sm:text-3xl opacity-50'
-                : 'text-3xl sm:text-4xl'
+                ? 'text-3xl sm:text-3xl md:text-4xl opacity-50'
+                : 'text-4xl sm:text-4xl md:text-5xl'
             }`}
           />
         )}
         <div className="flex flex-col">
           <span
-            className={`${memesTitleSize} text-xs sm:!text-sm !font-normal opacity-50`}
+            className={`${memesTextSize} text-xs sm:!text-sm !font-normal opacity-50`}
           >
             {label}
           </span>
           <span
-            className={`${memesTitleSize} !text-base sm:!text-3xl -mt-[2px] sm:-mt-1`}
+            className={`${memesTitleSize} !text-base sm:!text-2xl -mt-[2px] sm:-mt-1`}
           >
             {value}
           </span>
@@ -316,7 +317,7 @@ export const List = ({ userProfile }: { userProfile: UserProfile | null }) => {
   const sortedEmojis = getSortedEmojis(userProfile.emojis, sortBy)
 
   return (
-    <div className="flex flex-col gap-4 sm:gap-4 md:gap-8 xl:gap-8 items-center -mt-0">
+    <div className="flex flex-col gap-4 sm:gap-4 md:gap-8 xl:gap-8 items-center -mt-0 w-full">
       {/* 操作区域 */}
       <Section
         type="top"
@@ -337,11 +338,11 @@ export const List = ({ userProfile }: { userProfile: UserProfile | null }) => {
             options={[
               {
                 value: 'Hot',
-                label: 'Hot',
+                label: memes.hot
               },
               {
                 value: 'New',
-                label: 'New',
+                label: memes.new,
               },
             ]}
             placeholder="Default sort"
@@ -351,7 +352,7 @@ export const List = ({ userProfile }: { userProfile: UserProfile | null }) => {
         </div>
       </Section>
       {/* 列表 */}
-      <Section type="top">
+      <Section type="top" className='w-full'>
         {sortedEmojis.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
             {sortedEmojis.map(item => (
@@ -393,7 +394,7 @@ export default function MemesPage() {
 
   // 用户上下文数据
   const userContext = useMemo<UserContextProps>(() => {
-    const isCurrentUser = id ? id === user.userId : false
+    const isCurrentUser = id ? id === user?.userId : false
     const hasWallet = Boolean(user?.profile.sol_wallet_address)
 
     return {

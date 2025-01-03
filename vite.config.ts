@@ -179,7 +179,7 @@ export default defineConfig(({ mode }) => {
           rewrite: path => path.replace(/^\/api/, ''),
         },
         '/userApi': {
-          target: ' http://127.0.0.1:8787',
+          target: ' http://192.168.1.116:8787',
           changeOrigin: true,
           rewrite: path => path.replace(/^\/userApi/, ''),
         },

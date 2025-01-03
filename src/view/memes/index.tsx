@@ -74,7 +74,7 @@ export default function Memes() {
             options={[
               {
                 value: 'Hot',
-                label: 'Hot',
+                label: memes.hot,
               },
             ]}
             placeholder="Default sort"
@@ -84,7 +84,7 @@ export default function Memes() {
         </div>
       </Section>
       {/* 列表 */}
-      <Section type="top">
+      <Section type="top" className='w-full'>
         {emojiList.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
             {emojiList.map(item => (

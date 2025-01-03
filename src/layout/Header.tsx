@@ -17,6 +17,7 @@ import { RootState } from '@/store'
 import { clearUser } from '@/store/user'
 import { useClerk } from '@clerk/clerk-react'
 import { UserOutlined } from '@ant-design/icons'
+import { Ellipsis } from 'antd-mobile'
 
 const Header: React.FC = () => {
   const navigate = useNavigate()
@@ -46,7 +47,7 @@ const Header: React.FC = () => {
   const userMenuItems = [
     {
       key: 'username',
-      label: user?.profile.username || user?.userId || user?.profile.email,
+      label: <Ellipsis content={user?.profile.username || user?.userId || user?.profile.email || ''} direction="middle" className='max-w-[140px]'/>,
       disabled: true,
     },
     {
@@ -54,7 +55,7 @@ const Header: React.FC = () => {
       label: (
         <div className="flex items-center gap-2">
           <UserOutlined />
-          <span>{t('memes.profile')}</span>
+          <span>{t('login.profile')}</span>
         </div>
       ),
       onClick: () => navigate(`/memes/${user?.userId}`),

@@ -61,7 +61,7 @@ const Login = ({
     } catch (err: unknown) {
       const error = err as ClerkError
       setError(true)
-      setErrorMessage(error.message || '发送验证码失败，请稍后重试')
+      setErrorMessage(error.message || t("message.login.sendCodeFail"))
       console.error('发送验证码错误:', error)
     } finally {
       setLoading(false)
@@ -73,7 +73,7 @@ const Login = ({
 
     if (!code) {
       setError(true)
-      setErrorMessage('请输入验证码')
+      setErrorMessage(t("message.login.pleaseEnterTheCode"))
       return
     }
 
@@ -86,7 +86,7 @@ const Login = ({
 
       if (result.status !== 'complete') {
         setError(true)
-        setErrorMessage('验证失败，请重试')
+        setErrorMessage(t("message.login.verifyFail"))
         return
       }
       await clerk.setActive({ session: result.createdSessionId })
@@ -100,7 +100,7 @@ const Login = ({
     } catch (err: unknown) {
       const error = err as ClerkError
       setError(true)
-      setErrorMessage(error.message || '验证码验证失败，请检查后重试')
+      setErrorMessage(error.message || t("message.login.verifyFail"))
       console.error('验证码验证错误:', error)
     } finally {
       setLoading(false)
@@ -203,7 +203,6 @@ const Login = ({
       )}
       {sendCode ? (
         <>
-          {' '}
           <Button
             type="primary"
             size="large"
@@ -211,7 +210,7 @@ const Login = ({
             onClick={handleConfirm}
             loading={loading}
           >
-            {loading ? '验证中...' : t('login.confirm')}
+            {loading ? t("login.verifying") : t('login.confirm')}
           </Button>
         </>
       ) : (
@@ -222,7 +221,7 @@ const Login = ({
           onClick={handleSendCode}
           loading={loading}
         >
-          {loading ? '发送中...' : t('login.sendVerificationCode')}
+          {loading ? t("login.sending") : t('login.sendVerificationCode')}
         </Button>
       )}
 
@@ -298,7 +297,7 @@ const Register = ({
       setError('')
     } catch (err: unknown) {
       const error = err as ClerkError
-      setError(error.message || '注册失败，请稍后重试')
+      setError(error.message || t("message.login.registrationFailedPleaseTryAgainLater"))
       console.error('注册错误:', error)
     } finally {
       setLoading(false)
@@ -309,7 +308,7 @@ const Register = ({
     if (!signUpLoaded || !signUp) return
 
     if (!code) {
-      setError('请输入验证码')
+      setError(t("message.login.pleaseEnterTheCode"))
       return
     }
 
@@ -339,7 +338,7 @@ const Register = ({
         handleVerifyCode()
         return
       }
-      setError(error.message || '验证码验证失败，请检查后重试')
+      setError(error.message || t("message.login.verifyFail"))
       console.error('验证码验证错误:', error)
     } finally {
       setLoading(false)
@@ -398,7 +397,7 @@ const Register = ({
                 onClick={handleVerifyCode}
                 loading={loading}
               >
-                {loading ? '验证中...' : t('login.verify')}
+                {loading ? t("login.verifying") : t('login.verify')}
               </Button>
             </div>
           </div>
@@ -420,7 +419,7 @@ const Register = ({
               onClick={handleRegister}
               loading={loading}
             >
-              {loading ? '发送中...' : t('login.sendVerificationCode')}
+              {loading ? t("login.sending") : t('login.sendVerificationCode')}
             </Button>
           </>
         )}
