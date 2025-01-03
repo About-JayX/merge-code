@@ -97,7 +97,7 @@ export const UserInfo = ({
                   userProfile.user.id ||
                   t('memes.ownedBy')
                 }
-                className='h-8'
+                className="h-8"
               />
               &nbsp;
               <Icon name="authenticate" className="text-xl sm:text-2xl" />
@@ -338,7 +338,7 @@ export const List = ({ userProfile }: { userProfile: UserProfile | null }) => {
             options={[
               {
                 value: 'Hot',
-                label: memes.hot
+                label: memes.hot,
               },
               {
                 value: 'New',
@@ -352,7 +352,7 @@ export const List = ({ userProfile }: { userProfile: UserProfile | null }) => {
         </div>
       </Section>
       {/* 列表 */}
-      <Section type="top" className='w-full'>
+      <Section type="top" className="w-full">
         {sortedEmojis.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
             {sortedEmojis.map(item => (
@@ -371,7 +371,7 @@ export const List = ({ userProfile }: { userProfile: UserProfile | null }) => {
                 audioSrc={item.file_path}
                 address={item.author_account}
                 id={item.id}
-                ownerBy={item.author_username || item.author_id}
+                ownerBy={item.author_id}
               />
             ))}
           </div>

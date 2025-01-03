@@ -47,7 +47,15 @@ const Header: React.FC = () => {
   const userMenuItems = [
     {
       key: 'username',
-      label: <Ellipsis content={user?.profile.username || user?.userId || user?.profile.email || ''} direction="middle" className='max-w-[140px]'/>,
+      label: (
+        <Ellipsis
+          content={
+            user?.profile.username || user?.userId || user?.profile.email || ''
+          }
+          direction="middle"
+          className="max-w-[140px]"
+        />
+      ),
       disabled: true,
     },
     {

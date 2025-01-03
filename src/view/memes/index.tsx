@@ -84,7 +84,7 @@ export default function Memes() {
         </div>
       </Section>
       {/* 列表 */}
-      <Section type="top" className='w-full'>
+      <Section type="top" className="w-full">
         {emojiList.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
             {emojiList.map(item => (
@@ -103,7 +103,7 @@ export default function Memes() {
                 audioSrc={item.file_path}
                 address={item.author_account}
                 id={item.id}
-                ownerBy={item.author_username || item.author_id}
+                ownerBy={item.author_id}
               />
             ))}
           </div>
