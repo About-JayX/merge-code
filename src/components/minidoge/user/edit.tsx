@@ -132,7 +132,8 @@ export default function UserEdit({
       const token = (await session?.getToken()) || ''
       const result = await bindWalletAPI({ publicKey: wallAddress }, token)
       if (!result.success) {
-        throw new Error('绑定钱包失败')
+        message.error(t('message.bindWallet.bindWalletFail'))
+        throw new Error('Bind Wallet Fail')
       }
       dispatch(
         setUser({
@@ -140,9 +141,9 @@ export default function UserEdit({
           profile: { ...user?.profile, sol_wallet_address: wallAddress },
         })
       )
-      message.success('绑定钱包成功')
+      message.success(t('message.bindWallet.bindWalletSuccess'))
     } catch (error) {
-      message.error('绑定钱包失败')
+      message.error(t('message.bindWallet.bindWalletFail'))
     }
     setVerify(true)
     setLoading(false)
@@ -159,9 +160,9 @@ export default function UserEdit({
         setUser({ ...user, profile: { ...user?.profile, ...result.result } })
       )
       onClose(false)
-      message.success('更新用户信息成功')
+      message.success(t('message.updateUserProfile.updateUserProfileSuccess'))
     } else {
-      message.error('更新用户信息失败')
+      message.error(t('message.updateUserProfile.updateUserProfileFail'))
     }
   }
 

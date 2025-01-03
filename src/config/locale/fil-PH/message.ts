@@ -1,15 +1,23 @@
 export default {
   copy: {
-    fail: "Hindi Nakopya",
-    success: "Matagumpay na Nakopya",
+    fail: "Kopyahin ang Nabigo",
+    success: "Kopyahin ang Matagumpay",
   },
   login:{
-    sendCodeFail: "Hindi Maipadala ang Code, Pakisubukan Muli Mamaya",
-    sendCodeError: "May Error sa Pagpapadala ng Code",
-    pleaseEnterTheCode: "Pakilagay ang Code",
-    verifyFail: "Hindi Mapatunayan, Pakisubukan Muli",
+    sendCodeFail: "Nabigong Magpadala ng Kodigo, Pakisubukang Muli Mamaya",
+    sendCodeError: "Error sa Pagpapadala ng Kodigo",
+    pleaseEnterTheCode: "Pakisok ang Kodigo",
+    verifyFail: "Nabigong Beripikahin, Pakisubukang Muli",
   },
   register:{
-    registrationFailedPleaseTryAgainLater: "Hindi matagumpay ang pagpaparehistro, pakisubukan muli mamaya",
-  }
+    registrationFailedPleaseTryAgainLater: "Nabigong Magrehistro, Pakisubukang Muli Mamaya",
+  },
+  bindWallet: {
+    bindWalletFail: "Nabigong Ikabit ang Wallet",
+    bindWalletSuccess: "Matagumpay na Ikabit ang Wallet",
+  },
+  updateUserProfile: {
+    updateUserProfileFail: "Nabigong I-update ang Profile ng Gumagamit",
+    updateUserProfileSuccess: "Matagumpay na Na-update ang Profile ng Gumagamit",
+  },
 }; 

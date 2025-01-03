@@ -5,11 +5,19 @@ export default {
   },
   login:{
     sendCodeFail: "Gửi mã thất bại, vui lòng thử lại sau",
-    sendCodeError: "Đã xảy ra lỗi khi gửi mã",
+    sendCodeError: "Lỗi gửi mã",
     pleaseEnterTheCode: "Vui lòng nhập mã",
     verifyFail: "Xác minh thất bại, vui lòng thử lại",
   },
   register:{
     registrationFailedPleaseTryAgainLater: "Đăng ký thất bại, vui lòng thử lại sau",
-  }
+  },
+  bindWallet: {
+    bindWalletFail: "Liên kết ví thất bại",
+    bindWalletSuccess: "Liên kết ví thành công",
+  },
+  updateUserProfile: {
+    updateUserProfileFail: "Cập nhật hồ sơ người dùng thất bại",
+    updateUserProfileSuccess: "Hồ sơ người dùng đã được cập nhật thành công",
+  },
 }; 

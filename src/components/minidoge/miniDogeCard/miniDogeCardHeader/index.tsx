@@ -39,18 +39,18 @@ export const MiniDogeCardHeader = ({
         open={shareModalOpen}
         onClose={value => setShareModalOpen(value)}
       />
-      <div className="flex items-center justify-between gap-4 px-2">
-        <div className="grid grid-cols-[48px_1fr] items-center gap-2">
+      <div className="flex items-center justify-between gap-4 xl:px-2">
+        <div className="grid grid-cols-[32px_1fr] xl:grid-cols-[48px_1fr] items-center gap-2">
           <Avatar
             src={avatar}
-            className="w-12 h-12 bg-white aspect-square"
+            className="w-8 h-8 xl:w-12 xl:h-12 bg-white aspect-square"
             onClick={() => navigate(`/memes/${ownerBy}`)}
           />
           <div className="flex flex-col gap-1">
             <span
               className={`${memesTitleSize} !text-xs !font-bold uppercase flex`}
             >
-              <Ellipsis content={ownerBy} />
+              <Ellipsis content={ownerBy} className="h-4" />
               &nbsp;
               <Icon name="authenticate" className="text-base" />
             </span>
