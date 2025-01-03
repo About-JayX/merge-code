@@ -17,4 +17,10 @@ export default {
     "Mã xác minh đã được gửi đến email của bạn",
   verificationCode: "Mã xác minh",
   confirm: "Xác nhận",
+  profile: "Hồ sơ",
+  logout: "Đăng xuất",
+  verifying: "Đang xác minh...",
+  sending: "Đang gửi...",
+  verify: "Xác minh",
+  back: "Quay lại",
 };

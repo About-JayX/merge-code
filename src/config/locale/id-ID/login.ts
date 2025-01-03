@@ -17,4 +17,10 @@ export default {
     "Kode verifikasi telah dikirim ke email Anda",
   verificationCode: "Kode verifikasi",
   confirm: "Konfirmasi",
+  profile: "Profil",
+  logout: "Keluar",
+  verifying: "Memverifikasi...",
+  sending: "Mengirim...",
+  verify: "Verifikasi",
+  back: "Kembali",
 };

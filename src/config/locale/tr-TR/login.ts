@@ -1,6 +1,6 @@
 export default {
-  login: "Giriş",
-  title: "Hesabınıza giriş yapın",
+  login: "Giriş Yap",
+  title: "Hesabınıza Giriş Yapın",
   text: "Size bir doğrulama kodu göndereceğiz",
   pleaseEnterAValidEmailAddress: "Lütfen geçerli bir e-posta adresi girin!",
   donTHaveAnAccount: "Hesabınız yok mu?",
@@ -14,7 +14,13 @@ export default {
   automaticallyLogInAfterSuccessfulRegistration:
     "Başarılı kayıttan sonra otomatik olarak giriş yap",
   verificationCodeHasBeenSentToYourEmail:
-    "Doğrulama kodu e-posta adresinize gönderilmiştir",
+    "Doğrulama kodu e-posta adresinize gönderildi",
   verificationCode: "Doğrulama kodu",
   confirm: "Onayla",
+  profile: "Profil",
+  logout: "Çıkış Yap",
+  verifying: "Doğrulama yapılıyor...",
+  sending: "Gönderiliyor...",
+  verify: "Doğrula",
+  back: "Geri",
 };

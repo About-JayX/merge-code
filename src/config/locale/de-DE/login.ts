@@ -17,4 +17,10 @@ export default {
     "Der Bestätigungscode wurde an Ihre E-Mail gesendet",
   verificationCode: "Bestätigungscode",
   confirm: "Bestätigen",
+  profile: "Profil",
+  logout: "Abmelden",
+  verifying: "Überprüfen...",
+  sending: "Senden...",
+  verify: "Überprüfen",
+  back: "Zurück",
 };

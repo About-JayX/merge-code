@@ -14,7 +14,13 @@ export default {
   automaticallyLogInAfterSuccessfulRegistration:
     "เข้าสู่ระบบโดยอัตโนมัติหลังจากลงทะเบียนสำเร็จ",
   verificationCodeHasBeenSentToYourEmail:
-    "รหัสยืนยันได้ถูกส่งไปยังอีเมลของคุณแล้ว",
+    "รหัสยืนยันได้ถูกส่งไปยังอีเมลของคุณ",
   verificationCode: "รหัสยืนยัน",
   confirm: "ยืนยัน",
+  profile: "โปรไฟล์",
+  logout: "ออกจากระบบ",
+  verifying: "กำลังตรวจสอบ...",
+  sending: "กำลังส่ง...",
+  verify: "ตรวจสอบ",
+  back: "กลับ",
 };

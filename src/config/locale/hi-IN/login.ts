@@ -1,14 +1,14 @@
 export default {
-  login: "लॉगिन",
+  login: "लॉगिन करें",
   title: "अपने खाते में लॉगिन करें",
   text: "हम आपको एक सत्यापन कोड भेजेंगे",
   pleaseEnterAValidEmailAddress: "कृपया एक मान्य ईमेल पता दर्ज करें!",
-  donTHaveAnAccount: "क्या आपका कोई खाता नहीं है?",
+  donTHaveAnAccount: "क्या आपके पास खाता नहीं है?",
   clickToRegister: "पंजीकरण के लिए क्लिक करें",
   emailAddress: "ईमेल पता",
   sendVerificationCode: "सत्यापन कोड भेजें",
   orUseTheFollowingMethod: "या निम्नलिखित विधि का उपयोग करें",
-  signInWithGoogle: "गूगल के साथ साइन इन करें",
+  signInWithGoogle: "गूगल के साथ लॉगिन करें",
   register: "पंजीकरण करें",
   registerYourAccount: "अपने खाते को पंजीकृत करें",
   automaticallyLogInAfterSuccessfulRegistration:
@@ -17,4 +17,10 @@ export default {
     "सत्यापन कोड आपके ईमेल पर भेजा गया है",
   verificationCode: "सत्यापन कोड",
   confirm: "पुष्टि करें",
+  profile: "प्रोफ़ाइल",
+  logout: "लॉगआउट",
+  verifying: "सत्यापन हो रहा है...",
+  sending: "भेजा जा रहा है...",
+  verify: "सत्यापित करें",
+  back: "वापस",
 };

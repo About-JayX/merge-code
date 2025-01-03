@@ -17,4 +17,10 @@ export default {
     "인증 코드가 귀하의 이메일로 전송되었습니다",
   verificationCode: "인증 코드",
   confirm: "확인",
+  profile: "프로필",
+  logout: "로그아웃",
+  verifying: "확인 중...",
+  sending: "전송 중...",
+  verify: "확인",
+  back: "뒤로",
 };

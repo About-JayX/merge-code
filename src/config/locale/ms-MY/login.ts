@@ -17,4 +17,10 @@ export default {
     "Kod pengesahan telah dihantar ke emel anda",
   verificationCode: "Kod pengesahan",
   confirm: "Sahkan",
+  profile: "Profil",
+  logout: "Log keluar",
+  verifying: "Sedang mengesahkan...",
+  sending: "Sedang menghantar...",
+  verify: "Sahkan",
+  back: "Kembali",
 };

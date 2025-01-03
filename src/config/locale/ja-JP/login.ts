@@ -17,4 +17,10 @@ export default {
     "確認コードがあなたのメールに送信されました",
   verificationCode: "確認コード",
   confirm: "確認",
+  profile: "プロフィール",
+  logout: "ログアウト",
+  verifying: "確認中...",
+  sending: "送信中...",
+  verify: "確認する",
+  back: "戻る",
 };

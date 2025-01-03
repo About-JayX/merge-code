@@ -14,7 +14,13 @@ export default {
   automaticallyLogInAfterSuccessfulRegistration:
     "Awtomatikong mag-login pagkatapos ng matagumpay na pagpaparehistro",
   verificationCodeHasBeenSentToYourEmail:
-    "Ang verification code ay ipinadala sa iyong email",
+    "Ang verification code ay naipadala sa iyong email",
   verificationCode: "Verification code",
   confirm: "Kumpirmahin",
+  profile: "Profile",
+  logout: "Mag-logout",
+  verifying: "Nagsasagawa ng beripikasyon...",
+  sending: "Nagsasagawa ng pagpapadala...",
+  verify: "Beripikahin",
+  back: "Bumalik",
 };

@@ -1,5 +1,5 @@
 export default {
-  login: "Connexion",
+  login: "Se connecter",
   title: "Connectez-vous à votre compte",
   text: "Nous vous enverrons un code de vérification",
   pleaseEnterAValidEmailAddress: "Veuillez entrer une adresse e-mail valide !",
@@ -17,4 +17,10 @@ export default {
     "Le code de vérification a été envoyé à votre e-mail",
   verificationCode: "Code de vérification",
   confirm: "Confirmer",
+  profile: "Profil",
+  logout: "Se déconnecter",
+  verifying: "Vérification en cours...",
+  sending: "Envoi en cours...",
+  verify: "Vérifier",
+  back: "Retour",
 };

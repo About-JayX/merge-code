@@ -1,5 +1,5 @@
 export default {
-  login: "Accesso",
+  login: "Accedi",
   title: "Accedi al tuo account",
   text: "Ti invieremo un codice di verifica",
   pleaseEnterAValidEmailAddress: "Per favore, inserisci un indirizzo email valido!",
@@ -17,4 +17,10 @@ export default {
     "Il codice di verifica è stato inviato alla tua email",
   verificationCode: "Codice di verifica",
   confirm: "Conferma",
+  profile: "Profilo",
+  logout: "Disconnetti",
+  verifying: "Verifica in corso...",
+  sending: "Invio in corso...",
+  verify: "Verifica",
+  back: "Indietro",
 };

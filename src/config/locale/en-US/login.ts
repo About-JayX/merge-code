@@ -17,4 +17,10 @@ export default {
     "Verification code has been sent to your email",
   verificationCode: "Verification code",
   confirm: "Confirm",
+  profile: "Profile",
+  logout: "Logout",
+  verifying: "Verifying...",
+  sending: "Sending...",
+  verify: "Verify",
+  back: "Back",
 };

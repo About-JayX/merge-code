@@ -14,7 +14,13 @@ export default {
   automaticallyLogInAfterSuccessfulRegistration:
     "Iniciar sesión automáticamente después de un registro exitoso",
   verificationCodeHasBeenSentToYourEmail:
-    "El código de verificación ha sido enviado a tu correo electrónico",
+    "Se ha enviado un código de verificación a tu correo electrónico",
   verificationCode: "Código de verificación",
   confirm: "Confirmar",
+  profile: "Perfil",
+  logout: "Cerrar sesión",
+  verifying: "Verificando...",
+  sending: "Enviando...",
+  verify: "Verificar",
+  back: "Atrás",
 };

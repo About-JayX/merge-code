@@ -1,7 +1,7 @@
 export default {
   login: "Iniciar sessão",
   title: "Inicie sessão na sua conta",
-  text: "Enviaremos um código de verificação",
+  text: "Vamos enviar-lhe um código de verificação",
   pleaseEnterAValidEmailAddress: "Por favor, insira um endereço de e-mail válido!",
   donTHaveAnAccount: "Não tem uma conta?",
   clickToRegister: "Clique para se registar",
@@ -17,4 +17,10 @@ export default {
     "O código de verificação foi enviado para o seu e-mail",
   verificationCode: "Código de verificação",
   confirm: "Confirmar",
+  profile: "Perfil",
+  logout: "Sair",
+  verifying: "A verificar...",
+  sending: "A enviar...",
+  verify: "Verificar",
+  back: "Voltar",
 };
