@@ -7,21 +7,22 @@ import { Publish } from '@/components/minidoge/user/publish'
 import Segmented from '@/components/Segmented'
 import { useSelector } from 'react-redux'
 import { getUserProfileAPI, LoginResponse } from '@/api'
+import { UserProfile, EmojiItem } from '@/api/user/interface'
 
 import {
   Alert,
   Avatar,
   Divider,
   Empty,
-  Pagination,
+  message,
   Select,
   Typography,
 } from 'antd'
+const { Paragraph } = Typography
 import { Ellipsis } from 'antd-mobile'
 import { useState, useMemo, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router'
-const { Paragraph } = Typography
 
 interface UserContextProps {
   user: LoginResponse | null
@@ -34,34 +35,25 @@ export const UserInfo = ({
   editOpens,
   onEdit,
   userContext,
+  userProfile,
 }: {
   editOpens: boolean
   onEdit: (value: boolean) => void
   userContext: UserContextProps
+  userProfile: UserProfile | null
 }) => {
   const { t } = useTranslation()
   const [editOpen, setEditOpen] = useState(false)
   const [publishOpen, setPublishOpen] = useState(false)
   const { user, isCurrentUser, hasWallet } = userContext
-  const params = useParams()
   const handleEdit = (value: boolean) => {
     setEditOpen(value)
     onEdit && onEdit(value)
   }
-  const init = async () => {
-    if (params.id) {
-      const { id } = params
-      const res = await getUserProfileAPI(id)
-      console.log(res, 'res')
-    }
-  }
-  useEffect(() => {
-    init()
-  }, [params])
-  return (
-    <>
-      <UserEdit open={editOpens || editOpen} onClose={handleEdit} />
-      <Publish open={publishOpen} onClose={setPublishOpen} />
+
+  // 如果数据还未加载完成，显示加载状态
+  if (!userProfile?.user) {
+    return (
       <Section className="grid grid-cols-[1fr_auto] flex-wrap items-center justify-between gap-4">
         <div className="grid grid-cols-[56px_1fr] sm:grid-cols-[96px_1fr] items-center gap-2 sm:gap-4 w-auto">
           <Avatar
@@ -73,22 +65,71 @@ export const UserInfo = ({
               className={`${memesTitleSize} !text-xl sm:!text-2xl !font-bold uppercase flex items-center w-full`}
             >
               <Ellipsis content={t('memes.ownedBy')} />
+            </span>
+            <span
+              className={`${memesTextSize} !text-sm sm:!text-lg opacity-50`}
+            >
+              --
+            </span>
+          </div>
+        </div>
+      </Section>
+    )
+  }
+
+  return (
+    <>
+      <UserEdit open={editOpens || editOpen} onClose={handleEdit} />
+      <Publish open={publishOpen} onClose={setPublishOpen} />
+      <Section className="grid grid-cols-[1fr_auto] flex-wrap items-center justify-between gap-4">
+        <div className="grid grid-cols-[56px_1fr] sm:grid-cols-[96px_1fr] items-center gap-2 sm:gap-4 w-auto">
+          <Avatar
+            src={userProfile.user.avatar || '/logo.png'}
+            className="w-14 h-14 sm:w-24 sm:h-24 bg-white aspect-square"
+          />
+          <div className="flex flex-col gap-1">
+            <span
+              className={`${memesTitleSize} !text-xl sm:!text-2xl !font-bold uppercase flex items-center w-full`}
+            >
+              <Ellipsis
+                content={
+                  userProfile.user.username ||
+                  userProfile.user.id ||
+                  t('memes.ownedBy')
+                }
+              />
               &nbsp;
               <Icon name="authenticate" className="text-xl sm:text-2xl" />
-              &nbsp;
-              <a>
-                <Icon
-                  name="twitter"
-                  className="text-white text-sm sm:text-base"
-                />
-              </a>
-              &nbsp;
-              <a>
-                <Icon
-                  name="telegram"
-                  className="text-white text-sm sm:text-base"
-                />
-              </a>
+              {userProfile.user.x && (
+                <>
+                  &nbsp;
+                  <a
+                    href={userProfile.user.x}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon
+                      name="twitter"
+                      className="text-white text-sm sm:text-base"
+                    />
+                  </a>
+                </>
+              )}
+              {userProfile.user.telegram && (
+                <>
+                  &nbsp;
+                  <a
+                    href={userProfile.user.telegram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon
+                      name="telegram"
+                      className="text-white text-sm sm:text-base"
+                    />
+                  </a>
+                </>
+              )}
               {user && isCurrentUser && (
                 <>
                   &nbsp;
@@ -103,21 +144,21 @@ export const UserInfo = ({
             <span
               className={`${memesTextSize} !text-sm sm:!text-lg opacity-50`}
             >
-              {hasWallet ? (
+              {userProfile.user.sol_wallet_address ? (
                 <Paragraph
                   copyable={{
-                    text: user!.profile.sol_wallet_address || '',
+                    text: userProfile.user.sol_wallet_address,
                   }}
                   className="grid grid-cols-[1fr_auto] items-center"
                 >
                   <Ellipsis
-                    content={user!.profile.sol_wallet_address || ''}
+                    content={userProfile.user.sol_wallet_address}
                     direction="middle"
                     className="w-full h-[24px] flex-1"
                   />
                 </Paragraph>
               ) : user && isCurrentUser ? (
-                '请绑定solana钱包'
+                t('memes.bindSOLWallet')
               ) : (
                 '--'
               )}
@@ -143,8 +184,37 @@ export const UserInfo = ({
 }
 
 // 访问浏览点赞量
-export const ViewInfo = () => {
+export const ViewInfo = ({
+  userProfile,
+}: {
+  userProfile: UserProfile | null
+}) => {
   const { t } = useTranslation()
+
+  // 计算总点赞数
+  const getTotalLikes = (emojis: EmojiItem[]): string => {
+    if (!emojis?.length) return '--'
+    const total = emojis.reduce((sum, item) => sum + item.like_count, 0)
+    return total > 1000 ? `${(total / 1000).toFixed(2)}K` : total.toString()
+  }
+
+  // 计算总收入
+  const getTotalIncome = (emojis: EmojiItem[]): string => {
+    if (!emojis?.length) return '--'
+    const total = emojis.reduce(
+      (sum, item) => sum + (item.total_donation_amount || 0),
+      0
+    )
+    return total > 1000 ? `${(total / 1000).toFixed(2)}K` : total.toString()
+  }
+
+  // 计算总浏览量（这里假设每个 emoji 的浏览量为点赞数的 5 倍，实际应该从 API 获取）
+  const getTotalViews = (emojis: EmojiItem[]): string => {
+    if (!emojis?.length) return '--'
+    const total = emojis.reduce((sum, item) => sum + item.like_count * 5, 0)
+    return total > 1000 ? `${(total / 1000).toFixed(2)}K` : total.toString()
+  }
+
   const InfoItem = ({
     iconName,
     label,
@@ -187,31 +257,64 @@ export const ViewInfo = () => {
     )
   }
 
+  if (!userProfile?.emojis) {
+    return (
+      <Section className="flex flex-wrap gap-x-8 gap-y-4 sm:gap-16 -mt-4 sm:-mt-0">
+        <InfoItem iconName="view" label={t('memes.income')} value="--" />
+        <InfoItem iconName="praise" label={t('memes.like')} value="--" />
+        <InfoItem iconName="views" label={t('memes.check')} value="--" />
+      </Section>
+    )
+  }
+
   return (
     <Section className="flex flex-wrap gap-x-8 gap-y-4 sm:gap-16 -mt-4 sm:-mt-0">
       <InfoItem
         iconName="view"
         label={t('memes.income')}
-        value={false ? '5.22 K' : '--'}
+        value={getTotalIncome(userProfile.emojis)}
       />
       <InfoItem
         iconName="praise"
         label={t('memes.like')}
-        value={false ? '5.22 K' : '--'}
+        value={getTotalLikes(userProfile.emojis)}
       />
       <InfoItem
         iconName="views"
         label={t('memes.check')}
-        value={false ? '5.22 K' : '--'}
+        value={getTotalViews(userProfile.emojis)}
       />
     </Section>
   )
 }
 
 // 列表
-export const List = () => {
+export const List = ({ userProfile }: { userProfile: UserProfile | null }) => {
   const { t } = useTranslation()
   const memes: any = t('memes', { returnObjects: true })
+  const [sortBy, setSortBy] = useState('Hot')
+
+  // 排序函数
+  const getSortedEmojis = (emojis: EmojiItem[], sortType: string) => {
+    return [...emojis].sort((a, b) => {
+      if (sortType === 'Hot') {
+        return b.like_count - a.like_count
+      }
+      // 按时间排序，新的在前
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    })
+  }
+
+  if (!userProfile?.emojis) {
+    return (
+      <Section type="top">
+        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="" />
+      </Section>
+    )
+  }
+
+  const sortedEmojis = getSortedEmojis(userProfile.emojis, sortBy)
+
   return (
     <div className="flex flex-col gap-4 sm:gap-4 md:gap-8 xl:gap-8 items-center -mt-0">
       {/* 操作区域 */}
@@ -220,6 +323,8 @@ export const List = () => {
         className="flex gap-2 sm:gap-4 sm:flex-row justify-between w-full items-center"
       >
         <Segmented
+          value={sortBy}
+          onChange={value => setSortBy(value as string)}
           options={[
             { value: 'Hot', label: memes.hot },
             { value: 'New', label: memes.new },
@@ -227,10 +332,16 @@ export const List = () => {
         />
         <div className="antd-rounded">
           <Select
+            value={sortBy}
+            onChange={value => setSortBy(value)}
             options={[
               {
                 value: 'Hot',
                 label: 'Hot',
+              },
+              {
+                value: 'New',
+                label: 'New',
               },
             ]}
             placeholder="Default sort"
@@ -240,50 +351,35 @@ export const List = () => {
         </div>
       </Section>
       {/* 列表 */}
-
-      {false ? (
-        <>
-          <Section
-            type="top"
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full"
-          >
-            <MiniDogeCard
-              type="mp3"
-              audioSrc="/SoundHelix-Song-1.mp3"
-              address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq"
-              footerType={true ? 'delete' : 'download'}
-            />
-            <MiniDogeCard
-              type="mp4"
-              address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq"
-              footerType={true ? 'delete' : 'download'}
-            />
-            <MiniDogeCard
-              type="image"
-              address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq"
-              footerType={true ? 'delete' : 'download'}
-            />
-            <MiniDogeCard
-              type="mp3"
-              audioSrc=""
-              address="3M6uE2dMFzLTPgKZ1bpVgQTfgmYTQ6hMWojk4KMHMWtq"
-              footerType={true ? 'delete' : 'download'}
-            />
-          </Section>
+      <Section type="top">
+        {sortedEmojis.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+            {sortedEmojis.map(item => (
+              <MiniDogeCard
+                avatar={item.avatar || '/logo.png'}
+                createdAt={item.created_at}
+                likeCount={item.like_count}
+                key={item.id}
+                type={
+                  item.file_type.includes('image')
+                    ? 'image'
+                    : item.file_type.includes('video')
+                    ? 'mp4'
+                    : 'mp3'
+                }
+                audioSrc={item.file_path}
+                address={item.author_account}
+                id={item.id}
+                ownerBy={item.author_username || item.author_id}
+              />
+            ))}
+          </div>
+        ) : (
           <Section type="top">
-            <Pagination
-              defaultCurrent={1}
-              pageSize={20}
-              total={100}
-              showSizeChanger={false}
-            />
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="" />
           </Section>
-        </>
-      ) : (
-        <Section type="top">
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="" />
-        </Section>
-      )}
+        )}
+      </Section>
     </div>
   )
 }
@@ -293,6 +389,7 @@ export default function MemesPage() {
   const { t } = useTranslation()
   const [editOpen, setEditOpen] = useState(false)
   const user = useSelector((state: any) => state.user.user)
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
 
   // 用户上下文数据
   const userContext = useMemo<UserContextProps>(() => {
@@ -311,6 +408,24 @@ export default function MemesPage() {
   const showBindWalletAlert = useMemo(() => {
     return userContext.isCurrentUser && !userContext.hasWallet
   }, [userContext])
+
+  // 获取用户资料
+  const init = async () => {
+    if (id) {
+      try {
+        const { result, success } = await getUserProfileAPI(id)
+        if (success) {
+          setUserProfile(result)
+        }
+      } catch (error) {
+        message.error('获取数据失败')
+      }
+    }
+  }
+
+  useEffect(() => {
+    init()
+  }, [id])
 
   return (
     <>
@@ -337,12 +452,13 @@ export default function MemesPage() {
           editOpens={editOpen}
           onEdit={setEditOpen}
           userContext={userContext}
+          userProfile={userProfile}
         />
-        <ViewInfo />
+        <ViewInfo userProfile={userProfile} />
         <Section type="top">
           <Divider className="!my-0" />
         </Section>
-        <List />
+        <List userProfile={userProfile} />
       </div>
     </>
   )
