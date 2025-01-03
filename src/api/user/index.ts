@@ -57,3 +57,15 @@ export const updateUserProfileAPI = (
     },
   })
 }
+export const uploadFileAPI = (formData: FormData, token: string) =>
+  request.user.post<responseStatus<any>>('/creation/upload', formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+
+// 格式化文件索引，补0到两位数
+export const formatFileIndex = (index: number) => {
+  return index.toString().padStart(2, '0')
+}

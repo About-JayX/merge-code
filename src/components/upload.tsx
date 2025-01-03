@@ -102,8 +102,6 @@ export const Upload = ({
       onError?.(t('memes.limitText.batchUpload', { maxCount }))
       return
     }
-    setFiles?.(selectedFiles)
-
     try {
       const validationResults = await Promise.all(
         selectedFiles.map(file => validateFile(file))
@@ -119,7 +117,7 @@ export const Upload = ({
       const urls = await Promise.all(
         selectedFiles.map(file => readFileAsDataURL(file))
       )
-
+      setFiles?.(selectedFiles)
       onSuccess?.(urls)
     } catch (error) {
       onError?.(error instanceof Error ? error.message : '文件处理失败')
