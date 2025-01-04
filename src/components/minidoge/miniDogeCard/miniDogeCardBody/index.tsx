@@ -22,7 +22,7 @@ export const MiniDogeCardBody = ({
         <img
           src={audioSrc}
           alt="doge"
-          className="object-cover"
+          className="object-cover w-full h-full flex"
         />
       )}
       {type === 'mp3' && <Mp3 audioSrc={audioSrc} id={id} />}
