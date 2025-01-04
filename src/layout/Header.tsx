@@ -19,6 +19,7 @@ import { useClerk } from "@clerk/clerk-react";
 import { UserOutlined } from "@ant-design/icons";
 import { Ellipsis } from "antd-mobile";
 import Icon from "@/components/icon";
+import { isValidURL } from "@/util";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -61,12 +62,8 @@ const Header: React.FC = () => {
     },
     {
       key: "profile",
-      label: (
-        <div className="flex items-center gap-2">
-          <UserOutlined />
-          <span>{t("login.profile")}</span>
-        </div>
-      ),
+      label: t("login.profile"),
+      icon: <UserOutlined />,
       onClick: () => navigate(`/memes/${user?.userId}`),
     },
     {
@@ -76,6 +73,7 @@ const Header: React.FC = () => {
     {
       key: "logout",
       label: t("login.logout"),
+      icon: <Icon name="quit" className="text-base" />,
       onClick: handleLogout,
     },
   ];
@@ -156,18 +154,21 @@ const Header: React.FC = () => {
                     menu={{ items: userMenuItems }}
                     placement="bottomRight"
                   >
-                    {user.profile.avatar ? (
-                      <Avatar
-                        size="large"
-                        src={user.profile.avatar || "/logo.png"}
-                        className="cursor-pointer sm:min-w-12 sm:min-h-12 border-1 border-white/10 aspect-square bg-white/15"
-                      />
-                    ) : (
-                      <Icon
-                        name="avatar"
-                        className="text-[32px] sm:text-[48px] !border rounded-full !border-white/10 aspect-square"
-                      />
-                    )}
+                    <Avatar
+                      size="large"
+                      src={
+                        user.profile.avatar &&
+                        isValidURL(user.profile.avatar) ? (
+                          user.profile.avatar
+                        ) : (
+                          <Icon
+                            name="avatar"
+                            className="text-[40px] sm:text-[48px]"
+                          />
+                        )
+                      }
+                      className="cursor-pointer sm:min-w-12 sm:min-h-12  bg-white aspect-square"
+                    />
                   </Dropdown>
                 ) : (
                   <Button

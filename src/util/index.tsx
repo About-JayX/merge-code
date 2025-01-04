@@ -100,3 +100,8 @@ export const calc_VOTE_NFT = (
 
   return { votes, nftCount }
 }
+
+export const isValidURL = (url: string) => {
+  const regex = /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,}(:\d+)?(\/[^\s]*)?$/i;
+  return regex.test(url);
+}

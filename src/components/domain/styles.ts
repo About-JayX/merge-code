@@ -17,4 +17,4 @@ export const memesTextColor =
   "bg-gradient-to-b from-[#FFAC03] to-[#FFC10B] bg-clip-text text-transparent";
 
 export const memesHover =
-  "transition-all ease-in-out duration-300 hover:opacity-80 hover:scale-105 hover:shadow-lg"; 
+  "transition-all ease-in-out duration-300 hover:opacity-80 hover:scale-105 "; 

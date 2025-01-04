@@ -23,6 +23,7 @@ import { Ellipsis } from "antd-mobile";
 import { useState, useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
+import { isValidURL } from "@/util";
 
 interface UserContextProps {
   user: LoginResponse | null;
@@ -56,17 +57,18 @@ export const UserInfo = ({
     return (
       <Section className="grid grid-cols-[1fr_auto] flex-wrap items-center justify-between gap-4">
         <div className="grid grid-cols-[56px_1fr] sm:grid-cols-[96px_1fr] items-center gap-2 sm:gap-4 w-auto">
-          {userProfile?.user.avatar ? (
-            <Avatar
-              src={userProfile.user.avatar || "/logo.png"}
-              className="w-14 h-14 sm:w-24 sm:h-24 bg-white aspect-square"
-            />
-          ) : (
-            <Icon
-              name="avatar"
-              className="text-[56px] sm:text-[96px] !border-2 rounded-full !border-white aspect-square"
-            />
-          )}
+          <Avatar
+            src={
+              userProfile?.user.avatar &&
+              (!userProfile.user.avatar ||
+                isValidURL(userProfile.user.avatar)) ? (
+                userProfile.user.avatar
+              ) : (
+                <Icon name="avatar" className="text-[56px] sm:text-[96px]" />
+              )
+            }
+            className="w-14 h-14 sm:w-24 sm:h-24 bg-white aspect-square"
+          />
           <div className="flex flex-col gap-1">
             <span
               className={`${memesTitleSize} !text-xl sm:!text-2xl !font-bold uppercase flex items-center w-full`}
@@ -90,22 +92,21 @@ export const UserInfo = ({
       <Publish open={publishOpen} onClose={setPublishOpen} />
       <Section className="grid grid-cols-[1fr_auto] flex-wrap items-center justify-between gap-4">
         <div className="grid grid-cols-[56px_1fr] sm:grid-cols-[96px_1fr] items-center gap-2 sm:gap-4 w-auto">
-          {userProfile?.user.avatar ? (
-            <Avatar
-              src={userProfile.user.avatar || "/logo.png"}
-              className="w-14 h-14 sm:w-24 sm:h-24 border-2 border-white aspect-square"
-            />
-          ) : (
-            <div className="w-14 h-14 sm:w-24 sm:h-24 !border-1 !border-white">
-              <Icon
-                name="avatar"
-                className="text-[56px] sm:text-[96px]  aspect-square"
-              />
-            </div>
-          )}
-          <div className="flex flex-col gap-1">
+          <Avatar
+            src={
+              userProfile.user.avatar &&
+              (!userProfile.user.avatar ||
+                isValidURL(userProfile.user.avatar)) ? (
+                userProfile.user.avatar
+              ) : (
+                <Icon name="avatar" className="text-[56px] sm:text-[96px]" />
+              )
+            }
+            className="w-14 h-14 sm:w-24 sm:h-24 border-2 bg-white aspect-square"
+          />
+          <div className="flex flex-col gap-1 w-fit">
             <span
-              className={`${memesTitleSize}  !text-xl sm:!text-2xl !font-bold uppercase flex items-center w-full`}
+              className={`${memesTitleSize} flex-1  !text-xl sm:!text-2xl !font-bold uppercase flex items-center w-full`}
             >
               <Ellipsis
                 content={
@@ -113,7 +114,7 @@ export const UserInfo = ({
                   userProfile.user.id ||
                   t("memes.ownedBy")
                 }
-                className="h-8"
+                className="h-8 flex-1"
               />
               &nbsp;
               <Icon name="authenticate" className="text-xl sm:text-2xl" />
@@ -127,7 +128,7 @@ export const UserInfo = ({
                   >
                     <Icon
                       name="twitter"
-                      className="text-white text-sm sm:text-base"
+                      className="text-white text-sm sm:text-base -mt-1"
                     />
                   </a>
                 </>
@@ -142,7 +143,7 @@ export const UserInfo = ({
                   >
                     <Icon
                       name="telegram"
-                      className="text-white text-sm sm:text-base"
+                      className="text-white text-sm sm:text-base -mt-1"
                     />
                   </a>
                 </>
@@ -260,7 +261,7 @@ export const ViewInfo = ({
         )}
         <div className="flex flex-col">
           <span
-            className={`${memesTextSize} text-xs sm:!text-sm !font-normal opacity-50`}
+            className={`${memesTitleSize} text-xs sm:!text-sm !font-normal opacity-50`}
           >
             {label}
           </span>
