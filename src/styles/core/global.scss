@@ -1,0 +1,353 @@
+@use './transition.scss' as *;
+@use '@/styles/effects/starry.scss' as *;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --icon-color: #000000;
+}
+
+:root[class~='dark'] {
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --icon-color: #d1d5db;
+}
+
+* {
+  ::-webkit-scrollbar {
+    @apply w-2 h-1 bg-[--bg-color] rounded-2xl;
+  }
+  ::-webkit-scrollbar-track {
+    @apply my-4;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[--card-color] opacity-50 rounded-2xl;
+  }
+}
+
+.orbitron {
+  font-family: 'Orbitron', sans-serif !important;
+}
+
+.striker {
+  font-family: 'Striker', sans-serif !important;
+}
+
+.roboto-mono {
+  font-family: 'Roboto Mono', monospace !important;
+}
+._root_98iqw_1 {
+  margin: 0 !important;
+}
+
+.success-launch {
+  .ant-input-wrapper {
+    .ant-input-group-addon {
+      @apply border !border-[--success-color];
+    }
+    input {
+      @apply border !border-[--success-color];
+    }
+    .ant-input-group-addon {
+      button {
+        @apply border !border-[--success-color] !bg-[--success-color];
+      }
+    }
+  }
+}
+
+.light .react-tweet-theme {
+  --tweet-skeleton-gradient: linear-gradient(
+    270deg,
+    #fafafa,
+    #eaeaea,
+    #eaeaea,
+    #fafafa
+  );
+  --tweet-border: 0.0625rem solid #cfd9de;
+  --tweet-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+  --tweet-font-color: #0f1419;
+  --tweet-font-color-secondary: #536471;
+  --tweet-bg-color: #fff;
+  --tweet-bg-color-hover: #f7f9f9;
+  --tweet-quoted-bg-color-hover: rgba(0, 0, 0, 0.03);
+  --tweet-color-blue-primary: #1d9bf0;
+  --tweet-color-blue-primary-hover: #1a8cd8;
+  --tweet-color-blue-secondary: #006fd6;
+  --tweet-color-blue-secondary-hover: rgba(0, 111, 214, 0.1);
+  --tweet-color-red-primary: #f91880;
+  --tweet-color-red-primary-hover: rgba(249, 24, 128, 0.1);
+  --tweet-color-green-primary: #00ba7c;
+  --tweet-color-green-primary-hover: rgba(0, 186, 124, 0.1);
+  --tweet-twitter-icon-color: var(--tweet-font-color);
+  --tweet-verified-old-color: #829aab;
+  --tweet-verified-blue-color: var(--tweet-color-blue-primary);
+}
+
+.ant-dropdown-menu {
+  max-height: 50vh;
+}
+
+.text-content {
+  p,
+  span,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  a {
+    @apply transition-all duration-300 ease-in-out hover:opacity-80 hover:-translate-y-0.5 cursor-pointer;
+  }
+}
+
+.ant-typography-copy,
+.ant-typography-expand,
+.ant-typography-collapse {
+  color: currentColor !important;
+}
+
+.ant-collapse {
+  @apply border;
+}
+
+.ant-typography {
+  margin-bottom: 0 !important;
+}
+
+.adm-image-tip {
+  @apply bg-[--bg-color];
+}
+
+// SVG 图标样式
+svg {
+  @apply align-middle w-[1em] h-[1em] inline-block;
+
+  &.current-fill {
+    fill: currentColor;
+  }
+}
+
+// 社交图标样式
+.social-icon {
+  svg {
+    fill: #000000;
+  }
+}
+
+:root[class~='dark'] .social-icon {
+  svg {
+    fill: #d1d5db;
+  }
+}
+
+.light {
+  --skeleton-bg-color: #d6dadf81;
+  --skeleton-bg-colors: #e9eaeb;
+}
+
+.dark {
+  --skeleton-bg-color: #1d212868;
+  --skeleton-bg-colors: #282d37;
+}
+
+a {
+  @apply text-current;
+}
+
+.notranslate {
+  translate: no;
+}
+
+/* 禁用表格悬浮效果和滚动条 */
+.no-hover-effect {
+  .ant-table-tbody > tr:hover > td {
+    background: transparent !important;
+  }
+
+  .ant-table-tbody > tr > td {
+    background: transparent !important;
+  }
+
+  .ant-table-cell {
+    &:hover {
+      background: transparent !important;
+    }
+  }
+
+  /* 隐藏滚动条 */
+  .ant-table-body {
+    overflow: hidden !important;
+    &::-webkit-scrollbar {
+      width: 0 !important;
+      height: 0 !important;
+      display: none !important;
+    }
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  /* 确保表格内容不会溢出 */
+  .ant-table {
+    overflow: hidden !important;
+  }
+
+  .ant-table-container {
+    overflow: hidden !important;
+  }
+
+  .ant-table-content {
+    overflow: hidden !important;
+
+    // thead {
+    //   background-color: black;
+    //   position: sticky !important;
+    //   top: 0;
+    //   z-index: 1;
+    // }
+  }
+
+  .ant-table-wrapper {
+    overflow: hidden !important;
+  }
+
+  /* 禁用所有可能的滚动 */
+  * {
+    overflow: visible !important;
+    &::-webkit-scrollbar {
+      width: 0 !important;
+      height: 0 !important;
+      display: none !important;
+    }
+  }
+}
+
+/* 分页器样式 */
+.ant-pagination {
+  @apply mb-4;
+
+  .ant-pagination-item,
+  .ant-pagination-prev .ant-pagination-item-link,
+  .ant-pagination-next .ant-pagination-item-link {
+    @apply bg-white/5 border-white/10 text-white/80;
+
+    &:hover {
+      @apply border-[#FFAC03] text-[#FFAC03] bg-white/10;
+    }
+  }
+
+  .ant-pagination-item-active {
+    @apply border-[#FFAC03] text-[#FFAC03] bg-white/10;
+
+    a {
+      @apply text-[#FFAC03];
+    }
+  }
+
+  .ant-pagination-item-link {
+    .anticon {
+      @apply text-white/80;
+    }
+
+    &:hover .anticon {
+      @apply text-[#FFAC03];
+    }
+  }
+}
+
+/* 固定分页器样式 */
+.pagination-only {
+  @apply w-auto;
+
+  .ant-table-container {
+    @apply hidden;
+  }
+
+  .ant-pagination {
+    @apply m-0 bg-[#1A1D24] py-2 px-4 rounded-lg;
+
+    .ant-pagination-item,
+    .ant-pagination-prev .ant-pagination-item-link,
+    .ant-pagination-next .ant-pagination-item-link {
+      @apply min-w-[32px] h-8 leading-8;
+    }
+  }
+}
+
+.ant-pagination-item {
+  margin-left: 0.5rem !important;
+}
+
+.ant-pagination-item:first-child {
+  margin-left: 0 !important;
+}
+/* 移动端样式优化 */
+@media (max-width: 640px) {
+  .pagination-only {
+    .ant-pagination {
+      @apply flex flex-wrap justify-center gap-1;
+    }
+  }
+}
+
+/* DAO Modal Styles */
+.dao-modal {
+  .ant-modal-content {
+    @apply bg-[#1A1D24] border border-white/10 rounded-2xl pt-11 px-4;
+
+    .ant-modal-header {
+      @apply bg-transparent border-b border-white/10 rounded-t-2xl mb-0;
+    }
+
+    .ant-modal-body {
+      @apply p-4 px-2 max-h-[65vh] overflow-hidden overflow-y-auto;
+    }
+
+    .ant-modal-close {
+      @apply text-white/60 hover:text-[#FFAC03] transition-colors;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+
+      .ant-modal-close-x {
+        @apply flex items-center justify-center;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+
+        .anticon {
+          @apply flex items-center justify-center;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+.ant-empty-image {
+  svg {
+    @apply w-12 h-12;
+  }
+}
+
+.ant-pagination {
+  @apply m-0 !bg-white/5;
+  .ant-pagination-prev,
+  .ant-pagination-next {
+    @apply m-0 !mx-1;
+  }
+}
+.ant-tooltip {
+  @apply w-[120px];
+  .ant-tooltip-content {
+    .ant-tooltip-inner {
+      @apply px-4;
+    }
+  }
+}

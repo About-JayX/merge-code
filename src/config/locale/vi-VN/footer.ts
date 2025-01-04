@@ -1,0 +1,1 @@
+export default "<i>$MINIDOGE</i> là <b>token meme do cộng đồng điều hành</b> tôn vinh văn hóa tiền mã hóa.<br/>Trang web này được phát triển bởi <i>đội ngũ CTO</i> chỉ với mục đích cung cấp thông tin và <b>không nên được xem là lời khuyên đầu tư</b>."; 

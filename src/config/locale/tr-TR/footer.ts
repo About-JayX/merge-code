@@ -1,0 +1,1 @@
+export default "<i>$MINIDOGE</i>, kripto kültürünü kutlayan <b>topluluk odaklı bir meme token</b>'dır.<br/>Bu web sitesi <i>CTO ekibi</i> tarafından yalnızca bilgilendirme amaçlı olarak geliştirilmiştir ve <b>yatırım tavsiyesi olarak değerlendirilmemelidir</b>."; 

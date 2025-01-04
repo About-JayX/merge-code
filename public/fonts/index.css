@@ -1,0 +1,14 @@
+@font-face {
+	font-family: "Poppins SemiBold";
+	src: url("./poppinsSemiBold.woff2");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Striker";
+	src: url("./Striker.otf");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}

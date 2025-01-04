@@ -1,0 +1,1 @@
+export default "<i>$MINIDOGE</i> adalah <b>token meme berbasis komunitas</b> yang merayakan budaya kripto.<br/>Situs web ini dikembangkan oleh <i>tim CTO</i> hanya untuk tujuan informasi dan <b>tidak boleh dianggap sebagai saran investasi</b>."; 

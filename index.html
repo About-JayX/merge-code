@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=yes"
+    />
+    
+    <!-- SEO Meta Tags -->
+    <title>$MINIDOGE (CTO) - Minidoge</title>
+    <meta name="description" content="$MINIDOGE represents the inheritance of $DOGE, just as Elon Musk (the DogeFather) guides his successor (DogeSon)." />
+    <meta name="keywords" content="MINIDOGE, CTO, DOGE, cryptocurrency, token, DogeFather, DogeSon" />
+    <meta name="author" content="MINIDOGE" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mini-doge.com/" />
+    <meta property="og:title" content="$MINIDOGE (CTO) - Minidoge" />
+    <meta property="og:description" content="$MINIDOGE represents the inheritance of $DOGE, just as Elon Musk (the DogeFather) guides his successor (DogeSon)." />
+    <meta property="og:image" content="https://p.mini-doge.com/banner.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://mini-doge.com/" />
+    <meta name="twitter:title" content="$MINIDOGE (CTO) - Minidoge" />
+    <meta name="twitter:description" content="$MINIDOGE represents the inheritance of $DOGE, just as Elon Musk (the DogeFather) guides his successor (DogeSon)." />
+    <meta name="twitter:image" content="https://p.mini-doge.com/banner.png" />
+    
+    <!-- Telegram -->
+    <meta property="telegram:channel" content="@MINIDOGE_PORTAL" />
+    <meta property="telegram:image" content="https://p.mini-doge.com/banner.png" />
+    
+    <!-- Twitter JavaScript SDK -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+    <link
+      href="./fonts/poppinsSemiBold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="./fonts/Striker.otf"
+      as="font"
+      type="font/otf"
+      importance="high"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/fonts/index.css" />
+    <style>
+      :root[class="light"] {
+        --bg-color: white;
+        --title-color: #000000 !important;
+        --text-color: rgba(0, 0, 0, 0.5) !important;
+        --card-color: #e9eaeb;
+        --border-color: #5f5f5f24;
+      }
+      :root[class="dark"] {
+        --bg-color: #181a20 !important;
+        --title-color: white;
+        --text-color: rgba(255, 255, 255, 0.5) !important;
+        --card-color: #282d37;
+        --success-color: #16a34a;
+        --border-color: #5f5f5f71;
+      }
+      html,
+      body,
+      #root {
+        @apply min-h-screen bg-[--bg-color] text-[--title-color];
+      }
+    </style>
+    <script crossorigin="anonymous" type="module">
+      // document.documentElement.setAttribute(
+      //   "class",
+      //   window.localStorage.getItem("theme") || "dark"
+      // );
+      // document.documentElement.setAttribute(
+      //   "data-prefers-color-scheme",
+      //   window.localStorage.getItem("theme") || "dark"
+      // );
+      document.documentElement.setAttribute("class", "dark");
+      document.documentElement.setAttribute(
+        "data-prefers-color-scheme",
+        "dark"
+      );
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>

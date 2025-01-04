@@ -1,0 +1,62 @@
+.nav-enter {
+  opacity: 0;
+  transform: translateY(-114px) translateZ(0);
+}
+
+.nav-enter-active {
+  opacity: 1;
+  transition: all 1s ease-in-out;
+  transform: translateY(0px) translateZ(0);
+}
+.home-enter {
+  opacity: 0;
+  transform: translateY(-50px);
+}
+
+.home-enter-active {
+  opacity: 1;
+  transition: all 1s ease-in-out;
+  transform: none;
+}
+.lines-enter {
+  width: 0%;
+}
+
+.lines-enter-active {
+  width: 100%;
+  transition: all 1s linear;
+}
+
+.lines-enter-done {
+  width: 100%;
+}
+
+.about-enter {
+  opacity: 0;
+  transform: translateX(-50px) translateZ(0);
+}
+
+.about-enter-active {
+  opacity: 1;
+  transition: all 1s linear;
+  transform: none;
+}
+
+.hideToshow-enter {
+  opacity: 0;
+}
+.hideToshow-enter-active {
+  opacity: 1;
+  transition: all 1s linear;
+}
+
+.scale-enter {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.scale-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 1s linear;
+}
