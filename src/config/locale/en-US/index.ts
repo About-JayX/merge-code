@@ -15,7 +15,7 @@ import ai from "./ai";
 export default {
   translation: {
     language: "English",
-    lang: "Language",
+    lang: "Lang",
     home,
     section1,
     section2,

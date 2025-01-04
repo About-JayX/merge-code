@@ -20,6 +20,13 @@ const param: Record<string, string[]> = router.param
 // 使用 Vite 的 import.meta.glob 动态导入视图组件
 const view = import.meta.glob<RouterType.ImportMetaGlobType>('@/view/**/*.tsx')
 
+// HOC to inject data prop
+const withData = (WrappedComponent: React.ComponentType<any>, data: any) => {
+  return function WithDataComponent(props: any) {
+    return <WrappedComponent data={data} {...props} />;
+  };
+};
+
 /**
  * 生成路由配置
  * @param pages - 页面组件的导入信息数组
@@ -31,7 +38,8 @@ const view = import.meta.glob<RouterType.ImportMetaGlobType>('@/view/**/*.tsx')
  * 3. 使用 React.lazy 实现组件懒加载
  */
 const generateRoutes = (
-  pages: [string, () => Promise<{ default: React.ComponentType }>][]
+  pages: [string, () => Promise<{ default: React.ComponentType<any> }>][],
+  data: any
 ): RouterType.RouterDataType[] => {
   return pages.map(([path, page]) => {
     const segments = path.split('/')
@@ -48,7 +56,9 @@ const generateRoutes = (
         : `/${dirPath ? `${dirPath}/` : ''}${componentName.toLowerCase()}`
 
     const Component = lazy(() =>
-      page().then(module => ({ default: module.default }))
+      page().then(module => ({ 
+        default: withData(module.default, data)
+      }))
     )
 
     return {
@@ -79,7 +89,7 @@ export default function Router({ data }: RouterProps) {
     }
   }, [i18n.language])
 
-  const routes = React.useMemo(() => generateRoutes(Object.entries(view)), [])
+  const routes = React.useMemo(() => generateRoutes(Object.entries(view), data), [data])
 
   const langRoutes = React.useMemo(() => {
     const supportedLangs = Object.keys(locale)
@@ -94,7 +104,7 @@ export default function Router({ data }: RouterProps) {
         // 处理动态路由，使用正则表达式匹配动态部分
         const dynamicPath = route.path.replace(/\[(\w+)\]/g, ':$1');
         const element = React.isValidElement(route.element) 
-          ? React.cloneElement(route.element, { ...data }) // 使用展开运算符确保传递正确的属性
+          ? React.cloneElement(route.element) // 组件已经通过HOC注入了data
           : <></>; // 如果无效，则使用一个空的 ReactElement
 
         return [
@@ -104,19 +114,11 @@ export default function Router({ data }: RouterProps) {
         ]
       })
     })
-  }, [routes, data])
+  }, [routes])
 
   const allRoutes = React.useMemo(
-    () => [
-      ...routes.map(route => {
-        const element = React.isValidElement(route.element)
-          ? React.cloneElement(route.element, { ...data }) // 使用展开运算符确保传递正确的属性
-          : <></>; // 如果无效，则使用一个空的 ReactElement
-        return { ...route, element };
-      }),
-      ...langRoutes,
-    ],
-    [routes, langRoutes, data]
+    () => [...routes, ...langRoutes],
+    [routes, langRoutes]
   )
 
   return (
