@@ -4,4 +4,8 @@ export const pageSwitch = {
     // 基金会地址
     foundationAddr: true,
   },
-};
+  ai: {
+    // AI 功能页面
+    enabled: true,
+  },
+}

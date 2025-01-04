@@ -10,6 +10,7 @@ import footer from "./footer";
 import dao from "./dao";
 import memes from "./memes.ts";
 import login from "./login.ts";
+import ai from "./ai";
 
 export default {
   translation: {
@@ -26,6 +27,7 @@ export default {
     message,
     dao,
     memes,
-    login
+    login,
+    ai
   },
-}; 
+};

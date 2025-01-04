@@ -229,13 +229,13 @@ a {
 
 /* 分页器样式 */
 .ant-pagination {
-  @apply mb-4 px-4 py-2 rounded-lg;
-  .ant-pagination-item {
-    @apply m-0;
-  }
+  @apply mb-4;
+
   .ant-pagination-item,
   .ant-pagination-prev .ant-pagination-item-link,
   .ant-pagination-next .ant-pagination-item-link {
+    @apply bg-white/5 border-white/10 text-white/80;
+
     &:hover {
       @apply border-[#FFAC03] text-[#FFAC03] bg-white/10;
     }

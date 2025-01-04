@@ -3,126 +3,124 @@
  * 合约地址展示相关组件，包含地址显示、复制按钮和交互功能
  */
 
-import React, { useState, useEffect, useRef } from "react";
-import { Card as IconCard } from "./Icon.tsx";
-import { copy } from "@/util";
-import { memesHover } from "../styles.ts";
-import { useTranslation } from "react-i18next";
-import { CopyModal } from "@/components/minidoge/copyModal/index.tsx";
+import React, { useState, useEffect, useRef } from 'react'
+import { Modal } from 'antd'
+import { Card as IconCard } from './Icon.tsx'
+import { copy } from '@/util'
+import { memesHover } from '../styles.ts'
+import Tgs from '../../tgs'
+import { useTranslation } from 'react-i18next'
 
 /**
  * 计算字符宽度的工具函数
  */
 const getCharWidth = (fontSize: number) => {
-  return fontSize * 0.7;
-};
+  return fontSize * 0.7
+}
 
 /**
  * 地址显示组件的配置接口
  */
 interface AddressConfig {
   fontSize: {
-    mobile: number;
-    tablet: number;
-    desktop: number;
-  };
+    mobile: number
+    tablet: number
+    desktop: number
+  }
   padding: {
-    mobile: number;
-    desktop: number;
-  };
-  minChars: number;
+    mobile: number
+    desktop: number
+  }
+  minChars: number
 }
 
 /**
  * 地址显示组件的属性接口
  */
 interface AddressDisplayProps {
-  address?: string;
-  isMobile: boolean;
-  containerWidth: number;
-  onClick?: () => void;
-  className?: string;
-  style?: React.CSSProperties;
-  href?: string;
-  target?: string;
-  config?: AddressConfig;
+  address?: string
+  isMobile: boolean
+  containerWidth: number
+  onClick?: () => void
+  className?: string
+  style?: React.CSSProperties
+  href?: string
+  target?: string
+  config?: AddressConfig
 }
 
 /**
  * 地址显示内部组件
  */
 const AddressDisplayInner: React.FC<AddressDisplayProps> = ({
-  address = "",
+  address = '',
   isMobile,
   containerWidth,
   config,
 }) => {
   if (!address || !containerWidth) {
-    return <span className="font-normal notranslate">-</span>;
+    return <span className="font-normal notranslate">-</span>
   }
 
-  // 根据屏幕宽度确定字体大小
   let fontSize = config
     ? isMobile
       ? config.fontSize.mobile
       : config.fontSize.mobile
-    : 0;
+    : 0
   if (window.innerWidth >= 1280) {
-    fontSize = config ? config.fontSize.desktop : 0;
+    fontSize = config ? config.fontSize.desktop : 0
   } else if (window.innerWidth >= 640) {
-    fontSize = config ? config.fontSize.tablet : 0;
+    fontSize = config ? config.fontSize.tablet : 0
   }
 
-  // 计算实际可用宽度
-  const charWidth = getCharWidth(fontSize);
+  const charWidth = getCharWidth(fontSize)
   const padding = config
     ? isMobile
       ? config.padding.mobile
       : config.padding.desktop
-    : 0;
-  const ellipsisWidth = fontSize * 1.5;
-  const availableWidth = Math.max(containerWidth - padding - ellipsisWidth, 0);
+    : 0
+  const ellipsisWidth = fontSize * 1.5
+  const availableWidth = Math.max(containerWidth - padding - ellipsisWidth, 0)
 
-  // 计算可显示的总字符数
-  const totalChars = Math.floor(availableWidth / charWidth);
+  const totalChars = Math.floor(availableWidth / charWidth)
 
   if (totalChars >= address.length) {
-    return <span className="font-normal notranslate">{address}</span>;
+    return <span className="font-normal notranslate">{address}</span>
   }
 
-  const maxSideChars = Math.floor((totalChars - 3) / 2);
+  const maxSideChars = Math.floor((totalChars - 3) / 2)
 
   for (
     let chars = maxSideChars;
     chars >= (config ? config.minChars : 0);
     chars--
   ) {
-    const totalWidth = (chars * 2 + 3) * charWidth;
+    const totalWidth = (chars * 2 + 3) * charWidth
     if (totalWidth <= availableWidth) {
       const displayText = `${address.slice(0, chars)}...${address.slice(
         -chars
-      )}`;
-      return <span className="font-normal notranslate">{displayText}</span>;
+      )}`
+      return <span className="font-normal notranslate">{displayText}</span>
     }
   }
 
   const displayText = `${address.slice(
     0,
     config ? config.minChars : 0
-  )}...${address.slice(-(config ? config.minChars : 0))}`;
-  return <span className="font-normal notranslate">{displayText}</span>;
-};
+  )}...${address.slice(-(config ? config.minChars : 0))}`
+  return <span className="font-normal notranslate">{displayText}</span>
+}
 
 /**
  * 地址显示容器组件
  */
 export const AddressDisplay: React.FC<
-  Omit<AddressDisplayProps, "containerWidth">
+  Omit<AddressDisplayProps, 'containerWidth'>
 > = ({
-  address = "",
+  address = '',
   isMobile,
   onClick,
-  className = "",
+  className = '',
   style = {},
   href,
   target,
@@ -140,30 +138,30 @@ export const AddressDisplay: React.FC<
   },
   ...props
 }) => {
-  const containerRef = useRef<HTMLElement>(null);
-  const [containerWidth, setContainerWidth] = useState(0);
+  const containerRef = useRef<HTMLElement>(null)
+  const [containerWidth, setContainerWidth] = useState(0)
 
   useEffect(() => {
     const updateWidth = () => {
       if (containerRef.current) {
-        setContainerWidth(containerRef.current.offsetWidth);
+        setContainerWidth(containerRef.current.offsetWidth)
       }
-    };
-
-    updateWidth();
-
-    const resizeObserver = new ResizeObserver(updateWidth);
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
     }
 
-    window.addEventListener("resize", updateWidth);
+    updateWidth()
+
+    const resizeObserver = new ResizeObserver(updateWidth)
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current)
+    }
+
+    window.addEventListener('resize', updateWidth)
 
     return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", updateWidth);
-    };
-  }, []);
+      resizeObserver.disconnect()
+      window.removeEventListener('resize', updateWidth)
+    }
+  }, [])
 
   const baseClassName = `
     flex items-center justify-center
@@ -182,15 +180,15 @@ export const AddressDisplay: React.FC<
     active:shadow-[0_2px_8px_rgba(255,172,3,0.1)]
     active:transform active:translateY(0)
     ${className}
-  `;
+  `
 
   const baseStyle = {
     fontFamily: "'Roboto Mono', monospace",
-    letterSpacing: "1px",
-    boxShadow: "0 4px 12px rgba(255, 172, 3, 0.1)",
-    backdropFilter: "blur(4px)",
+    letterSpacing: '1px',
+    boxShadow: '0 4px 12px rgba(255, 172, 3, 0.1)',
+    backdropFilter: 'blur(4px)',
     ...style,
-  };
+  }
 
   const content = (
     <div className="w-full text-center whitespace-nowrap overflow-hidden">
@@ -201,7 +199,7 @@ export const AddressDisplay: React.FC<
         config={config}
       />
     </div>
-  );
+  )
 
   if (href) {
     return (
@@ -216,7 +214,7 @@ export const AddressDisplay: React.FC<
       >
         {content}
       </a>
-    );
+    )
   }
 
   return (
@@ -229,25 +227,25 @@ export const AddressDisplay: React.FC<
     >
       {content}
     </div>
-  );
-};
+  )
+}
 
 /**
  * 复制按钮组件
  */
 interface CopyButtonProps {
-  [key: string]: any;
-  className?: string;
-  onClick?: () => void;
+  [key: string]: any
+  className?: string
+  onClick?: () => void
   button?: {
-    background?: string;
-    text?: string;
-  };
+    background?: string
+    text?: string
+  }
 }
 
 export const CopyButton = ({
   onClick,
-  className = "",
+  className = '',
   button,
   ...props
 }: CopyButtonProps) => {
@@ -261,7 +259,7 @@ export const CopyButton = ({
         style={{
           background:
             button?.background ||
-            "linear-gradient(to bottom, #FFAC03, #FFC10B)",
+            'linear-gradient(to bottom, #FFAC03, #FFC10B)',
         }}
       />
       <IconCard
@@ -270,64 +268,84 @@ export const CopyButton = ({
         style={{
           background:
             button?.background ||
-            "linear-gradient(to bottom, #FFAC03, #FFC10B)",
-          color: button?.text || "#000",
+            'linear-gradient(to bottom, #FFAC03, #FFC10B)',
+          color: button?.text || '#000',
         }}
       />
     </div>
-  );
-};
+  )
+}
 
 /**
  * 地址卡片组件的属性接口
  */
 interface AddressCardProps {
-  address: string;
+  address: string
   button?: {
-    background?: string;
-    text?: string;
-  };
-  onCopySuccess?: () => void;
+    background?: string
+    text?: string
+  }
+  onCopySuccess?: () => void
 }
 
 /**
  * 地址卡片组件
  */
 export const AddressCard: React.FC<AddressCardProps> = ({
-  address = "",
+  address = '',
   button,
   onCopySuccess,
   ...props
 }) => {
-  const { t } = useTranslation();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const { t } = useTranslation()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+      setIsMobile(window.innerWidth < 768)
+    }
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const handleCopy = async () => {
-    if (!address) return;
+    if (!address) return
 
     await copy(address, () => {
-      setIsModalOpen(true);
-      onCopySuccess?.();
-    });
-  };
+      setIsModalOpen(true)
+      onCopySuccess?.()
+    })
+  }
 
   return (
     <>
-      <CopyModal open={isModalOpen} onClose={setIsModalOpen} />
-      <div className="flex w-full gap-3 items-center">
+      <Modal
+        open={isModalOpen}
+        centered
+        footer={null}
+        closable={false}
+        width="auto"
+      >
+        <div className="flex flex-col items-center px-8 py-4">
+          {isModalOpen && (
+            <Tgs
+              name="success"
+              className="!w-24 !h-24 sm:!w-32 sm:!h-32 md:!w-40 md:!h-40"
+              onChange={value => isModalOpen && setIsModalOpen(!value)}
+            />
+          )}
+          <span className="text-lg sm:text-xl md:text-2xl font-bold mt-2">
+            {t('message.copy.success')}
+          </span>
+        </div>
+      </Modal>
+
+      <div className="flex w-full gap-3">
         <CopyButton {...props} button={button} onClick={handleCopy} />
-        <div className="flex-1 min-w-0 items-center">
+        <div className="flex-1 min-w-0">
           <AddressDisplay
             address={address}
             isMobile={isMobile}
@@ -336,5 +354,5 @@ export const AddressCard: React.FC<AddressCardProps> = ({
         </div>
       </div>
     </>
-  );
-};
+  )
+}

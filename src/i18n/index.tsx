@@ -6,6 +6,10 @@ import { initReactI18next } from "react-i18next";
 
 import { locale } from "@/config";
 
+// 从 localStorage 获取保存的语言设置，如果没有则使用浏览器语言或默认语言
+const savedLanguage = localStorage.getItem('i18nextLng');
+const defaultLanguage = savedLanguage || navigator.language || 'en-US';
+
 export default i18next
   .use(HttpApi)
   .use(Backend)
@@ -13,20 +17,19 @@ export default i18next
   .use(initReactI18next)
   .init({
     resources: locale,
+    lng: defaultLanguage, // 使用保存的语言或默认语言
     fallbackLng: "en-US",
     react: {
       useSuspense: true,
     },
     detection: {
       order: [
-        "path",
         "localStorage",
-        "cookie",
         "navigator",
-        "querystring",
-        "htmlTag",
-        "subdomain",
       ],
-      caches: ["localStorage", "cookie"],
+      lookupLocalStorage: 'i18nextLng',
+      caches: ['localStorage'],
+      cookieMinutes: 10000,
+      cookieDomain: window.location.hostname,
     },
   });

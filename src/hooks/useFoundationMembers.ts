@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
-
+import { getList } from '@/api'
 import { calc_VOTE_NFT } from '@/util'
 import {
   isSpecialAddress,
   getAddressNftAirdrop,
   getAddressVotingRights,
 } from '@/config/specialAddresses'
-import { getList } from '@/api'
 
 interface TokenAmounts {
   USDT: number | string
@@ -164,9 +163,9 @@ export default function useFoundationMembers() {
 
           // 如果所有代币金额都小于阈值，则过滤掉该地址
           if (
-            solAmount < 0.001 &&
-            usdtAmount < 0.1 &&
-            usdcAmount < 0.1 &&
+            solAmount < 0.001 && 
+            usdtAmount < 0.1 && 
+            usdcAmount < 0.1 && 
             minidogeAmount < 0.1
           ) {
             return null

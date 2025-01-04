@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Typography, Modal, App } from 'antd'
+import { Typography, Modal } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { QuestionCircleOutlined, FileProtectOutlined } from '@ant-design/icons'
 import { MemberList } from '@/components/domain/sections/MemberList'
@@ -50,7 +50,6 @@ const GovernanceContent: React.FC = () => {
 const RulesContent: React.FC = () => {
   const { t } = useTranslation()
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { message } = App.useApp()
 
   const handleCopy = async () => {
     await copy(FOUNDATION_CONFIG.address, () => {
@@ -75,9 +74,15 @@ const RulesContent: React.FC = () => {
             dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRules') }}
           />
           <div className="grid gap-2 text-base">
-            <div dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRule1') }} />
-            <div dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRule2') }} />
-            <div dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRule3') }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRule1') }}
+            />
+            <div
+              dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRule2') }}
+            />
+            <div
+              dangerouslySetInnerHTML={{ __html: t('dao.nftAirdropRule3') }}
+            />
           </div>
         </div>
 
@@ -107,9 +112,15 @@ const RulesContent: React.FC = () => {
             dangerouslySetInnerHTML={{ __html: t('dao.votingRightsExamples') }}
           />
           <div className="grid gap-2 text-sm">
-            <div dangerouslySetInnerHTML={{ __html: t('dao.votingExample1') }} />
-            <div dangerouslySetInnerHTML={{ __html: t('dao.votingExample2') }} />
-            <div dangerouslySetInnerHTML={{ __html: t('dao.votingExample3') }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: t('dao.votingExample1') }}
+            />
+            <div
+              dangerouslySetInnerHTML={{ __html: t('dao.votingExample2') }}
+            />
+            <div
+              dangerouslySetInnerHTML={{ __html: t('dao.votingExample3') }}
+            />
           </div>
         </div>
 
@@ -122,9 +133,11 @@ const RulesContent: React.FC = () => {
           <div className="grid gap-2 text-base">
             <div dangerouslySetInnerHTML={{ __html: t('dao.processStep1') }} />
             <div className="flex flex-col gap-2">
-              <div dangerouslySetInnerHTML={{ __html: t('dao.processStep2') }} />
+              <div
+                dangerouslySetInnerHTML={{ __html: t('dao.processStep2') }}
+              />
               <div className="flex justify-center">
-                <span 
+                <span
                   className="font-mono text-sm bg-white/5 px-4 py-1.5 rounded cursor-pointer hover:bg-white/10 transition-colors break-all text-center max-w-full"
                   onClick={handleCopy}
                 >
@@ -133,13 +146,20 @@ const RulesContent: React.FC = () => {
               </div>
             </div>
             <div dangerouslySetInnerHTML={{ __html: t('dao.processStep3') }} />
-            <div dangerouslySetInnerHTML={{ 
-              __html: t('dao.processStep4', { 
-                telegramAdminLinks: FOUNDATION_CONFIG.telegramAdmin.map(admin => 
-                  `<a href="https://t.me/${admin.slice(1)}" target="_blank" class="text-[#FFAC03] hover:text-[#FFC10B] font-medium">${admin}</a>`
-                ).join('; ')
-              }) 
-            }} />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: t('dao.processStep4', {
+                  telegramAdminLinks: FOUNDATION_CONFIG.telegramAdmin
+                    .map(
+                      admin =>
+                        `<a href="https://t.me/${admin.slice(
+                          1
+                        )}" target="_blank" class="text-[#FFAC03] hover:text-[#FFC10B] font-medium">${admin}</a>`
+                    )
+                    .join('; '),
+                }),
+              }}
+            />
           </div>
         </div>
 

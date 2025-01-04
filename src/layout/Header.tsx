@@ -46,6 +46,11 @@ const Header: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleLanguageChange = (lang: string) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem("i18nextLng", lang);
+  };
+
   const userMenuItems = [
     {
       key: "username",
@@ -86,7 +91,7 @@ const Header: React.FC = () => {
           isScrolled ? "bg-black/10 backdrop-blur-sm" : ""
         }`}
       >
-        <div className="p-3 sm:p-8 md:pt-8 md:px-4 flex gap-1 sm:gap-4 items-center w-full max-w-screen-xl mx-auto">
+        <div className="p-3 sm:p-8 md:pt-8 md:px-8 flex gap-1 sm:gap-4 items-center w-full max-w-screen-xl mx-auto">
           <Section type="left" className={`${memesHover}`}>
             <Link
               to="/"
@@ -115,7 +120,6 @@ const Header: React.FC = () => {
                 <MusicPlayer />
               </div>
             )}
-
             {NAV.TWITTER && (
               <a href={NAV.TWITTER} target="_blank" className={memesHover}>
                 <IconCard className="text-white" name="twitter" />
@@ -137,9 +141,7 @@ const Header: React.FC = () => {
                 items: Object.entries(locale).map(([key, value]: any) => ({
                   key,
                   label: value.translation.language,
-                  onClick: () => {
-                    i18n.changeLanguage(key);
-                  },
+                  onClick: () => handleLanguageChange(key),
                 })),
               }}
             >
@@ -167,7 +169,7 @@ const Header: React.FC = () => {
                           />
                         )
                       }
-                      className="cursor-pointer sm:min-w-12 sm:min-h-12  bg-white aspect-square"
+                      className="cursor-pointer sm:min-w-12 sm:min-h-12 bg-white aspect-square"
                     />
                   </Dropdown>
                 ) : (
